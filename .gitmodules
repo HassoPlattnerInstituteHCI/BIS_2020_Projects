@@ -1,3 +1,6 @@
 [submodule "Assets/unity-dualpanto-framework"]
 	path = Assets/unity-dualpanto-framework
 	url = https://github.com/HassoPlattnerInstituteHCI/unity-dualpanto-framework
+[submodule "SpeechIOForUnity"]
+	path = SpeechIOForUnity
+	url = https://github.com/HassoPlattnerInstituteHCI/SpeechIOForUnity
