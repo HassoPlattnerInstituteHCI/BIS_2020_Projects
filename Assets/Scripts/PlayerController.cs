@@ -28,11 +28,11 @@ public class PlayerController : MonoBehaviour
     
     void PantoMovement()
         {
-            float rotation = GameObject
-                .Find("Panto")
-                .GetComponent<UpperHandle>()
-                .getRotation();
-            Vector3 direction = Quaternion.Euler(0, rotation, 0) * Vector3.forward;
-            playerRb.velocity = speed * direction;
+            // float rotation = GameObject
+            //    .Find("Panto")
+            //    .GetComponent<UpperHandle>()
+            //    .getRotation();
+            // Vector3 direction = Quaternion.Euler(0, rotation, 0) * Vector3.forward;
+            // playerRb.velocity = speed * direction;
         }
 }
