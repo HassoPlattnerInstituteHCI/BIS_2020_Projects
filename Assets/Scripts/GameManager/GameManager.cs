@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool introduceLevel = true;
     public GameObject player;
     public GameObject[] enemies;
+    private int focusedEnemy = 0;
     public Transform playerSpawn;
 
     UpperHandle upperHandle;
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
     {
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
+        
+        findEnemies();
 
         Introduction();
     }
@@ -122,5 +125,32 @@ public class GameManager : MonoBehaviour
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "quit", KeyCode.Escape } });
 
         Application.Quit();
+    }
+
+    void findEnemies()
+    {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    }
+
+    GameObject getFocusedEnemy()
+    {
+        if (focusedEnemy >= enemies.Length)
+        {
+            return null;
+        }
+
+        return enemies[focusedEnemy];
+    }
+
+    void focusEnemy()
+    {
+        if (getFocusedEnemy() != null)
+        {
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<EnemyController>().setFocused(false);
+            }
+            getFocusedEnemy().GetComponent<EnemyController>().setFocused(true);
+        }
     }
 }

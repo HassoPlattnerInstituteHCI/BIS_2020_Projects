@@ -8,11 +8,15 @@ public class EnemyController : MonoBehaviour
     public float speed = 1.0f; 
     // The enemy will patrol between these points;
     public Vector3[] path;
+    // Is the it handle following this enemy?
+    public bool focused;
     // The part of the path the enemy is currently headed to
     private int currentPathTargetIndex = 0;
+    private LowerHandle handle;
     
     void Start()
     {
+        handle = GameObject.FindObjectOfType<LowerHandle>();
     }
 
     // Update is called once per frame
@@ -24,6 +28,11 @@ public class EnemyController : MonoBehaviour
         }
 
         moveTowardsTarget();
+
+        if (focused)
+        {
+            moveHandle();
+        }
     }
 
     void moveTowardsTarget()
@@ -35,5 +44,15 @@ public class EnemyController : MonoBehaviour
     Vector3 getCurrentTarget()
     {
         return path[currentPathTargetIndex];
+    }
+
+    public void setFocused(bool newValue)
+    {
+        focused = newValue;
+    }
+
+    async void moveHandle()
+    {
+        await handle.MoveToPosition(gameObject.transform.position, speed, false);
     }
 }
