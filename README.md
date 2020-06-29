@@ -1,6 +1,6 @@
 # BIS_2020_Projects
 
-This repository contains all projects for Building Interactive Systems.
+This repository contains all projects for Building Interactive Systems 2020.
 
 ## Setup
 1. Create a new branch.
