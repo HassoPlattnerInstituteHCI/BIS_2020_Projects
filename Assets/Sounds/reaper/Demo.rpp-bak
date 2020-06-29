@@ -1,0 +1,1167 @@
+<REAPER_PROJECT 0.1 "6.12c/x64" 1593063425
+  RIPPLE 0
+  GROUPOVERRIDE 0 0 0
+  AUTOXFADE 1
+  ENVATTACH 1
+  POOLEDENVATTACH 0
+  MIXERUIFLAGS 11 48
+  PEAKGAIN 1
+  FEEDBACK 0
+  PANLAW 1
+  PROJOFFS 0 0 0
+  MAXPROJLEN 0 600
+  GRID 3455 8 1 8 1 0 0 0
+  TIMEMODE 1 5 -1 30 0 0 -1
+  VIDEO_CONFIG 0 0 256
+  PANMODE 3
+  CURSOR 48.28489280196682
+  ZOOM 38.39710295317213 0 0
+  VZOOMEX 3 0
+  USE_REC_CFG 0
+  RECMODE 1
+  SMPTESYNC 0 30 100 40 1000 300 0 0 1 0 0
+  LOOP 0
+  LOOPGRAN 0 4
+  RECORD_PATH "" ""
+  <RECORD_CFG
+  >
+  <APPLYFX_CFG
+  >
+  RENDER_FILE "../export\Demo.wav"
+  RENDER_FMT 0 2 44100
+  RENDER_1X 0
+  RENDER_RANGE 5 0 0 18 1000
+  RENDER_RESAMPLE 3 0 1
+  RENDER_ADDTOPROJ 0
+  RENDER_STEMS 8
+  RENDER_DITHER 0
+  TIMELOCKMODE 1
+  TEMPOENVLOCKMODE 1
+  ITEMMIX 0
+  DEFPITCHMODE 589824 0
+  TAKELANE 1
+  SAMPLERATE 44100 0 0
+  <RENDER_CFG
+    ZXZhdxAEAA==
+  >
+  LOCK 1
+  <METRONOME 6 2
+    VOL 0.25 0.125
+    FREQ 800 1600 1
+    BEATLEN 4
+    SAMPLES "" ""
+    PATTERN 2863311530 2863311529
+  >
+  GLOBAL_AUTO -1
+  TEMPO 120 4 4
+  PLAYRATE 1 0 0.25 4
+  SELECTION 48.36302369646839 0
+  SELECTION2 48.36302369646839 0
+  MASTERAUTOMODE 0
+  MASTERTRACKHEIGHT 0 0
+  MASTERPEAKCOL 16576
+  MASTERMUTESOLO 0
+  MASTERTRACKVIEW 0 0.6667 0.5 0.5 0 0 0 0 0 0
+  MASTERHWOUT 0 0 1 0 0 0 0 -1
+  MASTER_NCH 2 2
+  MASTER_VOLUME 1 0 -1 -1 1
+  MASTER_FX 1
+  MASTER_SEL 0
+  <MASTERPLAYSPEEDENV
+    EGUID {381385E6-586C-4649-8621-0BD4AACCB5E4}
+    ACT 0 -1
+    VIS 0 1 1
+    LANEHEIGHT 0 0
+    ARM 0
+    DEFSHAPE 0 -1 -1
+  >
+  <TEMPOENVEX
+    EGUID {92848BB2-0FFF-4017-A254-1E0E4009D694}
+    ACT 0 -1
+    VIS 1 0 1
+    LANEHEIGHT 0 0
+    ARM 0
+    DEFSHAPE 1 -1 -1
+  >
+  MARKER 1 0 "" 13 0 1 R {CC4E2AA0-5F7F-4A62-8923-308233126A0F}
+  MARKER 1 48.36302369646839 "" 13 0 1 R
+  <PROJBAY
+  >
+  <TRACK {DB4FEC7D-0498-498E-8549-7065F25C9E9A}
+    NAME Master
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 1 1
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FREEMODE 0
+    SEL 0
+    REC 0 0 1 0 0 0 0
+    VU 2
+    TRACKHEIGHT 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {DB4FEC7D-0498-498E-8549-7065F25C9E9A}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+  >
+  <TRACK {F1EA4B72-2CD4-47E1-ACE1-18F926A0796E}
+    NAME Footsteps
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    VOLPAN 0.21871375624299 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FREEMODE 0
+    SEL 0
+    REC 0 0 1 0 0 0 0
+    VU 2
+    TRACKHEIGHT 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {F1EA4B72-2CD4-47E1-ACE1-18F926A0796E}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+    <ITEM
+      POSITION 2.44740965105522
+      SNAPOFFS 0
+      LENGTH 0.61319727891156
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1.1 0.01 0.155057 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {DDC8839C-AC3C-4898-BD36-660FCAD8B0DE}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {CC732DF8-E411-42E7-9439-CCF36A600AA3}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 2.90555008315398
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.155057 1 1 0
+      FADEOUT 1.1 0.01 0.117462 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {45B03502-ADE1-48E4-8C1F-AE15DE14757F}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {967FC8B3-F5D7-4531-874A-0EEA6C851F84}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 3.37976561816694
+      SNAPOFFS 0
+      LENGTH 0.61319727891157
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.117462 1 1 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {819C286A-F1A8-4E08-BD4F-B8AC83FC33FE}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {F55E3FD1-D1B2-412B-B8DA-A04401AB9532}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 3.75351176010871
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1.1 0.01 0.17953 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {A2C59253-8AE7-4EA0-96BC-A61DA9E1E70D}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {131ABA6F-81A7-4790-8409-FEF841F30B83}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 4.16565938850746
+      SNAPOFFS 0
+      LENGTH 0.61319727891156
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.17953 1 1 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {FC646453-D8B4-48D8-A1DC-D0D29B439A6D}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {04909144-9592-413D-AD08-A80542E82EA2}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 4.53940553041522
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1.1 0.01 0.134965 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {AD267A42-7825-4F70-98F1-0D2AB7373176}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {25347C79-EC16-40F7-B7A7-38D174E2FAA9}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 4.99611835879886
+      SNAPOFFS 0
+      LENGTH 0.61319727891156
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.134965 1 1 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {E240A7F7-5192-47A6-AA73-7DE977929A18}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {621EA6B9-C795-4AB7-87B1-39FE82FDAACA}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 5.36986450070662
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {0FB68CDA-B241-41E8-8F8B-59D1DBB61513}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {93442882-1C61-48B4-90B6-DB37CDC9A136}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 6.59364248485558
+      SNAPOFFS 0
+      LENGTH 5.13740010662951
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1.1 0.01 4.763654 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {B976A125-42B4-460B-8604-E7F442F6B3D5}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {2E3E9EC4-B220-4E9B-A7B0-A6C51A207190}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 6.96738862676335
+      SNAPOFFS 0
+      LENGTH 5.1158808322531
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 4.763654 1 1 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {AE06C0A8-CA81-48A4-9792-AF826F7F6ED2}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {09FEDEA6-497C-4E89-B959-36C57750CE01}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 12.32166350914741
+      SNAPOFFS 0
+      LENGTH 0.61319727891157
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {BEBEBB30-F564-423F-AD46-1B9139CF6F4F}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {F8B18178-6A52-40C9-849B-33CE1DEE7DFD}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 12.69540965105521
+      SNAPOFFS 0
+      LENGTH 0.59167800453516
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1.1 0.01 0.123678 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {80AEA764-5F39-4BA2-BC6F-30430AD03C79}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {333FAFEB-372E-462A-8371-7065B0A12E1A}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 13.16340965105521
+      SNAPOFFS 0
+      LENGTH 9.06
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.123678 1 1 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {F79828F3-0DBF-4D6C-870F-44A35EA508E9}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {BF3AC7E8-6B57-4F0F-97EB-C48970683F6D}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 13.57140965105522
+      SNAPOFFS 0
+      LENGTH 8.628
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {CD039BFF-9627-4907-B9B7-76328C1F9FC3}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {71650E76-6758-41E3-943D-8DC76524510A}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 24.34141934895888
+      SNAPOFFS 0
+      LENGTH 0.61319727891156
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1.1 0.01 0.155057 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {0B5F9223-011A-434B-B6C9-8108099ADD58}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {933D991E-5269-4F40-A1EC-68793B72CEC3}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 24.79955978109501
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.155057 1 1 0
+      FADEOUT 1.1 0.01 0.117462 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {2C83315F-D6C1-4064-AD57-A59F258FB24C}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {FE488BCE-9A7C-476C-9ACD-60A3233707CB}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 25.27377531607635
+      SNAPOFFS 0
+      LENGTH 0.61319727891157
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.117462 1 1 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {5BC83E75-C561-43AD-A742-C000AD828D27}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {C82E72FE-90A0-4899-8667-0339039C98C2}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 25.64752145798411
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1.1 0.01 0.17953 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {097F74D2-4C48-4FE1-AEC2-A8AF75530FC4}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {1E2E09E8-DB90-4ED3-A341-39652E1B25B2}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 26.05966908647679
+      SNAPOFFS 0
+      LENGTH 0.61319727891156
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.17953 1 1 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {49D6233A-6DA6-4699-A66B-9EA2BBEAE5C4}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {78E1B2FB-5495-46C5-907A-E1C56BAB5A79}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 26.43341522838455
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1.1 0.01 0.134965 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {BCAF1389-A15D-45E4-95B3-7510DBBC2E38}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {15839560-A884-4E24-8BC4-D50C9E87FBC0}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 26.89012805675156
+      SNAPOFFS 0
+      LENGTH 0.61319727891156
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.134965 1 1 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {847C7E4F-8F85-4190-918F-FEF5F2B590BC}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {2C391031-3D24-446F-B4E6-C8839E85E1D2}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 27.26387419865932
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {841B8BC2-061A-4817-9E81-DD203282D5C2}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {AD5925C1-D735-4727-A633-EB62494C9059}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 28.41531487284144
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1.1 0.01 0.134965 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {8413BF0D-F03E-4401-9AB7-626465FBB0CA}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {334403F9-1226-45F3-A847-21B0872236C8}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 28.87202770120846
+      SNAPOFFS 0
+      LENGTH 0.61319727891156
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.134965 1 1 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {F2AD7151-E1D8-4C4E-AFB8-BF2C02099CE4}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {38E81DFE-8185-4FEB-8852-73AF12268956}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 29.24577384311621
+      SNAPOFFS 0
+      LENGTH 0.59167800453515
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {20932FC4-DA90-4A86-864B-D1E3D4C2D153}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {16354B54-7BE2-40BC-A407-E5DD0CE38EBB}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 30.1235343759181
+      SNAPOFFS 0
+      LENGTH 0.61319727891157
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1.1 0.01 0.239451 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {41B26961-2802-47AE-8695-F7013C8E8D9B}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {39AB7CCA-1565-4281-9EC2-3BE8EC8A1FD6}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 30.49728051782586
+      SNAPOFFS 0
+      LENGTH 0.59167800453516
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.239451 1 1 0
+      FADEOUT 1.1 0.01 0.123678 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {B6371DEC-EAA9-4419-9559-8225D374EE78}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {98B5D003-5850-4AC3-BBAC-6A1E1CEA908B}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 30.96528051781934
+      SNAPOFFS 0
+      LENGTH 11.55253864697762
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 0.123678 1 1 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {57435879-291F-4200-A298-602E3F11C080}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {8C660D5B-B460-4669-809D-680134E8B40B}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+    <ITEM
+      POSITION 31.37328051787335
+      SNAPOFFS 0
+      LENGTH 11.14453864692361
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 11.144539 1 1 0
+      FADEOUT 1.1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {EFF27EC6-6820-4075-A96A-461F2ECD5A58}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {F07CAF89-2E7F-4A1C-8640-B238D1DF8D58}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 43.04793599999978
+      SNAPOFFS 0
+      LENGTH 3.88268796393992
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1.1 0.01 3.641803 1 1 0
+      MUTE 0 0
+      SEL 0
+      IGUID {62953B7B-12BF-440D-BEB7-FC296AA8FD4A}
+      IID 3
+      NAME Steps-Right.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {88F42600-E51D-45B5-A8C4-EDF6A5E9FAE2}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Right.wav"
+      >
+    >
+    <ITEM
+      POSITION 43.28882142764913
+      SNAPOFFS 0
+      LENGTH 3.67918367346939
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1.1 0.01 3.641803 1 1 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {6084E25A-7E2F-44CB-BED1-A3413CA64159}
+      IID 2
+      NAME Steps-Left.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {D91FE5C7-7BEE-493F-A204-311140505CD6}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Steps-Left.wav"
+      >
+    >
+  >
+  <TRACK {5245C10F-FBDC-4E81-B92C-8213D952D331}
+    NAME Success
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FREEMODE 0
+    SEL 0
+    REC 0 0 1 0 0 0 0
+    VU 2
+    TRACKHEIGHT 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {5245C10F-FBDC-4E81-B92C-8213D952D331}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+    <ITEM
+      POSITION 46.9306239639397
+      SNAPOFFS 0
+      LENGTH 1.32097505668933
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {7A9857C8-8E9F-4F39-BEC0-F94B04711E92}
+      IID 20
+      NAME Success.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {0B64B552-4CFE-4E4C-AB37-E761BEEEDD15}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Success.wav"
+      >
+    >
+  >
+  <TRACK {4D6357FF-C6AD-400C-B083-D0147B528BE1}
+    NAME Failure
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FREEMODE 0
+    SEL 1
+    REC 0 0 1 0 0 0 0
+    VU 2
+    TRACKHEIGHT 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {4D6357FF-C6AD-400C-B083-D0147B528BE1}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+  >
+  <TRACK {183C1DF9-0882-4B8F-AE6E-BE31A6D46886}
+    NAME Enemy
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FREEMODE 0
+    SEL 0
+    REC 0 0 1 0 0 0 0
+    VU 2
+    TRACKHEIGHT 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {183C1DF9-0882-4B8F-AE6E-BE31A6D46886}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+    <ITEM
+      POSITION 6.62957584485967
+      SNAPOFFS 0
+      LENGTH 5.96650793650792
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 3.291952 0 1 0 0
+      FADEOUT 1 2.626556 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {929DD0C0-9BB1-4ACB-943E-660BC75C8F6E}
+      IID 1
+      NAME Danger1.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {F8566F7F-D4AC-4BC1-821D-C166AFD40DC3}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Danger1.wav"
+      >
+    >
+    <ITEM
+      POSITION 19.12161654712834
+      SNAPOFFS 0
+      LENGTH 3.25847096595017
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 3.291952 0 1 0 0
+      FADEOUT 1 2.626556 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {8C6EE49B-2538-4F0A-AAA0-BAB56D8DCE22}
+      IID 1
+      NAME Danger1.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {08A8B770-8A35-4665-B270-23FC689DAAC0}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Danger1.wav"
+      >
+    >
+    <ITEM
+      POSITION 34.63358409691136
+      SNAPOFFS 0
+      LENGTH 5.96650793650792
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 3.291952 0 1 0 0
+      FADEOUT 1 2.626556 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {B793CE5D-34AF-46A3-BC72-6B5226E11D57}
+      IID 1
+      NAME Danger1.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {C414CD4B-18C1-446F-877A-2EA22D0EB70E}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Danger1.wav"
+      >
+    >
+  >
+  <TRACK {718D7B41-C4FF-4FAB-92B3-A15E6FE04DB8}
+    NAME Obstacle-Hit
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 0 0
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FREEMODE 0
+    SEL 0
+    REC 0 0 1 0 0 0 0
+    VU 2
+    TRACKHEIGHT 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {718D7B41-C4FF-4FAB-92B3-A15E6FE04DB8}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+    <ITEM
+      POSITION 5.74281729236252
+      SNAPOFFS 0
+      LENGTH 0.45603174603175
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {EBD9170A-9547-4A41-A19E-BC7D25739F62}
+      IID 21
+      NAME Obstacle-Hit.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {F830CEB9-60F2-421D-B607-964D40AA52BE}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Obstacle-Hit.wav"
+      >
+    >
+    <ITEM
+      POSITION 27.72074435360264
+      SNAPOFFS 0
+      LENGTH 0.45603174603175
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {B451FFEF-8BAC-44D2-9E43-366C510A6170}
+      IID 21
+      NAME Obstacle-Hit.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {BC85E6E1-3E95-45C9-977F-9A5B2CFE10E2}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Obstacle-Hit.wav"
+      >
+    >
+    <ITEM
+      POSITION 29.57873064894609
+      SNAPOFFS 0
+      LENGTH 0.45603174603176
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {2AB36011-9BC1-48B5-B6B7-BC1DF74CD156}
+      IID 21
+      NAME Obstacle-Hit.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {E858B89E-BDBC-4541-91A9-104463B06EBF}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Obstacle-Hit.wav"
+      >
+    >
+    <ITEM
+      POSITION 42.32330844916802
+      SNAPOFFS 0
+      LENGTH 0.45603174603177
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {75A76F4E-F899-4992-900B-BB3897334BAA}
+      IID 21
+      NAME Obstacle-Hit.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {CD8896E7-4869-45E7-BBFC-E47FFA34F634}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\Obstacle-Hit.wav"
+      >
+    >
+  >
+  <TRACK {EC98B8D0-CFA9-4907-B904-0599227D3E33}
+    NAME LevelStart
+    PEAKCOL 16576
+    BEAT -1
+    AUTOMODE 0
+    VOLPAN 1 0 -1 -1 1
+    MUTESOLO 0 0 0
+    IPHASE 0
+    PLAYOFFS 0 1
+    ISBUS 2 -1
+    BUSCOMP 0 0 0 0 0
+    SHOWINMIX 1 0.6667 0.5 1 0.5 0 0 0
+    FREEMODE 0
+    SEL 0
+    REC 0 0 1 0 0 0 0
+    VU 2
+    TRACKHEIGHT 0 0 0
+    INQ 0 0 0 0.5 100 0 0 100
+    NCHAN 2
+    FX 1
+    TRACKID {EC98B8D0-CFA9-4907-B904-0599227D3E33}
+    PERF 0
+    MIDIOUT -1
+    MAINSEND 1 0
+    <ITEM
+      POSITION 0.2111329886898
+      SNAPOFFS 0
+      LENGTH 1.9518820861678
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {0245C1AB-2C49-4525-8FC1-2989E43AC791}
+      IID 22
+      NAME LevelStart.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {39D0F3E2-B686-41F7-A0A9-D787302689E1}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\LevelStart.wav"
+      >
+    >
+    <ITEM
+      POSITION 22.2932657150086
+      SNAPOFFS 0
+      LENGTH 1.9518820861678
+      LOOP 1
+      ALLTAKES 0
+      FADEIN 1 0.01 0 1 0 0
+      FADEOUT 1 0.01 0 1 0 0
+      MUTE 0 0
+      SEL 0
+      IGUID {A5C1624A-030B-4D63-93BC-1AF7D4875C1B}
+      IID 22
+      NAME LevelStart.wav
+      VOLPAN 1 0 1 -1
+      SOFFS 0
+      PLAYRATE 1 1 0 -1 0 0.0025
+      CHANMODE 0
+      GUID {BF86990A-206E-4949-9887-303826FA5086}
+      <SOURCE WAVE
+        FILE "C:\Users\benba\OneDrive\Desktop\BIS\unity\DualPanto-BIS-20-Student-Projects\Assets\Sounds\export\LevelStart.wav"
+      >
+    >
+  >
+>
