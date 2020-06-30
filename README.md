@@ -1,9 +1,17 @@
-# BIS_2020_Projects
+# DuelPanto
+A DualPanto shooter game. You against an enemy ai equipped with deadly lasers fight over three rounds.
 
-This repository contains all projects for Building Interactive Systems 2020.
+[Leaderboard](http://thijsroumen.eu/panto-highscores.html)
 
-## Setup
-1. Create a new branch.
-2. Clone the project.
-3. Add the [unity-dualpanto-framework](https://github.com/HassoPlattnerInstituteHCI/unity-dualpanto-framework) to your project.
-4. For reference take a look at the DualPanto Starter Application [DuelPanto](https://github.com/HassoPlattnerInstituteHCI/DuelPanto).
+Press `ALT` key to visualize game scene.
+Press `TAB` key to show leaderboard.
+
+Skip the introduction by disabling _Panto > Game Manager (Script) > Introduce Level_.
+
+## Installation 
+
+1. Run `git submodule update --init --recursive`.this will download a submodule `unity-dualpanto-framework`.
+
+## Basic functionality
+
+![Order of events](img/DuelPanto.jpg)
