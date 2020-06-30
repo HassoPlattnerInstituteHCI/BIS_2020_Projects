@@ -54,11 +54,11 @@ public class GameManager : MonoBehaviour
         Introduction();
     }
 
-    async void Introduction()
+    async void Introduction() //Speech: Introduce Me-Handle = Move. - Go to telephone
     {
-        await speechOut.Speak("Welcome to Quake Panto Edition");
-        // TODO: 1. Introduce obstacles in level 2 (aka 1)
-        await Task.Delay(1000);
+        await speechOut.Speak("Use the upper handle to move your character.");
+        // TODO: 1. Make telephone ring
+        //await Task.Delay(1000);
         RegisterColliders();
 
         if (introduceLevel)
@@ -66,22 +66,23 @@ public class GameManager : MonoBehaviour
             await IntroduceLevel();
         }
 
-        await speechOut.Speak("Introduction finished, game starts.");
-
         await ResetGame();
     }
 
     async Task IntroduceLevel()
     {
-        await speechOut.Speak("There are two obstacles.");
+
+        await speechOut.Speak("Pick up the phone");
+       
+        //TODO: Make Phone BOX Spawn  //TODO: Make Phone Ring
+        //TODO: If player is close to Phone BOX: -> Speechout Johnny Zoo
+        
         Level level = GetComponent<Level>();
         await level.PlayIntroduction();
 
-        // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound
-
-        await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
+        //await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
         //string response = await speechIn.Listen(commands);
-        await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
+        //await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
 
         //if (response == "yes")
         //{
@@ -89,22 +90,11 @@ public class GameManager : MonoBehaviour
         //}
     }
 
-    [System.Obsolete]
-    async Task RoomExploration()
-    {
-        while (true)
-        {
-            await speechOut.Speak("Say done when you're ready.");
-            string response = await speechIn.Listen(commands);
-            if (response == "done")
-            {
-                return;
-            }
-        }
-    }
-
     void RegisterColliders() {
         PantoCollider[] colliders = FindObjectsOfType<PantoCollider>();
+
+    //TODO: ADD all obstacles and walls to the game
+
         foreach (PantoCollider collider in colliders)
         {
             Debug.Log(collider);
@@ -119,6 +109,8 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     async Task ResetGame()
     {
+        //TODO Enemies rausnehmen
+
         await speechOut.Speak("Spawning player");
         player.transform.position = playerSpawn.position;
         await upperHandle.SwitchTo(player, 0.3f);
@@ -174,7 +166,7 @@ public class GameManager : MonoBehaviour
         string defeatedPerson = playerDefeated ? "You" : "Enemy";
         await speechOut.Speak($"{defeatedPerson} got defeated.");
 
-        gameScore += CalculateGameScore(player, enemy);
+        gameScore += CalculateGameScore(player, enemy); //TODO Level 2
 
         level++;
         if (level >= enemyConfigs.Length)
