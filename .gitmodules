@@ -1,3 +1,4 @@
 [submodule "Assets/unity-dualpanto-framework"]
 	path = Assets/unity-dualpanto-framework
 	url = git@github.com:HassoPlattnerInstituteHCI/unity-dualpanto-framework.git
+	ignore = dirty
