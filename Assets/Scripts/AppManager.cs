@@ -20,7 +20,7 @@ public class AppManager : MonoBehaviour
     async void Start()
     {
         audioManager = GetComponent<AudioManager>();
-        audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete);
+        audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete, OnList, OnShow);
 
         isMoving = false;
         upperHandle = GetComponent<UpperHandle>();
@@ -49,6 +49,27 @@ public class AppManager : MonoBehaviour
         newElement.name = addedName;
         SelectElement(newElement);
         // UpdateCommandsElements();
+    }
+
+    private void OnShow(string element)
+    {
+        GameObject elementToShow = GameObject.Find(element);
+        ShowElement(elementToShow);
+    }
+
+    async public Task ShowElement(GameObject element)
+    {
+        Task[] tasks = new Task[] {
+            audioManager.Say(element.name), 
+            MoveItToElement(element)
+        };
+    
+        await Task.WhenAll(tasks);
+    }
+
+    private void OnList()
+    {
+        Debug.Log("List ausgelöst");
     }
 
     private void OnDelete(string elementName)
@@ -103,5 +124,10 @@ public class AppManager : MonoBehaviour
         selectedElement = element; 
         await upperHandle.MoveToPosition(selectedElement.transform.position, 0.2f);
         isMoving = false;
+    }
+
+    async public Task MoveItToElement(GameObject element)
+    { 
+        await lowerHandle.MoveToPosition(element.transform.position, 0.2f, false);
     }
 }
