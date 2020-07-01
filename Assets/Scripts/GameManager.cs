@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("Pick up the phone");
        
         //TODO: Make Phone Ring
+
+        
         //TODO: If player is close to Phone BOX: -> Speechout Johnny Zoo
         
         Level level = GetComponent<Level>();
