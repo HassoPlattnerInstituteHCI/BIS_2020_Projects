@@ -7,7 +7,6 @@ public class MoveOnPath : MonoBehaviour
 {
     public PathCreator pathCreator;
     public LayerMask layerMask;
-    public float stepSize = 1;
 
     void Update()
     {
