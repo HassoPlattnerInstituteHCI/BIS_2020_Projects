@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7555226275043089616}
   - component: {fileID: 6137022105716192422}
+  - component: {fileID: 2055536606655351526}
   m_Layer: 0
   m_Name: BrightGreenBlock (2)
   m_TagString: Untagged
@@ -80,6 +81,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &2055536606655351526
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354105893471194627}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2475499396431953376
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8645548979788759345}
   - component: {fileID: 4849660055548115860}
+  - component: {fileID: 2241165111517530057}
   m_Layer: 0
   m_Name: BrightGreenBlock (3)
   m_TagString: Untagged
@@ -160,6 +175,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &2241165111517530057
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475499396431953376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2961910378510856125
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,8 +211,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2961910378510856125}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8760465, y: 5.971702, z: -27.222088}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5804183777921499290}
@@ -193,7 +221,7 @@ Transform:
   - {fileID: 7555226275043089616}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &3784188297819613551
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4013146487609866113}
   - component: {fileID: 6638226742163751920}
+  - component: {fileID: 9083881259221133884}
   m_Layer: 0
   m_Name: BrightGreenBlock (1)
   m_TagString: Untagged
@@ -274,6 +303,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &9083881259221133884
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784188297819613551}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5700362033827040264
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5804183777921499290}
   - component: {fileID: 8582389749659981542}
+  - component: {fileID: 6132455413843955856}
   m_Layer: 0
   m_Name: BrightGreenBlock
   m_TagString: Untagged
@@ -354,3 +397,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &6132455413843955856
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5700362033827040264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}

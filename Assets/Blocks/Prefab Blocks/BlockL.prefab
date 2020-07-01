@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7736472465796616491}
   m_Layer: 0
-  m_Name: LBlock
+  m_Name: BlockL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23,8 +23,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 521779287909189652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9084595, y: 8.009251, z: -13.247609}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1470127117016930300}
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 9112725048539610553}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1939515952887616720
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9112725048539610553}
   - component: {fileID: 3494248303363089882}
+  - component: {fileID: 5538045096145925204}
   m_Layer: 0
   m_Name: OrangeBlock (3)
   m_TagString: Untagged
@@ -114,6 +115,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &5538045096145925204
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939515952887616720}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4064901478290995754
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1470127117016930300}
   - component: {fileID: 1954042306630807996}
+  - component: {fileID: 1899074109310629435}
   m_Layer: 0
   m_Name: OrangeBlock
   m_TagString: Untagged
@@ -194,6 +209,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &1899074109310629435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064901478290995754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6418735940717923325
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8055429612511851353}
   - component: {fileID: 5821270435603885785}
+  - component: {fileID: 8409421943479321608}
   m_Layer: 0
   m_Name: OrangeBlock (1)
   m_TagString: Untagged
@@ -274,6 +303,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8409421943479321608
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418735940717923325}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6756303695825265200
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2483143773152527723}
   - component: {fileID: 4057405682375387811}
+  - component: {fileID: 6555492238528629262}
   m_Layer: 0
   m_Name: OrangeBlock (2)
   m_TagString: Untagged
@@ -354,3 +397,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &6555492238528629262
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6756303695825265200}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}

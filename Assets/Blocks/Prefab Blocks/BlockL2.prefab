@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3019380501471618915}
   - component: {fileID: 4830923920803638652}
+  - component: {fileID: 850357289705749020}
   m_Layer: 0
   m_Name: BlueBlock (1)
   m_TagString: Untagged
@@ -80,6 +81,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &850357289705749020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2616059856763542315}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2707310117215802548
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6058381845397672480}
   - component: {fileID: 2836871813524023817}
+  - component: {fileID: 8279067104658597389}
   m_Layer: 0
   m_Name: BlueBlock (3)
   m_TagString: Untagged
@@ -160,6 +175,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &8279067104658597389
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707310117215802548}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3979330123904248872
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,8 +211,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3979330123904248872}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47257012, y: 5.4582243, z: -25.173828}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2641525257798532186}
@@ -193,7 +221,7 @@ Transform:
   - {fileID: 6058381845397672480}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &8177827347091090191
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2641525257798532186}
   - component: {fileID: 1909331275264508030}
+  - component: {fileID: 2813593219522051359}
   m_Layer: 0
   m_Name: BlueBlock
   m_TagString: Untagged
@@ -274,6 +303,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &2813593219522051359
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177827347091090191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8249561069870348998
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6197021704656970265}
   - component: {fileID: 3151048175758270309}
+  - component: {fileID: 5099337598949980363}
   m_Layer: 0
   m_Name: BlueBlock (2)
   m_TagString: Untagged
@@ -354,3 +397,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &5099337598949980363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249561069870348998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5000001, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
