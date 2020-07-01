@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using SpeechIO;
 
 public class AppManager : MonoBehaviour
 {
@@ -13,18 +14,19 @@ public class AppManager : MonoBehaviour
 
     private AudioManager audioManager;
 
+    public GameObject elementPrefab;
+
     // Start is called before the first frame update
     async void Start()
     {
         audioManager = GetComponent<AudioManager>();
-        audioManager.SetCallbacks(OnSelect);
+        audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete);
 
         isMoving = false;
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
         selectedElement = null;
         Level level = GetComponent<Level>();
-        
 
         await level.PlayIntroduction();
         await SelectForTutorial();
@@ -39,8 +41,34 @@ public class AppManager : MonoBehaviour
             return;
         }
         SelectElement(toSelect);
-        
     }
+    private void OnCreate(string addedName)
+    {
+        GameObject newElement = Instantiate(elementPrefab);
+        newElement.transform.parent = GameObject.Find("Canvas/Elements").transform;
+        newElement.name = addedName;
+        SelectElement(newElement);
+        // UpdateCommandsElements();
+    }
+
+    private void OnDelete(string elementName)
+    {
+        GameObject elementToDelete = GameObject.Find(elementName);
+        
+        // should never be entered        
+        if (elementToDelete == null)
+        {
+            return;
+        }
+
+        if (selectedElement == elementToDelete){
+            selectedElement = null;
+        }
+
+        Destroy(elementToDelete);
+        //UpdateCommandsElements();
+    }
+
     private void UpdateCommandsElements()
     {
         GameObject[] elements = GameObject.FindGameObjectsWithTag("Element");

@@ -910,6 +910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf501b683bda284bbfa7997d228f43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elementPrefab: {fileID: 1134054059876488084, guid: 29e46590fe07419498a306494b64e050,
+    type: 3}
 --- !u!4 &1044823524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4397808583068575283, guid: 127a4bfbacb43c04eab422e70844598e,
