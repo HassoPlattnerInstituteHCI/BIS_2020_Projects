@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int trophyScore = 10000;
     public UIManager uiManager;
 
+    private TelephoneSoundEffect telephoneSounds;
+
     UpperHandle upperHandle;
     LowerHandle lowerHandle;
     SpeechIn speechIn;
@@ -49,7 +51,9 @@ public class GameManager : MonoBehaviour
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
 
-        uiManager.UpdateUI(playerScore, enemyScore);
+        telephoneSounds = GetComponent<TelephoneSoundEffect>();
+
+        //uiManager.UpdateUI(playerScore, enemyScore);
 
         Introduction();
     }
@@ -58,6 +62,8 @@ public class GameManager : MonoBehaviour
     {
         await speechOut.Speak("Use the upper handle to move your character.");
         // TODO: 1. Make telephone ring
+        //telephoneSounds.startPhoneRing(GetComponent);
+
         //await Task.Delay(1000);
         RegisterColliders();
 
@@ -74,7 +80,7 @@ public class GameManager : MonoBehaviour
 
         await speechOut.Speak("Pick up the phone");
        
-        //TODO: Make Phone BOX Spawn  //TODO: Make Phone Ring
+        //TODO: Make Phone Ring
         //TODO: If player is close to Phone BOX: -> Speechout Johnny Zoo
         
         Level level = GetComponent<Level>();
