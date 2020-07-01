@@ -50,9 +50,11 @@ public class AppManager : MonoBehaviour
         SelectElement(newElement);
         // UpdateCommandsElements();
     }
+    
 
-    private void OnShow(string element)
-    {
+
+    async private void OnShow(string element)
+    {    
         GameObject elementToShow = GameObject.Find(element);
         ShowElement(elementToShow);
     }
@@ -67,9 +69,13 @@ public class AppManager : MonoBehaviour
         await Task.WhenAll(tasks);
     }
 
-    private void OnList()
+    async private void OnList()
     {
-        Debug.Log("List ausgelöst");
+        await audioManager.Say($"There are {GetElements().Length} elements.");
+        foreach (GameObject element in GetElements())
+        {
+            await ShowElement(element);
+        }  
     }
 
     private void OnDelete(string elementName)
@@ -90,9 +96,13 @@ public class AppManager : MonoBehaviour
         //UpdateCommandsElements();
     }
 
+    private GameObject[] GetElements()
+    {
+        return GameObject.FindGameObjectsWithTag("Element");
+    }
     private void UpdateCommandsElements()
     {
-        GameObject[] elements = GameObject.FindGameObjectsWithTag("Element");
+        GameObject[] elements = GetElements();
         audioManager.UpdateCommands(elements);
     }
     async public Task SelectForTutorial()
