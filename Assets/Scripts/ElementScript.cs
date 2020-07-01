@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ElementScript : MonoBehaviour
 {
-    public string description;
-
     // Start is called before the first frame update
     void Start()
     {
