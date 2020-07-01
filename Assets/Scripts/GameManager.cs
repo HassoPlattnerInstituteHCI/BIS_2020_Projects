@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     async Task GameOver()
     {
-        await speechOut.Speak("Thanks for playing DuelPanto. Say quit when you're done.");
+        await speechOut.Speak("Thanks for playing Tetris Panto Edition. Say quit when you're done.");
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "quit", KeyCode.Escape } });
 
         Application.Quit();

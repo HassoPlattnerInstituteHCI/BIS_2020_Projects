@@ -149,7 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a6ccd72a0961a4bb1a1fa7347dc656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shouldFreeHandle: 0
   movementspeed: 0.2
+  SpawnerLeft: {fileID: 1644391322}
+  SpawnerRight: {fileID: 333825379}
 --- !u!4 &252466911
 Transform:
   m_ObjectHideFlags: 0

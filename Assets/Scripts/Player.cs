@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     bool playercontrol = false;
     public bool shouldFreeHandle;
     public float movementspeed = 0.2f;
+    public GameObject SpawnerLeft;
+    public GameObject SpawnerRight;
     SpeechIn speechIn;
     SpeechOut speechOut;
     
@@ -25,8 +27,8 @@ public class Player : MonoBehaviour
     async void Start()
     {
         meHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
-        GameObject SpawnerRight = GameObject.Find("SpawnerRight");
-        GameObject SpawnerLeft = GameObject.Find("SpawnerLeft");
+        //GameObject SpawnerRight = GameObject.Find("SpawnerRight");
+        //GameObject SpawnerLeft = GameObject.Find("SpawnerLeft");
         await meHandle.SwitchTo(gameObject, 0.4f);
         //movementStarted = true;
         await speechOut.Speak("Welcome to Tetris Panto Edition");
