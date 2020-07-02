@@ -85,6 +85,7 @@ namespace dualLayouting {
             GameObject newElement = Instantiate(elementPrefab);
             newElement.transform.parent = GameObject.Find("Canvas/Elements").transform;
             newElement.name = addedName;
+            newElement.GetComponent<ElementScript>().PlayCreateSound();
             SelectElement(newElement);
             UpdateCommandsElements();
         }
@@ -128,7 +129,7 @@ namespace dualLayouting {
                 selectedElement = null;
             }
 
-            Destroy(elementToDelete);
+            elementToDelete.GetComponent<ElementScript>().Delete();
             UpdateCommandsElements();
         }
 
