@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
             leftBlockActive = false;
             movedOnce = true;
         }
-        else if(message == "confirm" && !playercontrol && movedOnce)
+        if(message == "confirm" && !playercontrol && movedOnce)
         {
             if(leftBlockActive) {
                 Destroy(SpawnManager.blockRight);
