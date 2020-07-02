@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
+using System.Security;
+using UnityEditorInternal;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
@@ -17,20 +20,20 @@ public class Player : MonoBehaviour
     public GameObject SpawnerLeft;
     public GameObject SpawnerRight;
     SpeechIn speechIn;
-    SpeechOut speechOut;
-    
-    float lastFall = 0;
+    SpeechOut speechOut;float lastFall = 0;
     // Start is called before the first frame update
 
     void Awake()
     {
-        speechIn = new SpeechIn(onRecognized);
-        speechOut = new SpeechOut();
+        speechIn = new SpeechIn(onRecognized, new string[] { "repeat", "left", "right", "confirm" });
+        speechIn.StartListening();
         
     }
 
     async void Start()
     {
+        
+        speechOut = new SpeechOut();
         meHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
         await meHandle.SwitchTo(gameObject, 0.4f);
         //movementStarted = true;
@@ -38,7 +41,6 @@ public class Player : MonoBehaviour
         //Is this the right place for it? Will need it in Update to work also for the next waves of blocks
         speechIn.StartListening(new string[]{"left", "right", "confirm"});
         meHandlePrefab = GameObject.Find("MeHandlePrefab(Clone)");
-        
     }
 
     // Update is called once per frame
@@ -100,13 +102,20 @@ public class Player : MonoBehaviour
     
     async void onRecognized(string message)
     {
-        if(message == "left" && !playercontrol)
+        Debug.Log("[" + this.GetType() + "]:" + message);
+        switch (message)
+        {
+            case "repeat":
+                await speechOut.Repeat();
+                break;
+        }
+        if (message == "left" && !playercontrol)
         {
             await meHandle.MoveToPosition(SpawnerLeft.transform.position, 0.3f, shouldFreeHandle);
             leftBlockActive = true;
             movedOnce = true;
         }
-        else if(message == "right" && !playercontrol)
+        if (message == "right" && !playercontrol)
         {
             await meHandle.MoveToPosition(SpawnerRight.transform.position, 0.3f, shouldFreeHandle);
             leftBlockActive = false;
@@ -121,8 +130,39 @@ public class Player : MonoBehaviour
 
             playercontrol = true;
             chooseMode = false;
-            
         }
     }
-    
+
+
+
+    bool isValidGridPos() {        
+    foreach (Transform child in transform) {
+        Vector3 v = Playfield.roundVec3(child.position);
+
+        // Not inside Border?
+        if (!Playfield.insideBorder(v))
+            return false;
+
+        // Block in grid cell (and not part of same group)?
+        if (Playfield.grid[(int)v.x, (int)v.y] != null &&
+            Playfield.grid[(int)v.x, (int)v.y].parent != transform)
+            return false;
+    }
+    return true;
+    }
+
+    void updateGrid() {
+    // Remove old children from grid
+    for (int y = 0; y < Playfield.h; ++y)
+        for (int x = 0; x < Playfield.w; ++x)
+            if (Playfield.grid[x, y] != null)
+                if (Playfield.grid[x, y].parent == transform)
+                    Playfield.grid[x, y] = null;
+
+    // Add new children to grid
+    foreach (Transform child in transform) {
+        Vector3 v = Playfield.roundVec3(child.position);
+        Playfield.grid[(int)v.x, (int)v.y] = child;
+    }        
+    }
 }
