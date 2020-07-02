@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using SpeechIO;
+using System;
 
 public class AppManager : MonoBehaviour
 {
@@ -16,23 +17,60 @@ public class AppManager : MonoBehaviour
 
     public GameObject elementPrefab;
 
+    private int currLevel;
+
     // Start is called before the first frame update
     async void Start()
     {
+        currLevel = 0;
         audioManager = GetComponent<AudioManager>();
-        audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete, OnList, OnShow);
+        audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete, OnList, OnShow, OnDone);
 
         isMoving = false;
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
         selectedElement = null;
-        Level level = GetComponent<Level>();
 
-        await level.PlayIntroduction();
-        await SelectForTutorial();
+        await StartNextLevel();
         UpdateCommandsElements();
     }
 
+    private void OnDone()
+    {
+        StartNextLevel();
+    }
+    async public Task StartLevelZero()
+    {
+        Level level = GetComponent<Level>();
+        await level.PlayIntroduction();
+
+        await Task.WhenAll(new Task[] {
+            MoveItToElement(GameObject.Find("Sun")),
+            audioManager.Say("Here is a graphic of a sun.")
+        });
+        await audioManager.Say("Say \"Select sun\". Then try to move it to the upper right corner.");
+        await audioManager.Say("Say \"Done\" to continue.");
+    
+    }
+    async public Task StartLevelOne()
+    {
+        await audioManager.Say("There is a second element on this page.");
+        await audioManager.Say("Say \"List Elements\" to get an overview.");
+    }
+    async public Task StartLevelTwo()
+    {
+        await audioManager.Say("You can delete elements. Say \"Delete Otter\".");
+    }
+    async public Task StartLevelThree()
+    {
+        await audioManager.Say("Instead of the otter, let's add a picture of clouds. Say \"Create clouds\".");
+    }
+    async private Task StartNextLevel()
+    {
+        Func<Task>[] startLevels = new Func<Task>[] {StartLevelZero, StartLevelOne, StartLevelTwo, StartLevelThree};
+        await startLevels[currLevel]();
+        currLevel++;
+    }
     private void OnSelect(string name)
     {
         GameObject toSelect = GameObject.Find(name);
@@ -103,14 +141,7 @@ public class AppManager : MonoBehaviour
         GameObject[] elements = GetElements();
         audioManager.UpdateCommands(elements);
     }
-    async public Task SelectForTutorial()
-    {
-        Task[] tasks = new Task[2];
-        tasks[0] = audioManager.IntroduceFirstElement();
-        tasks[1] = SelectElement(GameObject.Find("Sun"));
-        
-        await Task.WhenAll(tasks);
-    }
+
     // Update is called once per frame
     void Update()
     {
@@ -138,4 +169,5 @@ public class AppManager : MonoBehaviour
     { 
         await lowerHandle.MoveToPosition(element.transform.position, 0.2f, false);
     }
+
 }

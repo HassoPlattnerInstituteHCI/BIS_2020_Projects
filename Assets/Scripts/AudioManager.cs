@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     Action<string> onDelete;
     Action<string> onShow;
     private Action onList;
+    private Action onDone;
     private GameObject[] elements;
 
     // Start is called before the first frame update
@@ -33,13 +34,15 @@ public class AudioManager : MonoBehaviour
                              Action<string> createCallback,
                              Action<string> deleteCallback,
                              Action listCallback,
-                             Action<string> showCallback)
+                             Action<string> showCallback,
+                             Action doneCallback)
     {
         onSelect = selectCallback;
         onCreate = createCallback;
         onDelete = deleteCallback;
         onList = listCallback;
         onShow = showCallback;
+        onDone = doneCallback;
     }
     
     async public void UpdateCommands(GameObject[] elements)
@@ -54,21 +57,24 @@ public class AudioManager : MonoBehaviour
             newCommands.Add($"Delete {element.name}");
             newCommands.Add($"Show {element.name}");
         }
-
-        // exemplary cause bug
-        newCommands.Add("Create Tree");
-        newCommands.Add("Create Car");
-        //newCommands.Add("Delete Otter");
+        // permanent commands
         newCommands.Add("List Elements");
-        //newCommands.Add("Show Sun");
+        newCommands.Add("Done");
 
+        // exemplary until we code a list of elements
+        newCommands.Add("Create Tree");
+        newCommands.Add("Create Clouds");
+        
 
-        speechIn.SetMetaCommands(newCommands);
-        speechIn.StartListening(new string[] {"Pfannkuchen"});
+        speechIn.StartListening(newCommands.ToArray());
     }
 
     private void OnRecognize(string command){
         Debug.Log(command);
+        if (command == "Done")
+        {
+            onDone();
+        }
         if (command == "List Elements")
         {
             onList();
@@ -100,10 +106,6 @@ public class AudioManager : MonoBehaviour
       
     }
 
-    async public Task IntroduceFirstElement()
-    {
-        await speechOut.Speak("Here is a graphic of a sun.");
-    }  
     // Update is called once per frame
     void Update()
     {
