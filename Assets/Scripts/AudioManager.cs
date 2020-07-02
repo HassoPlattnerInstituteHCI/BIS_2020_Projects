@@ -17,6 +17,14 @@ public class AudioManager : MonoBehaviour
     private Action onList;
     private Action onDone;
     private GameObject[] elements;
+    private static List<string> supportedElements = new List<string> {
+        "Tree",
+        "Balloon",
+        "Congratulations",
+        "Fireworks",
+        "Champagne",
+        "Cake"
+    };
 
     // Start is called before the first frame update
     void Start()
@@ -57,15 +65,16 @@ public class AudioManager : MonoBehaviour
             newCommands.Add($"Delete {element.name}");
             newCommands.Add($"Show {element.name}");
         }
+        
         // permanent commands
         newCommands.Add("List Elements");
         newCommands.Add("Done");
 
-        // exemplary until we code a list of elements
-        newCommands.Add("Create Tree");
-        newCommands.Add("Create Clouds");
-        
-
+        foreach (string element in supportedElements)
+        {
+            newCommands.Add($"Create {element}");
+        }
+    
         speechIn.StartListening(newCommands.ToArray());
     }
 
