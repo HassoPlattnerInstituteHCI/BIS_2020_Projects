@@ -74,26 +74,29 @@ public class AudioManager : MonoBehaviour
         if (command == "Done")
         {
             onDone();
+            return;
         }
         if (command == "List Elements")
         {
             onList();
+            return;
         }
-        if (command.StartsWith("Create"))
+
+        var commandHandlers = new Dictionary<string, Action<string>> {
+            {"Create", onCreate},
+            {"Select", onSelect},
+            {"Show", onShow},
+            {"Delete", onDelete}
+        };
+
+        foreach (var handler in commandHandlers)
         {
-            onCreate(command.Substring("Create ".Length));
-        }
-        if (command.StartsWith("Select"))
-        {
-            onSelect(command.Substring("Select ".Length));
-        }
-        if (command.StartsWith("Delete"))
-        {
-            onDelete(command.Substring("Delete ".Length));
-        }
-        if (command.StartsWith("Show"))
-        {
-            onShow(command.Substring("Show ".Length));
+            if (command.StartsWith(handler.Key))
+            {
+                string parameter = command.Substring(handler.Key.Length + 1);
+                handler.Value(parameter);
+                return;
+            }
         }
     } 
 
