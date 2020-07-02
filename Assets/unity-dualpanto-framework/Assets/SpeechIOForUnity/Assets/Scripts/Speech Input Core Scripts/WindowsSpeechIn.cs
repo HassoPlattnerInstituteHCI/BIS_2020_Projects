@@ -32,6 +32,9 @@ public class WindowsSpeechIn : VoiceCommandBase {
     public override void StartListening(string[] commands){
         if (commands != null) //???
         {
+            if (recognizer != null) {
+                recognizer.Dispose();
+            }
             recognizer = new KeywordRecognizer(commands, confidence);
             recognizer.OnPhraseRecognized += Recognizer_OnPhraseRecognized;
             recognizer.Start();

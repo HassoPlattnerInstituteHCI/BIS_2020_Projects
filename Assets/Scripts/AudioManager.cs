@@ -15,12 +15,14 @@ public class AudioManager : MonoBehaviour
     Action<string> onDelete;
     Action<string> onShow;
     private Action onList;
+    private GameObject[] elements;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Audiomanager initialized");
         speechOut = new SpeechOut();
+        speechIn = new SpeechIn(OnRecognize);
     }
 
     async public Task Say(string text)
@@ -40,30 +42,29 @@ public class AudioManager : MonoBehaviour
         onShow = showCallback;
     }
     
-    public void UpdateCommands(GameObject[] elements)
+    async public void UpdateCommands(GameObject[] elements)
     {
-        if (speechIn != null){
-            speechIn.StopListening();
-            speechIn = null;
-        }
+        this.elements = elements;
         
         List<string> newCommands = new List<string> {};
+
         foreach (GameObject element in elements)
         {
             newCommands.Add($"Select {element.name}");
-            newCommands.Add($"Select {element.name}");
+            newCommands.Add($"Delete {element.name}");
+            newCommands.Add($"Show {element.name}");
         }
 
         // exemplary cause bug
         newCommands.Add("Create Tree");
         newCommands.Add("Create Car");
-        newCommands.Add("Delete Otter");
+        //newCommands.Add("Delete Otter");
         newCommands.Add("List Elements");
-        newCommands.Add("Show Sun");
+        //newCommands.Add("Show Sun");
 
-        speechIn = new SpeechIn(OnRecognize, newCommands.ToArray());
 
-        speechIn.StartListening();
+        speechIn.SetMetaCommands(newCommands);
+        speechIn.StartListening(new string[] {"Pfannkuchen"});
     }
 
     private void OnRecognize(string command){

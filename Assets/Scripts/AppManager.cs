@@ -48,11 +48,9 @@ public class AppManager : MonoBehaviour
         newElement.transform.parent = GameObject.Find("Canvas/Elements").transform;
         newElement.name = addedName;
         SelectElement(newElement);
-        // UpdateCommandsElements();
+        UpdateCommandsElements();
     }
     
-
-
     async private void OnShow(string element)
     {    
         GameObject elementToShow = GameObject.Find(element);
@@ -93,7 +91,7 @@ public class AppManager : MonoBehaviour
         }
 
         Destroy(elementToDelete);
-        //UpdateCommandsElements();
+        UpdateCommandsElements();
     }
 
     private GameObject[] GetElements()
