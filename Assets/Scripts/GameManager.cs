@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     async Task IntroduceLevel()
     {
-        await speechOut.Speak("The It-Handle will now trace the shape of some blocks on the bottom of the level, we will call this is the 'skyline'.");
+        await speechOut.Speak("The It-Handle will now trace the shape of the blocks on the bottom of the level, we will call this is the 'skyline'.");
         // TODO: It-handle trace
 
         await speechOut.Speak("Now the Handle will trace a block at the top of the level. Every block has its own type of sound, remember it!");

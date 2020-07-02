@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     }
     async void onRecognized(string message)
     {
-        if(message == "right" && !playercontrol)
+        if(message == "left" && !playercontrol)
         {
             await meHandle.MoveToPosition(SpawnerLeft.transform.position, 0.3f, shouldFreeHandle);
         }
