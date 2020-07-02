@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public class MoveOnPath : MonoBehaviour
+namespace MarioKart
 {
-    public PathCreator pathCreator;
-    public LayerMask layerMask;
-
-    void Update()
+    public class MoveOnPath : MonoBehaviour
     {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        public PathCreator pathCreator;
+        public LayerMask layerMask;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        void Update()
         {
-            Transform objectHit = hit.transform;
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            // Do something with the object that was hit by the raycast.
-            transform.position = GetClosestPoint(hit.point);
-            GetComponent<MeshRenderer>().enabled = true;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            {
+                Transform objectHit = hit.transform;
+
+                // Do something with the object that was hit by the raycast.
+                transform.position = GetClosestPoint(hit.point);
+                GetComponent<MeshRenderer>().enabled = true;
+            }
+            else
+            {
+                GetComponent<MeshRenderer>().enabled = false;
+            }
         }
-        else
+
+        Vector3 GetClosestPoint(Vector3 point)
         {
-            GetComponent<MeshRenderer>().enabled = false;
+            return pathCreator.path.GetClosestPointOnPath(point);
         }
-    }
-
-    Vector3 GetClosestPoint(Vector3 point)
-    {
-        return pathCreator.path.GetClosestPointOnPath(point);
     }
 }

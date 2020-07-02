@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowMe : MonoBehaviour
+namespace MarioKart
 {
-    public LowerHandle handle;
-    // Start is called before the first frame update
-    void Start()
+    public class FollowMe : MonoBehaviour
     {
-        GameObject panto = GameObject.FindGameObjectWithTag("Panto");
-        print(panto);
-        handle = panto.GetComponent<LowerHandle>();
-    }
+        public LowerHandle handle;
+        // Start is called before the first frame update
+        void Start()
+        {
+            GameObject panto = GameObject.FindGameObjectWithTag("Panto");
+            print(panto);
+            handle = panto.GetComponent<LowerHandle>();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        handle.SwitchTo(gameObject, 0.2f);
+        // Update is called once per frame
+        void Update()
+        {
+            handle.SwitchTo(gameObject, 0.2f);
+        }
     }
 }
