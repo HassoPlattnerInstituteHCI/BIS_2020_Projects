@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElementScript : MonoBehaviour
+namespace dualLayouting 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        GetComponentInChildren<TextMesh>().text = name;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+    public class ElementScript : MonoBehaviour
+    {
+        // Start is called before the first frame update
+        void Start()
+        {
+            GetComponentInChildren<TextMesh>().text = name;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+    }
 }
