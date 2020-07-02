@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
+using System.Security;
+using UnityEditorInternal;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
@@ -13,20 +16,20 @@ public class Player : MonoBehaviour
     public GameObject SpawnerLeft;
     public GameObject SpawnerRight;
     SpeechIn speechIn;
-    SpeechOut speechOut;
-    
-    float lastFall = 0;
+    SpeechOut speechOut;float lastFall = 0;
     // Start is called before the first frame update
 
     void Awake()
     {
-        speechIn = new SpeechIn(onRecognized);
-        speechOut = new SpeechOut();
+        speechIn = new SpeechIn(onRecognized, new string[] { "repeat", "left", "right", "confirm" });
+        speechIn.StartListening();
         
     }
 
     async void Start()
     {
+        
+        speechOut = new SpeechOut();
         meHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
         //GameObject SpawnerRight = GameObject.Find("SpawnerRight");
         //GameObject SpawnerLeft = GameObject.Find("SpawnerLeft");
@@ -34,7 +37,8 @@ public class Player : MonoBehaviour
         //movementStarted = true;
         await speechOut.Speak("Welcome to Tetris Panto Edition");
         //Is th is the right place for it? Will need it in Update to work also for the next waves of blocks
-        speechIn.StartListening(new string[]{"left", "right", "confirm"});
+
+        
     }
 
     // Update is called once per frame
@@ -119,20 +123,30 @@ public class Player : MonoBehaviour
     }
     async void onRecognized(string message)
     {
-        if(message == "left" && !playercontrol)
+        Debug.Log("[" + this.GetType() + "]:" + message);
+        switch (message)
+        {
+            case "repeat":
+                await speechOut.Repeat();
+                break;
+        }
+        if (message == "left" && !playercontrol)
         {
             await meHandle.MoveToPosition(SpawnerLeft.transform.position, 0.3f, shouldFreeHandle);
         }
-        else if(message == "right" && !playercontrol)
+        if (message == "right" && !playercontrol)
         {
             await meHandle.MoveToPosition(SpawnerRight.transform.position, 0.3f, shouldFreeHandle);
         }
-        else if(message == "confirm" && !playercontrol)
+        if (message == "confirm" && !playercontrol)
         {
             //TODO: Delete other block
             playercontrol = true;
+            
         }
     }
+
+
 
     bool isValidGridPos() {        
     foreach (Transform child in transform) {
