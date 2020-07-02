@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public GameObject SpawnerLeft;
     public GameObject SpawnerRight;
     SpeechIn speechIn;
-    SpeechOut speechOut;float lastFall = 0;
+    SpeechOut speechOut;
     // Start is called before the first frame update
 
     void Awake()
