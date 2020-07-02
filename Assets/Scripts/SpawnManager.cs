@@ -8,6 +8,8 @@ public class SpawnManager : MonoBehaviour
     public bool isLeft = false;
     private int leftBlock;
     private int rightBlock;
+    public static GameObject blockLeft;
+    public static GameObject blockRight;
     public GameObject[] groups;
 
     // Start is called before the first frame update
@@ -31,7 +33,12 @@ public class SpawnManager : MonoBehaviour
     }
     // Spawn Group at current Position
     if(isLeft) {
-        Instantiate(groups[leftBlock], transform.position, transform.rotation);
-    } else {Instantiate(groups[rightBlock], transform.position, transform.rotation);}
+        blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
+        blockLeft.name = "LeftBlock";
+        
+    } else {
+        blockRight = Instantiate(groups[rightBlock], transform.position, transform.rotation);
+        blockRight.name = "RightBlock";
+        }
     }
 }
