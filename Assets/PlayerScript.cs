@@ -30,23 +30,21 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         StartCoroutine(MoveOverSpeed(GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 100));
-        //StartCoroutine(MoveOverSeconds(GameObject.Find("Player"), GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 1));
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("ball"))
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == Ball)
         {
+            Debug.Log("Hitting the Ball. Collider disabled");
+            Vector3 dir = Ball.transform.position - transform.position;
+            Ball.GetComponent<Rigidbody>().AddForce(dir * forceApplied);
             soundEffects.PlayClubHit();
-            Debug.Log("Ball getroffen, Collider disabled.");
-            //Ball.GetComponent<Rigidbody>().AddForce(0, forceApplied, 0);
-            // Calculate Angle Between the collision point and the player
-            //Vector3 dir = collision.contacts[0].point - transform.position;
-            // We then get the opposite (-Vector3) and normalize it
-            //dir = -dir.normalized;
-            // And finally we add force in the direction of dir and multiply it by force. 
-            // This will push back the player
-           // Ball.GetComponent<Rigidbody>().AddForce(dir * forceApplied);
             m_Collider.enabled = false;
         }
     }
@@ -61,25 +59,12 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public IEnumerator MoveOverSeconds(GameObject objectToMove, Vector3 end, float seconds)
-    {
-        float elapsedTime = 0;
-        Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
-        {
-            objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        objectToMove.transform.position = end;
-    }
-
     protected virtual bool ReadyToHit()
     {
         if (!m_Collider.enabled)
         {
             Rigidbody rb = Ball.GetComponent<Rigidbody>();
-            if (rb.velocity.magnitude > 0)
+            if (rb.velocity.magnitude > 0.01)
             {
                 return false;
             }

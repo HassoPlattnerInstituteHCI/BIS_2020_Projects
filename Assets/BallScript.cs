@@ -33,12 +33,13 @@ public class BallScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("player"))
+        Debug.Log("Ball Collision.");
+        /*if (collision.gameObject.CompareTag("player"))
         {
             Vector3 direction = collision.relativeVelocity;
             rb.AddForce(direction.normalized * 50);
             Debug.Log("Ball Collision"); 
-        }
+        } */
     }
 
     private void OnTriggerEnter(Collider other)

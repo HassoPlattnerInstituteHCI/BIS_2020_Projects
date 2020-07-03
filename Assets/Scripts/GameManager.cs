@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
 
-        uiManager.UpdateUI(playerScore, enemyScore);
-
         Introduction();
     }
 
