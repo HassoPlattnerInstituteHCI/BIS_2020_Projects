@@ -8,6 +8,7 @@ TagManager:
   - ball
   - player
   - water
+  - obstacle
   layers:
   - Default
   - TransparentFX

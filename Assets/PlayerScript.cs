@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+//using System.Collections.Generic;
 //using System.Numerics;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class PlayerScript : MonoBehaviour
 
     private GameObject Ball;
     private Collider m_Collider;
-    public float forceApplied = 50;
+    public float forceApplied = 30;
     public float upForce = 5f;
     private BallAudio soundEffects;
 
@@ -51,11 +52,16 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject == Ball)
         {
             Debug.Log("Hitting the Ball. Collider disabled");
+            Vector3 shotDir = new Vector3(0, 0, 0);
+            float angle = transform.eulerAngles.y * Mathf.Deg2Rad;
+            shotDir.x = Mathf.Cos(angle);
+            shotDir.z = -Mathf.Sin(angle);
             Vector3 dir = Ball.transform.position - transform.position;
             dir.y = 0;
             Vector3 up = new Vector3(0, upForce, 0);
-            Ball.GetComponent<Rigidbody>().AddForce(dir.normalized * forceApplied);
-            Ball.GetComponent<Rigidbody>().AddForce(up);
+            Debug.Log(shotDir);
+            Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceApplied);
+            //Ball.GetComponent<Rigidbody>().AddForce(up);
             soundEffects.PlayClubHit();
             m_Collider.enabled = false;
         }
@@ -80,8 +86,10 @@ public class PlayerScript : MonoBehaviour
             {
                 return false;
             }
+            // Ball is not moving anymore:
+            rb.velocity = Vector3.zero;     //Balls velocity set to 0.
             Debug.Log("Collider enabled.");
-            m_Collider.enabled = true;
+            m_Collider.enabled = true;      //Enable Club to make next hit.
         }
         return true;
     }

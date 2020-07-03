@@ -209,7 +209,7 @@ PrefabInstance:
     - target: {fileID: 6479032087511188700, guid: 8ba001b8ec74a9d4c94278435367e307,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 6479032087511188700, guid: 8ba001b8ec74a9d4c94278435367e307,
         type: 3}
@@ -342,7 +342,7 @@ PrefabInstance:
     - target: {fileID: 252343645419103545, guid: 2729c2b53a9dcc64f8ecda30c70aee91,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7
+      value: -1.41
       objectReference: {fileID: 0}
     - target: {fileID: 252343645419103545, guid: 2729c2b53a9dcc64f8ecda30c70aee91,
         type: 3}
@@ -396,10 +396,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 252343645419103548, guid: 2729c2b53a9dcc64f8ecda30c70aee91,
         type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: f91c29fc943efb84c815e1f713405df3,
-        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2729c2b53a9dcc64f8ecda30c70aee91, type: 3}
 --- !u!1 &1898531857
@@ -631,3 +630,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0a6972ea04671f43900188986f3e004, type: 3}
+--- !u!1001 &7633031627333140385
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4560055432828071331, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_Name
+      value: Ball Spawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.1287038
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964020152298770190, guid: 5cb15c2d71aa2fa409960c754be02dcd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5cb15c2d71aa2fa409960c754be02dcd, type: 3}

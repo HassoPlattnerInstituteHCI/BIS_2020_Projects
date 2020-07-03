@@ -54,10 +54,11 @@ public class GameManager : MonoBehaviour
 
     async void Introduction()
     {
+        await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
         await speechOut.Speak("Welcome to Quake Panto Edition");
         // TODO: 1. Introduce obstacles in level 2 (aka 1)
         await Task.Delay(1000);
-        RegisterColliders();
+        //RegisterColliders();
 
         if (introduceLevel)
         {
@@ -99,7 +100,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void RegisterColliders() {
+    /*void RegisterColliders() {
         PantoCollider[] colliders = FindObjectsOfType<PantoCollider>();
         foreach (PantoCollider collider in colliders)
         {
@@ -107,27 +108,19 @@ public class GameManager : MonoBehaviour
             collider.CreateObstacle();
             collider.Enable();
         }
-    }
+    } */
 
     async Task ResetGame()
     {
-        await speechOut.Speak("Spawning player");
-        player.transform.position = playerSpawn.position;
-        await upperHandle.SwitchTo(player, 0.3f);
-
-        await speechOut.Speak("Spawning enemy");
-        enemy.transform.position = enemySpawn.position;
-        enemy.transform.rotation = enemySpawn.rotation;
-        await lowerHandle.SwitchTo(enemy, 0.3f);
-        if (level >= enemyConfigs.Length)
-            Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
-        enemy.GetComponent<Enemy>().config = enemyConfigs[level];
-
         upperHandle.Free();
 
         player.SetActive(true);
-        enemy.SetActive(true);
         levelStartTime = Time.time;
+    }
+
+    public void LevelComplete()
+    {
+        Debug.Log("You completed the level.");
     }
 
     async void onRecognized(string message)
@@ -144,50 +137,9 @@ public class GameManager : MonoBehaviour
     async Task GameOver()
     {
         await speechOut.Speak("Congratulations.");
-
-        if (!GetComponent<DualPantoSync>().debug)
-        {
-            await speechOut.Speak($"You achieved a score of {gameScore}.");
-            await speechOut.Speak("Please enter your name to submit your highscore.");
-
-            await uiManager.GameOver(gameScore, (int)totalTime, trophyScore);
-        } else
-        {
-            await speechOut.Speak($"You achieved a score of {gameScore} in debug mode.");
-        }
-
-        await speechOut.Speak("Thanks for playing DuelPanto. Say quit when you're done.");
+        await speechOut.Speak("Thanks for playing PantoGolf. Say quit when you're done.");
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "quit", KeyCode.Escape } });
 
         Application.Quit();
-    }
-
-    int CalculateGameScore(GameObject player, GameObject enemy)
-    {
-        Health playerHealth = player.GetComponent<Health>();
-        Health enemyHealth = enemy.GetComponent<Health>();
-
-        float levelCompleteTime = Time.time - levelStartTime;
-        totalTime += levelCompleteTime;
-        int timeMultiplier = 1;
-        if (levelCompleteTime < 30)
-        {
-            timeMultiplier = 5;
-        } else if (levelCompleteTime < 45)
-        {
-            timeMultiplier = 3;
-        } else if (levelCompleteTime < 60)
-        {
-            timeMultiplier = 2;
-        }
-
-        int levelScore = playerHealth.healthPoints - enemyHealth.healthPoints;
-        if (levelScore > 0)
-        {
-            int levelMultiplier = (int)(Mathf.Pow(2, level) + 1);
-            levelScore *= timeMultiplier * levelMultiplier;
-        }
-
-        return levelScore;
     }
 }

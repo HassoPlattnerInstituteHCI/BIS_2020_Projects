@@ -33,32 +33,35 @@ public class BallScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Ball Collision.");
-        /*if (collision.gameObject.CompareTag("player"))
+        //Debug.Log("Ball Collision.");
+        if (collision.gameObject.CompareTag("obstacle"))
         {
-            Vector3 direction = collision.relativeVelocity;
-            rb.AddForce(direction.normalized * 50);
-            Debug.Log("Ball Collision"); 
-        } */
+            Debug.Log("Ball hit wall/obstacle.");
+            soundEffects.PlayObstacle();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("goal"))
         {
+            Debug.Log("The ball hit the goal!");
             soundEffects.PlayGoal();
-            //MISSING: Play goal sound
+            rb.velocity = Vector3.zero;
+            GameObject.Find("Panto").GetComponent<GameManager>().LevelComplete();
             // Start next Level
         }
         else if (other.gameObject.CompareTag("water"))
         {
+            Debug.Log("Ball fell in water!");
+            rb.velocity = Vector3.zero;
             soundEffects.PlayWaterDrop();
-            // MISSING: Play Water drop sound
             RestartLevel();
         }
     }
 
-    void RestartLevel()
+
+    public void RestartLevel()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
