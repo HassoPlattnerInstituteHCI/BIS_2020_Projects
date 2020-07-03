@@ -17,10 +17,10 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject Ball = GameObject.Find("Ball");
-        StartCoroutine(GameObject.Find("Panto")
-                       .GetComponent<LowerHandle>()
-                       .SwitchTo(Ball, 0.2f));
+        //GameObject Ball = GameObject.Find("Ball");
+        //StartCoroutine(GameObject.Find("Panto")
+        //               .GetComponent<LowerHandle>()
+        //               .SwitchTo(Ball, 0.2f));
     }
 
     private void FixedUpdate()

@@ -26,7 +26,7 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveOverSeconds(GameObject.Find("Player"), GameObject.Find("Panto").GetComponent<UpperHandle>().GetPosition(), 1);
+        MoveOverSeconds(GameObject.Find("Player"), GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 1);
     }
 
     private void OnCollisionEnter(Collision collision)
