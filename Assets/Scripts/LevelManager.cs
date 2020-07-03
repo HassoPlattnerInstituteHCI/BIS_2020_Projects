@@ -6,16 +6,32 @@ using System.Linq;
 
 namespace Stealth
 {
-    public class LevelManager1 : LevelManager
+    public class LevelManager : MonoBehaviour
     {
-       
+        public float spawnSpeed = 1f;
+        public bool introduceLevel = true;
+        public GameObject player;
+        public GameObject[] enemies;
+        public GameObject enemy;
+        public Transform playerSpawn;
+        public Transform[] enemySpawns;
+        public UpperHandle upperHandle;
+        public LowerHandle lowerHandle;
+        public SpeechIn speechIn;
+        public SpeechOut speechOut;
+        public Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
+        { "yes", KeyCode.Y },
+        { "no", KeyCode.N },
+        { "done", KeyCode.D },
+            {"switch",KeyCode.E }
+    };
 
         void Awake()
         {
             speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
             speechOut = new SpeechOut();
 
-            
+
         }
 
         void Start()
@@ -30,7 +46,7 @@ namespace Stealth
 
         async void Introduction()
         {
-            await speechOut.Speak("Welcome to Stealth Panto");
+            await speechOut.Speak("Welcome to Quake Panto Edition");
             // TODO: 1. Introduce obstacles in level 2 (aka 1)
             await Task.Delay(1000);
             RegisterColliders();
@@ -81,23 +97,8 @@ namespace Stealth
         /// <returns></returns>
         public async Task ResetGame()
         {
-            await speechOut.Speak("Spawning player");
-            player.transform.position = playerSpawn.position;
-            await upperHandle.SwitchTo(player, 0.3f);
-
-            //await speechOut.Speak("Spawning enemy");
-            //enemy.transform.position = enemySpawn.position;
-            //enemy.transform.rotation = enemySpawn.rotation;
-            //await lowerHandle.SwitchTo(enemy, 0.3f);
-            await speechOut.Speak("Follow the ticking sound and find treasure avoiding obstacles.");
-            
-            //enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
-
-            upperHandle.Free();
-
-            player.SetActive(true);
-            //enemy.SetActive(true);
-            
+            Debug.Log("Fail");
+            //await speechOut.Speak("Fail");
         }
 
         async void onRecognized(string message)

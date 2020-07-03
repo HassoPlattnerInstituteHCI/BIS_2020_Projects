@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Stealth
 {
@@ -16,18 +17,23 @@ namespace Stealth
         public GameObject player;
         // The part of the path the enemy is currently headed to
         private int currentPathTargetIndex = 0;
+        private bool spotted = false;
         SpeechOut speechOut;
 
         void Start()
         {
             speechOut = new SpeechOut();
+            
+
+
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= SpotRadius)
+            if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= SpotRadius && !spotted)
             {
+                spotted = true;
                 PlayerSpotted();
             }
             if (gameObject.transform.position == getCurrentTarget())
@@ -51,6 +57,25 @@ namespace Stealth
         async Task PlayerSpotted()
         {
             await speechOut.Speak(gameObject.name + " has spotted you.");
+            Debug.Log("Making a call");
+            if (SceneManager.GetActiveScene().name == "Level 2")
+            {
+                LevelManager2 script = GameObject.Find("Panto").GetComponent<LevelManager2>();
+                await script.ResetGame();
+                spotted = false;
+            }
+            else if (SceneManager.GetActiveScene().name == "Level 3")
+            {
+                LevelManager3 script = GameObject.Find("Panto").GetComponent<LevelManager3>();
+                await script.ResetGame();
+                spotted = false;
+            } else if (SceneManager.GetActiveScene().name == "Level 1")
+            {
+                LevelManager1 script = GameObject.Find("Panto").GetComponent<LevelManager1>();
+                await script.ResetGame();
+                spotted = false;
+            }
+            
         }
     }
 }
