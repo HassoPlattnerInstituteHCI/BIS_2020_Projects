@@ -9,9 +9,12 @@ public class PlayerScript : MonoBehaviour
 
     private GameObject Ball;
     private Collider m_Collider;
-    public float forceApplied = 30;
+    public float forceMultiplier = 1f;  //Multiplier to increase hitstrength
     public float upForce = 5f;
+    private float velocity = 0f;     //Stores the velocity of the moving club
     private BallAudio soundEffects;
+
+    private Vector3 previousPosition;   //To calculate velocity of club.
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +22,7 @@ public class PlayerScript : MonoBehaviour
         Ball = GameObject.FindGameObjectWithTag("ball");
         m_Collider = GetComponent<Collider>();
         soundEffects = Ball.GetComponent<BallAudio>();
+        previousPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -40,6 +44,8 @@ public class PlayerScript : MonoBehaviour
             GameObject.Find("Panto").GetComponent<UpperHandle>().GetRotation(),
             transform.eulerAngles.z
             );
+        velocity = (transform.position - previousPosition).magnitude / Time.deltaTime;
+        previousPosition = transform.position;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -60,7 +66,7 @@ public class PlayerScript : MonoBehaviour
             dir.y = 0;
             Vector3 up = new Vector3(0, upForce, 0);
             Debug.Log(shotDir);
-            Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceApplied);
+            Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * velocity);
             //Ball.GetComponent<Rigidbody>().AddForce(up);
             soundEffects.PlayClubHit();
             m_Collider.enabled = false;
@@ -82,7 +88,7 @@ public class PlayerScript : MonoBehaviour
         if (!m_Collider.enabled)
         {
             Rigidbody rb = Ball.GetComponent<Rigidbody>();
-            if (rb.velocity.magnitude > 0.01)
+            if (rb.velocity.magnitude > 0.02)   //Check if ball is moving
             {
                 return false;
             }
