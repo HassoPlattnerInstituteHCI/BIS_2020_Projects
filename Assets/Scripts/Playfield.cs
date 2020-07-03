@@ -7,8 +7,8 @@ public class Playfield : MonoBehaviour
     // The Grid itself
     public static int w = 10;
     public static int h = 18;
-    //grid of GameObjects=Small blocks?
     public static bool[,] grid = new bool[w,h];
+    private float newValue;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,17 @@ public class Playfield : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public static void roundAndPlaceBlock(GameObject block) { //takes the blocks position and rounds the coordinates 
+        //Need to assert that the placement location is valid first!
+        foreach(Transform child in block.transform) {
+            child.transform.position = new Vector3(Mathf.Round(child.transform.position.x*2f)*0.5f, 
+                                                                Mathf.Round(child.transform.position.y*2f)*0.5f, 
+                                                                Mathf.Round(child.transform.position.z*2f)*0.5f);
+        }
+
         
     }
 

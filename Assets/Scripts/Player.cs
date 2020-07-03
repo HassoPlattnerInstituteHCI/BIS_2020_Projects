@@ -47,12 +47,11 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
 
             if (playercontrol) {
-                transform.position = meHandle.HandlePosition(transform.position);
-            
+            transform.position = meHandle.HandlePosition(transform.position);
             //From here on movement via Keyboard arrows for now. Need to couple with Me-Handle movements.
             // Move Left
             if (Input.GetKeyDown(KeyCode.LeftArrow)) {
@@ -88,11 +87,13 @@ public class Player : MonoBehaviour
             }
 
             else if (Input.GetKeyDown(KeyCode.Return)) {
-                if(Playfield.isValidPlacement()) {
+                //if(Playfield.isValidPlacement()) {
+                    Playfield.roundAndPlaceBlock(activeBlock);
                     playercontrol = false;
+                    activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
                     Playfield.deleteFullRows();
                     SpawnManager.spawnWavePls = true;
-                }
+                //}
             }
         }
 
@@ -135,10 +136,12 @@ public class Player : MonoBehaviour
             placement = true;
             playercontrol = false;
             Playfield.isValidPlacement();
+            Playfield.roundAndPlaceBlock(activeBlock);
             await meHandle.MoveToPosition(activeBlock.transform.position, 0.3f, shouldFreeHandle);
         }
         if(message == "confirm" && placement)
         {
+            activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
             activeBlock.transform.parent = null; //detach Block
             placement = false;
             Playfield.deleteFullRows();
