@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3979329026019844504}
   - component: {fileID: 3979329026019844503}
   - component: {fileID: 3979329026019844502}
+  - component: {fileID: 1493744915}
   m_Layer: 0
   m_Name: Ball
   m_TagString: ball
@@ -251,3 +252,19 @@ MonoBehaviour:
   maxPitch: 1.2
   minPitch: 0.8
   audioSource: {fileID: 3979329026019844503}
+--- !u!114 &1493744915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3979329026019844510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7948ea43f9f03c647aa1ec214c4fbde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traceShape: 0
+  isOnUpper: 0
+  description: This is the ball. Try to shoot the ball into the goal.
+  priority: 5

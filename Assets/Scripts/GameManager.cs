@@ -8,14 +8,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public bool introduceLevel = true;
-    public Transform playerSpawn;
+    public GameObject Player;
     static public int level = 0;
 
     UpperHandle upperHandle;
     LowerHandle lowerHandle;
     SpeechIn speechIn;
     SpeechOut speechOut;
-    int hitCount = 0;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
         { "yes", KeyCode.Y },
         { "no", KeyCode.N },
@@ -32,36 +31,41 @@ public class GameManager : MonoBehaviour
     {
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
-
+        Player = GameObject.Find("Player");
+        Player.SetActive(false);
         Introduction();
     }
 
     async void Introduction()
     {
-        await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
-        await speechOut.Speak("Welcome to PantoGolf");
-        // TODO: 1. Introduce obstacles in level 2 (aka 1)
-        await Task.Delay(1000);
-        //RegisterColliders();
-
+        //await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
+        if (SceneManager.GetActiveScene().name == "Level 1")
+        {
+            await speechOut.Speak("Welcome to PantoGolf.");
+        }
+        await speechOut.Speak(SceneManager.GetActiveScene().name);  //Announce current level
+        //Introduce Level to player:
         if (introduceLevel)
         {
             await IntroduceLevel();
         }
 
-        await speechOut.Speak("Introduction finished, game starts.");
-
-        await ResetGame();
+        // Set IT Handle to follow the ball
+        await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
+        Debug.Log("Introduction finished, game starts.");
+        //await speechOut.Speak("Introduction finished, game starts.");
+        Player.SetActive(true);
+        //await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
+        //await ResetGame();
     }
 
     async Task IntroduceLevel()
     {
-        await speechOut.Speak("There are no obstacles.");
+        //await speechOut.Speak("There are no obstacles.");
         Level level = GetComponent<Level>();
         await level.PlayIntroduction();
 
         //string response = await speechIn.Listen(commands);
-        await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
 
         //if (response == "yes")
         //{

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6479032087511188702}
   - component: {fileID: 6479032087511188697}
   - component: {fileID: 6479032087511188696}
+  - component: {fileID: 1268341340}
   m_Layer: 0
   m_Name: Goal
   m_TagString: goal
@@ -105,3 +106,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80cafd81777fae9498cb744bb8bfe3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1268341340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6479032087511188699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7948ea43f9f03c647aa1ec214c4fbde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traceShape: 0
+  isOnUpper: 0
+  description: This is the goal.
+  priority: 10

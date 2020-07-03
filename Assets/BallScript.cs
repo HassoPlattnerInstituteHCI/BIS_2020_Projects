@@ -22,6 +22,8 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 goal_dir = GameObject.Find("Goal").transform.position - transform.position;
+        LowerHandle.transform.LookAt(goal_dir);
         GameObject Ball = GameObject.Find("Ball");
         //StartCoroutine(LowerHandle.SwitchTo(Ball, 0.2f));
     }

@@ -105,5 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c093348b60de70c4c863a255d5df4f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMultiplier: 1
+  disableHit: 0
+  forceMultiplier: 2
   upForce: 5
