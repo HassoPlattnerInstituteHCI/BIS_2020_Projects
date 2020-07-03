@@ -90,7 +90,6 @@ public class Player : MonoBehaviour
                 //if(Playfield.isValidPlacement()) {
                     Playfield.roundAndPlaceBlock(activeBlock);
                     playercontrol = false;
-                    activeBlock.transform.parent = null;
                     activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
                     Playfield.deleteFullRows();
                     SpawnManager.spawnWavePls = true;
@@ -141,6 +140,8 @@ public class Player : MonoBehaviour
         }
         if(message == "confirm" && placement)
         {
+            Playfield.roundAndPlaceBlock(activeBlock);
+            activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
             activeBlock.transform.parent = null; //detach Block
             Playfield.deleteFullRows();
             SpawnManager.spawnWavePls = true;
