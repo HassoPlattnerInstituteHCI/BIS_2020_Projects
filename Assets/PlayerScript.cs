@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     private GameObject Ball;
     private Collider m_Collider;
     public float forceApplied = 50;
+    public float upForce = 5f;
     private BallAudio soundEffects;
 
     // Start is called before the first frame update
@@ -43,7 +44,10 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("Hitting the Ball. Collider disabled");
             Vector3 dir = Ball.transform.position - transform.position;
-            Ball.GetComponent<Rigidbody>().AddForce(dir * forceApplied);
+            dir.y = 0;
+            Vector3 up = new Vector3(0, upForce, 0);
+            Ball.GetComponent<Rigidbody>().AddForce(dir.normalized * forceApplied);
+            Ball.GetComponent<Rigidbody>().AddForce(up);
             soundEffects.PlayClubHit();
             m_Collider.enabled = false;
         }
