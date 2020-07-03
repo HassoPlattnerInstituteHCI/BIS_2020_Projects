@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Panto
+  - Powerupzone
+  - Pausable
   layers:
   - Default
   - TransparentFX
@@ -15,11 +17,11 @@ TagManager:
   - 
   - 
   - Tracker
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Projectile
+  - Grass
+  - Road
   - 
   - 
   - 
@@ -41,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1610382333
+    locked: 0
+  - name: Racetrack
+    uniqueID: 943204717
+    locked: 0
+  - name: Cars
+    uniqueID: 2988022527
+    locked: 0
+  - name: Air
+    uniqueID: 2634718715
     locked: 0
