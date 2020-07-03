@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 588858258090031557}
   - component: {fileID: 588858258090031556}
   m_Layer: 0
-  m_Name: BrightGreenBlock (1)
+  m_Name: Block2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 588858258221679795}
   - component: {fileID: 588858258221679794}
   m_Layer: 0
-  m_Name: BrightGreenBlock
+  m_Name: Block1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 588858258400574595}
   - component: {fileID: 588858258400574594}
   m_Layer: 0
-  m_Name: BrightGreenBlock (3)
+  m_Name: Block4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 588858258749387966}
   - component: {fileID: 588858258749387905}
   m_Layer: 0
-  m_Name: BrightGreenBlock (2)
+  m_Name: Block3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,7 +421,7 @@ GameObject:
   m_Component:
   - component: {fileID: 247933239611493246}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Rotater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

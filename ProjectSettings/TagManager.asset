@@ -3,7 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - inLine0
+  - inLine1
+  - inLine2
+  - inLine3
+  - inLine4
+  - inLine5
+  - inLine6
+  - inLine7
+  - inLine8
+  - inLine9
+  - inLine10
+  - inLine11
+  - inLine12
+  - inLine13
+  - inLine14
+  - inLine15
+  - inLine16
+  - inLine17
   layers:
   - Default
   - TransparentFX

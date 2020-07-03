@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     public bool shouldFreeHandle;
     public float movementspeed = 0.2f;
     public GameObject SpawnerLeft;
-    public GameObject SpawnerRight;
     SpeechIn speechIn;
     SpeechOut speechOut;
     // Start is called before the first frame update
@@ -47,9 +46,23 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
 
+            if(!playercontrol) {
+                if (Input.GetKeyDown(KeyCode.L)) {
+                    onRecognized("left");
+                }
+                if (Input.GetKeyDown(KeyCode.R)) {
+                    onRecognized("right");
+                }
+                if (Input.GetKeyDown(KeyCode.C)) {
+                    onRecognized("confirm");
+                }
+                if (Input.GetKeyDown(KeyCode.X)) {
+                    onRecognized("abort");
+                }
+            }
             if (playercontrol) {
             transform.position = meHandle.HandlePosition(transform.position);
             //From here on movement via Keyboard arrows for now. Need to couple with Me-Handle movements.
@@ -86,14 +99,11 @@ public class Player : MonoBehaviour
                 activeBlock.transform.RotateAround(activeBlock.transform.GetChild(0).position, new Vector3(0,1,0), -90);
             }
 
-            else if (Input.GetKeyDown(KeyCode.Return)) {
-                //if(Playfield.isValidPlacement()) {
-                    Playfield.roundAndPlaceBlock(activeBlock);
-                    playercontrol = false;
-                    activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
-                    Playfield.deleteFullRows();
-                    SpawnManager.spawnWavePls = true;
-                //}
+            else if (Input.GetKeyDown(KeyCode.P)) {
+                onRecognized("place");
+            }
+            else if (Input.GetKeyDown(KeyCode.C)) {
+                onRecognized("confirm");
             }
         }
 
@@ -146,8 +156,10 @@ public class Player : MonoBehaviour
             activeBlock.transform.parent = null; //detach Block
             placement = false;
             Playfield.confirmBlock(activeBlock);
-            Playfield.deleteFullRows();
+            Playfield.checkRows();
             SpawnManager.spawnWavePls = true;
+            await meHandle.MoveToPosition(SpawnerLeft.transform.position, 0.3f, shouldFreeHandle);
+            transform.position = SpawnerLeft.transform.position;
         }
         if(message == "abort" && placement)
         {
