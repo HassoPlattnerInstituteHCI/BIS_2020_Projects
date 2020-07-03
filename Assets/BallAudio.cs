@@ -15,6 +15,7 @@ public class BallAudio : MonoBehaviour
     public float minPitch = 0.8f;
 
     public AudioSource audioSource;
+    private AudioSource rollingSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,23 @@ public class BallAudio : MonoBehaviour
         int i = Random.Range(0, Obstacle.Length);
         PlayClipPitched(Obstacle[i]);
     }
+
+    public void PlayRolling(float vol)
+    {
+        if (vol >= 1)
+        {
+            Debug.Log("Start Rolling sound");
+            int i = Random.Range(0, Obstacle.Length);
+            rollingSource.pitch = 1f;
+            //rollingSource.PlayOneShot(Rolling[0]);
+        }
+    }
+
+    public void StopRolling()
+    {
+        Debug.Log("End Rolling sound");
+        //rollingSource.Stop();
+    } 
 
     public void PlayClipPitched(AudioClip clip)
     {

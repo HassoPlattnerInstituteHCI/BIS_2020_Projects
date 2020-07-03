@@ -239,7 +239,6 @@ MonoBehaviour:
   ClubHit:
   - {fileID: 8300000, guid: 8f0a62929ac2e10418c327dfc9bb8a8d, type: 3}
   - {fileID: 8300000, guid: 292c8aa3c8a37214981f5b8599a68aa0, type: 3}
-  - {fileID: 8300000, guid: 1c7b364306cd2624e9141cadd2d506dc, type: 3}
   Goal:
   - {fileID: 8300000, guid: 8baa9970808611545bd6a72daf7afc62, type: 3}
   - {fileID: 8300000, guid: 26e22dc9976ec6846b84c6e37c62c913, type: 3}

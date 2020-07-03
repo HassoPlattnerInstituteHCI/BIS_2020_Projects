@@ -32,7 +32,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         //transform.position = GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position);
-        Vector3 show_goal = GameObject.Find("Goal").transform.position - GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position);
+        
         //GameObject.Find("Panto").GetComponent<UpperHandle>().
         ReadyToHit();
     }
@@ -73,6 +73,7 @@ public class PlayerScript : MonoBehaviour
             Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * velocity);
             //Ball.GetComponent<Rigidbody>().AddForce(up);
             soundEffects.PlayClubHit();
+            soundEffects.PlayRolling(1f);
             m_Collider.enabled = false;
         }
     }
@@ -102,6 +103,7 @@ public class PlayerScript : MonoBehaviour
             }
             // Ball is not moving anymore:
             rb.velocity = Vector3.zero;     //Balls velocity set to 0.
+            soundEffects.StopRolling();
             Debug.Log("Collider enabled.");
             //int nexthit = hitCount + 1;
             //VoiceOut("Waiting for hit "+ nexthit);
