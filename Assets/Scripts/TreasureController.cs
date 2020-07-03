@@ -15,6 +15,7 @@ namespace Stealth
         public GameObject player;
         private bool found;
         SpeechOut speechOut;
+        private LevelManager script;
 
         Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
         { "yes", KeyCode.Y },
@@ -27,6 +28,7 @@ namespace Stealth
             audioS = gameObject.GetComponent<AudioSource>();
             //player = GameObject.Find("Player");
             speechOut = new SpeechOut();
+            script = GameObject.Find("Panto").GetComponent<LevelManager>();
 
         }
 

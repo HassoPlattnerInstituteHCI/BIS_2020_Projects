@@ -6,32 +6,9 @@ using System.Linq;
 
 namespace Stealth
 {
-    public class LevelManager2 : MonoBehaviour
+    public class LevelManager2 : LevelManager
     {
-        public float spawnSpeed = 1f;
-        public bool introduceLevel = true;
-        public GameObject player;
-        public GameObject enemy;
-        public Transform playerSpawn;
-        public Transform enemySpawn;
-        public int level = 0;
-        public int trophyScore = 10000;
-        //public UIManager uiManager;
-
-        UpperHandle upperHandle;
-        LowerHandle lowerHandle;
-        SpeechIn speechIn;
-        SpeechOut speechOut;
-        int playerScore = 0;
-        int enemyScore = 0;
-        int gameScore = 0;
-        float totalTime = 0;
-        float levelStartTime = 0;
-        Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
-        { "yes", KeyCode.Y },
-        { "no", KeyCode.N },
-        { "done", KeyCode.D }
-    };
+        
 
         void Awake()
         {
@@ -51,7 +28,7 @@ namespace Stealth
 
         async void Introduction()
         {
-            await speechOut.Speak("Welcome to Quake Panto Edition");
+            await speechOut.Speak("Welcome to Stealth Panto");
             // TODO: 1. Introduce obstacles in level 2 (aka 1)
             await Task.Delay(1000);
             RegisterColliders();
@@ -113,25 +90,37 @@ namespace Stealth
         /// Starts a new round.
         /// </summary>
         /// <returns></returns>
-        async Task ResetGame()
+        public async Task ResetGame()
         {
+            player.SetActive(false);
+            foreach (GameObject en in enemies)
+            {
+                en.SetActive(false);
+            }
             await speechOut.Speak("Spawning player");
             player.transform.position = playerSpawn.position;
             await upperHandle.SwitchTo(player, 0.3f);
 
-            await speechOut.Speak("Spawning enemy");
-            enemy.transform.position = enemySpawn.position;
-            enemy.transform.rotation = enemySpawn.rotation;
+            await speechOut.Speak("Spawning enemies");
+
+
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                enemies[0].transform.position = enemySpawns[0].position;
+                enemies[0].transform.rotation = enemySpawns[0].rotation;
+            }
             await lowerHandle.SwitchTo(enemy, 0.3f);
-            await speechOut.Speak("Follow the ticking sound and find treasure avoiding enemies.");
-            
+            await speechOut.Speak("Follow the ticking sound and find treasure avoiding enemies. Say Switch to switch between enemies.");
+
             //enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
 
             upperHandle.Free();
 
             player.SetActive(true);
-            enemy.SetActive(true);
-            levelStartTime = Time.time;
+            foreach (GameObject en in enemies)
+            {
+                en.SetActive(true);
+            }
         }
 
         async void onRecognized(string message)
