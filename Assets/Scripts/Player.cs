@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 {
     private PantoHandle meHandle;
     GameObject meHandlePrefab;
+    GameObject activeBlock;
     bool movementStarted = false;
     bool playercontrol = false;
     bool chooseMode = true;
@@ -80,7 +81,7 @@ public class Player : MonoBehaviour
             // Rotate
             else if (Input.GetKeyDown(KeyCode.Space)) {
                 //meHandlePrefab.transform.Rotate(0, -90, 0);
-                transform.Rotate(0, -90, 0);
+                activeBlock.transform.RotateAround(activeBlock.transform.GetChild(0).position, new Vector3(0,1,0), -90);
             }
 
             else if (Input.GetKeyDown(KeyCode.Return)) {
@@ -126,8 +127,13 @@ public class Player : MonoBehaviour
             if(leftBlockActive) {
                 Destroy(SpawnManager.blockRight);
                 SpawnManager.blockLeft.transform.SetParent(transform);
-            } else {Destroy(SpawnManager.blockLeft); SpawnManager.blockRight.transform.SetParent(transform);}
-
+                activeBlock = SpawnManager.blockLeft; 
+            } else {
+                Destroy(SpawnManager.blockLeft); 
+                SpawnManager.blockRight.transform.SetParent(transform);
+                activeBlock = SpawnManager.blockRight; 
+                }
+            
             playercontrol = true;
             chooseMode = false;
         }

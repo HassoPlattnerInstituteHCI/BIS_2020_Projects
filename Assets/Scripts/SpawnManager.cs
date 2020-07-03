@@ -33,11 +33,11 @@ public class SpawnManager : MonoBehaviour
     }
     // Spawn Group at current Position
     if(isLeft) {
-        blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
+        blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3 (0, 1, 0), transform.rotation);
         blockLeft.name = "LeftBlock";
         
     } else {
-        blockRight = Instantiate(groups[rightBlock], transform.position, transform.rotation);
+        blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 (0, 1, 0), transform.rotation);
         blockRight.name = "RightBlock";
         }
     }
