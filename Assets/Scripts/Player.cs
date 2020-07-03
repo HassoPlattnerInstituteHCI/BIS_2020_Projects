@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         //Is this the right place for it? Will need it in Update to work also for the next waves of blocks
         speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place", "abort" });
         speechIn.StartListening(new string[] {"left", "right", "confirm", "place", "abort" });
-        meHandlePrefab = GameObject.Find("MeHandlePrefab(Clone)");
+        //meHandlePrefab = GameObject.Find("MeHandlePrefab(Clone)");
     }
 
     // Update is called once per frame
@@ -133,17 +133,19 @@ public class Player : MonoBehaviour
         }
         if(message == "place" && playercontrol)
         {
+            if(Playfield.isValidPlacement(activeBlock)){
             placement = true;
             playercontrol = false;
-            Playfield.isValidPlacement();
             Playfield.roundAndPlaceBlock(activeBlock);
             await meHandle.MoveToPosition(activeBlock.transform.position, 0.3f, shouldFreeHandle);
+            } else {await speechOut.Speak("You cannot place the block here.");}
         }
         if(message == "confirm" && placement)
         {
             activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
             activeBlock.transform.parent = null; //detach Block
             placement = false;
+            Playfield.confirmBlock(activeBlock);
             Playfield.deleteFullRows();
             SpawnManager.spawnWavePls = true;
         }
@@ -153,23 +155,5 @@ public class Player : MonoBehaviour
             playercontrol = true;
             meHandle.Free();
         }
-    }
-
-
-
-    bool isValidGridPos() {        
-
-        // Not inside Border?
-
-        // Block in grid cell (and not part of same group)?
-
-    return true;
-    }
-
-    void updateGrid() {
-    // Remove old children from grid
-
-    // Add new children to grid
-
     }
 }
