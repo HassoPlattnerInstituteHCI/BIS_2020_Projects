@@ -3,29 +3,19 @@ using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public float spawnSpeed = 1f;
     public bool introduceLevel = true;
-    public GameObject player;
-    public GameObject enemy;
-    public EnemyConfig[] enemyConfigs;
     public Transform playerSpawn;
-    public Transform enemySpawn;
-    public int level = 0;
-    public int trophyScore = 10000;
-    public UIManager uiManager;
+    static public int level = 0;
 
     UpperHandle upperHandle;
     LowerHandle lowerHandle;
     SpeechIn speechIn;
     SpeechOut speechOut;
-    int playerScore = 0;
-    int enemyScore = 0;
-    int gameScore = 0;
-    float totalTime = 0;
-    float levelStartTime = 0;
+    int hitCount = 0;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
         { "yes", KeyCode.Y },
         { "no", KeyCode.N },
@@ -36,12 +26,6 @@ public class GameManager : MonoBehaviour
     {
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
         speechOut = new SpeechOut();
-
-        if (level < 0 || level >= enemyConfigs.Length)
-        {
-            Debug.LogWarning($"Level value {level} < 0 or >= enemyConfigs.Length. Resetting to 0");
-            level = 0;
-        }
     }
 
     void Start()
@@ -55,7 +39,7 @@ public class GameManager : MonoBehaviour
     async void Introduction()
     {
         await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
-        await speechOut.Speak("Welcome to Quake Panto Edition");
+        await speechOut.Speak("Welcome to PantoGolf");
         // TODO: 1. Introduce obstacles in level 2 (aka 1)
         await Task.Delay(1000);
         //RegisterColliders();
@@ -72,11 +56,9 @@ public class GameManager : MonoBehaviour
 
     async Task IntroduceLevel()
     {
-        await speechOut.Speak("There are two obstacles.");
+        await speechOut.Speak("There are no obstacles.");
         Level level = GetComponent<Level>();
         await level.PlayIntroduction();
-
-        // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound
 
         //string response = await speechIn.Listen(commands);
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
@@ -112,15 +94,20 @@ public class GameManager : MonoBehaviour
 
     async Task ResetGame()
     {
-        upperHandle.Free();
-
-        player.SetActive(true);
-        levelStartTime = Time.time;
+        level = 0;
+        LoadScene(level);
     }
 
     public void LevelComplete()
     {
         Debug.Log("You completed the level.");
+        level++;
+        LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % (SceneManager.sceneCountInBuildSettings));
+    }
+
+    public void RestartLevel()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     async void onRecognized(string message)
@@ -136,10 +123,13 @@ public class GameManager : MonoBehaviour
 
     async Task GameOver()
     {
-        await speechOut.Speak("Congratulations.");
-        await speechOut.Speak("Thanks for playing PantoGolf. Say quit when you're done.");
-        await speechIn.Listen(new Dictionary<string, KeyCode>() { { "quit", KeyCode.Escape } });
-
+        await speechOut.Speak("Thanks for playing PantoGolf.");
         Application.Quit();
+    }
+
+    private void LoadScene(int index)
+    {
+        Debug.Log("Try to load Scene with index " + index);
+        SceneManager.LoadScene(index);
     }
 }

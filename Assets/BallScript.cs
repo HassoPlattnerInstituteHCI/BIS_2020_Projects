@@ -41,14 +41,15 @@ public class BallScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private async void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("goal"))
         {
             Debug.Log("The ball hit the goal!");
             soundEffects.PlayGoal();
             rb.velocity = Vector3.zero;
-            GameObject.Find("Panto").GetComponent<GameManager>().LevelComplete();
+            // Start next level
+            StartCoroutine(levelComplete());
             // Start next Level
         }
         else if (other.gameObject.CompareTag("water"))
@@ -56,13 +57,20 @@ public class BallScript : MonoBehaviour
             Debug.Log("Ball fell in water!");
             rb.velocity = Vector3.zero;
             soundEffects.PlayWaterDrop();
-            RestartLevel();
+            StartCoroutine(RestartLevel());
         }
     }
 
 
-    public void RestartLevel()
+    IEnumerator RestartLevel()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        yield return new WaitForSeconds(2);
+        GameObject.Find("Panto").GetComponent<GameManager>().RestartLevel();
+    }
+
+    IEnumerator levelComplete()
+    {
+        yield return new WaitForSeconds(2);
+        GameObject.Find("Panto").GetComponent<GameManager>().LevelComplete();
     }
 }

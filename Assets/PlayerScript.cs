@@ -3,17 +3,20 @@ using System.Collections;
 //using System.Collections.Generic;
 //using System.Numerics;
 using UnityEngine;
+using SpeechIO;
 
 public class PlayerScript : MonoBehaviour
 {
 
+    public bool disableHit = false;
     private GameObject Ball;
     private Collider m_Collider;
     public float forceMultiplier = 1f;  //Multiplier to increase hitstrength
     public float upForce = 5f;
     private float velocity = 0f;     //Stores the velocity of the moving club
     private BallAudio soundEffects;
-
+    private int hitCount = 0;
+    public SpeechOut speechOut = new SpeechOut();
     private Vector3 previousPosition;   //To calculate velocity of club.
 
     // Start is called before the first frame update
@@ -57,7 +60,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.gameObject == Ball)
         {
-            Debug.Log("Hitting the Ball. Collider disabled");
+            Debug.Log("Hitting the Ball, Collider disabled.");
+            hitCount++;
             Vector3 shotDir = new Vector3(0, 0, 0);
             float angle = transform.eulerAngles.y * Mathf.Deg2Rad;
             shotDir.x = Mathf.Cos(angle);
@@ -87,6 +91,10 @@ public class PlayerScript : MonoBehaviour
     {
         if (!m_Collider.enabled)
         {
+            if (disableHit)
+            {
+                return false;
+            }
             Rigidbody rb = Ball.GetComponent<Rigidbody>();
             if (rb.velocity.magnitude > 0.02)   //Check if ball is moving
             {
@@ -95,8 +103,16 @@ public class PlayerScript : MonoBehaviour
             // Ball is not moving anymore:
             rb.velocity = Vector3.zero;     //Balls velocity set to 0.
             Debug.Log("Collider enabled.");
+            //int nexthit = hitCount + 1;
+            //VoiceOut("Waiting for hit "+ nexthit);
             m_Collider.enabled = true;      //Enable Club to make next hit.
         }
         return true;
+    }
+
+    private async void VoiceOut(string message)
+    {
+        speechOut.Stop();
+        await speechOut.Speak(message);
     }
 }
