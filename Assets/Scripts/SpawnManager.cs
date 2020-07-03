@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     private int leftBlock;
     private int rightBlock;
     public static bool spawnWavePls = true;
+    public static int waveNumber = 0;
     public static GameObject blockLeft;
     public static GameObject blockRight;
     public GameObject[] groups;
@@ -37,5 +38,6 @@ public class SpawnManager : MonoBehaviour
         }
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 1, 0), transform.rotation);
         blockRight.name = "RightBlock";
+        waveNumber++;
     }
 }
