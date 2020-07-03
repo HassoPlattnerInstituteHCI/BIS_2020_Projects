@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BallAudio : MonoBehaviour
@@ -22,10 +23,29 @@ public class BallAudio : MonoBehaviour
 
     public void PlayWaterDrop()
     {
-
+        int i = Random.Range(0, WaterDrop.Length);
+        PlayClipPitched(WaterDrop[i]);
     }
 
-    public void PlayClipPitched(AudioClip clip, float minPitch, float maxPitch)
+    public void PlayClubHit()
+    {
+        int i = Random.Range(0, ClubHit.Length);
+        PlayClipPitched(ClubHit[i]);
+    }
+
+    public void PlayGoal()
+    {
+        int i = Random.Range(0, Goal.Length);
+        PlayClipPitched(Goal[i]);
+    }
+
+    public void PlayObstacle()
+    {
+        int i = Random.Range(0, Obstacle.Length);
+        PlayClipPitched(Obstacle[i]);
+    }
+
+    public void PlayClipPitched(AudioClip clip)
     {
         // little trick to make clip sound less redundant
         audioSource.pitch = Random.Range(minPitch, maxPitch);

@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
 
         // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound
 
-        await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
         //string response = await speechIn.Listen(commands);
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
 
@@ -142,41 +141,6 @@ public class GameManager : MonoBehaviour
     {
         speechOut.Stop(); //Windows: do not remove this line.
         speechIn.StopListening(); // [macOS] do not delete this line!
-    }
-
-    public async void OnDefeat(GameObject defeated)
-    {
-        player.SetActive(false);
-        enemy.SetActive(false);
-
-        bool playerDefeated = defeated.Equals(player);
-
-        if (playerDefeated)
-        {
-            enemyScore++;
-        }
-        else
-        {
-            playerScore++;
-        }
-        uiManager.UpdateUI(playerScore, enemyScore);
-
-        string defeatedPerson = playerDefeated ? "You" : "Enemy";
-        await speechOut.Speak($"{defeatedPerson} got defeated.");
-
-        gameScore += CalculateGameScore(player, enemy);
-
-        level++;
-        if (level >= enemyConfigs.Length)
-        {
-            await GameOver();
-        } else
-        {
-            // TODO: Evaluate the players performance with game score
-            await speechOut.Speak($"Current score is {gameScore}");
-            await speechOut.Speak($"Continuing with level {level + 1}");
-            await ResetGame();
-        }
     }
 
     async Task GameOver()

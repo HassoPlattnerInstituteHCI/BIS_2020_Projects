@@ -7,6 +7,7 @@ TagManager:
   - goal
   - ball
   - player
+  - water
   layers:
   - Default
   - TransparentFX

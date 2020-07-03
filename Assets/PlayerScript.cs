@@ -8,11 +8,14 @@ public class PlayerScript : MonoBehaviour
     private GameObject Ball;
     private Collider m_Collider;
     public float forceApplied = 50;
+    private BallAudio soundEffects;
+
     // Start is called before the first frame update
     void Start()
     {
         Ball = GameObject.FindGameObjectWithTag("ball");
         m_Collider = GetComponent<Collider>();
+        soundEffects = Ball.GetComponent<BallAudio>();
     }
 
     // Update is called once per frame
@@ -26,13 +29,15 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MoveOverSeconds(GameObject.Find("Player"), GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 1);
+        StartCoroutine(MoveOverSpeed(GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 100));
+        //StartCoroutine(MoveOverSeconds(GameObject.Find("Player"), GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 1));
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("ball"))
         {
+            soundEffects.PlayClubHit();
             Debug.Log("Ball getroffen, Collider disabled.");
             //Ball.GetComponent<Rigidbody>().AddForce(0, forceApplied, 0);
             // Calculate Angle Between the collision point and the player
@@ -51,7 +56,6 @@ public class PlayerScript : MonoBehaviour
         // speed should be 1 unit per second
         while (transform.position != end)
         {
-            Debug.Log("Nicht am Ziel");
             transform.position = Vector3.MoveTowards(transform.position, end, speed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }

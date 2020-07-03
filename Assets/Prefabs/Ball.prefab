@@ -232,11 +232,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b17b24f3b1f21a7428b9f97ee53a8d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaterDrop: []
-  ClubHit: []
-  Goal: []
-  Rolling: []
-  Obstacle: []
+  WaterDrop:
+  - {fileID: 8300000, guid: e111c1b4113433d41bb93c4d5713e444, type: 3}
+  - {fileID: 8300000, guid: b80e17ad5b8f7944b93113021f073fb2, type: 3}
+  ClubHit:
+  - {fileID: 8300000, guid: 8f0a62929ac2e10418c327dfc9bb8a8d, type: 3}
+  - {fileID: 8300000, guid: 292c8aa3c8a37214981f5b8599a68aa0, type: 3}
+  - {fileID: 8300000, guid: 1c7b364306cd2624e9141cadd2d506dc, type: 3}
+  Goal:
+  - {fileID: 8300000, guid: 8baa9970808611545bd6a72daf7afc62, type: 3}
+  - {fileID: 8300000, guid: 26e22dc9976ec6846b84c6e37c62c913, type: 3}
+  Rolling:
+  - {fileID: 8300000, guid: d8cc219f682188b409ef7cc62e1945a0, type: 3}
+  Obstacle:
+  - {fileID: 8300000, guid: 60ff59a6347478e409c9b6bf1116b35f, type: 3}
+  - {fileID: 8300000, guid: abd9b249a6e019d4697b4441cb80fc0e, type: 3}
+  - {fileID: 8300000, guid: c86826c35c6751740927d01f66fa9b1c, type: 3}
   maxPitch: 1.2
   minPitch: 0.8
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 3979329026019844503}
