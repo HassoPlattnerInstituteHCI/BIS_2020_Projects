@@ -136,11 +136,11 @@ public class Player : MonoBehaviour
             placement = true;
             playercontrol = false;
             Playfield.isValidPlacement();
+            Playfield.roundAndPlaceBlock(activeBlock);
             await meHandle.MoveToPosition(activeBlock.transform.position, 0.3f, shouldFreeHandle);
         }
         if(message == "confirm" && placement)
         {
-            Playfield.roundAndPlaceBlock(activeBlock);
             activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
             activeBlock.transform.parent = null; //detach Block
             Playfield.deleteFullRows();
