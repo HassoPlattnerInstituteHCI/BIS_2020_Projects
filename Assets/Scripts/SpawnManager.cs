@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public bool isLeft = false;
     private int leftBlock;
     private int rightBlock;
+    public static bool spawnWavePls = true;
     public static GameObject blockLeft;
     public static GameObject blockRight;
     public GameObject[] groups;
@@ -15,30 +15,27 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnNext();
+        //spawnNext();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(spawnWavePls) {
+            spawnNext();
+            spawnWavePls = false;
+        }
     }
 
     public void spawnNext() {
-
-    leftBlock = Random.Range(0, groups.Length);
-    rightBlock = Random.Range(1, groups.Length);
-    if (rightBlock==leftBlock) {
-        rightBlock = 0;
-    }
-    // Spawn Group at current Position
-    if(isLeft) {
+        leftBlock = Random.Range(0, groups.Length);
         blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3 (0, 1, 0), transform.rotation);
         blockLeft.name = "LeftBlock";
-        
-    } else {
-        blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 (0, 1, 0), transform.rotation);
-        blockRight.name = "RightBlock";
+        rightBlock = Random.Range(1, groups.Length);
+        if (rightBlock==leftBlock) {
+            rightBlock = 0;
         }
+        blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 1, 0), transform.rotation);
+        blockRight.name = "RightBlock";
     }
 }

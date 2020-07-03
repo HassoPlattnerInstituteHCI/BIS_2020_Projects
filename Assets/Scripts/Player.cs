@@ -85,8 +85,11 @@ public class Player : MonoBehaviour
             }
 
             else if (Input.GetKeyDown(KeyCode.Return)) {
-                //playercontrol = false;
-                Playfield.deleteFullRows();
+                if(Playfield.isValidPlacement()) {
+                    playercontrol = false;
+                    Playfield.deleteFullRows();
+                    SpawnManager.spawnWavePls = true;
+                }
             }
         }
 
@@ -142,33 +145,18 @@ public class Player : MonoBehaviour
 
 
     bool isValidGridPos() {        
-    foreach (Transform child in transform) {
-        Vector3 v = Playfield.roundVec3(child.position);
 
         // Not inside Border?
-        if (!Playfield.insideBorder(v))
-            return false;
 
         // Block in grid cell (and not part of same group)?
-        if (Playfield.grid[(int)v.x, (int)v.y] != null &&
-            Playfield.grid[(int)v.x, (int)v.y].parent != transform)
-            return false;
-    }
+
     return true;
     }
 
     void updateGrid() {
     // Remove old children from grid
-    for (int y = 0; y < Playfield.h; ++y)
-        for (int x = 0; x < Playfield.w; ++x)
-            if (Playfield.grid[x, y] != null)
-                if (Playfield.grid[x, y].parent == transform)
-                    Playfield.grid[x, y] = null;
 
     // Add new children to grid
-    foreach (Transform child in transform) {
-        Vector3 v = Playfield.roundVec3(child.position);
-        Playfield.grid[(int)v.x, (int)v.y] = child;
-    }        
+
     }
 }
