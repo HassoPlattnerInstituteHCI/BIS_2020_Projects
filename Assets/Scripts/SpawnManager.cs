@@ -30,13 +30,13 @@ public class SpawnManager : MonoBehaviour
 
     public void spawnNext() {
         leftBlock = Random.Range(0, groups.Length);
-        blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3 (0, 1, 0), transform.rotation);
+        blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
         blockLeft.name = "LeftBlock";
         rightBlock = Random.Range(1, groups.Length);
         if (rightBlock==leftBlock) {
             rightBlock = 0;
         }
-        blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 1, 0), transform.rotation);
+        blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
         blockRight.name = "RightBlock";
         waveNumber++;
     }

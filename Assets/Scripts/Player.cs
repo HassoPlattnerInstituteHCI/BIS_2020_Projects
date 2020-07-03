@@ -41,8 +41,8 @@ public class Player : MonoBehaviour
         //movementStarted = true;
         await speechOut.Speak("Welcome to Tetris Panto Edition");
         //Is this the right place for it? Will need it in Update to work also for the next waves of blocks
-        speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place" });
-        speechIn.StartListening(new string[] {"left", "right", "confirm", "place" });
+        speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place", "abort" });
+        speechIn.StartListening(new string[] {"left", "right", "confirm", "place", "abort" });
         meHandlePrefab = GameObject.Find("MeHandlePrefab(Clone)");
     }
 
