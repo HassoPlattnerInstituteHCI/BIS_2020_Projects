@@ -4,50 +4,53 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+namespace Stealth
 {
-    // Start is called before the first frame update
-    public float speed = 1.0f; 
-    // The enemy will patrol between these points;
-    public Vector3[] path;
-    public float SpotRadius = 4.0f;
-    public GameObject player;
-    // The part of the path the enemy is currently headed to
-    private int currentPathTargetIndex = 0;
-    SpeechOut speechOut;
-
-    void Start()
+    public class EnemyController : MonoBehaviour
     {
-        speechOut = new SpeechOut();
-    }
+        // Start is called before the first frame update
+        public float speed = 1.0f;
+        // The enemy will patrol between these points;
+        public Vector3[] path;
+        public float SpotRadius = 4.0f;
+        public GameObject player;
+        // The part of the path the enemy is currently headed to
+        private int currentPathTargetIndex = 0;
+        SpeechOut speechOut;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= SpotRadius)
+        void Start()
         {
-            PlayerSpotted();
-        }
-        if (gameObject.transform.position == getCurrentTarget())
-        {
-            currentPathTargetIndex = (currentPathTargetIndex + 1) % path.Length;
+            speechOut = new SpeechOut();
         }
 
-        moveTowardsTarget();
-    }
+        // Update is called once per frame
+        void Update()
+        {
+            if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= SpotRadius)
+            {
+                PlayerSpotted();
+            }
+            if (gameObject.transform.position == getCurrentTarget())
+            {
+                currentPathTargetIndex = (currentPathTargetIndex + 1) % path.Length;
+            }
 
-    void moveTowardsTarget()
-    {
-        gameObject.transform.position =
-            Vector3.MoveTowards(gameObject.transform.position, getCurrentTarget(), Time.deltaTime * speed);
-    }
+            moveTowardsTarget();
+        }
 
-    Vector3 getCurrentTarget()
-    {
-        return path[currentPathTargetIndex];
-    }
-    async Task PlayerSpotted()
-    {
-        await speechOut.Speak(gameObject.name + " has spotted you.");
+        void moveTowardsTarget()
+        {
+            gameObject.transform.position =
+                Vector3.MoveTowards(gameObject.transform.position, getCurrentTarget(), Time.deltaTime * speed);
+        }
+
+        Vector3 getCurrentTarget()
+        {
+            return path[currentPathTargetIndex];
+        }
+        async Task PlayerSpotted()
+        {
+            await speechOut.Speak(gameObject.name + " has spotted you.");
+        }
     }
 }
