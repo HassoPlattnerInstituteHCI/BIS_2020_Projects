@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -30,7 +31,14 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Move Club to Handle Position
         StartCoroutine(MoveOverSpeed(GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 100));
+        //Rotate Club according to Handle Position
+        transform.eulerAngles = new Vector3(
+            transform.eulerAngles.x,
+            GameObject.Find("Panto").GetComponent<UpperHandle>().GetRotation(),
+            transform.eulerAngles.z
+            );
     }
 
     private void OnCollisionEnter(Collision collision)
