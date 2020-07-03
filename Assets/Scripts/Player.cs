@@ -140,6 +140,7 @@ public class Player : MonoBehaviour
         if(message == "confirm" && placement)
         {
             activeBlock.transform.parent = null; //detach Block
+            placement = false;
             Playfield.deleteFullRows();
             SpawnManager.spawnWavePls = true;
         }
