@@ -25,8 +25,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        speechIn = new SpeechIn(onRecognized, new string[] { "repeat", "left", "right", "confirm" });
-        speechIn.StartListening();
+        
         
     }
 
@@ -39,7 +38,8 @@ public class Player : MonoBehaviour
         //movementStarted = true;
         await speechOut.Speak("Welcome to Tetris Panto Edition");
         //Is this the right place for it? Will need it in Update to work also for the next waves of blocks
-        speechIn.StartListening(new string[]{"left", "right", "confirm"});
+        speechIn = new SpeechIn(onRecognized, new string[] { "repeat", "left", "right", "confirm" });
+        speechIn.StartListening();
         meHandlePrefab = GameObject.Find("MeHandlePrefab(Clone)");
     }
 
@@ -89,9 +89,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (chooseMode) {
-            await speechIn.Listen(new Dictionary<string, KeyCode>() { { "confirm", KeyCode.C }, { "right", KeyCode.R }, { "left", KeyCode.L } });
-        }
+        
 
         if (movementStarted)
         {
@@ -117,7 +115,7 @@ public class Player : MonoBehaviour
         }
         if (message == "right" && !playercontrol)
         {
-            await meHandle.MoveToPosition(SpawnerRight.transform.position, 0.3f, shouldFreeHandle);
+            await meHandle.MoveToPosition(SpawnerLeft.transform.position + new Vector3((float)2.5, 0, 0), 0.3f, shouldFreeHandle);
             leftBlockActive = false;
             movedOnce = true;
         }
