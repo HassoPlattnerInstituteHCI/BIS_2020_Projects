@@ -16,7 +16,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //spawnNext();
+        spawnNext();
     }
 
     // Update is called once per frame
@@ -24,7 +24,6 @@ public class SpawnManager : MonoBehaviour
     {
         if(spawnWavePls) {
             spawnNext();
-            spawnWavePls = false;
         }
     }
 
@@ -32,12 +31,19 @@ public class SpawnManager : MonoBehaviour
         leftBlock = Random.Range(0, groups.Length);
         blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
         blockLeft.name = "LeftBlock";
+        Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
         rightBlock = Random.Range(1, groups.Length);
         if (rightBlock==leftBlock) {
             rightBlock = 0;
         }
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
         blockRight.name = "RightBlock";
+        for(int i=0; i<5; i++) {
+            blockLeft.transform.GetChild(i).transform.tag = "lineUndef";
+            blockRight.transform.GetChild(i).transform.tag = "lineUndef";
+        }
+        Player.rightBlockRotaterPos = blockRight.transform.GetChild(0).transform.position;
         waveNumber++;
+        spawnWavePls = false;
     }
 }

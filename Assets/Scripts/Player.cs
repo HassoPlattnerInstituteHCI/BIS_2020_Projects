@@ -13,10 +13,11 @@ public class Player : MonoBehaviour
     private PantoHandle meHandle;
     GameObject meHandlePrefab;
     GameObject activeBlock;
+    public static Vector3 leftBlockRotaterPos;
+    public static Vector3 rightBlockRotaterPos;
     bool playercontrol = false;
     bool chooseMode = true;
     bool leftBlockActive = false;
-    bool movedOnce = false;
     bool placement = false;
     public bool shouldFreeHandle;
     public float movementspeed = 0.2f;
@@ -37,12 +38,11 @@ public class Player : MonoBehaviour
         speechOut = new SpeechOut();
         meHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
         await meHandle.SwitchTo(gameObject, 0.4f);
-        //movementStarted = true;
-        await speechOut.Speak("Welcome to Tetris Panto Edition");
-        //Is this the right place for it? Will need it in Update to work also for the next waves of blocks
+        await speechOut.Speak("Welcome to Tetris Panto Edition.");
         speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place", "abort" });
         speechIn.StartListening(new string[] {"left", "right", "confirm", "place", "abort" });
-        //meHandlePrefab = GameObject.Find("MeHandlePrefab(Clone)");
+        //Initializes first wave on the left block immediately
+        onRecognized("left");
     }
 
     // Update is called once per frame
@@ -65,37 +65,9 @@ public class Player : MonoBehaviour
             }
             if (playercontrol) {
             transform.position = meHandle.HandlePosition(transform.position);
-            //From here on movement via Keyboard arrows for now. Need to couple with Me-Handle movements.
-            // Move Left
-            if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-                // Modify position
-                //meHandlePrefab.transform.position += new Vector3((float)-0.5, 0, 0);
-                transform.position += new Vector3((float)-0.5, 0, 0);
-            }
-
-            // Move Right
-            else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-                // Modify position
-                //meHandlePrefab.transform.position += new Vector3((float)0.5, 0, 0);
-                transform.position += new Vector3((float)0.5, 0, 0);
-            }
-
-            // Move Up
-            else if (Input.GetKeyDown(KeyCode.UpArrow)) {
-                // Modify position
-                //meHandlePrefab.transform.position += new Vector3(0, 0, (float)0.5);
-                transform.position += new Vector3(0, 0, (float)0.5);
-            }
-
-            // Move Downwards
-            else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-                // Modify position
-                //meHandlePrefab.transform.position += new Vector3(0, 0, (float)-0.5);
-                transform.position += new Vector3(0, 0, (float)-0.5);
-            }
+            
             // Rotate
-            else if (Input.GetKeyDown(KeyCode.Space)) {
-                //meHandlePrefab.transform.Rotate(0, -90, 0);
+            if (Input.GetKeyDown(KeyCode.Space)) {
                 activeBlock.transform.RotateAround(activeBlock.transform.GetChild(0).position, new Vector3(0,1,0), -90);
             }
 
@@ -114,17 +86,15 @@ public class Player : MonoBehaviour
         Debug.Log("[" + this.GetType() + "]:" + message);
         if (message == "left" && !playercontrol && !placement)
         {
-            await meHandle.MoveToPosition(SpawnerLeft.transform.position, 0.3f, shouldFreeHandle);
+            await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
             leftBlockActive = true;
-            movedOnce = true;
         }
         if (message == "right" && !playercontrol && !placement)
         {
-            await meHandle.MoveToPosition(SpawnerLeft.transform.position + new Vector3((float)2.5, 0, 0), 0.3f, shouldFreeHandle);
+            await meHandle.MoveToPosition(rightBlockRotaterPos, 0.3f, shouldFreeHandle);
             leftBlockActive = false;
-            movedOnce = true;
         }
-        if(message == "confirm" && !playercontrol && movedOnce && !placement)
+        if(message == "confirm" && !playercontrol && !placement)
         {
             if(leftBlockActive) {
                 Destroy(SpawnManager.blockRight);
@@ -143,11 +113,11 @@ public class Player : MonoBehaviour
         }
         if(message == "place" && playercontrol)
         {
-            if(Playfield.isValidPlacement(activeBlock)){
-            placement = true;
-            playercontrol = false;
-            Playfield.roundAndPlaceBlock(activeBlock);
-            await meHandle.MoveToPosition(activeBlock.transform.position, 0.3f, shouldFreeHandle);
+            if(Playfield.isValidPlacement(activeBlock)) {
+                placement = true;
+                playercontrol = false;
+                Playfield.roundAndPlaceBlock(activeBlock);
+                await meHandle.MoveToPosition(activeBlock.transform.GetChild(0).transform.position, 0.3f, shouldFreeHandle);
             } else {await speechOut.Speak("You cannot place the block here.");}
         }
         if(message == "confirm" && placement)
@@ -158,8 +128,10 @@ public class Player : MonoBehaviour
             Playfield.confirmBlock(activeBlock);
             Playfield.checkRows();
             SpawnManager.spawnWavePls = true;
-            await meHandle.MoveToPosition(SpawnerLeft.transform.position, 0.3f, shouldFreeHandle);
             transform.position = SpawnerLeft.transform.position;
+            await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
+            //Initializes next wave on the Me-Handle immediately
+            onRecognized("left");
         }
         if(message == "abort" && placement)
         {
