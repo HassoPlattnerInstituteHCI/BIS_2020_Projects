@@ -143,6 +143,7 @@ public class Player : MonoBehaviour
         {
             activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
             activeBlock.transform.parent = null; //detach Block
+            placement = false;
             Playfield.deleteFullRows();
             SpawnManager.spawnWavePls = true;
         }
