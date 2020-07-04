@@ -141,17 +141,17 @@ public class GameManager : MonoBehaviour
 
     async Task MoveX() //Move in X
     {
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(1, 0, 0), 0.1f);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.2f, 0, 0), 0.1f);
         await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-2, 0, 0), 0.1f);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-0.4f, 0, 0), 0.1f);
         await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(1, 0, 0), 0.1f);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.2f, 0, 0), 0.1f);
         await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 1), 0.1f);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.2f), 0.1f);
         await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -2), 0.1f);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -0.4f), 0.1f);
         await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 1), 0.1f);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.2f), 0.1f);
     }
 
     async Task RotateX()//Rotate in X
@@ -208,6 +208,7 @@ public class GameManager : MonoBehaviour
     {
         await speechOut.Speak("Spawning player");
         player.transform.position = playerSpawn.position;
+        player.transform.rotation = playerSpawn.rotation;
         await upperHandle.SwitchTo(player, 0.3f);
         if (level == 0)                                                                                 //LINO HELLIGE
         {
@@ -216,7 +217,10 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("Spawning enemy");
         enemy.transform.position = enemySpawn.position;
         enemy.transform.rotation = enemySpawn.rotation;
-        await lowerHandle.SwitchTo(enemy, 0.3f);
+        if(level != 2)
+        {
+            await lowerHandle.SwitchTo(enemy, 0.3f);
+        }
         if (level >= enemyConfigs.Length)
             Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
         enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
