@@ -87,38 +87,12 @@ public class GameManager : MonoBehaviour
                 await lowerHandle.SwitchTo(helpPos, 0.5f);
 
                 await speechOut.Speak("he is trying to kill you");
-                await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(1, 0, 0), 0.1f);
-                await Task.Delay(100);
-                await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-2, 0, 0), 0.1f);
-                await Task.Delay(100);
-                await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(1, 0, 0), 0.1f);
-                await Task.Delay(100);
-                await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 1), 0.1f);
-                await Task.Delay(100);
-                await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -2), 0.1f);
-                await Task.Delay(100);
-                await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 1), 0.1f);
+                await MoveX();
 
                 await speechOut.Speak("so aim at him");
                 //wiggling lef and right to show how to shoot                                                                                           LINO HELLIGE
-                for (int i = 0; i <= 60; i+=10)
-                {
-                    float r = upperHandle.transform.eulerAngles.y + (float)i;
-                    upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-                    await Task.Delay(100);
-                }
-                for (int i = 60; i >= -60; i -= 10)
-                {
-                    float r = upperHandle.transform.eulerAngles.y + (float)i;
-                    upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-                    await Task.Delay(100);
-                }
-                for (int i = -60; i <= 0; i += 10)
-                {
-                    float r = upperHandle.transform.eulerAngles.y + (float)i;
-                    upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-                    await Task.Delay(100);
-                }
+                await RotateX();
+
             break;
             //Level 2                                                                                                                                      OLIVER SCHULZ
             case 1:
@@ -167,32 +141,38 @@ public class GameManager : MonoBehaviour
 
     async Task MoveX() //Move in X
     {
-        await Move(0, 0, 1, 10);
-        await Move(0, 0, -1, 10);
-        await Move(1, 0, 0, 10);
-        await Move(-1, 0, 0, 10);
-        await Move(0, 0, -1, 10);
-        await Move(0, 0, 1, 10);
-        await Move(-1, 0, -0, 10);
-        await Move(1, 0, -0, 10);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(1, 0, 0), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-2, 0, 0), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(1, 0, 0), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 1), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -2), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 1), 0.1f);
     }
 
     async Task RotateX()//Rotate in X
     {
-        for (int i = 0; i < 25; i++)
+        for (int i = 0; i <= 60; i += 10)
         {
-            player.transform.Rotate(0, -1f, 0);
-            await Task.Delay(10);
+            float r = upperHandle.transform.eulerAngles.y + (float)i;
+            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
+            await Task.Delay(100);
         }
-        for (int i = 0; i < 50; i++)
+        for (int i = 60; i >= -60; i -= 10)
         {
-            player.transform.Rotate(0, 1f, 0);
-            await Task.Delay(10);
+            float r = upperHandle.transform.eulerAngles.y + (float)i;
+            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
+            await Task.Delay(100);
         }
-        for (int i = 0; i < 25; i++)
+        for (int i = -60; i <= 0; i += 10)
         {
-            player.transform.Rotate(0, -1f, 0);
-            await Task.Delay(10);
+            float r = upperHandle.transform.eulerAngles.y + (float)i;
+            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
+            await Task.Delay(100);
         }
     }
 
@@ -302,6 +282,7 @@ public class GameManager : MonoBehaviour
             // TODO: Evaluate the players performance with game score
             await speechOut.Speak($"Current score is {gameScore}");
             await speechOut.Speak($"Continuing with level {level + 1}");
+            await IntroduceLevel();
             await ResetGame();
         }
     }
