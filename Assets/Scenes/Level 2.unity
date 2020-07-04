@@ -195,7 +195,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: portName
-      value: /dev/cu.SLAB_USBtoUART
+      value: //.//COM3
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -441,7 +441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743777050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: -10.83}
+  m_LocalPosition: {x: -0.21, y: 0, z: -10.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -689,7 +689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891400172}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -3.74, y: 0, z: -15.41}
+  m_LocalPosition: {x: -3.74, y: 0, z: -14.97}
   m_LocalScale: {x: 2, y: 1, z: 7}
   m_Children: []
   m_Father: {fileID: 0}
@@ -776,7 +776,7 @@ PrefabInstance:
     - target: {fileID: 3921316458802807763, guid: 52980b55982d9db4a926d3fa16253255,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7959521906792516135, guid: 52980b55982d9db4a926d3fa16253255,
         type: 3}
@@ -972,7 +972,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956210011}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.01, y: 0, z: -12.09}
+  m_LocalPosition: {x: -6.06, y: 0, z: -12.09}
   m_LocalScale: {x: 2, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1039,7 +1039,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 7.0284553
+  orthographic size: 17.52321
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1184,7 +1184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967998315}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.51, y: 0, z: -10.76}
+  m_LocalPosition: {x: -4.51, y: 0, z: -10.54}
   m_LocalScale: {x: 5, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1283,6 +1283,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1401097167766281578, guid: aa66c6c6edf82d64bb33c27f2d07653a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1401097167766281581, guid: aa66c6c6edf82d64bb33c27f2d07653a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1361,7 +1366,7 @@ PrefabInstance:
     - target: {fileID: 6190580198449619686, guid: f4834d46235d17d489e6b274265d153b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.51
+      value: -4.45
       objectReference: {fileID: 0}
     - target: {fileID: 6190580198449619686, guid: f4834d46235d17d489e6b274265d153b,
         type: 3}
@@ -1371,7 +1376,7 @@ PrefabInstance:
     - target: {fileID: 6190580198449619686, guid: f4834d46235d17d489e6b274265d153b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.06
+      value: -13.09
       objectReference: {fileID: 0}
     - target: {fileID: 6190580198449619686, guid: f4834d46235d17d489e6b274265d153b,
         type: 3}
@@ -1418,5 +1423,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1237496910}
+    - target: {fileID: 6190580198449619682, guid: f4834d46235d17d489e6b274265d153b,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4834d46235d17d489e6b274265d153b, type: 3}

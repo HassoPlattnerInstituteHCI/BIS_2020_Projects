@@ -92,25 +92,24 @@ namespace Stealth
         /// <returns></returns>
         public async Task ResetGame()
         {
-            player.SetActive(false);
-            foreach (GameObject en in enemies)
-            {
-                en.SetActive(false);
-            }
+            // player.SetActive(true);
+            // foreach (GameObject en in enemies)
+            // {
+            //    en.SetActive(true);
+            //  }
             await speechOut.Speak("Spawning player");
             player.transform.position = playerSpawn.position;
             await upperHandle.SwitchTo(player, 0.3f);
 
             await speechOut.Speak("Spawning enemies");
-
-
+            
             for (int i = 0; i < enemies.Length; i++)
             {
                 enemies[0].transform.position = enemySpawns[0].position;
                 enemies[0].transform.rotation = enemySpawns[0].rotation;
             }
             await lowerHandle.SwitchTo(enemy, 0.3f);
-            await speechOut.Speak("Follow the ticking sound and find treasure avoiding enemies. Say Switch to switch between enemies.");
+            await speechOut.Speak("Follow the ticking sound and find treasure avoiding enemies.");
 
             //enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
 

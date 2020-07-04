@@ -21,14 +21,10 @@ namespace Stealth
 
         }
 
-
-
         // Update is called once per frame
         void Update()
-        {
+        { 
             transform.position = upperHandle.HandlePosition(transform.position);
-
-
         }
 
         private void FixedUpdate()
@@ -45,7 +41,5 @@ namespace Stealth
             Vector3 direction = Quaternion.Euler(0, rotation, 0) * Vector3.forward;
             playerRb.velocity = speed * direction;
         }
-
-
     }
 }
