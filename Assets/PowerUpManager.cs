@@ -64,9 +64,12 @@ namespace MarioKart
             }
         }
 
+        public delegate void OnSayFinished(object sender);
+        public event OnSayFinished SayFinished;
         private async void Say(string message)
         {
             await speechOut.Speak(message);
+            SayFinished?.Invoke(this);
         }
 
         void OnSpeechRecognized(string command)
@@ -82,9 +85,14 @@ namespace MarioKart
                 StartCoroutine(UsePowerup());
             }
         }
-        public void SayDescription()
+
+        void OnDescriptionSayFinished(object sender)
         {
             SaidDescription?.Invoke(this, activePowerup);
+        }
+
+        public void SayDescription()
+        {
             switch (activePowerup)
             {
                 case Powerup.PowerupType.None:
@@ -102,13 +110,12 @@ namespace MarioKart
                 case Powerup.PowerupType.Laser:
                     Say("You have a laser. You can use it to stun next opponent in front of you");
                     break;
-
             }
+            SayFinished += OnDescriptionSayFinished;
         }
 
         public IEnumerator UsePowerup()
         {
-            UsedPowerup?.Invoke(this, activePowerup);
             switch (activePowerup)
             {
                 case Powerup.PowerupType.None:
@@ -142,6 +149,7 @@ namespace MarioKart
                         break;
                     */
             }
+            UsedPowerup?.Invoke(this, activePowerup);
             activePowerup = Powerup.PowerupType.None;
         }
 
