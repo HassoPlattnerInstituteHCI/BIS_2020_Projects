@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a274c06e27d3a49da8946f92c5ab2a9b, type: 3}
   m_Name: EnemyHard
   m_EditorClassIdentifier: 
-  health: 100
+  health: 250
   speed: 3
   CSGoPlayer: 0
   turnSpeed: 6
@@ -21,4 +21,4 @@ MonoBehaviour:
   timeTillSeek: 5
   inaccuracy: 0.2
   returnsFireOnAttack: 1
-  attackPlayerAtStart: 1
+  attackPlayerAtStart: 0
