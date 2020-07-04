@@ -2,27 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseManager : MonoBehaviour
+namespace MarioKart
 {
-    public bool isPaused { get; private set; } = false;
-    public bool wasPaused { get; private set; } = true;
-
-    void Update()
+    public class PauseManager : MonoBehaviour
     {
-        wasPaused = isPaused;
-    }
+        public bool isPaused = false;
+        public bool wasPaused { get; private set; } = false;
 
-    public void Pause()
-    {
-        isPaused = true;
-    }
-
-    public void Unpause()
-    {
-        if (isPaused)
+        void Start()
         {
-            wasPaused = true;
+            wasPaused = !isPaused;
         }
-        isPaused = false;
+
+        void Update()
+        {
+            wasPaused = isPaused;
+        }
+
+        public void Pause()
+        {
+            isPaused = true;
+        }
+
+        public void Unpause()
+        {
+            if (isPaused)
+            {
+                wasPaused = true;
+            }
+            isPaused = false;
+        }
     }
 }

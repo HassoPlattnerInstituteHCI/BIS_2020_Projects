@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeHandleRep : MonoBehaviour
+namespace MarioKart
 {
-    PantoHandle upperHandle;
-
-    // Start is called before the first frame update
-    void Start()
+    public class MeHandleRep : MonoBehaviour
     {
-        upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
-    }
+        PantoHandle upperHandle;
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position = new Vector3(-8, 0, upperHandle.HandlePosition(transform.position).z);
-        transform.eulerAngles = new Vector3(0, upperHandle.GetRotation(), 0);
+        // Start is called before the first frame update
+        void Start()
+        {
+            upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            transform.position = new Vector3(-8, 0, upperHandle.HandlePosition(transform.position).z);
+            transform.eulerAngles = new Vector3(0, upperHandle.GetRotation(), 0);
+        }
     }
 }

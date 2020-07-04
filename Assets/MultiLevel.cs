@@ -34,6 +34,7 @@ namespace MarioKart
             }
             GetPantoGameObject().GetComponent<LowerHandle>().Free();
             GetPantoGameObject().GetComponent<UpperHandle>().Free();
+            IntroductionFinished?.Invoke(this);
         }
 
         async private Task IntroduceObject(ObjectOfInterest objectOfInterest)
@@ -62,5 +63,8 @@ namespace MarioKart
             await Task.WhenAll(tasks);
             await Task.Delay(500);
         }
+
+        public delegate void OnIntroductionFinished(object sender);
+        public event OnIntroductionFinished IntroductionFinished;
     }
 }

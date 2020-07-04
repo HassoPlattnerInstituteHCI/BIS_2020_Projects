@@ -2,59 +2,153 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using SpeechIO;
 
-public class PowerUpManager : MonoBehaviour
+namespace MarioKart
 {
-    public PathCreator pathCreator;
-    public GameObject zone;
-
-    // Start is called before the first frame update
-    void Start()
+    // Accepts a powerup and allows using it
+    public class PowerUpManager : MonoBehaviour
     {
-        float distance = Random.Range(0, pathCreator.path.length);
-        GameObject new_zone = Instantiate(zone, pathCreator.path.GetPointAtDistance(distance), pathCreator.path.GetRotationAtDistance(distance));
-        new_zone.name = "New Zone";
-    }
+        private Player player;
+        private SpeechOut speechOut;
+        private SpeechIn speechIn;
+        private Powerup.PowerupType activePowerup = Powerup.PowerupType.None;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    IEnumerator usePowerup(int PowerUpType)
-    {
-        switch (PowerUpType)
+        // Start is called before the first frame update
+        void Start()
         {
-            //Booster
-            case 0:
-                GameObject.FindObjectOfType<Player>().SetSpeed(20.0f);
-                yield return new WaitForSeconds(2);
-                GameObject.FindObjectOfType<Player>().SetSpeed(10.0f);
-                break;
-
-            //Shockwave
-            /* braucht noch Enemy
-            case 1:
-                if (Vector3.Distance(GameObject.FindObjectOfType<Player>().transform.position, GameObject.FindObjectOfType<Enemy>().transform.position) < 2)
-                {
-                    GameObject.FindObjectOfType<Enemy>().SetSpeed(0.0f);
-                    yield return new WaitForSeconds(5);
-                    GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
-                }
-                
-                break;
-
-            //Homing Shot
-            case 2: 
-                if (Vector3.Distance(GameObject.FindObjectOfType<Player>().transform.position, GameObject.FindObjectOfType<Enemy>().transform.position) < 5)
-                {
-                    GameObject.FindObjectOfType<Enemy>().SetSpeed(0.0f);
-                    yield return new WaitForSeconds(3);
-                    GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
-                }
-                break;
-            */
+            player = GetComponent<Player>();
+            speechOut = new SpeechOut();
+            speechIn = new SpeechIn(OnSpeechRecognized);
+            speechIn.StartListening(new string[] { "description", "use" });
         }
+
+        void OnApplicationQuit()
+        {
+            speechOut.Stop();
+            speechIn.StopListening();
+        }
+
+        // Give a powerup. If it already has one, say so and discard the new one.
+        public void GivePowerup(Powerup.PowerupType type, bool doAnounce)
+        {
+            if (activePowerup != Powerup.PowerupType.None)
+            {
+                Say("You already have a powerup!");
+                return;
+            }
+
+            activePowerup = type;
+
+            if (!doAnounce)
+            {
+                return;
+            }
+
+            switch (type)
+            {
+                case Powerup.PowerupType.Booster:
+                    Say("You got a booster!");
+                    break;
+
+                case Powerup.PowerupType.Shockwave:
+                    Say("You got a shockwave!");
+                    break;
+
+                case Powerup.PowerupType.Laser:
+                    Say("You got a laser!");
+                    break;
+                default:
+                    Say("You got a programming error!");
+                    break;
+            }
+        }
+
+        private async void Say(string message)
+        {
+            await speechOut.Speak(message);
+        }
+
+        void OnSpeechRecognized(string command)
+        {
+            print("Recoglized command " + command);
+            if (command == "description")
+            {
+                print("Saying description!");
+                SayDescription();
+            }
+            else if (command == "use")
+            {
+                StartCoroutine(UsePowerup());
+            }
+        }
+        public void SayDescription()
+        {
+            SaidDescription?.Invoke(this, activePowerup);
+            switch (activePowerup)
+            {
+                case Powerup.PowerupType.None:
+                    Say("You do not have a powerup!");
+                    break;
+
+                case Powerup.PowerupType.Booster:
+                    Say("You have a booster. You can use it to get a speed Boost for 2 Seconds");
+                    break;
+
+                case Powerup.PowerupType.Shockwave:
+                    Say("You have a shockwave. You can use it to stun opponents around you");
+                    break;
+
+                case Powerup.PowerupType.Laser:
+                    Say("You have a laser. You can use it to stun next opponent in front of you");
+                    break;
+
+            }
+        }
+
+        public IEnumerator UsePowerup()
+        {
+            UsedPowerup?.Invoke(this, activePowerup);
+            switch (activePowerup)
+            {
+                case Powerup.PowerupType.None:
+                    Say("You do not have a powerup!");
+                    break;
+                //Booster
+                case Powerup.PowerupType.Booster:
+                    Say("You used a booster!");
+                    player.speed = 20.0f;
+                    yield return new WaitForSeconds(2);
+                    player.speed = player.defaultSpeed;
+                    break;
+
+                    //Shockwave
+                    /* braucht noch Enemy
+                    case 2:
+                        if (Vector3.Distance(GameObject.FindObjectOfType<Player>().transform.position, GameObject.FindObjectOfType<Enemy>().transform.position) < 2)
+                        {
+                            GameObject.FindObjectOfType<Enemy>().SetSpeed(0.0f);
+                            yield return new WaitForSeconds(5);
+                            GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
+                        }
+
+                        break;
+
+                    //Laser
+                    case 3: 
+                        GameObject.FindObjectOfType<Enemy>().SetSpeed(0.0f);
+                        yield return new WaitForSeconds(3);
+                        GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
+                        break;
+                    */
+            }
+            activePowerup = Powerup.PowerupType.None;
+        }
+
+        public delegate void OnUsedPowerup(object sender, Powerup.PowerupType powerup);
+        public delegate void OnSaidDescription(object sender, Powerup.PowerupType powerup);
+
+        public event OnUsedPowerup UsedPowerup;
+        public event OnSaidDescription SaidDescription;
     }
 }
