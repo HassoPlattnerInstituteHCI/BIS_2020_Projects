@@ -5,13 +5,15 @@ public class Shooting : MonoBehaviour
     public float maxRayDistance = 20f;
     public LayerMask hitLayers;
     // TODO: 6. A clever way of keeping track of hits might be to make the damage/second dependent on how precisely you hit the opponent, rather than having a step function hit/no hit.
-    public int damage = 2;
+    public int damage = 10;
+    public float cooldown = 0.5f;
     public bool isUpper = true;
     public AudioClip defaultClip;
     public AudioClip wallClip;
     public AudioClip hitClip;
+    private float timestamp = 0;
 
-    public float fireSpreadAngle = 2f;
+    public float fireSpreadAngle = 1f;
     public Transform enemyTransform;
 
     AudioSource audioSource;
@@ -77,14 +79,20 @@ public class Shooting : MonoBehaviour
             if (Physics.Raycast(transform.position, enemyDirection, out hit, maxRayDistance, hitLayers))
             {
                 lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point });
+                lineRenderer.material.color = Color.red;
+                lineRenderer.startWidth = 0.1f;
 
                 Health enemy = hit.transform.GetComponent<Health>();
 
                 if (enemy)
                 {
-                    enemy.TakeDamage(damage, gameObject);
+                    if (timestamp <= Time.time)
+                    {
+                        enemy.TakeDamage(damage, gameObject);
 
-                    currentClip = hitClip;
+                        currentClip = hitClip;
+                        timestamp = Time.time + cooldown;
+                    }
                 }
                 else
                 {
@@ -98,14 +106,20 @@ public class Shooting : MonoBehaviour
             {
                 lineRenderer.SetPositions(new Vector3[] { transform.position,
                     hit.point });
+                lineRenderer.material.color = Color.red;
+                lineRenderer.startWidth = 0.1f;
 
                 Health enemy = hit.transform.GetComponent<Health>();
 
                 if (enemy)
                 {
-                    enemy.TakeDamage(damage, gameObject);
+                    if (timestamp <= Time.time)
+                    {
+                        enemy.TakeDamage(damage, gameObject);
 
-                    currentClip = hitClip;
+                        currentClip = hitClip;
+                        timestamp = Time.time + cooldown;
+                    }
                 }
                 else
                 {
@@ -116,6 +130,8 @@ public class Shooting : MonoBehaviour
             {
                 lineRenderer.SetPositions(new Vector3[] { transform.position,
                     transform.position + transform.forward * maxRayDistance });
+                lineRenderer.material.color = Color.red;
+                lineRenderer.startWidth = 0.1f;
                 currentClip = defaultClip;
             }
             
