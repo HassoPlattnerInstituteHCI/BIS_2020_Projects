@@ -8,6 +8,7 @@ using UnityEditor;
 using System.Net.Sockets;
 using System.Threading;
 
+
 public class Player : MonoBehaviour
 {
     private PantoHandle meHandle;
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
         speechOut = new SpeechOut();
         meHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
         await meHandle.SwitchTo(gameObject, 0.4f);
-        await speechOut.Speak("Welcome to Tetris Panto Edition.");
+        //await speechOut.Speak("Welcome to Tetris Panto Edition.");
         speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place", "abort" });
         speechIn.StartListening(new string[] {"left", "right", "confirm", "place", "abort" });
         //Initializes first wave on the left block immediately
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
 
             if(!playercontrol) {
@@ -83,18 +84,19 @@ public class Player : MonoBehaviour
     
     async void onRecognized(string message)
     {
+        //checking voice input
         Debug.Log("[" + this.GetType() + "]:" + message);
-        if (message == "left" && !playercontrol && !placement)
+        if (message == "left" && !playercontrol && !placement)      //select left block
         {
             await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
             leftBlockActive = true;
         }
-        if (message == "right" && !playercontrol && !placement)
+        if (message == "right" && !playercontrol && !placement)     //select right block
         {
             await meHandle.MoveToPosition(rightBlockRotaterPos, 0.3f, shouldFreeHandle);
             leftBlockActive = false;
         }
-        if(message == "confirm" && !playercontrol && !placement)
+        if(message == "confirm" && !playercontrol && !placement)    //confirm block selection
         {
             if(leftBlockActive) {
                 Destroy(SpawnManager.blockRight);
@@ -111,7 +113,7 @@ public class Player : MonoBehaviour
             chooseMode = false;
             activeBlock.transform.position = transform.position;
         }
-        if(message == "place" && playercontrol)
+        if(message == "place" && playercontrol)     //placing the block on the grid                     
         {
             if(Playfield.isValidPlacement(activeBlock)) {
                 placement = true;
@@ -120,7 +122,7 @@ public class Player : MonoBehaviour
                 await meHandle.MoveToPosition(activeBlock.transform.GetChild(0).transform.position, 0.3f, shouldFreeHandle);
             } else {await speechOut.Speak("You cannot place the block here.");}
         }
-        if(message == "confirm" && placement)
+        if(message == "confirm" && placement)       //confirming placement location
         {
             activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
@@ -132,7 +134,7 @@ public class Player : MonoBehaviour
             //Initializes next wave on the Me-Handle immediately
             onRecognized("left");
         }
-        if(message == "abort" && placement)
+        if(message == "abort" && placement)     //abort block placement
         {
             placement = false;
             playercontrol = true;
