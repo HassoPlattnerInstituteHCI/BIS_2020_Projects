@@ -8,6 +8,7 @@ public class Shooting : MonoBehaviour
     public int damage = 10;
     public float cooldown = 0.5f;
     public bool isUpper = true;
+    private bool spotted = false;
     public AudioClip defaultClip;
     public AudioClip wallClip;
     public AudioClip hitClip;
@@ -63,7 +64,7 @@ public class Shooting : MonoBehaviour
     /// <summary>
     /// Fire gun with aiming assistance.
     /// </summary>
-    void FireCone()
+    async void FireCone()
     {
         RaycastHit hit;
 
@@ -78,6 +79,15 @@ public class Shooting : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, enemyDirection, out hit, maxRayDistance, hitLayers))
             {
+                GameObject panto = GameObject.Find("Panto");
+                if (panto.GetComponent<GameManager>().level == 2 && !spotted && this.name == "Player")
+                {
+                    spotted = true;
+                    GameObject e = hit.transform.gameObject;
+                    PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
+                    await lowerHandle.SwitchTo(e,0.2f);
+
+                }
                 lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point });
                 lineRenderer.material.color = Color.red;
                 lineRenderer.startWidth = 0.1f;
