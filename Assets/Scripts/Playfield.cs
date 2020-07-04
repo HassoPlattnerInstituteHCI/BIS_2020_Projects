@@ -6,7 +6,6 @@ public class Playfield : MonoBehaviour
     public static int w = 10;
     public static int h = 18;
     private static bool[,] grid = new bool[w,h];
-
     // Start is called before the first frame update
     void Start()
     {
@@ -31,56 +30,51 @@ public class Playfield : MonoBehaviour
     static void updateTagName(int column, int row, Transform block) {
         block.tag = "inLine"+row;
         block.name = "ArrayCL"+column+row;
-        updateGrid();
+        //updateGrid(column, row, true);
     }
 
-
-
-    static void updateGrid() {
-        for(int row=0; row<h; row++) {
-            for(int column=0; column<w; column++) {
-                grid[column, row] = false;
-                if(GameObject.Find("ArrayCL"+column+row)) {
-                    grid[column, row] = true;
-                } 
-            }
+    static bool checkPosition(int column, int row) {
+        if(GameObject.Find("ArrayCL"+column+row)) {
+            return true;
         }
+        return false;
     }
 
-    public static void decreaseRowsAbove(int row) {
+    static void updateGrid(int column, int row, bool value) {
+        grid[column, row] = value;
+    }
+
+    public static void decreaseRowsAbove(int i) {
         GameObject currentBlock;
-        for(;row<h-1;row++) {
+        for(int row=i; row<h-1; row++) {
             for(int column=0; column<w; column++) {
-                currentBlock = GameObject.Find("ArrayCL"+column+row);
-                if(currentBlock!=null) {
+                if(checkPosition(column, row)) {
+                    currentBlock = GameObject.Find("ArrayCL"+column+row);
                     currentBlock.transform.position=currentBlock.transform.position + new Vector3(0, 0, (float)-0.5);
+                    //updateGrid(column, row, false);
                     updateTagName(column, row-1, currentBlock.transform);
-                    currentBlock=null;
                 }
             }
         }
     }
 
     public static void checkRows() {
-        bool foundOne=false;
-        for(int row=0; row<h; row++) {
+        for(int row=h-1; row>=0; row--) {
             if(GameObject.FindGameObjectsWithTag("inLine"+row).Length==w) {
                 deleteThisRow(row);
-                foundOne=true;
             }
-        }
-        if(foundOne) {
-            checkRows();
         }
     }
 
     public static void deleteThisRow(int row) {
-        GameObject[] theseBlocks;
-        theseBlocks = GameObject.FindGameObjectsWithTag("inLine"+row); 
-        foreach(GameObject block in theseBlocks) {
-            Destroy(block);
+        GameObject thisBlock;
+        for(int column=0; column<w; column++) {
+            thisBlock = GameObject.Find("ArrayCL"+column+row);
+            Destroy(thisBlock);
         }
-        updateGrid();
+        for(int column=0; column<w; column++) {
+            //updateGrid(column, row, false);
+        }
         decreaseRowsAbove(row+1);
     }
 
@@ -98,6 +92,9 @@ public class Playfield : MonoBehaviour
                 updateTagName(column, row, child);
             }
         }
+        block.transform.DetachChildren();
+        Destroy(block);
+        Destroy(GameObject.Find("Rotater"));
     }
 
     public static bool isValidPlacement(GameObject block) {
@@ -110,20 +107,16 @@ public class Playfield : MonoBehaviour
             if(child.name!="Rotater") {
                 //Put the whole function into placeBlock and reuse PosRelative?
                 xPosRelative = Mathf.Round(child.transform.position.x*2f)/2f;
-//Debug.Log("xPos" + xPosRelative);
                 zPosRelative = Mathf.Round(child.transform.position.z*2f)/2f;
-//Debug.Log("yPos" + zPosRelative);
                 column=(int)(2*xPosRelative);
                 row=(int)(2*zPosRelative);
-//Debug.Log("column " +column);
-//Debug.Log("row " +row);
-                
-                if(grid[column, row]==true) {
+                if(checkPosition(column, row)) {
+                //if(grid[column, row]==true)
                     Debug.Log("Invalid Placement: Position already occupied");
                     return false;
                 }
                 //Check for this child if it is on bottom row or below is another block
-                if(row==0 || grid[column, row-1]==true) {
+                if(row==0 || checkPosition(column, row-1)) {
                     surroundings++;
                 }
             }

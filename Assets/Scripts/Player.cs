@@ -122,8 +122,7 @@ public class Player : MonoBehaviour
         }
         if(message == "confirm" && placement)
         {
-            activeBlock.name = "PlacedBlock" + SpawnManager.waveNumber;
-            activeBlock.transform.parent = null; //detach Block
+            activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
             Playfield.confirmBlock(activeBlock);
             Playfield.checkRows();
