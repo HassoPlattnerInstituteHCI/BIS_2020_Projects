@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     async void Introduction()
     {
         await speechOut.Speak("Welcome to Tetris Panto Edition");
+        RegisterColliders();
         await Task.Delay(1000);
 
         if (introduceLevel)
