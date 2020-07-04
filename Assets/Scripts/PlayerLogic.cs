@@ -16,11 +16,23 @@ public class PlayerLogic : MonoBehaviour
     float nextHeartbeat;
     Health health;
 
+
+    private TelephoneSoundEffect telephoneSounds;
+    GameObject phoneBox;
+
     void Start()
     {
         upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
         health = GetComponent<Health>();
         audioSource = GetComponent<AudioSource>();
+
+        phoneBox = GameObject.Find("TelephoneBox1");
+
+        telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
+        if (telephoneSounds == null)
+        {
+            Debug.LogError("No TelephoneSoundsEffect component found.");  
+        }
 
         bpmCoefficient = (endBPM - startBPM) / Mathf.Pow(health.maxHealth, 2);
     }
@@ -44,5 +56,16 @@ public class PlayerLogic : MonoBehaviour
                 nextHeartbeat += Time.deltaTime;
             }
         }
+    }
+
+    void OnTriggerEnter(Collider collider1)
+    {   
+        Debug.LogError("OnTriggerEnter gets called"); 
+        if(collider1.CompareTag("TelephoneBox1")){           
+
+            telephoneSounds.StopPlayback();
+            telephoneSounds.startPhoneTalks(1);
+        }
+
     }
 }

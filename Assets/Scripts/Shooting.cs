@@ -40,7 +40,7 @@ public class Shooting : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
 
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = defaultClip;
+        //audioSource.clip = defaultClip;
 
         GameObject panto = GameObject.Find("Panto");
         if (isUpper)
@@ -55,7 +55,7 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         //Fire();
-        FireCone();
+        //FireCone();
     }
 
     /// <summary>

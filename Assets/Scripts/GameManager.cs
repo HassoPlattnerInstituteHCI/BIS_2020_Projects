@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
 
     private TelephoneSoundEffect telephoneSounds;
+    GameObject phoneBox;
 
     UpperHandle upperHandle;
     LowerHandle lowerHandle;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         { "no", KeyCode.N },
         { "done", KeyCode.D }
     };
+
 
     void Awake()
     {
@@ -50,8 +52,14 @@ public class GameManager : MonoBehaviour
     {
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
+        
+        phoneBox = GameObject.Find("TelephoneBox1");
 
-        telephoneSounds = GetComponent<TelephoneSoundEffect>();
+        telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
+        if (telephoneSounds == null)
+        {
+            Debug.LogError("No TelephoneSoundsEffect component found.");  
+        }
 
         //uiManager.UpdateUI(playerScore, enemyScore);
 
@@ -61,8 +69,7 @@ public class GameManager : MonoBehaviour
     async void Introduction() //Speech: Introduce Me-Handle = Move. - Go to telephone
     {
         await speechOut.Speak("Use the upper handle to move your character.");
-        // TODO: 1. Make telephone ring
-        //telephoneSounds.startPhoneRing(GetComponent);
+        await ResetGame();
 
         //await Task.Delay(1000);
         RegisterColliders();
@@ -72,7 +79,7 @@ public class GameManager : MonoBehaviour
             await IntroduceLevel();
         }
 
-        await ResetGame();
+        
     }
 
     async Task IntroduceLevel()
@@ -80,12 +87,14 @@ public class GameManager : MonoBehaviour
 
         await speechOut.Speak("Pick up the phone");
        
-        //TODO: Make Phone Ring
-
         
+        //TODO: Make Phone Ring
+        telephoneSounds.startPhoneRing();
+
+
         //TODO: If player is close to Phone BOX: -> Speechout Johnny Zoo
         
-        Level level = GetComponent<Level>();
+        //Level level = GetComponent<Level>();
         //await level.PlayIntroduction();
 
         //await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
@@ -97,6 +106,8 @@ public class GameManager : MonoBehaviour
         //    await RoomExploration();
         //}
     }
+
+    
 
     void RegisterColliders() {
         PantoCollider[] colliders = FindObjectsOfType<PantoCollider>();
@@ -121,20 +132,11 @@ public class GameManager : MonoBehaviour
 
         await speechOut.Speak("Spawning player");
         player.transform.position = playerSpawn.position;
-        await upperHandle.SwitchTo(player, 0.3f);
-
-        await speechOut.Speak("Spawning enemy");
-        enemy.transform.position = enemySpawn.position;
-        enemy.transform.rotation = enemySpawn.rotation;
-        await lowerHandle.SwitchTo(enemy, 0.3f);
-        if (level >= enemyConfigs.Length)
-            Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
-        enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
+        await upperHandle.SwitchTo(player, 0.1f);
 
         upperHandle.Free();
 
         player.SetActive(true);
-        enemy.SetActive(true);
         levelStartTime = Time.time;
     }
 
