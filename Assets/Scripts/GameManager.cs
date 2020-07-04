@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     async Task IntroduceLevel()
     {
+        await upperHandle.MoveToPosition(playerSpawn.position + new Vector3(2, 0, 2), 0.3f, false);
         switch(level)
         {
             case 0:
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
 
                 await speechOut.Speak("so aim at him");
                 //wiggling lef and right to show how to shoot                                                                                           LINO HELLIGE
+                upperHandle.Free();
                 await RotateX();
 
             break;
@@ -102,6 +104,7 @@ public class GameManager : MonoBehaviour
                     await speechOut.Speak("...and kill the enemy...");
                     await lowerHandle.SwitchTo(enemy, 0.2f);
                     await speechOut.Speak("by aiming at him.");
+                    upperHandle.Free();
                     await RotateX();
             break;
             //Level 3                                                                                                                                      OLIVER SCHULZ
@@ -111,6 +114,7 @@ public class GameManager : MonoBehaviour
                     await speechOut.Speak("Oh no the enemy escaped, move around...");
                     await MoveX();
                     await speechOut.Speak("...and watch out...");
+                    upperHandle.Free();
                     await RotateX();
                     await speechOut.Speak("for the enemy to kill it.");
             break;
@@ -119,7 +123,6 @@ public class GameManager : MonoBehaviour
         }
 
         await speechOut.Speak("The gun will automaticly shoot for you");
-
     await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
         //string response = await speechIn.Listen(commands);
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
@@ -141,17 +144,22 @@ public class GameManager : MonoBehaviour
 
     async Task MoveX() //Move in X
     {
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.2f, 0, 0), 0.1f);
-        await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-0.4f, 0, 0), 0.1f);
-        await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.2f, 0, 0), 0.1f);
-        await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.2f), 0.1f);
-        await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -0.4f), 0.1f);
-        await Task.Delay(100);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.2f), 0.1f);
+        await Task.Delay(200);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.5f, 0, 0), 0.1f, false);
+        await Task.Delay(200);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-0.5f, 0, 0), 0.1f, false);
+        await Task.Delay(200);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-0.5f, 0, 0), 0.1f, false);
+        await Task.Delay(200);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.5f, 0, 0), 0.1f, false);
+        await Task.Delay(200);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.5f), 0.1f, false);
+        await Task.Delay(200);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -0.5f), 0.1f, false);
+        await Task.Delay(200);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -0.5f), 0.1f, false);
+        await Task.Delay(200);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.5f), 0.1f, false);
     }
 
     async Task RotateX()//Rotate in X
