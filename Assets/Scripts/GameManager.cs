@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     async void Introduction()
     {
-        await speechOut.Speak("Welcome to Quake Panto Edition");
+        await speechOut.Speak("Welcome to C o D Blackout Panto Edition");
         // TODO: 1. Introduce obstacles in level 2 (aka 1)
         await Task.Delay(1000);
         RegisterColliders();
@@ -73,16 +73,55 @@ public class GameManager : MonoBehaviour
 
     async Task IntroduceLevel()
     {
-        await speechOut.Speak("There are two obstacles.");
         Level level = GetComponent<Level>();
         await level.PlayIntroduction();
+        // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound                                                LINO HELLIGE
+        await speechOut.Speak("Oh no there is an enemy");
+        GameObject helpPos = new GameObject();
+        helpPos.transform.position = enemySpawn.position;
+        helpPos.transform.rotation = enemySpawn.rotation;
+        lowerHandle = GetComponent<LowerHandle>();
+        await lowerHandle.SwitchTo(helpPos, 0.5f);
 
-        // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound
+        await speechOut.Speak("he is trying to kill you");
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(1, 0, 0), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-2, 0, 0), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(1, 0, 0), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 1), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -2), 0.1f);
+        await Task.Delay(100);
+        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 1), 0.1f);
+
+        await speechOut.Speak("so aim at him");
+        //wiggling lef and right to show how to shoot                                                                                           LINO HELLIGE
+        for (int i = 0; i <= 60; i+=10)
+        {
+            float r = upperHandle.transform.eulerAngles.y + (float)i;
+            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
+            await Task.Delay(100);
+        }
+        for (int i = 60; i >= -60; i -= 10)
+        {
+            float r = upperHandle.transform.eulerAngles.y + (float)i;
+            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
+            await Task.Delay(100);
+        }
+        for (int i = -60; i <= 0; i += 10)
+        {
+            float r = upperHandle.transform.eulerAngles.y + (float)i;
+            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
+            await Task.Delay(100);
+        }
+
+        await speechOut.Speak("The gun will automaticly shoot for you");
 
         await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
         //string response = await speechIn.Listen(commands);
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
-
         //if (response == "yes")
         //{
         //    await RoomExploration();
@@ -122,7 +161,10 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("Spawning player");
         player.transform.position = playerSpawn.position;
         await upperHandle.SwitchTo(player, 0.3f);
-
+        if (level == 0)                                                                                 //LINO HELLIGE
+        {
+            await upperHandle.SwitchTo(GameObject.Find("Player Spawn"), 0.3f);
+        }
         await speechOut.Speak("Spawning enemy");
         enemy.transform.position = enemySpawn.position;
         enemy.transform.rotation = enemySpawn.rotation;
@@ -131,7 +173,14 @@ public class GameManager : MonoBehaviour
             Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
         enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
 
-        upperHandle.Free();
+        if(level == 0)
+        {
+            upperHandle.FreeRotation();
+        }
+        else
+        {
+            upperHandle.Free();
+        }
 
         player.SetActive(true);
         enemy.SetActive(true);

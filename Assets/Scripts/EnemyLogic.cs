@@ -40,8 +40,10 @@ public class EnemyLogic : MonoBehaviour
         {
             SeekMode();
         }
-
-        agent.SetDestination(lastSeenPosition);
+        if(GameObject.Find("Panto").GetComponent<GameManager>().level != 0)                                                                          //LINO HELLIGE
+        {
+            agent.SetDestination(lastSeenPosition);
+        }
         Quaternion lookRotation = Quaternion.LookRotation(lastSeenPosition - transform.position, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, config.turnSpeed);
     }
