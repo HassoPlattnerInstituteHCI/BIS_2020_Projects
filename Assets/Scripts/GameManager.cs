@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         //TODO: If player is close to Phone BOX: -> Speechout Johnny Zoo
         
         Level level = GetComponent<Level>();
-        await level.PlayIntroduction();
+        //await level.PlayIntroduction();
 
         //await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
         //string response = await speechIn.Listen(commands);
