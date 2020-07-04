@@ -29,6 +29,11 @@ namespace MarioKart
             speechIn.StopListening();
         }
 
+        void OnDestroy()
+        {
+            speechIn.StopListening();
+        }
+
         // Give a powerup. If it already has one, say so and discard the new one.
         public void GivePowerup(Powerup.PowerupType type, bool doAnounce)
         {
