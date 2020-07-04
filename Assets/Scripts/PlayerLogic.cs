@@ -33,11 +33,6 @@ public class PlayerLogic : MonoBehaviour
 
         playerSounds = GetComponent<PlayerSoundEffect>();
 
-        if (telephoneSounds == null)
-        {
-            Debug.LogError("No TelephoneSoundsEffect component found.");  
-        }
-
         bpmCoefficient = (endBPM - startBPM) / Mathf.Pow(health.maxHealth, 2);
     }
 
@@ -70,9 +65,11 @@ public class PlayerLogic : MonoBehaviour
             telephoneSounds.StopPlayback();
             telephoneSounds.startPhoneTalks(1);
         }
-        else if(collider1.CompareTag("dangerous")){//player should die when running into an obstacle
+        else if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
             playerSounds.playWasted();
-            //reset game
+
+            GameManager gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
+            gameManager.ResetGame();
         } 
 
     }

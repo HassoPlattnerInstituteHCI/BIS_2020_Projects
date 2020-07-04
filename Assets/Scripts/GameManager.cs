@@ -56,10 +56,7 @@ public class GameManager : MonoBehaviour
         phoneBox = GameObject.Find("TelephoneBox1");
 
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
-        if (telephoneSounds == null)
-        {
-            Debug.LogError("No TelephoneSoundsEffect component found.");  
-        }
+      
 
         //uiManager.UpdateUI(playerScore, enemyScore);
 
@@ -68,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     async void Introduction() //Speech: Introduce Me-Handle = Move. - Go to telephone
     {
-        await speechOut.Speak("Use the upper handle to move your character.");
+        await speechOut.Speak("Use the upper handle to move your character. Spawning Player");        
         await ResetGame();
 
         //await Task.Delay(1000);
@@ -128,13 +125,11 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public async Task ResetGame()
     {
-        //TODO Enemies rausnehmen
-
-        await speechOut.Speak("Spawning player");
+        
         player.transform.position = playerSpawn.position;
-        await upperHandle.SwitchTo(player, 0.1f);
+        await upperHandle.MoveToPosition(player.transform.position, 0.2f, true);
 
-        upperHandle.Free();
+        //upperHandle.Free();
 
         player.SetActive(true);
         levelStartTime = Time.time;
