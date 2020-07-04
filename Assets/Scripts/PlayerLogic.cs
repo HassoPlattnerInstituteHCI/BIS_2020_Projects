@@ -16,6 +16,8 @@ public class PlayerLogic : MonoBehaviour
     float nextHeartbeat;
     Health health;
 
+    GameManager gameManager;
+
 
     private TelephoneSoundEffect telephoneSounds;
     private PlayerSoundEffect playerSounds;
@@ -34,6 +36,8 @@ public class PlayerLogic : MonoBehaviour
         playerSounds = GetComponent<PlayerSoundEffect>();
 
         bpmCoefficient = (endBPM - startBPM) / Mathf.Pow(health.maxHealth, 2);
+
+        gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
     }
 
     void Update()
@@ -64,11 +68,13 @@ public class PlayerLogic : MonoBehaviour
 
             telephoneSounds.StopPlayback();
             telephoneSounds.startPhoneTalks(1);
+
+            gameManager.StartLevel2();
+
         }
         else if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
             playerSounds.playWasted();
 
-            GameManager gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
             gameManager.ResetGame();
         } 
 

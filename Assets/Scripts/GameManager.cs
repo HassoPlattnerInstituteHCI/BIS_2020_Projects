@@ -73,13 +73,13 @@ public class GameManager : MonoBehaviour
 
         if (introduceLevel)
         {
-            await IntroduceLevel();
+            await StartLevel1();
         }
 
         
     }
 
-    async Task IntroduceLevel()
+    async Task StartLevel1()
     {
 
         await speechOut.Speak("Pick up the phone");
@@ -102,6 +102,15 @@ public class GameManager : MonoBehaviour
         //{
         //    await RoomExploration();
         //}
+
+    }
+
+    public async Task StartLevel2(){
+        phoneBox = GameObject.Find("TelephoneBox2");
+        telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
+
+        telephoneSounds.startPhoneRing();
+
     }
 
     
