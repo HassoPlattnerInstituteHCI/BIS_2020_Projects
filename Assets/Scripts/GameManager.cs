@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
     /// Starts a new round.
     /// </summary>
     /// <returns></returns>
-    async Task ResetGame()
+    public async Task ResetGame()
     {
         //TODO Enemies rausnehmen
 

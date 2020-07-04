@@ -18,6 +18,7 @@ public class PlayerLogic : MonoBehaviour
 
 
     private TelephoneSoundEffect telephoneSounds;
+    private PlayerSoundEffect playerSounds;
     GameObject phoneBox;
 
     void Start()
@@ -29,6 +30,9 @@ public class PlayerLogic : MonoBehaviour
         phoneBox = GameObject.Find("TelephoneBox1");
 
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
+
+        playerSounds = GetComponent<PlayerSoundEffect>();
+
         if (telephoneSounds == null)
         {
             Debug.LogError("No TelephoneSoundsEffect component found.");  
@@ -66,6 +70,10 @@ public class PlayerLogic : MonoBehaviour
             telephoneSounds.StopPlayback();
             telephoneSounds.startPhoneTalks(1);
         }
+        else if(collider1.CompareTag("dangerous")){//player should die when running into an obstacle
+            playerSounds.playWasted();
+            //reset game
+        } 
 
     }
 }

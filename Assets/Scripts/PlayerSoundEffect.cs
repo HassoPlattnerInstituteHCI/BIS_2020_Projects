@@ -1,9 +1,9 @@
 using UnityEngine;
 using SpeechIO;
 
-public class TelephoneSoundEffect : MonoBehaviour
+public class PlayerSoundEffect : MonoBehaviour
 {
-    public AudioClip ringClip;
+    public AudioClip wasted;
 
     SpeechOut speechOut;
 
@@ -24,25 +24,13 @@ public class TelephoneSoundEffect : MonoBehaviour
         //rollSource.clip = rollClip;
     }
 
+    public void playWasted(){
+        Debug.LogError("No TelephoneSoundsEffect component found.");
 
-    public void startPhoneRing(){
-
+        audioSource.loop = false;
         audioSource = GetComponent<AudioSource>();
-        audioSource.loop = true;
-        audioSource.clip = ringClip;
+        audioSource.clip = wasted;
         audioSource.Play();
-    }
-
-    public void startPhoneTalks(int level){
-        if(level == 1){
-            speechOut.Speak("Yo Claude, it's Johnny Zoo. Congratulations on breaking out of prison!");
-        }
-    }
-
-
-    public void StopPlayback()
-    {
-        audioSource.Stop();
     }
 
 }
