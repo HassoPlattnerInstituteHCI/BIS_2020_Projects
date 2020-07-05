@@ -11,21 +11,17 @@ namespace Stealth
 
     public class TreasureController : MonoBehaviour
     {
-        private AudioSource audioS;
+        public AudioSource tickingAudioSource;
+        public AudioSource successAudioSource;
+        
         public GameObject player;
         private bool found;
         SpeechOut speechOut;
         private LevelManager script;
 
-        Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
-        { "yes", KeyCode.Y },
-        { "no", KeyCode.N },
-        { "done", KeyCode.D }
-    };
         // Start is called before the first frame update
         void Start()
         {
-            audioS = gameObject.GetComponent<AudioSource>();
             //player = GameObject.Find("Player");
             speechOut = new SpeechOut();
             script = GameObject.Find("Panto").GetComponent<LevelManager>();
@@ -43,7 +39,7 @@ namespace Stealth
                     found = true;
                     GameOver();
                 }
-                audioS.pitch = 6 / Vector3.Distance(gameObject.transform.position, player.transform.position);
+                tickingAudioSource.pitch = 6 / Vector3.Distance(gameObject.transform.position, player.transform.position);
 
             }
 
@@ -51,13 +47,9 @@ namespace Stealth
 
         async Task GameOver()
         {
+            successAudioSource.Play();
             await speechOut.Speak("Congratulations.");
-
-
-
             await speechOut.Speak("Thanks for playing DuelPanto.");
-
-
             Application.Quit();
         }
         public void OnApplicationQuit()
