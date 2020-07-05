@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public float spawnSpeed = 1f;
     public bool welcome = true;
-    public bool introducteryLevel = true;
+    public static bool introductoryLevel = true;
     public GameObject player;
     public bool shouldFreeHandle;
     UpperHandle upperHandle;
@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour
           
         await Task.Delay(1000);
 
-        if (introducteryLevel)
+        if (introductoryLevel)
         {
-            await IntroducteryLevel();
+            await IntroductoryLevel();
         }
         
         await speechOut.Speak("Introduction finished, game starts.");
@@ -60,23 +60,32 @@ public class GameManager : MonoBehaviour
         //await ResetGame();
     }
 
-    async Task IntroducteryLevel()
+    async Task IntroductoryLevel()
     {
         //Register Blocks in Grid
+        /*
         Playfield.confirmBlock(GameObject.Find("BlockL2"));
         Playfield.confirmBlock(GameObject.Find("BlockZ"));
-        Playfield.confirmBlock(GameObject.Find("BlockT"));
+        Playfield.confirmBlock(GameObject.Find("BlockL"));
+        Playfield.confirmBlock(GameObject.Find("BlockZ2"));
         Playfield.confirmBlock(GameObject.Find("BlockI"));
+        Playfield.confirmBlock(GameObject.Find("BlockL22"));
+        */
+        //Spawn first intro level skyline
+        SpawnManager.spawnIntroPls=true;
+        SpawnManager.introCounter=0;
 
         await speechOut.Speak("The It-Handle will now trace the shape of the blocks on the bottom of the level, we will call this the 'skyline'.");
         //yes there propably is a better way to do this
+        //Idea: Using the grid, for each column find the highest positioned block. Move there, then .5 to the right, find the next one in relative position to current
+        //->this will however ignore "holes" in the skyline
         await lowerHandle.MoveToPosition(new Vector3(0f,0f,2f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(0.5f, 0f, 2f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(0.5f, 0f, 1f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(1f, 0f, 1f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(1f, 0f, 0.5f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(2f, 0f, 0.5f), 0.1f, shouldFreeHandle);
-        await lowerHandle.MoveToPosition(new Vector3(2f, 0f, 0f), 0.1f, shouldFreeHandle);
+        await lowerHandle.MoveToPosition(new Vector3(2f, 0f, 0f), 0.1f, shouldFreeHandle); //Weird random "New Game Object" is created somewhere in this area?!?
         await lowerHandle.MoveToPosition(new Vector3(2.5f, 0f, 0f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(2.5f, 0f, 0.5f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(3f, 0f, 0.5f), 0.1f, shouldFreeHandle);
@@ -86,7 +95,8 @@ public class GameManager : MonoBehaviour
         await lowerHandle.MoveToPosition(new Vector3(5f, 0f, 0.5f), 0.1f, shouldFreeHandle);
         lowerHandle.Free();
         await speechOut.Speak("Now, try yourself to feel the blocks.");
-        
+        //Do we need to give the player control here? Remember to return to the block in the end.
+
         await Task.Delay(20000);
 
         await speechOut.Speak("Now the Me-Handle will trace a block at the top of the level. Every block has its own type of sound, remember it!");

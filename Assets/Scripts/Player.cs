@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-            if(!playercontrol) {
+        if(!playercontrol) {
                 if (Input.GetKeyDown(KeyCode.L)) {
                     onRecognized("left");
                 }
@@ -64,10 +64,10 @@ public class Player : MonoBehaviour
                     onRecognized("abort");
                 }
             }
-            if (playercontrol) {
+        if (playercontrol) {
             transform.position = meHandle.HandlePosition(transform.position);
             
-            // Rotate
+            // Rotate !!Need way of doing this with the Me-Handle rotation!!
             if (Input.GetKeyDown(KeyCode.Space)) {
                 activeBlock.transform.RotateAround(activeBlock.transform.GetChild(0).position, new Vector3(0,1,0), -90);
             }
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
             activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
             Playfield.confirmBlock(activeBlock);
-            Playfield.checkRows();
+            Playfield.deleteFullRows();
             SpawnManager.spawnWavePls = true;
             transform.position = SpawnerLeft.transform.position;
             await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);

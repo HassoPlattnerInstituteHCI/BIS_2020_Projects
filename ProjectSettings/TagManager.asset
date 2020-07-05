@@ -4,25 +4,26 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - inLine0
-  - inLine1
-  - inLine2
-  - inLine3
-  - inLine4
-  - inLine5
-  - inLine6
-  - inLine7
-  - inLine8
-  - inLine9
-  - inLine10
-  - inLine11
-  - inLine12
-  - inLine13
-  - inLine14
-  - inLine15
-  - inLine16
-  - inLine17
-  - lineUndef
+  - row0
+  - row1
+  - row2
+  - row3
+  - row4
+  - row5
+  - row6
+  - row7
+  - row8
+  - row9
+  - row10
+  - row11
+  - row12
+  - row13
+  - row14
+  - row15
+  - row16
+  - row17
+  - rowUndef
+  - RowParent
   layers:
   - Default
   - TransparentFX
