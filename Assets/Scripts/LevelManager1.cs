@@ -89,7 +89,7 @@ namespace Stealth
             //enemy.transform.position = enemySpawn.position;
             //enemy.transform.rotation = enemySpawn.rotation;
             //await lowerHandle.SwitchTo(enemy, 0.3f);
-            await speechOut.Speak("Follow the ticking sound and find treasure avoiding obstacles.");
+            await speechOut.Speak("You can move using the me handle. Follow the ticking sound and find treasure while avoiding the obstacles.");
             
             //enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
 

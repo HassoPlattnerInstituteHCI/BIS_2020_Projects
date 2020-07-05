@@ -28,7 +28,7 @@ namespace Stealth
             if (response == "switch")
             {
                 ToggleEnemies();
-                await lowerHandle.SwitchTo(enemy, 0.3f);
+                await lowerHandle.SwitchTo(currentEnemy, 0.3f);
 
             }
             ListenToSwitch();
@@ -40,7 +40,7 @@ namespace Stealth
                 EnemyIndex++;
             }
             else EnemyIndex = 0;
-            enemy = enemies[EnemyIndex];
+            currentEnemy = enemies[EnemyIndex];
 
         }
 
@@ -48,7 +48,7 @@ namespace Stealth
         {
             upperHandle = GetComponent<UpperHandle>();
             lowerHandle = GetComponent<LowerHandle>();
-            enemy = enemies[0];
+            currentEnemy = enemies[0];
 
             //uiManager.UpdateUI(playerScore, enemyScore);
 
@@ -135,11 +135,11 @@ namespace Stealth
            
             for(int i=0;i<enemies.Length; i++)
             {
-                enemies[0].transform.position = enemySpawns[0].position;
-                enemies[0].transform.rotation = enemySpawns[0].rotation;
+                enemies[i].transform.position = enemySpawns[i].position;
+                enemies[i].transform.rotation = enemySpawns[i].rotation;
             }
-            await lowerHandle.SwitchTo(enemy, 0.3f);
-            await speechOut.Speak("Follow the ticking sound and find treasure avoiding enemies. Say Switch to switch between enemies.");
+            await lowerHandle.SwitchTo(currentEnemy, 0.3f);
+            await speechOut.Speak("Now there are two enemies. Say Switch to switch between enemies.");
            
             //enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
 

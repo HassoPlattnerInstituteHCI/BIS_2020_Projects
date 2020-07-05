@@ -8,8 +8,6 @@ namespace Stealth
 {
     public class LevelManager2 : LevelManager
     {
-        
-
         void Awake()
         {
             speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
@@ -53,7 +51,7 @@ namespace Stealth
 
             await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
             //string response = await speechIn.Listen(commands);
-            await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
+            await speechIn.Listen(new Dictionary<string, KeyCode>() {{"yes", KeyCode.Y}, {"done", KeyCode.D}});
 
             //if (response == "yes")
             //{
@@ -97,19 +95,28 @@ namespace Stealth
             // {
             //    en.SetActive(true);
             //  }
+
+            foreach (var enemy in enemies)
+            {
+                enemy.GetComponent<EnemyController>().canSpot = false;
+            }
+
             await speechOut.Speak("Spawning player");
             player.transform.position = playerSpawn.position;
             await upperHandle.SwitchTo(player, 0.3f);
 
             await speechOut.Speak("Spawning enemies");
-            
+
             for (int i = 0; i < enemies.Length; i++)
             {
-                enemies[0].transform.position = enemySpawns[0].position;
-                enemies[0].transform.rotation = enemySpawns[0].rotation;
+                enemies[i].transform.position = enemySpawns[i].position;
+                enemies[i].transform.rotation = enemySpawns[i].rotation;
+                enemies[i].GetComponent<EnemyController>().canSpot = true;
             }
-            await lowerHandle.SwitchTo(enemy, 0.3f);
-            await speechOut.Speak("Follow the ticking sound and find treasure avoiding enemies.");
+
+            currentEnemy = enemies[0];
+            await lowerHandle.SwitchTo(currentEnemy, 0.3f);
+            await speechOut.Speak("An enemy protects the treasure. You can feel him using the it handle. Don't get to close to him.");
 
             //enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
 
@@ -132,7 +139,5 @@ namespace Stealth
             speechOut.Stop(); //Windows: do not remove this line.
             speechIn.StopListening(); // [macOS] do not delete this line!
         }
-
-
     }
 }

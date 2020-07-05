@@ -12,7 +12,7 @@ namespace Stealth
         public bool introduceLevel = true;
         public GameObject player;
         public GameObject[] enemies;
-        public GameObject enemy;
+        public GameObject currentEnemy;
         public Transform playerSpawn;
         public Transform[] enemySpawns;
         public UpperHandle upperHandle;
@@ -39,8 +39,6 @@ namespace Stealth
             upperHandle = GetComponent<UpperHandle>();
             lowerHandle = GetComponent<LowerHandle>();
 
-            //uiManager.UpdateUI(playerScore, enemyScore);
-
             Introduction();
         }
 
@@ -54,10 +52,9 @@ namespace Stealth
             if (introduceLevel)
             {
                 await IntroduceLevel();
+                await speechOut.Speak("Introduction finished, game starts.");
             }
-
-            await speechOut.Speak("Introduction finished, game starts.");
-
+            
             await ResetGame();
         }
 
@@ -66,8 +63,6 @@ namespace Stealth
             await speechOut.Speak("There are two obstacles.");
             Level level = GetComponent<Level>();
             await level.PlayIntroduction();
-
-            // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound
 
             await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
             //string response = await speechIn.Listen(commands);

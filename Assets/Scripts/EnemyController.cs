@@ -19,6 +19,8 @@ namespace Stealth
         private int currentPathTargetIndex = 0;
         private bool spotted = false;
         SpeechOut speechOut;
+        public AudioSource failureAudioSource;
+        public bool canSpot = false;
 
         void Start()
         {
@@ -33,8 +35,11 @@ namespace Stealth
         {
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= SpotRadius && !spotted)
             {
-                spotted = true;
-                PlayerSpotted();
+                if (canSpot)
+                {
+                  spotted = true;
+                  PlayerSpotted();
+                }
             }
             if (gameObject.transform.position == getCurrentTarget())
             {
@@ -56,7 +61,8 @@ namespace Stealth
         }
         async Task PlayerSpotted()
         {
-            await speechOut.Speak(gameObject.name + " has spotted you.");
+            failureAudioSource.Play();
+            await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
             Debug.Log("Making a call");
             if (SceneManager.GetActiveScene().name == "Level 2")
             {
