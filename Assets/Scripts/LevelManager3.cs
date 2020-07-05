@@ -57,17 +57,16 @@ namespace Stealth
 
         async void Introduction()
         {
-            await speechOut.Speak("Welcome to Stealth Panto");
+            await speechOut.Speak("Welcome to Stealth Panto Level 3");
             // TODO: 1. Introduce obstacles in level 2 (aka 1)
             await Task.Delay(1000);
             RegisterColliders();
 
             if (introduceLevel)
             {
-                await IntroduceLevel();
+                await IntroduceLevel(); 
+                await speechOut.Speak("Introduction finished, game starts.");
             }
-
-            await speechOut.Speak("Introduction finished, game starts.");
 
             await ResetGame();
         }

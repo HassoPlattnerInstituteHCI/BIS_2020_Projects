@@ -194,12 +194,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52980b55982d9db4a926d3fa16253255, type: 3}
---- !u!1 &175819760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3921316458802807763, guid: 52980b55982d9db4a926d3fa16253255,
-    type: 3}
-  m_PrefabInstance: {fileID: 175819759}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &249509631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,7 +515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743777050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: -10.83}
+  m_LocalPosition: {x: -0.25, y: 0, z: -4.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -892,7 +886,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 17.52321
+  orthographic size: 17.511597
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1111,7 +1105,7 @@ MonoBehaviour:
   introduceLevel: 0
   player: {fileID: 881415689}
   enemies: []
-  enemy: {fileID: 175819760}
+  currentEnemy: {fileID: 0}
   playerSpawn: {fileID: 743777051}
   enemySpawns: []
   upperHandle: {fileID: 0}

@@ -3,6 +3,7 @@ using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 namespace Stealth
 {
@@ -26,7 +27,7 @@ namespace Stealth
 
         async void Introduction()
         {
-            await speechOut.Speak("Welcome to Stealth Panto");
+            await speechOut.Speak("Welcome to Stealth Panto Level 2");
             // TODO: 1. Introduce obstacles in level 2 (aka 1)
             await Task.Delay(1000);
             RegisterColliders();
@@ -34,9 +35,8 @@ namespace Stealth
             if (introduceLevel)
             {
                 await IntroduceLevel();
+                await speechOut.Speak("Introduction finished, game starts.");
             }
-
-            await speechOut.Speak("Introduction finished, game starts.");
 
             await ResetGame();
         }
@@ -116,7 +116,8 @@ namespace Stealth
 
             currentEnemy = enemies[0];
             await lowerHandle.SwitchTo(currentEnemy, 0.3f);
-            await speechOut.Speak("An enemy protects the treasure. You can feel him using the it handle. Don't get to close to him.");
+            await speechOut.Speak(
+                "An enemy protects the treasure. You can feel him using the it handle. Don't get to close to him.");
 
             //enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
 
@@ -138,6 +139,11 @@ namespace Stealth
         {
             speechOut.Stop(); //Windows: do not remove this line.
             speechIn.StopListening(); // [macOS] do not delete this line!
+        }
+
+        async public Task Success()
+        {
+            SceneManager.LoadScene(sceneName: "Level 3");
         }
     }
 }
