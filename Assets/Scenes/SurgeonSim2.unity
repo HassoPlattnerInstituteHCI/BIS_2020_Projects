@@ -2258,10 +2258,10 @@ GameObject:
   - component: {fileID: 881415691}
   - component: {fileID: 881415695}
   - component: {fileID: 881415698}
-  - component: {fileID: 881415690}
   - component: {fileID: 881415697}
   - component: {fileID: 881415696}
   - component: {fileID: 881415699}
+  - component: {fileID: 881415690}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -2278,10 +2278,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 881415689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21733786ca9914408a865f6374a92d02, type: 3}
+  m_Script: {fileID: 11500000, guid: c4a65682beff6274faaeed67d552a396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartbeatClip: {fileID: 8300000, guid: bf04339cd29ef4aa991476cdf62b4561, type: 3}
+  heartbeatClip: {fileID: 0}
   startBPM: 60
   endBPM: 220
   bps: 1
@@ -2498,7 +2498,7 @@ MonoBehaviour:
   notifyDefeat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1189803893}
+      - m_Target: {fileID: 0}
         m_MethodName: OnDefeat
         m_Mode: 0
         m_Arguments:
@@ -2973,7 +2973,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 249509631}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1189803893
+--- !u!114 &1189803888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2982,17 +2982,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1189803887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8684daf065224d688575e0262e620d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ee8b406f32eda447adb4c44fd533d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnSpeed: 1
   introduceLevel: 1
   player: {fileID: 881415689}
   enemy: {fileID: 1819973866}
-  enemyConfigs:
-  - {fileID: 11400000, guid: 250866c4286eb423a8b4403c91105727, type: 2}
-  - {fileID: 11400000, guid: 208eff900b552412aa87ec05faeab19d, type: 2}
-  - {fileID: 11400000, guid: cc985994c53e84f6fae197a5aed96f0e, type: 2}
+  enemyConfigs: []
   playerSpawn: {fileID: 743777051}
   enemySpawn: {fileID: 1012411828}
   level: 0
@@ -3680,7 +3677,7 @@ MonoBehaviour:
   notifyDefeat:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1189803893}
+      - m_Target: {fileID: 0}
         m_MethodName: OnDefeat
         m_Mode: 0
         m_Arguments:
@@ -4105,7 +4102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2025684969
@@ -4214,7 +4211,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1769380718}
   m_HandleRect: {fileID: 1769380717}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999994
   m_NumberOfSteps: 4
   m_OnValueChanged:

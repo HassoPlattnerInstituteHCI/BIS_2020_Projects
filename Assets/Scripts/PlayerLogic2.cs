@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
 
-public class PlayerLogic : MonoBehaviour
+public class PlayerLogic2 : MonoBehaviour
 {
     private PantoHandle upperHandle;
 
@@ -17,11 +17,20 @@ public class PlayerLogic : MonoBehaviour
     float nextHeartbeat;
     Health health;
 
+    private int currentTarget = 0;
+    private GameObject[] targets;
+
     SpeechOut speechOut;
 
     private void Awake()
     {
         speechOut = new SpeechOut();
+
+        targets = new GameObject[] {
+            GameObject.Find("Liver"),
+            GameObject.Find("Heart"),
+            GameObject.Find("Stomach"),
+            GameObject.Find("Lungs")};
     }
 
     void Start()
@@ -55,10 +64,10 @@ public class PlayerLogic : MonoBehaviour
 
     private async void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Heart")
+        if (collision.gameObject.name == targets[currentTarget].name)
         {
-            await speechOut.Speak("Congratulations, you reached the heart.");
-            await speechOut.Speak("You completed level 1");
+            await speechOut.Speak("Congratulations, you reached the " + targets[currentTarget].name);
+            currentTarget++;
         }
         else
         {
@@ -66,5 +75,10 @@ public class PlayerLogic : MonoBehaviour
         }
 
         Debug.Log(collision.gameObject.name);
+
+        if (currentTarget == targets.Length)
+        {
+            await speechOut.Speak("You completed level 2");
+        }
     }
 }
