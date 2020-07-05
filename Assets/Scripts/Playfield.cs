@@ -73,7 +73,7 @@ public class Playfield : MonoBehaviour
         GameObject thisBlock;
         for(int column=0; column<w; column++) {
             thisBlock = GameObject.Find("ArrayCL"+column+row);
-            thisBlock.GetComponent<PantoBoxCollider>().Disable();
+            //thisBlock.GetComponent<PantoBoxCollider>().Disable();
             //thisBlock.GetComponent<PantoBoxCollider>().Remove();
             Destroy(thisBlock);
         }
@@ -88,20 +88,20 @@ public class Playfield : MonoBehaviour
         float zPosRelative;
         int column;
         int row;
-        
-        
-        foreach (Transform child in block.transform) {
-                xPosRelative = Mathf.Round(child.transform.position.x*2f)/2f;
-                zPosRelative = Mathf.Round(child.transform.position.z*2f)/2f;
-                column=(int)(2*xPosRelative);
-                row=(int)(2*zPosRelative);
-                updateTagName(column, row, child);
-        }
-        for(int i = 1; i< block.transform.childCount; i++)  //Enable PantoCollider for placed Blocks
+
+
+        foreach (Transform child in block.transform)
         {
-            Transform child = block.transform.GetChild(i);
-            child.GetComponent<PantoBoxCollider>().CreateObstacle();
-            child.GetComponent<PantoBoxCollider>().Enable();
+            if (child.name != "Rotater")
+            {
+                xPosRelative = Mathf.Round(child.transform.position.x * 2f) / 2f;
+                zPosRelative = Mathf.Round(child.transform.position.z * 2f) / 2f;
+                column = (int)(2 * xPosRelative);
+                row = (int)(2 * zPosRelative);
+                updateTagName(column, row, child);
+                //child.GetComponent<PantoBoxCollider>().CreateObstacle();
+                //child.GetComponent<PantoBoxCollider>().Enable();
+            }
         }
         block.transform.DetachChildren();
         Destroy(GameObject.Find("Rotater"));
