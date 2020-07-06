@@ -864,9 +864,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnSpeed: 1
-  welcome: 0
-  introducteryLevel: 0
+  welcome: 1
+  introductoryLevel: 0
   player: {fileID: 0}
+  shouldFreeHandle: 0
 --- !u!1 &1065104911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,6 +1004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755d0893992e16b4f8d8f0fc091668af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skylines: []
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}

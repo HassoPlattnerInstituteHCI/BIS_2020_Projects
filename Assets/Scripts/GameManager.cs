@@ -53,9 +53,11 @@ public class GameManager : MonoBehaviour
         {
             
             await IntroductoryLevel();
+            await speechOut.Speak("Introduction finished, game starts.");
+
         } else{ SpawnManager.spawnWavePls = true;} //If we aer not in the welcome-Level, assume that we are in Main/Endless and spawn a new wave
         
-        await speechOut.Speak("Introduction finished, game starts.");
+        
         //SceneManager.LoadScene("Endless");  //Endless level
 
         //await ResetGame();
