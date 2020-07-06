@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public float spawnSpeed = 1f;
     public bool welcome = true;
-    public static bool introductoryLevel = true;
+    public bool introductoryLevel = true;
     public GameObject player;
     public bool shouldFreeHandle;
     UpperHandle upperHandle;
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         if (welcome)
         {
             Welcome();
-        }
+        } 
     }
 
     async void Welcome()    //welcome the player
@@ -51,8 +51,9 @@ public class GameManager : MonoBehaviour
 
         if (introductoryLevel)
         {
+            
             await IntroductoryLevel();
-        }
+        } else{ SpawnManager.spawnWavePls = true;} //If we aer not in the welcome-Level, assume that we are in Main/Endless and spawn a new wave
         
         await speechOut.Speak("Introduction finished, game starts.");
         //SceneManager.LoadScene("Endless");  //Endless level
