@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
+
     public void NextStage()
     {
         //Stage Change
@@ -66,6 +67,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HealthUp()
+    {
+        if (health < 3)
+        {
+            health++;
+            UIhealth[health-1].color = new Color(1, 1, 1, 1);
+        }
+
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
@@ -83,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     void PlayerReposition()
     {
-        player.transform.position = new Vector3(-10, 2, 0);
+        player.transform.position = new Vector3(-80, -28, 0);
         player.VelocityZero();
     }
 

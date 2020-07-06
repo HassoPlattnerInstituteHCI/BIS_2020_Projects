@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    public GameObject mushroom;
     public GameManager gameManager;
     public float maxSpeed;
     public float jumpPower;
@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public AudioClip audioLevelCom;
     public AudioClip audioWalk;
 
-    private PantoHandle upperHandle;
+    //private PantoHandle upperHandle;
 
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
@@ -31,21 +31,22 @@ public class Player : MonoBehaviour
         changeAnimation = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
-        upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
-        await upperHandle.MoveToPosition(transform.position, 0.2f);
+        ////await upperHandle.MoveToPosition(transform.position, 0.2f);
     }
 
 
     void Update()
     {
-        transform.position = upperHandle.HandlePosition(transform.position);
+        //transform.position = upperHandle.HandlePosition(transform.position);
         // upperHandle.MoveToPosition(transform.position, 0.2f);
 
         // Jumping Movement
-        if (upperHandle.GetPosition().y > 3 || Input.GetButtonUp("Jump") && !changeAnimation.GetBool("isJumping"))
+        if (//upperHandle.GetPosition().y > 3 || 
+            Input.GetButtonDown("Jump") && !changeAnimation.GetBool("isJumping"))
         {
-            Debug.Log(upperHandle.GetPosition().x + " " + upperHandle.GetPosition().y + " " + upperHandle.GetPosition().z);
-            Debug.Log(upperHandle.GetRotation());
+            //Debug.Log(upperHandle.GetPosition().x + " " + upperHandle.GetPosition().y + " " + upperHandle.GetPosition().z);
+            //Debug.Log(upperHandle.GetRotation());
+            
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             changeAnimation.SetBool("isJumping", true);
             PlaySound("Jump");
@@ -145,6 +146,16 @@ public class Player : MonoBehaviour
             gameManager.NextStage();
             PlaySound("Finish");
             audioSource.Play();
+        }
+        else if (collision.gameObject.tag == "Itembox")
+        {
+            collision.gameObject.GetComponent<Itembox>().gotHit();
+            collision.gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.tag == "Mushroom")
+        {
+            collision.gameObject.SetActive(false);
+            gameManager.HealthUp();
         }
     }
     

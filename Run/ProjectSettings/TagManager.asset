@@ -7,6 +7,8 @@ TagManager:
   - Platform
   - Enemy
   - Coin
+  - Itembox
+  - Mushroom
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Background
   - 
   - 
   - 
@@ -41,6 +43,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1749462425
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 4052203393
     locked: 0

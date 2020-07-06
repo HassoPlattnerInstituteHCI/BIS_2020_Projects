@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     SpriteRenderer spriteRenderer;
     CapsuleCollider2D capsuleCollider;
 
-    private PantoHandle lowerHandle;
+    //private PantoHandle lowerHandle;
 
     public int nextMove;
 
@@ -21,8 +21,8 @@ public class Enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         Invoke("Think", 5);
-        lowerHandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
-        await lowerHandle.MoveToPosition(transform.position, 0.2f);
+        //lowerHandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
+        //await lowerHandle.MoveToPosition(transform.position, 0.2f);
 
     }
 
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     {
         // Moving 
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
-        transform.position = lowerHandle.HandlePosition(transform.position);
+        //transform.position = lowerHandle.HandlePosition(transform.position);
 
         //Platform checking
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.5f, rigid.position.y);
