@@ -158,16 +158,17 @@ namespace eduChem
             cylinder.transform.position = new Vector3(cylinder.transform.position.x, cylinder.transform.position.y - 0.5f, atom1.transform.position.z);
             level = 1;
 
-            cylinder.AddComponent<BoxCollider>();
-            cylinder.AddComponent<PantoBoxCollider>();
+            CapsuleCollider cap = cylinder.GetComponent<CapsuleCollider>();
+            Object.Destroy(cap);
+            BoxCollider box = cylinder.AddComponent<BoxCollider>();
+            PantoBoxCollider pantoBox = cylinder.AddComponent<PantoBoxCollider>();
 
-            BoxCollider box = cylinder.GetComponent<BoxCollider>();
-            box.transform.position = cylinder.transform.position;
-            box.transform.localScale = cylinder.transform.localScale;
+            //box.transform.position = cylinder.transform.position;
+            //box.transform.localScale = cylinder.transform.localScale;
 
-            PantoBoxCollider pantoBox = cylinder.GetComponent<PantoBoxCollider>();
-            pantoBox.transform.position = cylinder.transform.position;
-            pantoBox.transform.localScale = cylinder.transform.localScale;
+            //pantoBox.transform.position = cylinder.transform.position;
+            //pantoBox.transform.localScale = cylinder.transform.localScale;
+
             await Task.Delay(1000);
 
             RegisterColliders();
