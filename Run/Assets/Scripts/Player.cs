@@ -23,6 +23,14 @@ public class Player : MonoBehaviour
     Animator changeAnimation;
     CapsuleCollider2D capsuleCollider;
     AudioSource audioSource;
+    float startpos;
+    Vector3 safepos;
+    float lasttime;
+    private void Start()
+    {
+        startpos = transform.position.y;
+        lasttime = Time.time;
+    }
 
     async void Awake()
     {
@@ -37,6 +45,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if((Time.time - lasttime) > 2 && !(transform.position.y < startpos - 4))
+        {
+            safepos = transform.position;
+            Debug.Log("SET");
+            lasttime = Time.time;
+        }
+
+        if(transform.position.y < startpos - 8)
+        {
+            OnDamaged(transform.position);
+            transform.position = safepos;
+        }
         //transform.position = upperHandle.HandlePosition(transform.position);
         // upperHandle.MoveToPosition(transform.position, 0.2f);
 

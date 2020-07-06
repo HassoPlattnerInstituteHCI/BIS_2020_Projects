@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         stagePoint = 0;
     }
 
+
     public void HealthDown()
     {
         if(health > 1)
