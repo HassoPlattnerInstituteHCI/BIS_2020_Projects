@@ -4,8 +4,9 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
-using DualPantoFramework
+using DualPantoFramework;
 
+namespace Tetris {
 public class GameManager : MonoBehaviour
 {
     public float spawnSpeed = 1f;
@@ -153,4 +154,5 @@ public class GameManager : MonoBehaviour
 
         Application.Quit();
     }
+}
 }

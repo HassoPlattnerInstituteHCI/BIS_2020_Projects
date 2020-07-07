@@ -7,8 +7,9 @@ using UnityEditorInternal;
 using UnityEditor;
 using System.Net.Sockets;
 using System.Threading;
-using DualPantoFramework
+using DualPantoFramework;
 
+namespace Tetris {
 public class Player : MonoBehaviour
 {
     private PantoHandle meHandle;
@@ -141,4 +142,5 @@ public class Player : MonoBehaviour
             meHandle.Free();
         }
     }
+}
 }

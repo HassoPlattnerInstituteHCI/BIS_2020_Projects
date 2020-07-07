@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DualPantoFramework
-using static PantoCollider;
+using DualPantoFramework;
+
+namespace Tetris {
 public class Playfield : MonoBehaviour
 {
     public static int w = 10;
@@ -170,4 +171,5 @@ public class Playfield : MonoBehaviour
         }
         return true;
     }
+}
 }

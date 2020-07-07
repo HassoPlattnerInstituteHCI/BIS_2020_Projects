@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
-using DualPantoFramework
+using DualPantoFramework;
 
+namespace Tetris {
 public class SpawnManager : MonoBehaviour
 {
     private int leftBlock;
@@ -72,4 +73,5 @@ public class SpawnManager : MonoBehaviour
         }
         spawnIntroPls = false;
     }
+}
 }
