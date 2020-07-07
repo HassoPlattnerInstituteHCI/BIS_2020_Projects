@@ -4,6 +4,7 @@ using UnityEngine;
 using PathCreation;
 using SpeechIO;
 using MarioKart;
+using DualPantoFramework;
 
 namespace MarioKart
 {

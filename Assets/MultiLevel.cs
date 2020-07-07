@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
 using System.Threading.Tasks;
+using DualPantoFramework;
 
 namespace MarioKart
 {
