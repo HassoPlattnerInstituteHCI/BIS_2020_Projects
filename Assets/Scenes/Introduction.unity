@@ -860,6 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnSpeed: 1
   welcome: 1
+  introductoryLevel: 1
   player: {fileID: 0}
   shouldFreeHandle: 0
 --- !u!1 &1263745530

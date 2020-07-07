@@ -2,17 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DualPantoFramework
 using static PantoCollider;
 public class Playfield : MonoBehaviour
 {
     public static int w = 10;
     public static int h = 18;
-    private static bool[,] grid = new bool[w,h];
+    private static bool[,] grid = new bool[w,h]; //is currently not used
+    static GameObject allRowsParent = GameObject.Find("AllRows");
 
     // Start is called before the first frame update
     void Start()
     {
-        
+    
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class Playfield : MonoBehaviour
 
     //sets a blocks name and tag to the column and row it is in in the grid
     static void updateTagName(int column, int row, Transform block) {
-        block.tag = "row"+row;
+        block.tag = ""+column; //need to change tags names to column
         block.name = "ArrayCR"+column+row;
     }
 
@@ -46,48 +48,30 @@ public class Playfield : MonoBehaviour
         return false;
     }
 
-    //is called when a row is decreased. Changes the blocks parent to be the new row
-    static void updateRowParents(int newRow, int oldRow) {
-        foreach(Transform child in GameObject.Find("Row"+oldRow).transform) {
-            child.parent = null;
-            child.parent = GameObject.Find("Row"+newRow).transform;
-        }
-    }
-
-    //for each block in all rows including and above i, moves the blocks to the row below
-    public static void decreaseRowsAbove(int row) {
-        int column;
-        GameObject rowParent;
-        for(int i=row; i<h; i++) {
-        rowParent = GameObject.Find("Row"+i);
-            foreach (Transform child in rowParent.transform) {
-                child.transform.position=child.transform.position + new Vector3(0, 0, (float)-0.5);
-                column = (int)Mathf.Round(child.transform.position.x)*2;
-                updateTagName(column, i-1, child.transform);
-                updateRowParents(i-1, i);
+    //For each row, checks if it is full and proceeds accordingly
+    public static void deleteFullRows() {
+        int maxRow = -1;
+        int counter = 0;
+        for (int row=0; row<h; row++) { //This first deletes all rows that are full, and counts how many have been deleted
+            if (checkRow(row)) {
+                deleteThisRow(GameObject.Find("Row"+row));
+                if(maxRow<row) {maxRow=row;}
+                counter++;
             }
+            //Debug.Log("Row: "+row+" maxRow: "+maxRow+" counter: "+counter);
+        }
+        while(counter>0) { //All rows above the highest fallen row are now decreased as many times as rows have been deleted
+            decreaseRowsAbove(maxRow+counter);
+            counter--;
         }
     }
 
     //checks whether or not a row is completely filled with blocks
     public static bool checkRow(int row) {
-        GameObject currentRow;
-        currentRow=GameObject.Find("Row"+row);
-        if(currentRow.transform.childCount == w) {
+        if(allRowsParent.transform.GetChild(row).transform.childCount == w) {
             return true;
         }
         return false;
-    }
-
-    //For each row, checks if it is full and proceeds accordingly
-    public static void deleteFullRows() {
-        for (int row = h-1; row>=0; --row) { 
-            if (checkRow(row)) {
-                deleteThisRow(GameObject.Find("Row"+row));
-                decreaseRowsAbove(row+1);
-            }
-            Debug.Log(row);
-        }
     }
 
     //deletes one row of blocks
@@ -101,6 +85,32 @@ public class Playfield : MonoBehaviour
         }
     }
 
+    //for each block in all rows including and above "row", moves the blocks down one row
+    public static void decreaseRowsAbove(int row) {
+        int column;
+        GameObject rowParent;
+        for(int currentRow=row; currentRow<h; currentRow++) { //do this for every row above and including the current one
+        rowParent = allRowsParent.transform.GetChild(currentRow).gameObject; //get the parent object of the current row
+            foreach (Transform child in rowParent.transform) {
+                child.transform.position=child.transform.position + new Vector3(0, 0, (float)-0.5); //set the childs z-position amount times .5 lower
+                column = int.Parse(child.tag); //gets the child column tag
+                updateTagName(column, currentRow-1, child.transform); 
+            }
+            updateRowParents(currentRow-1, rowParent); //After all children have been renamed and moved, change their parent to be the new row
+        }
+    }
+
+    //is called when after a row is decreased. Changes all blocks in the old row to be children of their new row
+    static void updateRowParents(int newRow, GameObject oldRow) {
+        Transform child;
+        int children = oldRow.transform.childCount;
+        for(int block=0; block<children; block++) {
+            child=oldRow.transform.GetChild(0);
+            child.parent = null;
+            child.parent = allRowsParent.transform.GetChild(newRow);
+        }
+    }
+
     //is called when the player wants to place the block in the current position. For each child, except the rotater (which is deleted), the coordinates are confirmed
     //and the block gets the appropiate name and tag
     public static void confirmBlock(GameObject block) {
@@ -109,7 +119,9 @@ public class Playfield : MonoBehaviour
         int column;
         int row;
         GameObject parentRow;
-        Destroy(block.transform.GetChild(0).gameObject); //Destroys Rotater
+        GameObject rotater = block.transform.GetChild(0).gameObject;
+        rotater.transform.parent = null;
+        Destroy(rotater); //Destroys Rotater
         for(int i=block.transform.childCount-1; i>=0; i--) {
             xPosRelative = Mathf.Round(block.transform.GetChild(i).transform.position.x * 2f) / 2f;
             zPosRelative = Mathf.Round(block.transform.GetChild(i).transform.position.z * 2f) / 2f;
@@ -117,6 +129,7 @@ public class Playfield : MonoBehaviour
             row = (int)(2 * zPosRelative);
             updateTagName(column, row, block.transform.GetChild(i));
             parentRow = GameObject.Find("Row"+row);
+            Debug.Log(block.transform.GetChild(i).transform);
             block.transform.GetChild(i).transform.SetParent(parentRow.transform);
             //block.transform.GetChild(i).GetComponent<PantoBoxCollider>().CreateObstacle();
             //block.transform.GetChild(i).GetComponent<PantoBoxCollider>().Enable();

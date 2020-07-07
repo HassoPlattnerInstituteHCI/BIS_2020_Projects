@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using DualPantoFramework
 
 public class GameManager : MonoBehaviour
 {
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("Now, try yourself to feel the blocks.");
         //Do we need to give the player control here? Remember to return to the block in the end.
 
-        await Task.Delay(20000);
+        await Task.Delay(2000); //Changed time for debugging
 
         await speechOut.Speak("Now the Me-Handle will trace a block at the top of the level. Every block has its own type of sound, remember it!");
         // TODO: Me-handle trace
