@@ -11,16 +11,20 @@ public class Enemy : MonoBehaviour
 
     //private PantoHandle lowerHandle;
 
-    public int nextMove;
+    public int direction = -1;
+    float xpos;
+    float time;
 
     // Start is called before the first frame update
     async void Awake()
     {
+        time = Time.time;
+        xpos = transform.position.x;
         rigid = GetComponent<Rigidbody2D>();
         changeAnimation = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
-        Invoke("Think", 5);
+        //Invoke("Think", 5);
         //lowerHandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
         //await lowerHandle.MoveToPosition(transform.position, 0.2f);
 
@@ -30,18 +34,38 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         // Moving 
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+        rigid.velocity = new Vector2(direction, rigid.velocity.y);
+        if((Time.time - time) > .1f)
+        {
+            if (transform.position.x == xpos)
+            {
+                direction = direction * -1;
+                spriteRenderer.flipX = direction == 1;
+            }
+            else
+            {
+                xpos = transform.position.x;
+            }
+                
+            time = Time.time;
+        }
+
+
+        if(transform.position.y < -33)
+        {
+            DeActive();
+        }
         //transform.position = lowerHandle.HandlePosition(transform.position);
 
         //Platform checking
-        Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.5f, rigid.position.y);
+        Vector2 frontVec = new Vector2(rigid.position.x + direction * 0.5f, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
 
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
 
         if (rayHit.collider == null)
         {
-            if (rayHit.distance < 0.5f)
+            if (rayHit.distance < 0.1f)
             {
                 Turning();
             }
@@ -50,25 +74,24 @@ public class Enemy : MonoBehaviour
 
     void Think()
     {
-        nextMove = Random.Range(-1, 2);
+        //nextMove = Random.Range(-1, 2);
 
         // Changing the direction of the animation
-        changeAnimation.SetInteger("MovingSpeed", nextMove);
-        if (nextMove != 0)
-        {
-            spriteRenderer.flipX = nextMove == 1;
-        }
+        //changeAnimation.SetInteger("MovingSpeed", nextMove);
+        //if (nextMove != 0)
+        //{
+        //    spriteRenderer.flipX = nextMove == 1;
+        //}
 
-        float selfMoveTime = Random.Range(2f, 5f);
-        Invoke("Think", selfMoveTime);
+        //float selfMoveTime = Random.Range(2f, 5f);
+        //Invoke("Think", selfMoveTime);
     }
 
     void Turning()
     {
-        nextMove = nextMove * -1;
-        spriteRenderer.flipX = nextMove == 1;
-        CancelInvoke();
-        Invoke("Think", 5);
+        direction = direction * -1;
+        spriteRenderer.flipX = direction == 1;
+
     }
 
     public void OnDamaged()
