@@ -26,6 +26,9 @@ public class BatLogic : MonoBehaviour
         lowerHandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
         upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
 
+        bat = GameObject.Find("Bat");
+
+
         audioSource = GetComponent<AudioSource>();
 
         gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
@@ -39,17 +42,16 @@ public class BatLogic : MonoBehaviour
 
         transform.position = upperHandle.HandlePosition(transform.position);
 
-        Vector3 playerPos = player.transform.position;
-        
+        Vector3 playerPos = upperHandle.HandlePosition(transform.position);
+
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
 
         Vector3 playerDirection = transform.forward;
-        float spawnDistance = 2; 
+        float spawnDistance = 1; 
         
         Vector3 batPos = playerPos + playerDirection*spawnDistance; 
 
-        transform.position = batPos;
-        
+        transform.position = batPos;                
         
     }
 

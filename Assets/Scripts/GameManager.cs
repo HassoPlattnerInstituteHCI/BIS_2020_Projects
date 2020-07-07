@@ -90,6 +90,10 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("Pick up the phone");        
 
         bat.SetActive(true);
+
+        lowerHandle.SwitchTo(bat, 0.1f);
+
+        transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
        
         
         //phone starts ringing
