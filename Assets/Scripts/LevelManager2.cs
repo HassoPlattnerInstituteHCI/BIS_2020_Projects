@@ -102,6 +102,7 @@ namespace Stealth
             }
 
             await speechOut.Speak("Spawning player");
+            Debug.Log("Player position: " + playerSpawn.position);
             player.transform.position = playerSpawn.position;
             await upperHandle.SwitchTo(player, 0.3f);
 
