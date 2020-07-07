@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
 
     private TelephoneSoundEffect telephoneSounds;
+
     GameObject phoneBox;
+    GameObject bat;
 
     UpperHandle upperHandle;
     LowerHandle lowerHandle;
@@ -55,6 +57,9 @@ public class GameManager : MonoBehaviour
         
         phoneBox = GameObject.Find("TelephoneBox1");
 
+        bat = GameObject.Find("Bat");
+        bat.SetActive(false);
+
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
       
 
@@ -82,10 +87,12 @@ public class GameManager : MonoBehaviour
     async Task StartLevel1()
     {
 
-        await speechOut.Speak("Pick up the phone");
+        await speechOut.Speak("Pick up the phone");        
+
+        bat.SetActive(true);
        
         
-        //TODO: Make Phone Ring
+        //phone starts ringing
         telephoneSounds.startPhoneRing();
 
 
