@@ -51,9 +51,16 @@ public class BatLogic : MonoBehaviour
         
         Vector3 batPos = playerPos + playerDirection*spawnDistance; 
 
-        transform.position = batPos;                
+        transform.position = batPos;
+
+        //transform.RotateAround(player.transform.position, Vector3.up, 20 * Time.deltaTime);            
         
     }
+
+
+    //TODO: Rotation hinkriegen
+    //TODO: Sounds wenn Bat irgendwas schlägt
+    //TODO: Level 2 Telephone & Story
 
     void OnTriggerEnter(Collider collider1)
     {   
