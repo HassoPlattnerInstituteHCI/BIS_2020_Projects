@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public float spawnSpeed = 1f;
     public bool welcome = true;
     public bool introductoryLevel = true;
+    public bool mainMenu = false;
     public GameObject player;
     public bool shouldFreeHandle;
     UpperHandle upperHandle;
@@ -38,18 +39,21 @@ public class GameManager : MonoBehaviour
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
         RegisterColliders();
+        if (mainMenu) {
+            StartMainMenu();
+        }
         if (welcome)
         {
             Welcome();
         } 
     }
 
+    async void StartMainMenu() {
+        await speechOut.Speak("Welcome to Tetris Panto Edition. Say modes to hear the list of available modes or start immediately by saying Tutorial.");
+    }
+
     async void Welcome()    //welcome the player
     {
-        
-        await speechOut.Speak("Welcome to Tetris Panto Edition");
-          
-        await Task.Delay(1000);
 
         if (introductoryLevel)
         {
@@ -57,7 +61,7 @@ public class GameManager : MonoBehaviour
             await IntroductoryLevel();
             await speechOut.Speak("Introduction finished, game starts.");
 
-        } else{ SpawnManager.spawnWavePls = true;} //If we aer not in the welcome-Level, assume that we are in Main/Endless and spawn a new wave
+        } else{ SpawnManager.spawnWavePls = true;} //If we are not in the welcome-Level, assume that we are in Main/Endless and spawn a new wave
         
         
         //SceneManager.LoadScene("Endless");  //Endless level
@@ -67,19 +71,15 @@ public class GameManager : MonoBehaviour
 
     async Task IntroductoryLevel()
     {
-        //Register Blocks in Grid
-        /*
-        Playfield.confirmBlock(GameObject.Find("BlockL2"));
-        Playfield.confirmBlock(GameObject.Find("BlockZ"));
-        Playfield.confirmBlock(GameObject.Find("BlockL"));
-        Playfield.confirmBlock(GameObject.Find("BlockZ2"));
-        Playfield.confirmBlock(GameObject.Find("BlockI"));
-        Playfield.confirmBlock(GameObject.Find("BlockL22"));
-        */
-        //Spawn first intro level skyline
-        SpawnManager.spawnIntroPls=true;
+        await speechOut.Speak("Welcome to the Tutorial. We will now show you what you need to know to play the Tetris Panto Edition. Let's Start!");
         SpawnManager.introCounter=0;
 
+        //Create a separate function here that progresses the Tutorial levels one by one. Start by deleting all remaining blocks in Scene (in Playfield.cs?),
+        //so we can reuse it.
+
+        //Spawn first intro level skyline
+        SpawnManager.spawnIntroPls=true;
+        
         await speechOut.Speak("The It-Handle will now trace the shape of the blocks on the bottom of the level, we will call this the 'skyline'.");
         //yes there propably is a better way to do this
         //Idea: Using the grid, for each column find the highest positioned block. Move there, then .5 to the right, find the next one in relative position to current
