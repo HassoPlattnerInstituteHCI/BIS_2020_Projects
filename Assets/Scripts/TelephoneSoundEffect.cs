@@ -34,7 +34,7 @@ public class TelephoneSoundEffect : MonoBehaviour
         }
 
         if(level == 2){
-            await speechOut.Speak("Yeah you made it!" );
+            await speechOut.Speak("Yeah you made it!" ); // Lets see how quick you can navigate. Remember the place where you started? Its your safe house. Its in the south of downtown. I just called the police that some crazy guy with a baseball bat is running around. Get to the safe house before they arrive. My buddy Danny is waiting for you there.
             gameManager.StartLevel3();
         }
     }

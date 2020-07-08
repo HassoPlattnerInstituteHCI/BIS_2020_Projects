@@ -30,8 +30,6 @@ public class BatLogic : MonoBehaviour
 
         bat = GameObject.Find("Bat");
 
-        player = GameObject.Find("Player");
-        playerSounds = player.GetComponent<PlayerSoundEffect>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -71,7 +69,7 @@ public class BatLogic : MonoBehaviour
     void OnTriggerEnter(Collider collider1)
     {   
         if(collider1.CompareTag("dangerous")){  
-
+            Debug.Log("Dangerous Object hit by bat");
             player = GameObject.Find("Player");
             playerSounds = player.GetComponent<PlayerSoundEffect>();         
 
