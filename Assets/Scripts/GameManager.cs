@@ -96,25 +96,7 @@ public class GameManager : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
        
-        
-        //phone starts ringing
         telephoneSounds.startPhoneRing();
-
-
-        //TODO: If player is close to Phone BOX: -> Speechout Johnny Zoo
-        
-        //Level level = GetComponent<Level>();
-        //await level.PlayIntroduction();
-
-        //await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
-        //string response = await speechIn.Listen(commands);
-        //await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
-
-        //if (response == "yes")
-        //{
-        //    await RoomExploration();
-        //}
-
     }
 
     public async Task StartLevel2(){
@@ -131,7 +113,6 @@ public class GameManager : MonoBehaviour
         playerSpawn.position = phoneBox.transform.position;
         player = GameObject.Find("Player");
         playerSounds = player.GetComponent<PlayerSoundEffect>();
-        Debug.Log("start level 3");
         playerSounds.startSirens();
 
     }

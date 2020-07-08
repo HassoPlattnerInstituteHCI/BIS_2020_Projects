@@ -42,7 +42,6 @@ public class PlayerSoundEffect : MonoBehaviour
 
     }
     public void startSirens(){
-        Debug.Log("startSirens gets called lol");
         audioSource = GetComponent<AudioSource>();
         audioSource.loop = true;
         audioSource.clip = sirens;

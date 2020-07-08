@@ -18,7 +18,6 @@ public class PlayerLogic : MonoBehaviour
 
     GameManager gameManager;
 
-
     private TelephoneSoundEffect telephoneSounds;
     private PlayerSoundEffect playerSounds;
     GameObject phoneBox;
@@ -67,7 +66,7 @@ public class PlayerLogic : MonoBehaviour
         if(gameManager.currentLevel==1){
             if(collider1.CompareTag("TelephoneBox1")){           
             telephoneSounds.StopPlayback();
-            telephoneSounds.startPhoneTalks(1);
+            telephoneSounds.startPhoneTalks();
             }
         }
         if(gameManager.currentLevel==2){
@@ -75,17 +74,17 @@ public class PlayerLogic : MonoBehaviour
                 phoneBox = GameObject.Find("TelephoneBox2");
                 telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
                 telephoneSounds.StopPlayback();
-                telephoneSounds.startPhoneTalks(2);
+                telephoneSounds.startPhoneTalks();
             }
         }
         if(gameManager.currentLevel==3){
             if(collider1.CompareTag("safehouse")){
                 playerSounds.StopPlayback();
+                
             }
         }
         if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
             playerSounds.playWasted();
-
             gameManager.ResetGame();
         } 
     }
