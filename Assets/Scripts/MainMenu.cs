@@ -31,7 +31,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void PlayPuzzles() {
-        SceneManager.LoadScene(3); //loads (for now unexisting) Puzzles-Scene. Need to implement Level-select if time
+        SceneManager.LoadScene(3); //loads Puzzles-Scene. Need to implement Level-select if time
     }
 
     public void QuitGame () {

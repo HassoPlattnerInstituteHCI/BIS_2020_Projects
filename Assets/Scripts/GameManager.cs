@@ -61,10 +61,8 @@ public class GameManager : MonoBehaviour
             await IntroductoryLevel();
             await speechOut.Speak("Introduction finished, game starts.");
 
-        } else{ SpawnManager.spawnWavePls = true;} //If we are not in the welcome-Level, assume that we are in Main/Endless and spawn a new wave
-        
-        
-        //SceneManager.LoadScene("Endless");  //Endless level
+        } else{ SpawnManager.spawnWavePls = true;} //If we are not in the welcome-Level, assume that we are in Endless and spawn a new wave
+        //if to determine if in Puzzles mode + Puzzle-Spawn functio in SpawnManager.
 
         //await ResetGame();
     }
@@ -84,13 +82,15 @@ public class GameManager : MonoBehaviour
         //yes there propably is a better way to do this
         //Idea: Using the grid, for each column find the highest positioned block. Move there, then .5 to the right, find the next one in relative position to current
         //->this will however ignore "holes" in the skyline
+        Playfield.traceSkyline();
+        /*
         await lowerHandle.MoveToPosition(new Vector3(0f,0f,2f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(0.5f, 0f, 2f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(0.5f, 0f, 1f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(1f, 0f, 1f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(1f, 0f, 0.5f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(2f, 0f, 0.5f), 0.1f, shouldFreeHandle);
-        await lowerHandle.MoveToPosition(new Vector3(2f, 0f, 0f), 0.1f, shouldFreeHandle); //Weird random "New Game Object" is created somewhere in this area?!?
+        await lowerHandle.MoveToPosition(new Vector3(2f, 0f, 0f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(2.5f, 0f, 0f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(2.5f, 0f, 0.5f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(3f, 0f, 0.5f), 0.1f, shouldFreeHandle);
@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
         await lowerHandle.MoveToPosition(new Vector3(4.5f, 0f, 1f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(4.5f, 0f, 0.5f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(5f, 0f, 0.5f), 0.1f, shouldFreeHandle);
+        */
         lowerHandle.Free();
         await speechOut.Speak("Now, try yourself to feel the blocks.");
         //Do we need to give the player control here? Remember to return to the block in the end.
@@ -110,7 +111,6 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("Now, try to move the block down to clear a row of blocks in the skyline.");
         // TODO: Me-handle wiggle
     }
-
 
     void RegisterColliders()
     {
