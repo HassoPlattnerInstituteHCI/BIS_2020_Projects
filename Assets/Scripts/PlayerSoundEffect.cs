@@ -4,6 +4,7 @@ using SpeechIO;
 public class PlayerSoundEffect : MonoBehaviour
 {
     public AudioClip wasted;
+    public AudioClip objectHit;
 
     SpeechOut speechOut;
 
@@ -25,12 +26,19 @@ public class PlayerSoundEffect : MonoBehaviour
     }
 
     public void playWasted(){
-        Debug.LogError("No TelephoneSoundsEffect component found.");
 
         audioSource.loop = false;
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = wasted;
         audioSource.Play();
+    }
+
+    public void playObjectHitByBat(){
+        audioSource.loop = false;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = objectHit;
+        audioSource.Play();
+
     }
 
 }

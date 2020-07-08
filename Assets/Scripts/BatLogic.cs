@@ -47,7 +47,7 @@ public class BatLogic : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
 
         Vector3 playerDirection = transform.forward;
-        float spawnDistance = 1; 
+        float spawnDistance = 1.5f; 
         
         Vector3 batPos = playerPos + playerDirection*spawnDistance; 
 
@@ -60,10 +60,16 @@ public class BatLogic : MonoBehaviour
 
     //TODO: Rotation hinkriegen
     //TODO: Sounds wenn Bat irgendwas schlägt
-    //TODO: Level 2 Telephone & Story
+
+
+    //TODO: Level 2 Story
 
     void OnTriggerEnter(Collider collider1)
     {   
+        if(collider1.CompareTag("dangerous")){           
+
+            
+        }
         
     }
 }
