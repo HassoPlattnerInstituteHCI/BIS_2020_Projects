@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public int level = 0;
     public int trophyScore = 10000;
     public UIManager uiManager;
-    public int level;
+    public int currentLevel;
 
     private TelephoneSoundEffect telephoneSounds;
     private PlayerSoundEffect playerSounds;
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     async Task StartLevel1()
     {
-        level = 1;
+        currentLevel = 1;
         await speechOut.Speak("Pick up the phone");      
 
         bat.SetActive(true);
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task StartLevel2(){
-        level = 2;
+        currentLevel = 2;
         playerSpawn.position = phoneBox.transform.position;
         phoneBox = GameObject.Find("TelephoneBox2");
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task StartLevel3(){
-        level = 3;
+        currentLevel = 3;
         playerSpawn.position = phoneBox.transform.position;
         player = GameObject.Find("Player");
         playerSounds = player.GetComponent<PlayerSoundEffect>();
