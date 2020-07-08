@@ -3,6 +3,7 @@ using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using DualPantoFramework;
 
 namespace eduChem
 {
@@ -23,8 +24,11 @@ namespace eduChem
 
         public GameObject[] objects;
 
+        public AudioClip success;
+
         [HideInInspector]
         public GameObject playerSpawn;
+        public AudioSource audioSource;
 
         UpperHandle upperHandle;
         LowerHandle lowerHandle;
@@ -65,6 +69,7 @@ namespace eduChem
             playerSpawn.transform.position = playerSpawnPosition.position;
 
             //objects = GetComponents<GameObject>();
+            audioSource = GetComponent<AudioSource>();
 
             Introduction();
         }
@@ -173,6 +178,7 @@ namespace eduChem
                 }
             }
 
+            audioSource.PlayOneShot(success);
             await speechOut.Speak("Well Done");
             cylinder.transform.position = new Vector3(atoms[0].transform.position.x + atoms[1].transform.position.x, cylinder.transform.position.y - 0.5f, atom1.transform.position.z);
             cylinder.transform.localScale = new Vector3(2.5f, 1, 0.5f);

@@ -3,6 +3,7 @@ using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using DualPantoFramework;
 
 namespace eduChem {
 
@@ -21,8 +22,11 @@ namespace eduChem {
         public Transform playerSpawnPosition;
         public GameObject[] objects;
 
+        public AudioClip success;
+
         [HideInInspector]
         public GameObject playerSpawn;
+        public AudioSource audioSource;
 
         UpperHandle upperHandle;
         LowerHandle lowerHandle;
@@ -62,6 +66,7 @@ namespace eduChem {
             playerSpawn = new GameObject();
             playerSpawn.transform.position = playerSpawnPosition.position;
 
+            audioSource = GetComponent<AudioSource>();
             //objects = GetComponents<GameObject>();
 
             Introduction();
@@ -85,17 +90,13 @@ namespace eduChem {
             await FeelForYourself();
             await ThirdLevel();
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Level2");
+            await speechOut.Speak("Thank you for using Project EduChem. We hope you enjoyed our little demo.");
             Application.Quit();
         }
 
         async Task IntroduceLevel()
         {
             await speechOut.Speak("Now we want to take that a step further. There are both the carbon atoms. But there are just 4 of the 6 hydrogen atoms from the ethane molecule.");
-            //Debug.Log("Introduction");
-            //Level level0 = GetComponent<Level>();
-            //if (introduceLevel) await level0.PlayIntroduction();
-            //await speechOut.Speak("Congratulations, you created your first molecule: ethene.");
         }
 
         async Task ThirdLevel()
@@ -105,7 +106,9 @@ namespace eduChem {
             await createBond();
             await speechOut.Speak("This is the first bond.");
             await createBond();
+            audioSource.PlayOneShot(success);
             await speechOut.Speak("Well done! You created a double bond and the resulting molecule is ethene.");
+            await FeelForYourself();
 
 
 

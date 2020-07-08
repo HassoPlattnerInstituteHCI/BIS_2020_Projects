@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DualPantoFramework;
 
 public class Atom : MonoBehaviour
 {
@@ -23,12 +24,12 @@ public class Atom : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         GameObject other = collision.gameObject;
         Debug.Log("on collision");
 
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             audioSource.Play();
             Debug.Log("play");

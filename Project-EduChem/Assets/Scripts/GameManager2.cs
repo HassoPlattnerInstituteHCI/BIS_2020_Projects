@@ -3,6 +3,7 @@ using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using DualPantoFramework;
 
 namespace eduChem
 {
