@@ -118,9 +118,7 @@ public class GameManager : MonoBehaviour
 
     public async Task StartLevel2(){
         phoneBox = GameObject.Find("TelephoneBox2");
-
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
-
         telephoneSounds.startPhoneRing();
 
     }
