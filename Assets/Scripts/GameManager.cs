@@ -4,6 +4,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
+////TODO Level 4
+//1. Let Danny Erzählen
+//2. Let Passanten spawnen (Random position)
+//3. Let Passanten quasseln
+//4. Wenn Passant hit by bat -> Passant active = false
+//5. Score up
+
 public class GameManager : MonoBehaviour
 {
     public float spawnSpeed = 1f;
