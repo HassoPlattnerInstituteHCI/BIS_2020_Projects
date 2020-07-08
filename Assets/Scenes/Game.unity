@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1157,6 +1157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wasted: {fileID: 8300000, guid: 8c4139d55384ad04aa26cf2385c7cdf1, type: 3}
+  objectHit: {fileID: 0}
+  sirens: {fileID: 8300000, guid: bd413a285ea873a4f9543a04e03662a7, type: 3}
   audioSource: {fileID: 881415698}
 --- !u!81 &881415701
 AudioListener:
@@ -1366,8 +1368,8 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194226}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1410,7 +1412,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 19.193548
+  orthographic size: 20.401236
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1468,7 +1470,7 @@ GameObject:
   - component: {fileID: 967998321}
   m_Layer: 10
   m_Name: SafeHouse
-  m_TagString: Untagged
+  m_TagString: safehouse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -2103,7 +2105,6 @@ GameObject:
   - component: {fileID: 1430467157}
   - component: {fileID: 1430467156}
   - component: {fileID: 1430467155}
-  - component: {fileID: 1430467153}
   - component: {fileID: 1430467159}
   - component: {fileID: 1430467154}
   m_Layer: 10
@@ -2113,22 +2114,6 @@ GameObject:
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
---- !u!114 &1430467153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430467152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7948ea43f9f03c647aa1ec214c4fbde9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  traceShape: 0
-  isOnUpper: 0
-  description: And there.
-  priority: 0
 --- !u!82 &1430467154
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2436,6 +2421,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1597186086
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1597186087}
+  m_Layer: 0
+  m_Name: New Game Object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1597186087
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597186086}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1819973866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,12 +2724,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 881415694}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1280
   aimbotDistance: 10
   seekingDistance: 3
   config: {fileID: 11400000, guid: 250866c4286eb423a8b4403c91105727, type: 2}
+  sirensClip: {fileID: 0}
 --- !u!195 &1819973875
 NavMeshAgent:
   m_ObjectHideFlags: 0

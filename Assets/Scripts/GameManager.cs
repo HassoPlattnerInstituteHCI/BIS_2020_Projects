@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
 
     private TelephoneSoundEffect telephoneSounds;
+    private PlayerSoundEffect playerSounds;
 
     GameObject phoneBox;
     GameObject bat;
@@ -61,7 +62,6 @@ public class GameManager : MonoBehaviour
         bat.SetActive(false);
 
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
-      
 
         //uiManager.UpdateUI(playerScore, enemyScore);
 
@@ -126,7 +126,10 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task StartLevel3(){
-        
+        player = GameObject.Find("Player");
+        playerSounds = player.GetComponent<PlayerSoundEffect>();
+        Debug.Log("start level 3");
+        playerSounds.startSirens();
 
     }
 
@@ -158,6 +161,8 @@ public class GameManager : MonoBehaviour
         //upperHandle.Free();
 
         player.SetActive(true);
+        GameObject camera = GameObject.Find("Main Camera");
+        camera.GetComponent<AudioListener>().enabled = false;
         levelStartTime = Time.time;
     }
 

@@ -9,7 +9,7 @@ public class TelephoneSoundEffect : MonoBehaviour
     SpeechOut speechOut;
 
     public AudioSource audioSource;
-     GameManager gameManager;
+    GameManager gameManager;
 
     void Start()
     {

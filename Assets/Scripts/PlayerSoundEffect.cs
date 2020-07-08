@@ -5,6 +5,7 @@ public class PlayerSoundEffect : MonoBehaviour
 {
     public AudioClip wasted;
     public AudioClip objectHit;
+    public AudioClip sirens;
 
     SpeechOut speechOut;
 
@@ -40,5 +41,16 @@ public class PlayerSoundEffect : MonoBehaviour
         audioSource.Play();
 
     }
-
+    public void startSirens(){
+        Debug.Log("startSirens gets called lol");
+        audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
+        audioSource.clip = sirens;
+        audioSource.Play();
+        
+    }
+    public void StopPlayback()
+    {
+        audioSource.Stop();
+    }
 }

@@ -86,6 +86,9 @@ public class PlayerLogic : MonoBehaviour
 
             gameManager.ResetGame();
         } 
+        else if(collider1.CompareTag("safehouse")){
+            playerSounds.StopPlayback();
+        }
 
     }
 }

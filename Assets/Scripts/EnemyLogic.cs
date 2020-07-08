@@ -13,9 +13,7 @@ public class EnemyLogic : MonoBehaviour
     Vector3 lastSeenPosition;
     NavMeshAgent agent;
     AudioSource audioSource;
-
-    public bool sirens;
-
+    public AudioClip sirensClip;
 
     void Start()
     {
