@@ -213,6 +213,9 @@ MonoBehaviour:
   shouldFreeHandle: 0
   movementspeed: 0.2
   SpawnerLeft: {fileID: 1644391322}
+  startBPM: 60
+  endBPM: 220
+  bps: 1
 --- !u!4 &252466911
 Transform:
   m_ObjectHideFlags: 0
@@ -794,7 +797,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422813, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.25
+      value: 14.19
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422813, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -839,17 +842,17 @@ PrefabInstance:
     - target: {fileID: 826605487606422813, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422813, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422813, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3118277324960447087, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -884,6 +887,16 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: debug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
+        type: 3}
+      propertyPath: portName
+      value: //.//COM4
+      objectReference: {fileID: 0}
+    - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
+        type: 3}
+      propertyPath: showRawValues
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1128,7 +1141,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063456852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e74f1a29daca7c340b94a6237b35b1fe, type: 3}
   m_Name: 
@@ -1136,6 +1149,7 @@ MonoBehaviour:
   spawnSpeed: 1
   welcome: 1
   introductoryLevel: 0
+  mainMenu: 0
   player: {fileID: 0}
   shouldFreeHandle: 0
 --- !u!1 &1065104911

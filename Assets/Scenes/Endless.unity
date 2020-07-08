@@ -585,6 +585,9 @@ MonoBehaviour:
   shouldFreeHandle: 0
   movementspeed: 0.2
   SpawnerLeft: {fileID: 817437447}
+  startBPM: 60
+  endBPM: 220
+  bps: 1
 --- !u!4 &661166640
 Transform:
   m_ObjectHideFlags: 0
@@ -1556,6 +1559,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
+        type: 3}
+      propertyPath: portName
+      value: //.//COM4
+      objectReference: {fileID: 0}
+    - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
+        type: 3}
+      propertyPath: debug
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f08d327e9fb42f94d97ba9d1d226d418, type: 3}
 --- !u!1 &2074481188 stripped
@@ -1579,5 +1592,6 @@ MonoBehaviour:
   spawnSpeed: 1
   welcome: 1
   introductoryLevel: 1
+  mainMenu: 0
   player: {fileID: 0}
   shouldFreeHandle: 0
