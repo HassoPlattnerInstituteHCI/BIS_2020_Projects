@@ -79,8 +79,8 @@ public class PlayerLogic : MonoBehaviour
         }
         if(gameManager.currentLevel==3){
             if(collider1.CompareTag("safehouse")){
-                playerSounds.StopPlayback();
-                
+                playerSounds.StopPolicePlayback();
+
             }
         }
         if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle

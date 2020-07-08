@@ -10,6 +10,7 @@ public class PlayerSoundEffect : MonoBehaviour
     SpeechOut speechOut;
 
     public AudioSource audioSource;
+    public AudioSource audioSourcePolice;
     //public AudioSource rollSource;
 
     //private GameObject TelephoneBox1;
@@ -20,8 +21,8 @@ public class PlayerSoundEffect : MonoBehaviour
     {
 
         speechOut = new SpeechOut();
-        //audioSource = GetComponent<AudioSource>();
-        //rollSource = gameObject.AddComponent<AudioSource>();
+        //audioSource = GetComponents<AudioSource>();
+        audioSourcePolice = gameObject.AddComponent<AudioSource>();
         //rollSource.loop = true;
         //rollSource.clip = rollClip;
     }
@@ -30,26 +31,28 @@ public class PlayerSoundEffect : MonoBehaviour
 
         audioSource.loop = false;
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = wasted;
-        audioSource.Play();
+        audioSource.PlayOneShot(wasted);
     }
 
     public void playObjectHitByBat(){
         audioSource.loop = false;
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = objectHit;
-        audioSource.Play();
+        audioSource.PlayOneShot(objectHit);
 
     }
     public void startSirens(){
-        audioSource = GetComponent<AudioSource>();
-        audioSource.loop = true;
-        audioSource.clip = sirens;
-        audioSource.Play();
+        //audioSource = GetComponent<AudioSource>();
+        audioSourcePolice.loop = true;
+        audioSourcePolice.clip = sirens;
+        audioSourcePolice.Play();
         
     }
     public void StopPlayback()
     {
         audioSource.Stop();
+    }
+    public void StopPolicePlayback()
+    {
+        audioSourcePolice.Stop();
     }
 }
