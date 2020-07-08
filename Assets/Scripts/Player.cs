@@ -8,6 +8,7 @@ using UnityEditor;
 using System.Net.Sockets;
 using System.Threading;
 using DualPantoFramework;
+using System.Threading.Tasks;
 
 namespace Tetris {
 public class Player : MonoBehaviour
@@ -26,9 +27,15 @@ public class Player : MonoBehaviour
     public GameObject SpawnerLeft;
     SpeechIn speechIn;
     SpeechOut speechOut;
-    // Start is called before the first frame update
 
-    void Awake()
+    public int startBPM = 60;
+    public int endBPM = 220;
+    float bpmCoefficient;
+    public float bps = 1;
+    float nextHeartbeat;
+        // Start is called before the first frame update
+
+        void Awake()
     {
         
         
@@ -39,6 +46,7 @@ public class Player : MonoBehaviour
         
         speechOut = new SpeechOut();
         meHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
+            await Task.Delay(1000);
         await meHandle.SwitchTo(gameObject, 0.4f);
         //await speechOut.Speak("Welcome to Tetris Panto Edition.");
         speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place", "abort" });
@@ -50,8 +58,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            // Simply connects the player to the upper handles position
 
-        if(!playercontrol) {
+            if (!playercontrol) {
                 if (Input.GetKeyDown(KeyCode.L)) {
                     onRecognized("left");
                 }

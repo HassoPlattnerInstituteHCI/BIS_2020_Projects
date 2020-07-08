@@ -34,11 +34,12 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void Start()
+    async void Start()
     {
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
-        RegisterColliders();
+            await Task.Delay(2000);
+            RegisterColliders();
         if (mainMenu) {
             StartMainMenu();
         }

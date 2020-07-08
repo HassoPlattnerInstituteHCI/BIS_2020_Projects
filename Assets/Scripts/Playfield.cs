@@ -166,10 +166,13 @@ public class Playfield : MonoBehaviour
             column = (int)(2 * xPosRelative);
             row = (int)(2 * zPosRelative);
             updateTagName(column, row, block.transform.GetChild(i));
+            block.transform.GetChild(i).gameObject.GetComponent<PantoBoxCollider>().CreateObstacle();
+            block.transform.GetChild(i).gameObject.GetComponent<PantoBoxCollider>().Enable();
             parentRow = GameObject.Find("Row"+row);
             block.transform.GetChild(i).transform.SetParent(parentRow.transform);
+            //block.transform.GetChild(i).AddComponent<PantoBoxCollider>();
             //block.transform.GetChild(i).GetComponent<PantoBoxCollider>().CreateObstacle();
-            //block.transform.GetChild(i).GetComponent<PantoBoxCollider>().Enable();
+            
         }
         Destroy(block);
     }
