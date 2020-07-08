@@ -27,13 +27,13 @@ public class TelephoneSoundEffect : MonoBehaviour
         audioSource.Play();
     }
 
-    public async Task startPhoneTalks(int level){
-        if(level == 1){
+    public async Task startPhoneTalks(){
+        Debug.Log(gameManager.currentLevel);
+        if(gameManager.currentLevel == 1){
             await speechOut.Speak("Yo Claude, it's Johnny Zoo. " );//Congratulations on breaking out of prison! Welcome back to Downtown Anywhere City. Dude. This city went crazy during the time you spent in prison. You may have some trouble navigating without being able to see. I will help you out. Grab the baseball bat that I have hidden here in the telephone booth. You can use it to spot objects around you. I will call you on the other telephone booth to see if that works for you.");
             gameManager.StartLevel2();
         }
-
-        if(level == 2){
+        else if(gameManager.currentLevel == 2){
             await speechOut.Speak("Yeah you made it!" ); // Lets see how quick you can navigate. Remember the place where you started? Its your safe house. Its in the south of downtown. I just called the police that some crazy guy with a baseball bat is running around. Get to the safe house before they arrive. My buddy Danny is waiting for you there.
             gameManager.StartLevel3();
         }

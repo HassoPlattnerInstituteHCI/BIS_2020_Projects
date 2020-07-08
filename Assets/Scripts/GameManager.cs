@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public int level = 0;
     public int trophyScore = 10000;
     public UIManager uiManager;
+    public int currentLevel;
 
     private TelephoneSoundEffect telephoneSounds;
     private PlayerSoundEffect playerSounds;
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     async Task StartLevel1()
     {
-
+        currentLevel = 1;
         await speechOut.Speak("Pick up the phone");      
 
         bat.SetActive(true);
@@ -102,28 +103,11 @@ public class GameManager : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
        
-        
-        //phone starts ringing
         telephoneSounds.startPhoneRing();
-
-
-        //TODO: If player is close to Phone BOX: -> Speechout Johnny Zoo
-        
-        //Level level = GetComponent<Level>();
-        //await level.PlayIntroduction();
-
-        //await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
-        //string response = await speechIn.Listen(commands);
-        //await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
-
-        //if (response == "yes")
-        //{
-        //    await RoomExploration();
-        //}
-
     }
 
     public async Task StartLevel2(){
+        currentLevel = 2;
         playerSpawn.position = phoneBox.transform.position;
         phoneBox = GameObject.Find("TelephoneBox2");
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
@@ -132,10 +116,10 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task StartLevel3(){
+        currentLevel = 3;
         playerSpawn.position = phoneBox.transform.position;
         player = GameObject.Find("Player");
         playerSounds = player.GetComponent<PlayerSoundEffect>();
-        Debug.Log("start level 3");
         playerSounds.startSirens();
 
     }
