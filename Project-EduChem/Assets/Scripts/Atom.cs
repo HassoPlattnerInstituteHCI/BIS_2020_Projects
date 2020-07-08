@@ -13,8 +13,6 @@ public class Atom : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         player = GameObject.Find("MeHandle");
-        audioSource.Play();
-        audioSource.Play();
 
         Debug.Log("start atom script");
     }
@@ -30,7 +28,7 @@ public class Atom : MonoBehaviour
         GameObject other = collision.gameObject;
         Debug.Log("on collision");
 
-        if(other.Equals(player))
+        if(other.tag == "Player")
         {
             audioSource.Play();
             Debug.Log("play");

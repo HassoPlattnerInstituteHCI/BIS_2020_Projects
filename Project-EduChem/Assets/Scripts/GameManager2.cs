@@ -20,6 +20,7 @@ namespace eduChem
 
         public GameObject atom1, atom2;
         public Transform playerSpawnPosition;
+        public GameObject[] objects;
 
         [HideInInspector]
         public GameObject playerSpawn;
@@ -34,11 +35,12 @@ namespace eduChem
         float totalTime = 0;
         float levelStartTime = 0;
         Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
-        { "yes", KeyCode.Y },
-        { "no", KeyCode.N },
-        { "done", KeyCode.D },
-        { "start bond", KeyCode.S },
-        { "end bond", KeyCode.E }
+            { "yes", KeyCode.Y },
+            { "no", KeyCode.N },
+            { "done", KeyCode.D },
+            {"explain", KeyCode.E },
+            {"show", KeyCode.S },
+            {"quit", KeyCode.Q }
     };
 
         void Awake()
@@ -61,25 +63,20 @@ namespace eduChem
             playerSpawn = new GameObject();
             playerSpawn.transform.position = playerSpawnPosition.position;
 
+            //objects = GetComponents<GameObject>();
+
             Introduction();
         }
 
         async void Introduction()
         {
-            // await speechOut.Speak("Welcome to Project EduChem");
-            // TODO: 1. Introduce obstacles in level 2 (aka 1)
-            // await Task.Delay(1000);
             RegisterColliders();
-
-            //if (introduceLevel){
             await speechOut.Speak("Level2 started");
             await IntroduceLevel();
-            //}
-
-            //await FirstLevel();
-            //await FeelForYourself();
 
             await SecondLevel();
+
+            await Quiz();
 
             UnityEngine.SceneManagement.SceneManager.LoadScene("Level3");
             Application.Quit();
@@ -101,17 +98,68 @@ namespace eduChem
         async Task FeelForYourself()
         {
 
-            await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
+            await speechOut.Speak("Feel for yourself again. You can use two new commands too: Say Show to restart the introduction to this level to get a better orientation." +
+                "Or say explain while touching an object to get to know what kind of atom or object you are touching. Say yes or done when you're ready.");
 
-            //string response = await speechIn.Listen(commands);
-            await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
+            bool exploring = true;
 
-            //if (response == "yes")
-            //{
-            //    await RoomExploration();
-            //}
+            while (exploring)
+            {
+                string response = await speechIn.Listen(commands);
+
+                switch (response)
+                {
+                    case "show":
+                        await IntroduceLevel();
+                        break;
+                    case "explain":
+                        await Explain();
+                        break;
+                    case "quit":
+                        Application.Quit();
+                        break;
+                    case "yes":
+                    case "done":
+                        exploring = false;
+                        break;
+                }
+            }
         }
 
+        async Task Quiz() //TODO new question
+        {
+            await speechOut.Speak("Here is a little quiz for you. Is this an actual molecule? Reminder: These are 2 carbon atoms connected with one bond." +
+                "Say yes or no.");
+            string response = await speechIn.Listen(new Dictionary<string, KeyCode> { { "yes", KeyCode.Y }, { "no", KeyCode.N } });
+            if (response == "yes")
+            {
+                await speechOut.Speak("You are wrong. That was really hard! C2, the molecule made of two carbon atoms, has a double bond.");
+            }
+            else if (response == "no")
+            {
+                await speechOut.Speak("Yes. thats correct!");
+            }
+        }
+
+        async Task Explain()
+        {
+            float closestDistanceSqr = Mathf.Infinity;
+            Vector3 currentPosition = upperHandle.GetPosition();
+            GameObject nearest = null;
+
+            foreach (GameObject obj in objects)
+            {
+                Vector3 dist = obj.transform.position - currentPosition;
+                float distSqr = dist.sqrMagnitude;
+                if (distSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distSqr;
+                    nearest = obj;
+                }
+            }
+
+            await speechOut.Speak("This is a " + nearest.tag);
+        }
 
         [System.Obsolete]
         async Task RoomExploration()

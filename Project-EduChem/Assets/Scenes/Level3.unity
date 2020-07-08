@@ -148,7 +148,7 @@ BoxCollider:
   m_GameObject: {fileID: 593793393}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 607845200}
   m_Layer: 0
   m_Name: Bond (4)
-  m_TagString: Untagged
+  m_TagString: Single Bond
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 647352597}
   m_Layer: 0
   m_Name: H-Atom1
-  m_TagString: Atom
+  m_TagString: Hydrogen Atom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 651380204}
   m_Layer: 0
   m_Name: Atom2
-  m_TagString: Atom
+  m_TagString: Carbon Atom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 675682286}
   m_Layer: 0
   m_Name: Bond (5)
-  m_TagString: Untagged
+  m_TagString: Single Bond
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1321,7 +1321,7 @@ GameObject:
   - component: {fileID: 1012940477}
   m_Layer: 0
   m_Name: Bond (2)
-  m_TagString: Untagged
+  m_TagString: Single Bond
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1534,7 +1534,7 @@ GameObject:
   - component: {fileID: 1057675661}
   m_Layer: 0
   m_Name: H-Atom3
-  m_TagString: Atom
+  m_TagString: Hydrogen Atom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1659,7 +1659,7 @@ GameObject:
   - component: {fileID: 1080112646}
   m_Layer: 0
   m_Name: H-Atom6
-  m_TagString: Atom
+  m_TagString: Hydrogen Atom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1784,7 +1784,7 @@ GameObject:
   - component: {fileID: 1431655672}
   m_Layer: 0
   m_Name: H-Atom4
-  m_TagString: Atom
+  m_TagString: Hydrogen Atom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2051,6 +2051,18 @@ MonoBehaviour:
   atom1: {fileID: 2099524815}
   atom2: {fileID: 651380202}
   playerSpawnPosition: {fileID: 743777051}
+  objects:
+  - {fileID: 2099524815}
+  - {fileID: 651380202}
+  - {fileID: 647352596}
+  - {fileID: 1057675660}
+  - {fileID: 1431655671}
+  - {fileID: 1080112645}
+  - {fileID: 1012940471}
+  - {fileID: 1927993059}
+  - {fileID: 607845194}
+  - {fileID: 675682280}
+  - {fileID: 0}
   playerSpawn: {fileID: 0}
 --- !u!1 &1927993059
 GameObject:
@@ -2067,7 +2079,7 @@ GameObject:
   - component: {fileID: 1927993065}
   m_Layer: 0
   m_Name: Bond (3)
-  m_TagString: Untagged
+  m_TagString: Single Bond
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2174,7 +2186,7 @@ GameObject:
   - component: {fileID: 2099524817}
   m_Layer: 0
   m_Name: Atom
-  m_TagString: Atom
+  m_TagString: Carbon Atom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

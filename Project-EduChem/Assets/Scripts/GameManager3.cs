@@ -19,6 +19,7 @@ namespace eduChem {
 
         public GameObject atom1, atom2;
         public Transform playerSpawnPosition;
+        public GameObject[] objects;
 
         [HideInInspector]
         public GameObject playerSpawn;
@@ -33,11 +34,12 @@ namespace eduChem {
         float totalTime = 0;
         float levelStartTime = 0;
         Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
-        { "yes", KeyCode.Y },
-        { "no", KeyCode.N },
-        { "done", KeyCode.D },
-        { "start bond", KeyCode.S },
-        { "end bond", KeyCode.E }
+            { "yes", KeyCode.Y },
+            { "no", KeyCode.N },
+            { "done", KeyCode.D },
+            {"explain", KeyCode.E },
+            {"show", KeyCode.S },
+            {"quit", KeyCode.Q }
     };
 
         void Awake()
@@ -59,6 +61,8 @@ namespace eduChem {
 
             playerSpawn = new GameObject();
             playerSpawn.transform.position = playerSpawnPosition.position;
+
+            //objects = GetComponents<GameObject>();
 
             Introduction();
         }
@@ -154,11 +158,13 @@ namespace eduChem {
             }
 
 
-            cylinder.transform.position = new Vector3(cylinder.transform.position.x, cylinder.transform.position.y - 0.5f, atom1.transform.position.z);
-            level = 1;
+            cylinder.transform.position = new Vector3(atom1.transform.position.x + atom2.transform.position.x, cylinder.transform.position.y - 0.5f, atom1.transform.position.z);
+            cylinder.transform.localScale = new Vector3(2.5f, 1, 0.5f);
 
             CapsuleCollider cap = cylinder.GetComponent<CapsuleCollider>();
             Object.Destroy(cap);
+            cylinder.tag = "Double Bond";
+            objects[10] = cylinder;
             BoxCollider box = cylinder.AddComponent<BoxCollider>();
             PantoBoxCollider pantoBox = cylinder.AddComponent<PantoBoxCollider>();
             await Task.Delay(1000);
@@ -167,32 +173,53 @@ namespace eduChem {
         }
         async Task FeelForYourself()
         {
+            await speechOut.Speak("Feel for yourself again. Say yes or done when you're ready.");
 
-            await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
+            bool exploring = true;
 
-            //string response = await speechIn.Listen(commands);
-            await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
-
-            //if (response == "yes")
-            //{
-            //    await RoomExploration();
-            //}
-        }
-
-
-        [System.Obsolete]
-        async Task RoomExploration()
-        {
-            while (true)
+            while (exploring)
             {
-                await speechOut.Speak("Say done when you're ready.");
                 string response = await speechIn.Listen(commands);
-                if (response == "done")
+
+                switch (response)
                 {
-                    return;
+                    case "show":
+                        await IntroduceLevel();
+                        break;
+                    case "explain":
+                        await Explain();
+                        break;
+                    case "quit":
+                        Application.Quit();
+                        break;
+                    case "yes":
+                    case "done":
+                        exploring = false;
+                        break;
                 }
             }
         }
+
+        async Task Explain()
+        {
+            float closestDistanceSqr = Mathf.Infinity;
+            Vector3 currentPosition = upperHandle.GetPosition();
+            GameObject nearest = null;
+
+            foreach (GameObject obj in objects)
+            {
+                Vector3 dist = obj.transform.position - currentPosition;
+                float distSqr = dist.sqrMagnitude;
+                if (distSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distSqr;
+                    nearest = obj;
+                }
+            }
+
+            await speechOut.Speak("This is a " + nearest.tag);
+        }
+
 
         void RegisterColliders()
         {
@@ -203,31 +230,6 @@ namespace eduChem {
                 collider.CreateObstacle();
                 collider.Enable();
             }
-        }
-
-        /// <summary>
-        /// Starts a new round.
-        /// </summary>
-        /// <returns></returns>
-        async Task ResetGame()
-        {
-            await speechOut.Speak("Spawning player");
-            //player.transform.position = playerSpawn.position;
-            await upperHandle.SwitchTo(player, 0.3f);
-
-            await speechOut.Speak("Spawning enemy");
-            enemy.transform.position = enemySpawn.position;
-            enemy.transform.rotation = enemySpawn.rotation;
-            await lowerHandle.SwitchTo(enemy, 0.3f);
-            if (level >= enemyConfigs.Length)
-                Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
-            enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
-
-            upperHandle.Free();
-
-            player.SetActive(true);
-            enemy.SetActive(true);
-            levelStartTime = Time.time;
         }
 
         void onRecognized(string message)

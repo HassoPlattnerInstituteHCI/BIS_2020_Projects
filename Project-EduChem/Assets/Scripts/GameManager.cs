@@ -21,6 +21,8 @@ namespace eduChem
         public Transform playerSpawnPosition;
         public PrimitiveType bond;
 
+        public GameObject[] objects;
+
         [HideInInspector]
         public GameObject playerSpawn;
 
@@ -34,9 +36,12 @@ namespace eduChem
         float totalTime = 0;
         float levelStartTime = 0;
         Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
-        { "yes", KeyCode.Y },
-        { "no", KeyCode.N },
-        { "done", KeyCode.D },
+            { "yes", KeyCode.Y },
+            { "no", KeyCode.N },
+            { "done", KeyCode.D },
+            {"explain", KeyCode.E },
+            {"show", KeyCode.S },
+            {"quit", KeyCode.Q }
     };
 
         void Awake()
@@ -59,27 +64,25 @@ namespace eduChem
             playerSpawn = new GameObject();
             playerSpawn.transform.position = playerSpawnPosition.position;
 
+            //objects = GetComponents<GameObject>();
+
             Introduction();
         }
 
         async void Introduction()
         {
             await speechOut.Speak("Welcome to Project EduChem");
-            // TODO: 1. Introduce obstacles in level 2 (aka 1)
             await Task.Delay(1000);
             RegisterColliders();
 
-            //if (introduceLevel){
             await IntroduceLevel();
-            //}
-
             await FirstLevel();
             await FeelForYourself();
 
+            await Quiz();
+
             SecondLevel(); //starts a new scene
             Application.Quit();
-
-            //await ResetGame();
         }
 
         async Task IntroduceLevel()
@@ -90,10 +93,26 @@ namespace eduChem
             if (introduceLevel) await level.PlayIntroduction(); //says "these are the two atoms, make the bond"
         }
 
+        async Task Quiz()
+        {
+            await speechOut.Speak("Here is a little quiz for you. Is this an actual molecule? Reminder: These are 2 carbon atoms connected with one bond."+
+                "Say yes or no.");
+            string response = await speechIn.Listen(new Dictionary<string, KeyCode> { { "yes", KeyCode.Y }, { "no", KeyCode.N } });
+            if (response == "yes")
+            {
+                await speechOut.Speak("You are wrong. That was really hard! C2, the molecule made of two carbon atoms, has a double bond. We will learn more about this in a moment.");
+            } else if (response == "no")
+            {
+                await speechOut.Speak("Yes. thats correct!");
+            }
+        }
+
         async Task FirstLevel()
         {
+            await speechOut.Speak("They should be connected with a chemical bond. " +
+                "Create this bond by saying start bond, moving the handle to the other atom und say end bond.");
 
-            GameObject[] atoms = GameObject.FindGameObjectsWithTag("Atom");
+            GameObject[] atoms = GameObject.FindGameObjectsWithTag("Carbon Atom");
             if (atoms[0].transform.position.x < atoms[1].transform.position.x) //left atom is atom1
             {
                 GameObject atom1 = atoms[0];
@@ -125,10 +144,10 @@ namespace eduChem
                 await speechIn.Listen(new Dictionary<string, KeyCode> { { "end bond", KeyCode.E } });
 
                 Vector3 pos2 = upperHandle.GetPosition();
-                cylinder.transform.localScale = new Vector3(2.5f, System.Math.Abs(pos2.x - pos1.x) / 2 + 0.7f, 0.5f);
-                cylinder.transform.position = new Vector3(System.Math.Abs(pos1.x + pos2.x) / 2 - 0.4f, pos1.y, pos1.z);
+                cylinder.transform.localScale = new Vector3(2.5f, System.Math.Abs(pos2.x - pos1.x) / 2 + 0.3f, 0.5f);
+                cylinder.transform.position = new Vector3(System.Math.Abs(pos1.x + pos2.x) / 2 - 0.2f, pos1.y, pos1.z);
 
-                //im sorry for that terrible style, gonna change later
+                //im sorry for that terrible style, gonna change that later
 
                 if (cylinder.transform.position.z < atom1.transform.position.z + 1 && cylinder.transform.position.y > atom1.transform.position.z - 1)
                 {
@@ -155,19 +174,15 @@ namespace eduChem
             }
 
             await speechOut.Speak("Well Done");
-            cylinder.transform.position = new Vector3(cylinder.transform.position.x, cylinder.transform.position.y - 0.5f, atom1.transform.position.z);
-            level = 1;
-
+            cylinder.transform.position = new Vector3(atoms[0].transform.position.x + atoms[1].transform.position.x, cylinder.transform.position.y - 0.5f, atom1.transform.position.z);
+            cylinder.transform.localScale = new Vector3(2.5f, 1, 0.5f);
             CapsuleCollider cap = cylinder.GetComponent<CapsuleCollider>();
             Object.Destroy(cap);
+            cylinder.tag = "Single Bond";
             BoxCollider box = cylinder.AddComponent<BoxCollider>();
             PantoBoxCollider pantoBox = cylinder.AddComponent<PantoBoxCollider>();
 
-            //box.transform.position = cylinder.transform.position;
-            //box.transform.localScale = cylinder.transform.localScale;
-
-            //pantoBox.transform.position = cylinder.transform.position;
-            //pantoBox.transform.localScale = cylinder.transform.localScale;
+            objects[2] = cylinder;
 
             await Task.Delay(1000);
 
@@ -179,38 +194,54 @@ namespace eduChem
         {
             Debug.Log("second Level start");
             UnityEngine.SceneManagement.SceneManager.LoadScene("Level2");
-
-            //await IntroduceLevel();
-            //await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
-            //await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
         }
 
         async Task FeelForYourself()
         {
-
             await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
 
-            //string response = await speechIn.Listen(commands);
-            await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
+            bool exploring = true;
 
-            //if (response == "yes")
-            //{
-            //    await RoomExploration();
-            //}
-        }
-
-        [System.Obsolete]
-        async Task RoomExploration()
-        {
-            while (true)
-            {
-                await speechOut.Speak("Say done when you're ready.");
+            while (exploring) { 
                 string response = await speechIn.Listen(commands);
-                if (response == "done")
+
+                switch (response)
                 {
-                    return;
+                    case "show":
+                        await IntroduceLevel();
+                        break;
+                    case "explain":
+                        await Explain();
+                        break;
+                    case "quit":
+                        Application.Quit();
+                        break;
+                    case "yes":
+                    case "done":
+                        exploring = false;
+                        break;
                 }
             }
+        }
+
+        async Task Explain()
+        {
+            float closestDistanceSqr = Mathf.Infinity;
+            Vector3 currentPosition = upperHandle.GetPosition();
+            GameObject nearest = null;
+
+            foreach (GameObject obj in objects)
+            {
+                Vector3 dist = obj.transform.position - currentPosition;
+                float distSqr = dist.sqrMagnitude;
+                if (distSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distSqr;
+                    nearest = obj;
+                }
+            }
+
+            await speechOut.Speak("This is a " + nearest.tag);
         }
 
         void RegisterColliders()
@@ -224,31 +255,6 @@ namespace eduChem
             }
         }
 
-        /// <summary>
-        /// Starts a new round.
-        /// </summary>
-        /// <returns></returns>
-        async Task ResetGame()
-        {
-            await speechOut.Speak("Spawning player");
-            //player.transform.position = playerSpawn.position;
-            await upperHandle.SwitchTo(player, 0.3f);
-
-            await speechOut.Speak("Spawning enemy");
-            enemy.transform.position = enemySpawn.position;
-            enemy.transform.rotation = enemySpawn.rotation;
-            await lowerHandle.SwitchTo(enemy, 0.3f);
-            if (level >= enemyConfigs.Length)
-                Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
-            enemy.GetComponent<EnemyLogic>().config = enemyConfigs[level];
-
-            upperHandle.Free();
-
-            player.SetActive(true);
-            enemy.SetActive(true);
-            levelStartTime = Time.time;
-        }
-
         void onRecognized(string message)
         {
             Debug.Log("SpeechIn recognized: " + message);
@@ -259,5 +265,7 @@ namespace eduChem
             speechOut.Stop(); //Windows: do not remove this line.
             speechIn.StopListening(); // [macOS] do not delete this line!
         }
+
+        
     }
 }
