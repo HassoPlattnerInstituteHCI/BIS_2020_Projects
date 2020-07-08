@@ -70,7 +70,10 @@ public class BatLogic : MonoBehaviour
 
     void OnTriggerEnter(Collider collider1)
     {   
-        if(collider1.CompareTag("dangerous")){           
+        if(collider1.CompareTag("dangerous")){  
+
+            player = GameObject.Find("Player");
+            playerSounds = player.GetComponent<PlayerSoundEffect>();         
 
             playerSounds.playObjectHitByBat();
             
