@@ -7,8 +7,8 @@ using DualPantoFramework;
 namespace Tetris {
 public class SpawnManager : MonoBehaviour
 {
-    private int leftBlock;
-    private int rightBlock;
+    public static int leftBlock;
+    public static int rightBlock;
     public static bool spawnIntroPls = false;
     public static int introCounter = 0;
     public static bool spawnWavePls = false;
@@ -40,14 +40,14 @@ public class SpawnManager : MonoBehaviour
     public void spawnNext() {
         leftBlock = Random.Range(0, groups.Length);
         blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
-        blockLeft.name = "LeftBlock";
+        blockLeft.name = ""+leftBlock;
         Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
         rightBlock = Random.Range(1, groups.Length);
         if (rightBlock==leftBlock) {
             rightBlock = 0;
         }
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
-        blockRight.name = "RightBlock";
+        blockRight.name = ""+rightBlock;
         Player.rightBlockRotaterPos = blockRight.transform.GetChild(0).transform.position;
         waveNumber++;
         spawnWavePls = false;
@@ -59,8 +59,8 @@ public class SpawnManager : MonoBehaviour
             case 0: leftBlock = 3; //Picks the yellow block, which fits in the gap
                     Instantiate(skylines[level], transform.position + new Vector3((float)-0.5, 0, (float)-7), transform.rotation);
                     Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
-                    blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3((float)1.5,0,0), transform.rotation);
-                    blockLeft.name = "LeftBlock";
+                    blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
+                    blockLeft.name = ""+leftBlock;
                     Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
                     introCounter++;
                     spawnIntroPls = false;
@@ -68,10 +68,10 @@ public class SpawnManager : MonoBehaviour
         }
         Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
         blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3((float)1.5,0,0), transform.rotation);
-        blockLeft.name = "LeftBlock";
+        blockLeft.name = ""+leftBlock;
         Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
-        blockRight.name = "RightBlock";
+        blockRight.name = ""+rightBlock;
         Player.rightBlockRotaterPos = blockRight.transform.GetChild(0).transform.position;
         introCounter++;
         spawnIntroPls = false;

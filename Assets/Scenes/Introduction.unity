@@ -168,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 136307135}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -1.5, y: 0, z: -7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0000005, z: 1.0000005}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -412,9 +412,6 @@ MonoBehaviour:
   shouldFreeHandle: 0
   movementspeed: 0.2
   SpawnerLeft: {fileID: 136307135}
-  startBPM: 60
-  endBPM: 220
-  bps: 1
 --- !u!4 &422395897
 Transform:
   m_ObjectHideFlags: 0

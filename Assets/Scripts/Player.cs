@@ -27,12 +27,13 @@ public class Player : MonoBehaviour
     public GameObject SpawnerLeft;
     SpeechIn speechIn;
     SpeechOut speechOut;
-
+/*
     public int startBPM = 60;
     public int endBPM = 220;
     float bpmCoefficient;
     public float bps = 1;
     float nextHeartbeat;
+    */
         // Start is called before the first frame update
 
         void Awake()
