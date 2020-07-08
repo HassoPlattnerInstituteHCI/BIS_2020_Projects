@@ -58,13 +58,22 @@ public class SpawnManager : MonoBehaviour
         switch(level) {
             case 0: leftBlock = 3; //Picks the yellow block, which fits in the gap
                     Instantiate(skylines[level], transform.position + new Vector3((float)-0.5, 0, (float)-7), transform.rotation);
-                    break;
+                    Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
+                    blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3((float)1.5,0,0), transform.rotation);
+                    blockLeft.name = "LeftBlock";
+                    Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
+                    introCounter++;
+                    spawnIntroPls = false;
+                    return; //Level 0 is special, since we only spawn one block
         }
         Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
         blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3((float)1.5,0,0), transform.rotation);
         blockLeft.name = "LeftBlock";
         Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
-        //introCounter++;
+        blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
+        blockRight.name = "RightBlock";
+        Player.rightBlockRotaterPos = blockRight.transform.GetChild(0).transform.position;
+        introCounter++;
         spawnIntroPls = false;
     }
 }

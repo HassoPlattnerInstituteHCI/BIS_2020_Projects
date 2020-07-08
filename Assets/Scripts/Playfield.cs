@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 using DualPantoFramework;
 
 namespace Tetris {
@@ -11,15 +12,17 @@ public class Playfield : MonoBehaviour
     LowerHandle lowerHandle;
     public bool shouldFreeHandle;
 
-    static int offsetX = 2;
-    static int offsetZ = 14;
+    public static int offsetX = 2;
+    public static int offsetZ = 14;
 
     public static int w = 10;
     public static int h = 18;
     private static bool[,] grid = new bool[w,h]; //is currently not used
-    static GameObject allRowsParent = GameObject.Find("AllRows"); //Parent Object of all the Row-Objects that are used to track blocks positions
-    
-    static int[] skylineHeights; //Each array space determines the height of the highest block in that column (in steps of 1, not .5)
+    public static GameObject allRowsParent = GameObject.Find("AllRows"); //Parent Object of all the Row-Objects that are used to track blocks positions
+
+    public static int clearedRows; //To track in endless (for points) and in Tutorial. Don't know how to do it in Puzzles yet.
+
+
 
     //Info on blocks in general: Every block is named after its exact position, e.g. "ArrayCR10" would be the block in the bottom row in the first column.
     //Additionally, every block is set as a child of a "RowX" object, each of which (in theory) can only have ten children: One for every column. 
@@ -49,31 +52,7 @@ public class Playfield : MonoBehaviour
 
     }
 
-    public async void traceSkyline() {
-        //In the first part, we get the heights of the highest block in each column. For this, we need to go through every row, starting with the highest one
-        //If there is a block in there with a column-tag that is not yet initialized in the array, we take it as our highest block.
-        skylineHeights = new int[11]; //By default, max height is 0=ground level
-        GameObject currentRow;
-        int column;
-        //Every step in the array signals one step of .5 upwards when tracing. This means a block in row 1 has a value of 2 in the array!
-        for(int row=h-1; row>=0; row--) { //for every row...
-            currentRow = allRowsParent.transform.GetChild(row).gameObject;
-            foreach(Transform child in currentRow.transform) { //...check all blocks in that row for their tag and check if that column is already !=0 in the array
-            column = int.Parse(child.tag);
-                if(skylineHeights[column+1]==0) { //Do the check only if the space has not been occupied beforehand
-                    skylineHeights[column+1]=row+1;
-                }
-                Debug.Log("SkylineRow :"+row+" Height :"+skylineHeights[column+1]+" column :"+column);
-            }
-        }
-        //We have now filled the Array with the heights in each column. Time to make the Panto move
-        await lowerHandle.MoveToPosition(new Vector3(-0.25f,0f,-0.25f), 0.1f, shouldFreeHandle); //Moves handle to lower left corner of the level
-        for(int col=1; col<11; col++) { //Starting at 1 since skylineHeights[0] is our default value for the first subtraction below
-            await lowerHandle.MoveToPosition(lowerHandle.transform.position + new Vector3(0f,0f,0.5f*(skylineHeights[col]-skylineHeights[col-1])), 0.1f, shouldFreeHandle);
-            await lowerHandle.MoveToPosition(lowerHandle.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
-        }
-        await lowerHandle.MoveToPosition(new Vector3(4.75f,0f,-0.25f), 0.1f, shouldFreeHandle);
-    }
+
 
     //sets a blocks name and tag to the column and row it is in in the grid
     static void updateTagName(int column, int row, Transform block) {
@@ -93,9 +72,11 @@ public class Playfield : MonoBehaviour
     public static void deleteFullRows() {
         int maxRow = -1;
         int counter = 0;
+        clearedRows = 0;
         for (int row=0; row<h; row++) { //This first deletes all rows that are full, and counts how many have been deleted
             if (checkRow(row)) {
                 deleteThisRow(GameObject.Find("Row"+row));
+                clearedRows++;
                 if(maxRow<row) {maxRow=row;}
                 counter++;
             }
