@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task StartLevel2(){
+        playerSpawn.position = phoneBox.transform.position;
         phoneBox = GameObject.Find("TelephoneBox2");
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
         telephoneSounds.startPhoneRing();
@@ -124,6 +125,7 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task StartLevel3(){
+        playerSpawn.position = phoneBox.transform.position;
         player = GameObject.Find("Player");
         playerSounds = player.GetComponent<PlayerSoundEffect>();
         Debug.Log("start level 3");
