@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public static Vector3 rightBlockRotaterPos;
     bool playercontrol = false;
     bool chooseMode = true;
-    bool leftBlockActive = false;
+    bool leftBlockActive = true;
     bool placement = false;
     public bool shouldFreeHandle;
     public float movementspeed = 0.2f;
@@ -46,13 +46,13 @@ public class Player : MonoBehaviour
         
         speechOut = new SpeechOut();
         meHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
-            await Task.Delay(1000);
-        await meHandle.SwitchTo(gameObject, 0.4f);
+        await Task.Delay(1000);
+        await meHandle.SwitchTo(SpawnerLeft, 0.4f);
         //await speechOut.Speak("Welcome to Tetris Panto Edition.");
         speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place", "abort" });
         speechIn.StartListening(new string[] {"left", "right", "confirm", "place", "abort" });
         //Initializes first wave on the left block immediately
-        onRecognized("left");
+        //onRecognized("left"); DOESNT WORK ANYMORE
     }
 
     // Update is called once per frame

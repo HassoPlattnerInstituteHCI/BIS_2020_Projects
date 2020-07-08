@@ -177,8 +177,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -193,7 +193,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 9eefa048885ad354cbf032ae5ee99494,
+  m_fontColorGradientPreset: {fileID: 11400000, guid: ea60332ac8e20734f82b9b20dfcdbbd1,
     type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -333,8 +333,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tetris PANTO Edition
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -349,7 +349,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 9eefa048885ad354cbf032ae5ee99494,
+  m_fontColorGradientPreset: {fileID: 11400000, guid: ea60332ac8e20734f82b9b20dfcdbbd1,
     type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -752,7 +752,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 588244006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec3d0e7265844894fbeba4ec17a458c1, type: 3}
+  m_Script: {fileID: 11500000, guid: e4d53f50cbb007646ba3a320d8b5c1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   QuitButton: {fileID: 433206937}
@@ -1076,8 +1076,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Puzzles
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1092,7 +1092,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 9eefa048885ad354cbf032ae5ee99494,
+  m_fontColorGradientPreset: {fileID: 11400000, guid: ea60332ac8e20734f82b9b20dfcdbbd1,
     type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -1232,8 +1232,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tutorial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1248,7 +1248,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 9eefa048885ad354cbf032ae5ee99494,
+  m_fontColorGradientPreset: {fileID: 11400000, guid: ea60332ac8e20734f82b9b20dfcdbbd1,
     type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -1600,8 +1600,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Endless
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1616,7 +1616,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 9eefa048885ad354cbf032ae5ee99494,
+  m_fontColorGradientPreset: {fileID: 11400000, guid: ea60332ac8e20734f82b9b20dfcdbbd1,
     type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -2609,8 +2609,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 9eefa048885ad354cbf032ae5ee99494,
-    type: 2}
+  m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0

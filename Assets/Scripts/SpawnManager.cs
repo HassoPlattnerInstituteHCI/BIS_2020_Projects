@@ -48,10 +48,6 @@ public class SpawnManager : MonoBehaviour
         }
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
         blockRight.name = "RightBlock";
-        for(int i=0; i<5; i++) {
-            blockLeft.transform.GetChild(i).transform.tag = "rowUndef";
-            blockRight.transform.GetChild(i).transform.tag = "rowUndef";
-        }
         Player.rightBlockRotaterPos = blockRight.transform.GetChild(0).transform.position;
         waveNumber++;
         spawnWavePls = false;
@@ -68,9 +64,6 @@ public class SpawnManager : MonoBehaviour
         blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3((float)1.5,0,0), transform.rotation);
         blockLeft.name = "LeftBlock";
         Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
-        for(int i=0; i<5; i++) {
-            blockLeft.transform.GetChild(i).transform.tag = "rowUndef";
-        }
         spawnIntroPls = false;
     }
 }

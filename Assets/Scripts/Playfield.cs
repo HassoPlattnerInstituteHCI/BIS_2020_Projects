@@ -11,11 +11,14 @@ public class Playfield : MonoBehaviour
     LowerHandle lowerHandle;
     public bool shouldFreeHandle;
 
+    static int offsetX = 2;
+    static int offsetZ = 14;
+
     public static int w = 10;
     public static int h = 18;
     private static bool[,] grid = new bool[w,h]; //is currently not used
     static GameObject allRowsParent = GameObject.Find("AllRows"); //Parent Object of all the Row-Objects that are used to track blocks positions
-
+    
     static int[] skylineHeights; //Each array space determines the height of the highest block in that column (in steps of 1, not .5)
 
     //Info on blocks in general: Every block is named after its exact position, e.g. "ArrayCR10" would be the block in the bottom row in the first column.
@@ -39,9 +42,9 @@ public class Playfield : MonoBehaviour
     public static void roundAndPlaceBlock(GameObject block) { 
         //Need to assert that the placement location is valid first!
         foreach(Transform child in block.transform) {
-            child.transform.position = new Vector3(Mathf.Round(child.transform.position.x*2f)/2f, 
+            child.transform.position = new Vector3((Mathf.Round(child.transform.position.x*2f)/2f), 
                                                                 Mathf.Round(child.transform.position.y*2f)/2f, 
-                                                                Mathf.Round(child.transform.position.z*2f)/2f);
+                                                                (Mathf.Round(child.transform.position.z*2f)/2f));
         }
 
     }
@@ -66,7 +69,7 @@ public class Playfield : MonoBehaviour
         //We have now filled the Array with the heights in each column. Time to make the Panto move
         await lowerHandle.MoveToPosition(new Vector3(-0.25f,0f,-0.25f), 0.1f, shouldFreeHandle); //Moves handle to lower left corner of the level
         for(int col=1; col<11; col++) { //Starting at 1 since skylineHeights[0] is our default value for the first subtraction below
-            await lowerHandle.MoveToPosition(lowerHandle.transform.position + new Vector3(0f,0f,1f*(skylineHeights[col]-skylineHeights[col-1])), 0.1f, shouldFreeHandle);
+            await lowerHandle.MoveToPosition(lowerHandle.transform.position + new Vector3(0f,0f,0.5f*(skylineHeights[col]-skylineHeights[col-1])), 0.1f, shouldFreeHandle);
             await lowerHandle.MoveToPosition(lowerHandle.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
         }
         await lowerHandle.MoveToPosition(new Vector3(4.75f,0f,-0.25f), 0.1f, shouldFreeHandle);
@@ -161,18 +164,15 @@ public class Playfield : MonoBehaviour
         rotater.transform.parent = null;
         Destroy(rotater); //Destroys Rotater
         for(int i=block.transform.childCount-1; i>=0; i--) {
-            xPosRelative = Mathf.Round(block.transform.GetChild(i).transform.position.x * 2f) / 2f;
-            zPosRelative = Mathf.Round(block.transform.GetChild(i).transform.position.z * 2f) / 2f;
-            column = (int)(2 * xPosRelative);
-            row = (int)(2 * zPosRelative);
+            xPosRelative = (Mathf.Round(block.transform.GetChild(i).transform.position.x * 2f) / 2f);
+            zPosRelative = (Mathf.Round(block.transform.GetChild(i).transform.position.z * 2f) / 2f);
+            column = (int)(2 * (xPosRelative+offsetX));
+            row = (int)(2 * (zPosRelative+offsetZ));
             updateTagName(column, row, block.transform.GetChild(i));
             block.transform.GetChild(i).gameObject.GetComponent<PantoBoxCollider>().CreateObstacle();
             block.transform.GetChild(i).gameObject.GetComponent<PantoBoxCollider>().Enable();
             parentRow = GameObject.Find("Row"+row);
-            block.transform.GetChild(i).transform.SetParent(parentRow.transform);
-            //block.transform.GetChild(i).AddComponent<PantoBoxCollider>();
-            //block.transform.GetChild(i).GetComponent<PantoBoxCollider>().CreateObstacle();
-            
+            block.transform.GetChild(i).transform.SetParent(parentRow.transform);            
         }
         Destroy(block);
     }
@@ -188,10 +188,10 @@ public class Playfield : MonoBehaviour
         foreach(Transform child in block.transform) {
             if(child.name!="Rotater") {
                 //Put the whole function into placeBlock and reuse PosRelative?
-                xPosRelative = Mathf.Round(child.transform.position.x*2f)/2f;
-                zPosRelative = Mathf.Round(child.transform.position.z*2f)/2f;
-                column=(int)(2*xPosRelative);
-                row=(int)(2*zPosRelative);
+                xPosRelative = (Mathf.Round(child.transform.position.x*2f)/2f);
+                zPosRelative = (Mathf.Round(child.transform.position.z*2f)/2f);
+                column=(int)(2*(xPosRelative+offsetX));
+                row=(int)(2*(zPosRelative+offsetZ));
                 if(checkPosition(column, row)) {
                 //if(grid[column, row]==true)
                     Debug.Log("Invalid Placement: Position already occupied");

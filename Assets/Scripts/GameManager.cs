@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         //yes there propably is a better way to do this
         //Idea: Using the grid, for each column find the highest positioned block. Move there, then .5 to the right, find the next one in relative position to current
         //->this will however ignore "holes" in the skyline
-        Playfield.traceSkyline();
+        //Playfield.traceSkyline();
         /*
         await lowerHandle.MoveToPosition(new Vector3(0f,0f,2f), 0.1f, shouldFreeHandle);
         await lowerHandle.MoveToPosition(new Vector3(0.5f, 0f, 2f), 0.1f, shouldFreeHandle);
