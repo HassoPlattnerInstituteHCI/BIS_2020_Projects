@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     private int leftBlock;
     private int rightBlock;
     public static bool spawnIntroPls = false;
-    public static int introCounter;
+    public static int introCounter = 0;
     public static bool spawnWavePls = false;
     public static int waveNumber = 0;
     public static GameObject blockLeft;
@@ -64,6 +64,7 @@ public class SpawnManager : MonoBehaviour
         blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3((float)1.5,0,0), transform.rotation);
         blockLeft.name = "LeftBlock";
         Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
+        //introCounter++;
         spawnIntroPls = false;
     }
 }
