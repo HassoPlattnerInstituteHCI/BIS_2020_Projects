@@ -13,6 +13,8 @@ public class BatLogic : MonoBehaviour
     GameObject bat;
     GameObject player;
 
+    private PlayerSoundEffect playerSounds;
+
 
 
     AudioSource audioSource;
@@ -28,6 +30,8 @@ public class BatLogic : MonoBehaviour
 
         bat = GameObject.Find("Bat");
 
+        player = GameObject.Find("Player");
+        playerSounds = player.GetComponent<PlayerSoundEffect>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -36,7 +40,7 @@ public class BatLogic : MonoBehaviour
 
     void Update()
     {
-        player = GameObject.Find("Player");
+        
         //transform.position = player.transform.position;
         // Simply connects the bat to the lower handles position
 
@@ -68,6 +72,7 @@ public class BatLogic : MonoBehaviour
     {   
         if(collider1.CompareTag("dangerous")){           
 
+            playerSounds.playObjectHitByBat();
             
         }
         
