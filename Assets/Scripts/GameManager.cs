@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     async Task StartLevel1()
     {
 
-        await speechOut.Speak("Pick up the phone");        
+        await speechOut.Speak("Pick up the phone");      
 
         bat.SetActive(true);
 
@@ -118,9 +118,15 @@ public class GameManager : MonoBehaviour
 
     public async Task StartLevel2(){
         phoneBox = GameObject.Find("TelephoneBox2");
+
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
 
         telephoneSounds.startPhoneRing();
+
+    }
+
+    public async Task StartLevel3(){
+        
 
     }
 
