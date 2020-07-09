@@ -66,8 +66,13 @@ namespace dualLayouting {
         }
         async public Task StartLevelThree()
         {
-            await audioManager.Say("Instead of the otter, let's add a picture of clouds. Say \"Create clouds\".");
+            await audioManager.Say("Instead of the pizza, let's insert something fun. How about a clipart of colorful baloons or a bottle of champagne? Say \"Add ballons\" or \"Add champagne\"");
         }
+        async public Task StartLevelFour()
+        {
+            await audioManager.Say("Instead of the pizza, let's insert something fun. How about a clipart of colorful baloons or a bottle of champagne? Say \"Add ballons\" or \"Add champagne\"");
+        }
+
         async private Task StartNextLevel()
         {
             Func<Task>[] startLevels = new Func<Task>[] {StartLevelZero, StartLevelOne, StartLevelTwo, StartLevelThree};
