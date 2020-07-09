@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Threading.Tasks;
 using SpeechIO;
 using System;
+using DualPantoFramework;
+
 namespace dualLayouting {
     public class AppManager : MonoBehaviour
     {
