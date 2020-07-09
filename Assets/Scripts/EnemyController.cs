@@ -1,4 +1,5 @@
-﻿using SpeechIO;
+﻿
+using SpeechIO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace Stealth
     {
         // Start is called before the first frame update
         public float speed = 1.0f;
+        public float health = 100.0f;
+        public float HitPower = 10.0f;
         // The enemy will patrol between these points;
         public Vector3[] path;
         public float SpotRadius = 4.0f;
@@ -20,6 +23,7 @@ namespace Stealth
         private bool spotted = false;
         SpeechOut speechOut;
         public AudioSource failureAudioSource;
+        public AudioSource death;
         public bool canSpot = false;
 
         void Start()
@@ -62,13 +66,42 @@ namespace Stealth
         async Task PlayerSpotted()
         {
             failureAudioSource.Play();
-            await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
+            if(SceneManager.GetActiveScene().name!="Level 5") await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
             Debug.Log("Making a call");
             
             LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
 
-            await script.ResetGame();
-            spotted = false;
+            if (SceneManager.GetActiveScene().name != "Level 5") {
+                await script.ResetGame();
+                spotted = false;
+
+            } else
+            {
+                Debug.Log("ACTIVATE SWORD");
+                player.transform.GetChild(0).gameObject.SetActive(true);
+            }
+           
+        }
+        public void TakeHit()
+        {
+            if (health > 0)
+            {
+                health = health - HitPower;
+                Debug.Log("helath is " + health);
+            }
+            if (health == 0)
+            {
+                EnemyDeath();
+            }
+            
+        }
+        async Task EnemyDeath()
+        {
+            Debug.Log("death");
+            GameObject.Find("Sword").SetActive(false);
+            death.Play();
+            await speechOut.Speak(gameObject.name + " has died");
+            gameObject.SetActive(false);
         }
     }
 }

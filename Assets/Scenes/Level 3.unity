@@ -1069,7 +1069,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 17.196667
+  orthographic size: 7.5706215
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1297,6 +1297,7 @@ MonoBehaviour:
   - {fileID: 1145393521}
   - {fileID: 1272860244}
   currentEnemy: {fileID: 0}
+  EnemyIndex: 0
   playerSpawn: {fileID: 743777051}
   enemySpawns:
   - {fileID: 1012411828}
@@ -1442,7 +1443,7 @@ PrefabInstance:
     - target: {fileID: 1401097167766281578, guid: aa66c6c6edf82d64bb33c27f2d07653a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1401097167766281581, guid: aa66c6c6edf82d64bb33c27f2d07653a,
         type: 3}
@@ -1634,6 +1635,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: treasure
       objectReference: {fileID: 0}
+    - target: {fileID: 6190580198449619682, guid: f4834d46235d17d489e6b274265d153b,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6190580198449619686, guid: f4834d46235d17d489e6b274265d153b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1694,5 +1700,27 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1237496910}
+    - target: {fileID: 6190580198449619685, guid: f4834d46235d17d489e6b274265d153b,
+        type: 3}
+      propertyPath: successAudioSource
+      value: 
+      objectReference: {fileID: 6190580198203040172}
+    - target: {fileID: 6190580198449619685, guid: f4834d46235d17d489e6b274265d153b,
+        type: 3}
+      propertyPath: tickingAudioSource
+      value: 
+      objectReference: {fileID: 6190580198203040173}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4834d46235d17d489e6b274265d153b, type: 3}
+--- !u!82 &6190580198203040172 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8810289403529288099, guid: f4834d46235d17d489e6b274265d153b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6190580198203040171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6190580198203040173 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6190580198449619682, guid: f4834d46235d17d489e6b274265d153b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6190580198203040171}
+  m_PrefabAsset: {fileID: 0}

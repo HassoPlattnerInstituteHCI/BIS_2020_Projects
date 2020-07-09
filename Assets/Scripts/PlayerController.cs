@@ -12,6 +12,7 @@ namespace Stealth
         private Rigidbody playerRb;
         public float speed = 1.0f;
         private PantoHandle upperHandle;
+        public GameObject sword;
 
         // Start is called before the first frame update
         void Start()
@@ -21,10 +22,16 @@ namespace Stealth
 
         }
 
+        public void StartFighting()
+        {
+            sword.GetComponent<Collider>().enabled = true;
+        }
+
         // Update is called once per frame
         void Update()
         { 
             transform.position = upperHandle.HandlePosition(transform.position);
+            transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
         }
 
         private void FixedUpdate()

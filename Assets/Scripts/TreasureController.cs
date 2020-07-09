@@ -59,7 +59,19 @@ namespace Stealth
                 LevelManager2 script = GameObject.Find("Panto").GetComponent<LevelManager2>();
                 await script.Success();
             }
-            else if (SceneManager.GetActiveScene().name == "Level 1")
+            else if (SceneManager.GetActiveScene().name == "Level 3")
+            {
+                await speechOut.Speak("congratulations. You completed the game.");
+                await speechOut.Speak("Thanks for playing DuelPanto.");
+                Application.Quit();
+            }
+            else if (SceneManager.GetActiveScene().name == "Level 4")
+            {
+                await speechOut.Speak("congratulations. You completed the game.");
+                await speechOut.Speak("Thanks for playing DuelPanto.");
+                Application.Quit();
+            }
+            else if (SceneManager.GetActiveScene().name == "Level 5")
             {
                 await speechOut.Speak("congratulations. You completed the game.");
                 await speechOut.Speak("Thanks for playing DuelPanto.");
