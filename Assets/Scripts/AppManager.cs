@@ -26,7 +26,7 @@ namespace dualLayouting {
         {
             currLevel = 0;
             audioManager = GetComponent<AudioManager>();
-            audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete, OnList, OnShow, OnDone);
+            audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete, OnList, OnShow, OnDone, OnDeleteAll);
 
             isMoving = false;
             upperHandle = GetComponent<UpperHandle>();
@@ -34,6 +34,17 @@ namespace dualLayouting {
             selectedElement = null;
 
             await StartNextLevel();
+            UpdateCommandsElements();
+        }
+        private void OnDeleteAll()
+        {
+            GameObject container = GameObject.Find("Elements");
+
+            foreach (Transform child in container.transform)
+            {
+                GameObject childo = child.gameObject;
+                childo.GetComponent<ElementScript>().Delete();
+            }
             UpdateCommandsElements();
         }
 
@@ -74,7 +85,7 @@ namespace dualLayouting {
         }
         async public Task StartLevelFive()
         {
-            await audioManager.Say("Now position the baloons next to the text. If you do not remember it's position just say \"Show Happy Birthday\".");
+            await audioManager.Say("Great job! Feel free to continue or start over with a new kick-ass design! Say \"Delete all\" to get a clear page.");
         }
 
         async private Task StartNextLevel()

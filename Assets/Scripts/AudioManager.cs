@@ -18,6 +18,7 @@ namespace dualLayouting {
         Action<string> onShow;
         private Action onList;
         private Action onDone;
+        private Action onDeleteAll;
         private GameObject[] elements;
         private static List<string> supportedElements = new List<string> {
             "Tree",
@@ -47,7 +48,8 @@ namespace dualLayouting {
                                  Action<string> deleteCallback,
                                  Action listCallback,
                                  Action<string> showCallback,
-                                 Action doneCallback)
+                                 Action doneCallback,
+                                 Action deleteAllCallback)
         {
             onSelect = selectCallback;
             onCreate = createCallback;
@@ -55,6 +57,7 @@ namespace dualLayouting {
             onList = listCallback;
             onShow = showCallback;
             onDone = doneCallback;
+            onDeleteAll = deleteAllCallback;
         }
 
         async public void UpdateCommands(GameObject[] elements)
@@ -73,6 +76,7 @@ namespace dualLayouting {
             // permanent commands
             newCommands.Add("List Elements");
             newCommands.Add("Done");
+            newCommands.Add("Delete all");
 
             foreach (string element in supportedElements)
             {
@@ -84,11 +88,19 @@ namespace dualLayouting {
 
         private void OnRecognize(string command){
             Debug.Log(command);
+
+            if (command == "Delete all")
+            {
+                onDeleteAll();
+                return;
+            }
+
             if (command == "Done")
             {
                 onDone();
                 return;
             }
+
             if (command == "List Elements")
             {
                 onList();
