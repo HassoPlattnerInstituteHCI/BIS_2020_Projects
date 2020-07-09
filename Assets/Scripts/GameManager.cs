@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         /*GameObject.Find("EmberWorkingArea").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("DoerteWorkingArea").GetComponent<MeshRenderer>().enabled = false;
         GameObject.Find("group_0_15277357").GetComponent<MeshCollider>().enabled = false;*/
+        GameObject.Find("Map").GetComponent<MeshRenderer>().enabled = false;
 
         Introduction();
     }
@@ -132,7 +133,7 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("Spawning enemy");
         enemy.transform.position = enemySpawn.position;
         enemy.transform.rotation = enemySpawn.rotation;
-        if(level != 2)
+        if(level < 2)
         {
             await lowerHandle.SwitchTo(enemy, 0.3f);
         }
@@ -148,7 +149,7 @@ public class GameManager : MonoBehaviour
         {
             upperHandle.Free();
         }
-        if (level == 4)
+        if (level <= 4)
         {
             GetComponent<Levels>().GunListener(speechIn);
         }

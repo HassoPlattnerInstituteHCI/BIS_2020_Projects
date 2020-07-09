@@ -9,8 +9,9 @@ public class Shooting : MonoBehaviour
     public int damage = 10;
     public float cooldown = 0.5f;
     public float startWidth = 0.1f;
+    public float endWidth = 0.1f;
     public bool isUpper = true;
-    private bool spotted = false;
+    public bool spotted = false;
     public AudioClip defaultClip;
     public AudioClip wallClip;
     public AudioClip hitClip;
@@ -82,22 +83,24 @@ public class Shooting : MonoBehaviour
             if (Physics.Raycast(transform.position, enemyDirection, out hit, maxRayDistance, hitLayers))
             {
                 GameObject panto = GameObject.Find("Panto");
-                if (panto.GetComponent<GameManager>().level == 2 && !spotted && this.name == "Player")
-                {
-                    spotted = true;
-                    GameObject e = hit.transform.gameObject;
-                    PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
-                    await lowerHandle.SwitchTo(e,0.2f);
 
-                }
                 lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point });
                 lineRenderer.material.color = Color.red;
                 lineRenderer.startWidth = startWidth;
+                lineRenderer.endWidth = endWidth;
 
                 Health enemy = hit.transform.GetComponent<Health>();
 
                 if (enemy)
                 {
+                    if (panto.GetComponent<GameManager>().level >= 2 && !spotted && CompareTag("Player"))
+                    {
+                        spotted = true;
+                        GameObject e = hit.transform.gameObject;
+                        PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
+                        await lowerHandle.SwitchTo(e, 0.2f);
+                    }
+
                     if (timestamp <= Time.time)
                     {
                         enemy.TakeDamage(damage, gameObject);
@@ -117,23 +120,23 @@ public class Shooting : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance, hitLayers))
             {
                 GameObject panto = GameObject.Find("Panto");
-                if (panto.GetComponent<GameManager>().level == 2 && !spotted && this.name == "Player")
-                {
-                    spotted = true;
-                    GameObject e = hit.transform.gameObject;
-                    PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
-                    await lowerHandle.SwitchTo(e, 0.2f);
-
-                }
                 lineRenderer.SetPositions(new Vector3[] { transform.position,
                     hit.point });
                 lineRenderer.material.color = Color.red;
                 lineRenderer.startWidth = startWidth;
+                lineRenderer.endWidth = endWidth;
 
                 Health enemy = hit.transform.GetComponent<Health>();
 
                 if (enemy)
                 {
+                    if (panto.GetComponent<GameManager>().level >= 2 && !spotted && CompareTag("Player"))
+                    {
+                        spotted = true;
+                        GameObject e = hit.transform.gameObject;
+                        PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
+                        await lowerHandle.SwitchTo(e, 0.2f);
+                    }
                     if (timestamp <= Time.time)
                     {
                         enemy.TakeDamage(damage, gameObject);
@@ -153,6 +156,7 @@ public class Shooting : MonoBehaviour
                     transform.position + transform.forward * maxRayDistance });
                 lineRenderer.material.color = Color.red;
                 lineRenderer.startWidth = startWidth;
+                lineRenderer.endWidth = endWidth;
                 currentClip = defaultClip;
             }
             
@@ -172,7 +176,7 @@ public class Shooting : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance, hitLayers))
         {
             GameObject panto = GameObject.Find("Panto");
-            if (panto.GetComponent<GameManager>().level == 2 && !spotted && this.name == "Player")
+            if (panto.GetComponent<GameManager>().level == 2 && !spotted && CompareTag("Player"))
             {
                 spotted = true;
                 GameObject e = hit.transform.gameObject;

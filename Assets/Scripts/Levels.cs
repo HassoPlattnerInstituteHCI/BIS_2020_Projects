@@ -16,6 +16,7 @@ public class Levels : MonoBehaviour
     public GameObject enemy;
     public GameObject[] obstacles;
     public GameObject powerUp;
+    Shooting shooting;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class Levels : MonoBehaviour
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
         gm = GetComponent<GameManager>();
+        shooting = gm.player.GetComponent<Shooting>();
     }
 
     // Update is called once per frame
@@ -80,40 +82,37 @@ public class Levels : MonoBehaviour
                 break;
             //Level 4
             case 3:
+                shooting.spotted = false;
 
-                
-                foreach(GameObject obst in obstacles)
-                {
-                    obst.SetActive(true);
-                    await IntroduceObject(obst.GetComponent<ObjectOfInterest>());
-                }
-                powerUp.SetActive(true);
-                await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
-
-                await upperHandle.SwitchTo(playerHelper, 0.2f);
-                await speechOut.Speak("The enemy dropped an item behind a wall, move around...");
-                await MoveX(playerHelper);
-                await speechOut.Speak("...and watch out...");
-                await RotateX(playerHelper);
-                await speechOut.Speak("to find the wall and the item. I will tell you when you look at them.");
-                break;
-            //level 5
-            case 4:
                 foreach (GameObject obst in obstacles)
                 {
                     obst.SetActive(true);
                     await IntroduceObject(obst.GetComponent<ObjectOfInterest>());
                 }
+
                 powerUp.SetActive(true);
                 await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
-
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
                 await speechOut.Speak("The enemy dropped an item behind a wall, move around...");
                 await MoveX(playerHelper);
                 await speechOut.Speak("...and watch out...");
                 await RotateX(playerHelper);
-                await speechOut.Speak("to find the wall and the item. I will tell you when you look at them.");
-                await speechOut.Speak("You can switch your weapon, by saying weapon one (one is your sniper), weapon two (two is your MG) or weapon three (three is your pumpgun)");
+                await speechOut.Speak("for the wall and the item. I will tell you when you found it.");
+                break;
+            //level 5
+            case 4:
+                shooting.spotted = false;
+
+                foreach (GameObject obst in obstacles)
+                {
+                    //obst.SetActive(true);
+                    await IntroduceObject(obst.GetComponent<ObjectOfInterest>());
+                }
+                //powerUp.SetActive(true);
+                await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
+
+                await upperHandle.SwitchTo(playerHelper, 0.2f);
+                await speechOut.Speak("This time you can switch your weapon, by saying weapon one (one is your sniper), weapon two (two is your MG) or weapon three (three is your pumpgun)");
                 break;
 
             default: break;
@@ -213,27 +212,30 @@ public class Levels : MonoBehaviour
         switch (input)
         {
             case "weapon one": //sniper/normal
-                gm.player.GetComponent<Shooting>().fireSpreadAngle = 1f;
-                gm.player.GetComponent<Shooting>().damage = 10;
-                gm.player.GetComponent<Shooting>().maxRayDistance = 20f;
-                gm.player.GetComponent<Shooting>().cooldown = 0.5f;
-                gm.player.GetComponent<Shooting>().startWidth = 0.1f;
+                shooting.fireSpreadAngle = 1f;
+                shooting.damage = 10;
+                shooting.maxRayDistance = 20f;
+                shooting.cooldown = 0.5f;
+                shooting.startWidth = 0.1f;
+                shooting.endWidth = 0.1f;
                 await speechOut.Speak("weapon one");
                 break;
             case "weapon two": //MG
-                gm.player.GetComponent<Shooting>().fireSpreadAngle = 5f;
-                gm.player.GetComponent<Shooting>().damage = 2;
-                gm.player.GetComponent<Shooting>().maxRayDistance = 10f;
-                gm.player.GetComponent<Shooting>().cooldown = 0.1f;
-                gm.player.GetComponent<Shooting>().startWidth = 0.5f;
+                shooting.fireSpreadAngle = 5f;
+                shooting.damage = 2;
+                shooting.maxRayDistance = 10f;
+                shooting.cooldown = 0.1f;
+                shooting.startWidth = 0.5f;
+                shooting.endWidth = 0.5f;
                 await speechOut.Speak("weapon two");
                 break;
             case "weapon three": //pump
-                gm.player.GetComponent<Shooting>().fireSpreadAngle = 20f;
-                gm.player.GetComponent<Shooting>().damage = 40;
-                gm.player.GetComponent<Shooting>().maxRayDistance = 4f;
-                gm.player.GetComponent<Shooting>().cooldown = 1f;
-                gm.player.GetComponent<Shooting>().startWidth = 2f;
+                shooting.fireSpreadAngle = 20f;
+                shooting.damage = 40;
+                shooting.maxRayDistance = 4f;
+                shooting.cooldown = 1f;
+                shooting.startWidth = 0.1f;
+                shooting.endWidth = 2f;
                 await speechOut.Speak("weapon three");
                 break;
             default: break;
