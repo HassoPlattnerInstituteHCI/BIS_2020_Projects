@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Stealth
 {
-    public class LevelManager3 : LevelManager
+    public class LevelManager4 : LevelManager
     {
         /// <summary>
         /// Starts a new round.
@@ -18,7 +18,7 @@ namespace Stealth
             DeactivateGameObjects();
             await SpawnPlayer();
             await SpawnEnemies();
-            await speechOut.Speak("Now there are two enemies. Say Switch to switch between enemies.");
+            await speechOut.Speak("This level is more complicated than the first three, but there is nothing you haven't encountered yet. You can do it.");
             upperHandle.Free();
             ActivateGameObjects(); 
             ListenToSwitch();
@@ -26,7 +26,7 @@ namespace Stealth
 
         override async public Task Success()
         {
-            SceneManager.LoadScene(sceneName: "Level 4");
+            await speechOut.Speak("Congratutations. You finished level 4! That's the end of the game for now. Thanks for playing Stealth Panto.");
         }
     }
 }

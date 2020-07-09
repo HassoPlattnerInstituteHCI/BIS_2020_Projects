@@ -64,24 +64,11 @@ namespace Stealth
             failureAudioSource.Play();
             await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
             Debug.Log("Making a call");
-            if (SceneManager.GetActiveScene().name == "Level 2")
-            {
-                LevelManager2 script = GameObject.Find("Panto").GetComponent<LevelManager2>();
-                await script.ResetGame();
-                spotted = false;
-            }
-            else if (SceneManager.GetActiveScene().name == "Level 3")
-            {
-                LevelManager3 script = GameObject.Find("Panto").GetComponent<LevelManager3>();
-                await script.ResetGame();
-                spotted = false;
-            } else if (SceneManager.GetActiveScene().name == "Level 1")
-            {
-                LevelManager1 script = GameObject.Find("Panto").GetComponent<LevelManager1>();
-                await script.ResetGame();
-                spotted = false;
-            }
             
+            LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
+
+            await script.ResetGame();
+            spotted = false;
         }
     }
 }
