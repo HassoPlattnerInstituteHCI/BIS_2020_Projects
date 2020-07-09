@@ -8,6 +8,7 @@ TagManager:
   - dangerous
   - TelephoneBox2
   - safehouse
+  - AHole
   layers:
   - Default
   - TransparentFX
