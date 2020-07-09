@@ -62,7 +62,7 @@ namespace dualLayouting {
         }
         async public Task StartLevelTwo()
         {
-            await audioManager.Say("You can delete elements. Say \"Delete Otter\".");
+            await audioManager.Say("A pizza doesn't seem to be appropriate on a birthday card, right? To delete it, say \"Delete Pizza\".");
         }
         async public Task StartLevelThree()
         {
