@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Stealth
 {
-    public class LevelManager : MonoBehaviour
+    public abstract class LevelManager : MonoBehaviour
     {
         public float spawnSpeed = 1f;
         public bool introduceLevel = true;
@@ -44,7 +44,7 @@ namespace Stealth
 
         async void Introduction()
         {
-            await speechOut.Speak("Welcome to Quake Panto Edition");
+            await speechOut.Speak("Welcome to Stealth Panto");
             // TODO: 1. Introduce obstacles in level 2 (aka 1)
             await Task.Delay(1000);
             RegisterColliders();
@@ -90,11 +90,7 @@ namespace Stealth
         /// Starts a new round.
         /// </summary>
         /// <returns></returns>
-        public async Task ResetGame()
-        {
-            Debug.Log("Fail");
-            //await speechOut.Speak("Fail");
-        }
+        abstract public Task ResetGame();
 
         async void onRecognized(string message)
         {
@@ -106,9 +102,5 @@ namespace Stealth
             speechOut.Stop(); //Windows: do not remove this line.
             speechIn.StopListening(); // [macOS] do not delete this line!
         }
-
-
-
-
     }
 }

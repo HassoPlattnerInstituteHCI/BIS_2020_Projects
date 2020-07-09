@@ -118,7 +118,7 @@ namespace Stealth
         /// Starts a new round.
         /// </summary>
         /// <returns></returns>
-        public async Task ResetGame()
+        override public async Task ResetGame()
         {
             player.SetActive(false);
             foreach (GameObject en in enemies)
