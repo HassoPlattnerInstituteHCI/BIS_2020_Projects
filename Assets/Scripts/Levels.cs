@@ -97,6 +97,10 @@ public class Levels : MonoBehaviour
                 await RotateX(playerHelper);
                 await speechOut.Speak("to find the wall and the item. I will tell you when you look at them.");
                 break;
+            //level 5
+            case 4:
+                await speechOut.Speak("Level 5 du kek");
+                break;
 
             default: break;
         }
@@ -186,5 +190,42 @@ public class Levels : MonoBehaviour
             obj.transform.Rotate(0, -1f, 0);
             await Task.Delay(10);
         }
+    }
+
+    async public void GunListener(SpeechIn speechIn)
+    {
+        await speechOut.Speak("I am da du kek");
+        Dictionary<string, KeyCode> command = GetComponent<GameManager>().commands;
+        string input = await speechIn.Listen(command);
+        switch (input)
+        {
+            case "weapon one": //sniper/normal
+                gm.player.GetComponent<Shooting>().fireSpreadAngle = 1f;
+                gm.player.GetComponent<Shooting>().damage = 10;
+                gm.player.GetComponent<Shooting>().maxRayDistance = 20f;
+                gm.player.GetComponent<Shooting>().cooldown = 0.5f;
+                gm.player.GetComponent<Shooting>().startWidth = 0.1f;
+                await speechOut.Speak("weapon one");
+                break;
+            case "weapon two": //MG
+                gm.player.GetComponent<Shooting>().fireSpreadAngle = 5f;
+                gm.player.GetComponent<Shooting>().damage = 2;
+                gm.player.GetComponent<Shooting>().maxRayDistance = 10f;
+                gm.player.GetComponent<Shooting>().cooldown = 0.1f;
+                gm.player.GetComponent<Shooting>().startWidth = 0.5f;
+                await speechOut.Speak("weapon two");
+                break;
+            case "weapon three": //pump
+                gm.player.GetComponent<Shooting>().fireSpreadAngle = 20f;
+                gm.player.GetComponent<Shooting>().damage = 40;
+                gm.player.GetComponent<Shooting>().maxRayDistance = 4f;
+                gm.player.GetComponent<Shooting>().cooldown = 1f;
+                gm.player.GetComponent<Shooting>().startWidth = 2f;
+                await speechOut.Speak("weapon three");
+                break;
+            default: break;
+        }
+        //Put in switching sound
+        GunListener(speechIn);
     }
 }

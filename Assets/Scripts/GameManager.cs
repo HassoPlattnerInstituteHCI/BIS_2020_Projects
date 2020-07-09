@@ -27,10 +27,13 @@ public class GameManager : MonoBehaviour
     int gameScore = 0;
     float totalTime = 0;
     float levelStartTime = 0;
-    Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
+    public Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
         { "yes", KeyCode.Y },
         { "no", KeyCode.N },
-        { "done", KeyCode.D }
+        { "done", KeyCode.D },
+        { "weapon one", KeyCode.Alpha1 },
+        { "weapon two", KeyCode.Alpha2 },
+        { "weapon three", KeyCode.Alpha3 }
     };
 
     void Awake()
@@ -144,6 +147,10 @@ public class GameManager : MonoBehaviour
         else
         {
             upperHandle.Free();
+        }
+        if (level == 4)
+        {
+            GetComponent<Levels>().GunListener(speechIn);
         }
 
         player.SetActive(true);

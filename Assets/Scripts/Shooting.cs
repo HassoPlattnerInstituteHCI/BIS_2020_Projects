@@ -8,6 +8,7 @@ public class Shooting : MonoBehaviour
     // TODO: 6. A clever way of keeping track of hits might be to make the damage/second dependent on how precisely you hit the opponent, rather than having a step function hit/no hit.
     public int damage = 10;
     public float cooldown = 0.5f;
+    public float startWidth = 0.1f;
     public bool isUpper = true;
     private bool spotted = false;
     public AudioClip defaultClip;
@@ -91,7 +92,7 @@ public class Shooting : MonoBehaviour
                 }
                 lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point });
                 lineRenderer.material.color = Color.red;
-                lineRenderer.startWidth = 0.1f;
+                lineRenderer.startWidth = startWidth;
 
                 Health enemy = hit.transform.GetComponent<Health>();
 
@@ -127,7 +128,7 @@ public class Shooting : MonoBehaviour
                 lineRenderer.SetPositions(new Vector3[] { transform.position,
                     hit.point });
                 lineRenderer.material.color = Color.red;
-                lineRenderer.startWidth = 0.1f;
+                lineRenderer.startWidth = startWidth;
 
                 Health enemy = hit.transform.GetComponent<Health>();
 
@@ -151,7 +152,7 @@ public class Shooting : MonoBehaviour
                 lineRenderer.SetPositions(new Vector3[] { transform.position,
                     transform.position + transform.forward * maxRayDistance });
                 lineRenderer.material.color = Color.red;
-                lineRenderer.startWidth = 0.1f;
+                lineRenderer.startWidth = startWidth;
                 currentClip = defaultClip;
             }
             
@@ -181,7 +182,7 @@ public class Shooting : MonoBehaviour
             }
             lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point });
             lineRenderer.material.color = Color.red;
-            lineRenderer.startWidth = 0.1f;
+            lineRenderer.startWidth = startWidth;
 
             Health enemy = hit.transform.GetComponent<Health>();
 
@@ -198,7 +199,7 @@ public class Shooting : MonoBehaviour
             lineRenderer.SetPositions(new Vector3[] { transform.position,
                 transform.position + transform.forward * maxRayDistance });
             lineRenderer.material.color = Color.red;
-            lineRenderer.startWidth = 0.1f;
+            lineRenderer.startWidth = startWidth;
             currentClip = defaultClip;
         }
     }
