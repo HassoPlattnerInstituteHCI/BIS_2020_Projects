@@ -80,6 +80,9 @@ public class PlayerLogic : MonoBehaviour
         if(gameManager.currentLevel==3){
             if(collider1.CompareTag("safehouse")){
                 playerSounds.StopPolicePlayback();
+                telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
+                telephoneSounds.StopPlayback();
+                telephoneSounds.startPhoneTalks();
 
             }
         }

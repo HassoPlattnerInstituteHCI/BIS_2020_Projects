@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 ////TODO Level 4
-//1. Let Danny Erzählen
+//1. DONE Let Danny Erzählen
 //2. Let Passanten spawnen (Random position)
 //3. Let Passanten quasseln
 //4. Wenn Passant hit by bat -> Passant active = false
@@ -121,6 +121,15 @@ public class GameManager : MonoBehaviour
         player = GameObject.Find("Player");
         playerSounds = player.GetComponent<PlayerSoundEffect>();
         playerSounds.startSirens();
+
+    }
+
+    public async Task StartLevel4(){
+        currentLevel = 4;
+
+        GameObject safeHouse = GameObject.Find("SafeHouse");
+        playerSpawn.position = safeHouse.transform.position;
+
 
     }
 
