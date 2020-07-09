@@ -99,7 +99,21 @@ public class Levels : MonoBehaviour
                 break;
             //level 5
             case 4:
-                await speechOut.Speak("Level 5 du kek");
+                foreach (GameObject obst in obstacles)
+                {
+                    obst.SetActive(true);
+                    await IntroduceObject(obst.GetComponent<ObjectOfInterest>());
+                }
+                powerUp.SetActive(true);
+                await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
+
+                await upperHandle.SwitchTo(playerHelper, 0.2f);
+                await speechOut.Speak("The enemy dropped an item behind a wall, move around...");
+                await MoveX(playerHelper);
+                await speechOut.Speak("...and watch out...");
+                await RotateX(playerHelper);
+                await speechOut.Speak("to find the wall and the item. I will tell you when you look at them.");
+                await speechOut.Speak("You can switch your weapon, by saying weapon one (one is your sniper), weapon two (two is your MG) or weapon three (three is your pumpgun)");
                 break;
 
             default: break;
@@ -194,7 +208,6 @@ public class Levels : MonoBehaviour
 
     async public void GunListener(SpeechIn speechIn)
     {
-        await speechOut.Speak("I am da du kek");
         Dictionary<string, KeyCode> command = GetComponent<GameManager>().commands;
         string input = await speechIn.Listen(command);
         switch (input)
