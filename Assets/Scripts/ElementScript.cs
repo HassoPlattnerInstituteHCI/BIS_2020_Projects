@@ -10,6 +10,9 @@ namespace dualLayouting
     {
         public AudioClip creationSound;
         public AudioClip deletionSound;
+        
+        // TODO
+        public string description;
 
         private AudioSource audioSource;
 

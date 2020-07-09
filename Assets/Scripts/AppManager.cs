@@ -44,14 +44,15 @@ namespace dualLayouting {
         async public Task StartLevelZero()
         {
             Level level = GetComponent<Level>();
+            await audioManager.Say("Welcome to Dual Layouting. Let's design a birthday card.");
             await level.PlayIntroduction();
 
             await Task.WhenAll(new Task[] {
-                MoveItToElement(GameObject.Find("Sun")),
-                audioManager.Say("Here is a graphic of a sun.")
+                MoveItToElement(GameObject.Find("Happy Birthday")),
+                audioManager.Say("Here is a text reading \"Happy Birthday\".")
             });
-            await audioManager.Say("Say \"Select sun\". Then try to move it to the upper right corner.");
-            await audioManager.Say("Say \"Done\" to continue.");
+            await audioManager.Say("Say \"Select Happy Birthday\". Then try to move it to the center of the page.");
+            await audioManager.Say("Say \"Done\" when you are ready for the next step.");
 
         }
         async public Task StartLevelOne()

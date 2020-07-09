@@ -448,7 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traceShape: 1
   isOnUpper: 0
-  description: These are the borders of your document.
+  description: This is your page.
   priority: 0
 --- !u!1001 &526162485
 PrefabInstance:
@@ -702,7 +702,7 @@ PrefabInstance:
     - target: {fileID: 1134054059876488084, guid: 29e46590fe07419498a306494b64e050,
         type: 3}
       propertyPath: m_Name
-      value: Otter
+      value: Pizza
       objectReference: {fileID: 0}
     - target: {fileID: 1134054059876488085, guid: 29e46590fe07419498a306494b64e050,
         type: 3}
@@ -1078,7 +1078,7 @@ PrefabInstance:
     - target: {fileID: 1134054059876488084, guid: 29e46590fe07419498a306494b64e050,
         type: 3}
       propertyPath: m_Name
-      value: Sun
+      value: Happy Birthday
       objectReference: {fileID: 0}
     - target: {fileID: 1134054059876488085, guid: 29e46590fe07419498a306494b64e050,
         type: 3}
@@ -1135,10 +1135,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9200576996189624786, guid: 29e46590fe07419498a306494b64e050,
+        type: 3}
+      propertyPath: m_Text
+      value: Element
+      objectReference: {fileID: 0}
     - target: {fileID: 4068519345987674049, guid: 29e46590fe07419498a306494b64e050,
         type: 3}
       propertyPath: description
-      value: Sun
+      value: A text reading Happy Birthday
       objectReference: {fileID: 0}
     - target: {fileID: 4298555987000511475, guid: 29e46590fe07419498a306494b64e050,
         type: 3}
@@ -1149,11 +1154,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9200576996189624786, guid: 29e46590fe07419498a306494b64e050,
-        type: 3}
-      propertyPath: m_Text
-      value: Element
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29e46590fe07419498a306494b64e050, type: 3}

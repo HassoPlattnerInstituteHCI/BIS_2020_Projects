@@ -21,11 +21,13 @@ namespace dualLayouting {
         private GameObject[] elements;
         private static List<string> supportedElements = new List<string> {
             "Tree",
-            "Balloon",
+            "Balloons",
             "Congratulations",
             "Fireworks",
             "Champagne",
-            "Cake"
+            "Cake",
+            "Pizza",
+            "Happy Birthday"
         };
 
         // Start is called before the first frame update
