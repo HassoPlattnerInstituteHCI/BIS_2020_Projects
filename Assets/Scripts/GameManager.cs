@@ -3,6 +3,7 @@ using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using DualPantoFramework;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,115 +74,15 @@ public class GameManager : MonoBehaviour
 
     async Task IntroduceLevel()
     {
-        await upperHandle.MoveToPosition(playerSpawn.position + new Vector3(2, 0, 2), 0.3f, false);
-        switch(level)
-        {
-            case 0:
-                Level lvl = GetComponent<Level>();
-                await lvl.PlayIntroduction();
-                // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound                                                LINO HELLIGE
-                await speechOut.Speak("Oh no there is an enemy");
-                GameObject helpPos = new GameObject();
-                helpPos.transform.position = enemySpawn.position;
-                helpPos.transform.rotation = enemySpawn.rotation;
-                lowerHandle = GetComponent<LowerHandle>();
-                await lowerHandle.SwitchTo(helpPos, 0.5f);
-
-                await speechOut.Speak("he is trying to kill you");
-                await MoveX();
-
-                await speechOut.Speak("so aim at him");
-                //wiggling lef and right to show how to shoot                                                                                           LINO HELLIGE
-                upperHandle.Free();
-                await RotateX();
-
-            break;
-            //Level 2                                                                                                                                      OLIVER SCHULZ
-            case 1:
-                    await upperHandle.SwitchTo(player, 0.2f);
-                    await speechOut.Speak("Oh no the enemy spotted you, move to another position...");
-                    await MoveX();
-                    await speechOut.Speak("...and kill the enemy...");
-                    await lowerHandle.SwitchTo(enemy, 0.2f);
-                    await speechOut.Speak("by aiming at him.");
-                    upperHandle.Free();
-                    await RotateX();
-            break;
-            //Level 3                                                                                                                                      OLIVER SCHULZ
-            case 2:
-                    await upperHandle.SwitchTo(player, 0.2f);
-                    await lowerHandle.SwitchTo(player, 0.2f); //player shouldn't know where enemy is
-                    await speechOut.Speak("Oh no the enemy escaped, move around...");
-                    await MoveX();
-                    await speechOut.Speak("...and watch out...");
-                    upperHandle.Free();
-                    await RotateX();
-                    await speechOut.Speak("for the enemy to kill it.");
-            break;
-
-            default: break;
-        }
-
-        await speechOut.Speak("The gun will automaticly shoot for you");
-    await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
-        //string response = await speechIn.Listen(commands);
-        await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
+        upperHandle.Free();
+        lowerHandle.Free();
+        await GetComponent<Levels>().PlayIntroduction(level,speechIn);
+        upperHandle.Free();
+        lowerHandle.Free();
         //if (response == "yes")
         //{
         //    await RoomExploration();
         //}
-    }
-
-    async Task Move(float x, float y, float z, int n) //Move to position in n steps
-    {
-        for (int i = 0; i < n; i++)
-        {
-            Vector3 v = new Vector3((float)x / n, y, (float)z / n);
-            player.transform.position = player.transform.position + v;
-            await Task.Delay(10);
-        }
-    }
-
-    async Task MoveX() //Move in X
-    {
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.5f, 0, 0), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-0.5f, 0, 0), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-0.5f, 0, 0), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.5f, 0, 0), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.5f), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -0.5f), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -0.5f), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.5f), 0.1f, false);
-    }
-
-    async Task RotateX()//Rotate in X
-    {
-        for (int i = 0; i <= 60; i += 10)
-        {
-            float r = upperHandle.transform.eulerAngles.y + (float)i;
-            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-            await Task.Delay(100);
-        }
-        for (int i = 60; i >= -60; i -= 10)
-        {
-            float r = upperHandle.transform.eulerAngles.y + (float)i;
-            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-            await Task.Delay(100);
-        }
-        for (int i = -60; i <= 0; i += 10)
-        {
-            float r = upperHandle.transform.eulerAngles.y + (float)i;
-            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-            await Task.Delay(100);
-        }
     }
 
     [System.Obsolete]
@@ -218,10 +119,10 @@ public class GameManager : MonoBehaviour
         player.transform.position = playerSpawn.position;
         player.transform.rotation = playerSpawn.rotation;
         await upperHandle.SwitchTo(player, 0.3f);
-        if (level == 0)                                                                                 //LINO HELLIGE
+        /*if (level == 0)                                                                                 //LINO HELLIGE
         {
             await upperHandle.SwitchTo(GameObject.Find("Player Spawn"), 0.3f);
-        }
+        }*/
         await speechOut.Speak("Spawning enemy");
         enemy.transform.position = enemySpawn.position;
         enemy.transform.rotation = enemySpawn.rotation;
@@ -243,6 +144,7 @@ public class GameManager : MonoBehaviour
         }
 
         player.SetActive(true);
+
         enemy.SetActive(true);
         levelStartTime = Time.time;
     }

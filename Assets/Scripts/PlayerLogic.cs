@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using DualPantoFramework;
+using SpeechIO;
 
 public class PlayerLogic : MonoBehaviour
 {
@@ -16,12 +18,14 @@ public class PlayerLogic : MonoBehaviour
     public float bps = 1;
     float nextHeartbeat;
     Health health;
+    SpeechOut speechOut;
 
     void Start()
     {
         upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
         health = GetComponent<Health>();
         audioSource = GetComponent<AudioSource>();
+        speechOut = new SpeechOut();
 
         bpmCoefficient = (endBPM - startBPM) / Mathf.Pow(health.maxHealth, 2);
     }
@@ -44,6 +48,18 @@ public class PlayerLogic : MonoBehaviour
             {
                 nextHeartbeat += Time.deltaTime;
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Powerup"))
+        {
+            health.Heal(25);
+            GetComponent<Shooting>().damage = (int)(GetComponent<Shooting>().damage * 1.2);
+            //soundEffects.PlayPowerupCollect();
+            _ = speechOut.Speak("Powerup found!");
+            Destroy(other.gameObject);
         }
     }
 }

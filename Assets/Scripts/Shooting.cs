@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DualPantoFramework;
 
 public class Shooting : MonoBehaviour
 {
@@ -114,6 +115,15 @@ public class Shooting : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance, hitLayers))
             {
+                GameObject panto = GameObject.Find("Panto");
+                if (panto.GetComponent<GameManager>().level == 2 && !spotted && this.name == "Player")
+                {
+                    spotted = true;
+                    GameObject e = hit.transform.gameObject;
+                    PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
+                    await lowerHandle.SwitchTo(e, 0.2f);
+
+                }
                 lineRenderer.SetPositions(new Vector3[] { transform.position,
                     hit.point });
                 lineRenderer.material.color = Color.red;
@@ -151,7 +161,7 @@ public class Shooting : MonoBehaviour
     /// <summary>
     /// Simple firing in forward direction. Doesn't require a target.
     /// </summary>
-    void Fire()
+    async void Fire()
     {
         RaycastHit hit;
 
@@ -160,7 +170,18 @@ public class Shooting : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance, hitLayers))
         {
+            GameObject panto = GameObject.Find("Panto");
+            if (panto.GetComponent<GameManager>().level == 2 && !spotted && this.name == "Player")
+            {
+                spotted = true;
+                GameObject e = hit.transform.gameObject;
+                PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
+                await lowerHandle.SwitchTo(e, 0.2f);
+
+            }
             lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point });
+            lineRenderer.material.color = Color.red;
+            lineRenderer.startWidth = 0.1f;
 
             Health enemy = hit.transform.GetComponent<Health>();
 
@@ -176,6 +197,8 @@ public class Shooting : MonoBehaviour
         {
             lineRenderer.SetPositions(new Vector3[] { transform.position,
                 transform.position + transform.forward * maxRayDistance });
+            lineRenderer.material.color = Color.red;
+            lineRenderer.startWidth = 0.1f;
             currentClip = defaultClip;
         }
     }

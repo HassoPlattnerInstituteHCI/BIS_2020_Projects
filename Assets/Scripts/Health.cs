@@ -52,6 +52,8 @@ public class Health : MonoBehaviour
     public void Heal(int amount)
     {
         healthPoints = Mathf.Min(healthPoints + amount, maxHealth);
+
+        UpdateUI();
     }
 
     void UpdateUI()
