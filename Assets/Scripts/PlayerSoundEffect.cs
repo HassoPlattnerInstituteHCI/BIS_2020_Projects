@@ -19,12 +19,20 @@ public class PlayerSoundEffect : MonoBehaviour
 
     void Start()
     {
-
+        
         speechOut = new SpeechOut();
         //audioSource = GetComponents<AudioSource>();
         audioSourcePolice = gameObject.AddComponent<AudioSource>();
         //rollSource.loop = true;
         //rollSource.clip = rollClip;
+    }
+
+    void Update(){
+        if(audioSourcePolice.isPlaying){
+            //May improve this to make setting by seconds possible
+            audioSourcePolice.volume = audioSourcePolice.volume + 0.0002f;
+        }
+        
     }
 
     public void playWasted(){
@@ -43,6 +51,7 @@ public class PlayerSoundEffect : MonoBehaviour
     public void startSirens(){
         //audioSource = GetComponent<AudioSource>();
         audioSourcePolice.loop = true;
+        audioSourcePolice.volume = 0.1f;
         audioSourcePolice.clip = sirens;
         audioSourcePolice.Play();
         
