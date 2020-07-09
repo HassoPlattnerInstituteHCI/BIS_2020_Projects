@@ -17,8 +17,8 @@ MonoBehaviour:
   CSGoPlayer: 0
   turnSpeed: 6
   randomStepSpeed: 8
-  fieldOfView: 30
-  timeTillSeek: 2
+  fieldOfView: 1
+  timeTillSeek: 5
   inaccuracy: 0.2
   returnsFireOnAttack: 1
   attackPlayerAtStart: 0

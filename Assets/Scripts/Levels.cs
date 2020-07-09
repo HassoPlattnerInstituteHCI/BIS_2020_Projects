@@ -36,13 +36,15 @@ public class Levels : MonoBehaviour
     {
 
         //await upperHandle.MoveToPosition(gm.playerSpawn.position + new Vector3(2, 0, 2), 0.3f, false);
-        GameObject playerHelper = Instantiate(new GameObject(), gm.playerSpawn.position, gm.playerSpawn.rotation);
-        GameObject enemyHelper = Instantiate(new GameObject(), gm.enemySpawn.position, gm.enemySpawn.rotation);
+        GameObject playerHelper = new GameObject();
+        playerHelper.transform.position = gm.playerSpawn.position;
+        playerHelper.transform.rotation = gm.playerSpawn.rotation;
+        GameObject enemyHelper = new GameObject();
+        enemyHelper.transform.position = gm.enemySpawn.position;
+        enemyHelper.transform.rotation = gm.enemySpawn.rotation;
         switch (level)
         {
             case 0:
-                Level lvl = GetComponent<Level>();
-                await lvl.PlayIntroduction();
                 // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound                                                LINO HELLIGE
                 await speechOut.Speak("Oh no there is an enemy");
                 lowerHandle = GetComponent<LowerHandle>();
@@ -65,17 +67,14 @@ public class Levels : MonoBehaviour
                 await speechOut.Speak("...and kill the enemy...");
                 await lowerHandle.SwitchTo(enemy, 0.2f);
                 await speechOut.Speak("by aiming at him.");
-                //upperHandle.Free();
                 await RotateX(playerHelper);
                 break;
             //Level 3                                                                                                                                      OLIVER SCHULZ
             case 2:
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
-                await lowerHandle.SwitchTo(playerHelper, 0.2f); //player shouldn't know where enemy is
                 await speechOut.Speak("Oh no the enemy escaped, move around...");
                 await MoveX(playerHelper);
                 await speechOut.Speak("...and watch out...");
-                upperHandle.Free();
                 await RotateX(playerHelper);
                 await speechOut.Speak("for the enemy to kill it.");
                 break;
@@ -95,16 +94,25 @@ public class Levels : MonoBehaviour
                 await speechOut.Speak("The enemy dropped an item behind a wall, move around...");
                 await MoveX(playerHelper);
                 await speechOut.Speak("...and watch out...");
-                //upperHandle.Free();
                 await RotateX(playerHelper);
                 await speechOut.Speak("to find the wall and the item. I will tell you when you look at them.");
                 break;
 
             default: break;
         }
-        upperHandle.Free();
 
         await speechOut.Speak("The gun will automaticly shoot for you");
+
+        if (level != 0)
+        {
+            upperHandle.Free();
+        }
+        else
+        {
+            await upperHandle.MoveToPosition(playerHelper.transform.position, 0.2f, false);
+            upperHandle.FreeRotation();
+        }
+
         await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
         //string response = await speechIn.Listen(commands);
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "yes", KeyCode.Y }, { "done", KeyCode.D } });
@@ -179,46 +187,4 @@ public class Levels : MonoBehaviour
             await Task.Delay(10);
         }
     }
-
-    /*async Task MoveX() //Move in X
-    {
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.5f, 0, 0), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-0.5f, 0, 0), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(-0.5f, 0, 0), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0.5f, 0, 0), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.5f), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -0.5f), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, -0.5f), 0.1f, false);
-        await Task.Delay(200);
-        await upperHandle.MoveToPosition(upperHandle.GetPosition() + new Vector3(0, 0, 0.5f), 0.1f, false);
-    }
-
-    async Task RotateX()//Rotate in X
-    {
-        for (int i = 0; i <= 60; i += 10)
-        {
-            float r = upperHandle.transform.eulerAngles.y + (float)i;
-            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-            await Task.Delay(100);
-        }
-        for (int i = 60; i >= -60; i -= 10)
-        {
-            float r = upperHandle.transform.eulerAngles.y + (float)i;
-            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-            await Task.Delay(100);
-        }
-        for (int i = -60; i <= 0; i += 10)
-        {
-            float r = upperHandle.transform.eulerAngles.y + (float)i;
-            upperHandle.SetPositions(upperHandle.GetPosition(), r, null);
-            await Task.Delay(100);
-        }
-    }*/
 }

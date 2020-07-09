@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
         lowerHandle = GetComponent<LowerHandle>();
 
         uiManager.UpdateUI(playerScore, enemyScore);
+        /*GameObject.Find("EmberWorkingArea").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("DoerteWorkingArea").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("group_0_15277357").GetComponent<MeshCollider>().enabled = false;*/
 
         Introduction();
     }
