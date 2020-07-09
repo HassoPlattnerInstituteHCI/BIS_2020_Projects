@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a274c06e27d3a49da8946f92c5ab2a9b, type: 3}
-  m_Name: EnemyMedium
+  m_Name: Level 4
   m_EditorClassIdentifier: 
   health: 200
   speed: 3
   CSGoPlayer: 0
   turnSpeed: 6
   randomStepSpeed: 8
-  fieldOfView: 30
-  timeTillSeek: 2
+  fieldOfView: 10
+  timeTillSeek: 200
   inaccuracy: 0.2
-  returnsFireOnAttack: 1
+  returnsFireOnAttack: 0
   attackPlayerAtStart: 0
