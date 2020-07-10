@@ -6,13 +6,12 @@ using DualPantoFramework;
 namespace PantoGolf
 {
     public class BallScript : MonoBehaviour
-    {
-
+    { 
         private Rigidbody rb;
         private GameObject Ball;
         private BallAudio soundEffects;
         private LowerHandle LowerHandle;
-        public bool tempBool = false;
+        public bool active = true;
         // Start is called before the first frame update
         void Start()
         {
@@ -50,6 +49,7 @@ namespace PantoGolf
             if (other.gameObject.CompareTag("goal"))
             {
                 Debug.Log("The ball hit the goal!");
+                active = false;
                 soundEffects.PlayGoal();
                 rb.velocity = Vector3.zero;
                 // Start next level
@@ -59,6 +59,7 @@ namespace PantoGolf
             else if (other.gameObject.CompareTag("water"))
             {
                 Debug.Log("Ball fell in water!");
+                active = false;
                 rb.velocity = Vector3.zero;
                 soundEffects.PlayWaterDrop();
                 StartCoroutine(RestartLevel());

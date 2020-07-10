@@ -139,6 +139,10 @@ namespace PantoGolf
                 {
                     return false;
                 }
+                if (Ball.GetComponent<BallScript>().enabled == false)
+                {
+                    return false;
+                }
                 Debug.Log("Ball is not moving:");
                 // Ball is not moving anymore:
 
