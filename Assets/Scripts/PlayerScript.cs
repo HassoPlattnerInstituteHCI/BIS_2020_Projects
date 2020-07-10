@@ -141,7 +141,9 @@ namespace PantoGolf
                 }
                 Debug.Log("Ball is not moving:");
                 // Ball is not moving anymore:
+
                 rb.velocity = Vector3.zero;     //Balls velocity set to 0.
+
                 soundEffects.StopRolling();
                 int nexthit = hitCount + 1;
                 VoiceOut("Waiting for hit " + nexthit);

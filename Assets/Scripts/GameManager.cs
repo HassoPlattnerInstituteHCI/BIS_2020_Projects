@@ -116,7 +116,14 @@ namespace PantoGolf
         {
             Debug.Log("You completed the level.");
             level++;
-            LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % (SceneManager.sceneCountInBuildSettings));
+            if (SceneManager.GetActiveScene().buildIndex + 1 < SceneManager.sceneCountInBuildSettings)
+            {
+                LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % (SceneManager.sceneCountInBuildSettings));
+            }
+            else
+            {
+                LastLevelComplete();
+            }
         }
 
         public void RestartLevel()
@@ -138,6 +145,12 @@ namespace PantoGolf
         async Task GameOver()
         {
             await speechOut.Speak("Thanks for playing PantoGolf.");
+            Application.Quit();
+        }
+
+        async Task LastLevelComplete()
+        {
+            await speechOut.Speak("You completed all levels of PantoGolf! Congratulations");
             Application.Quit();
         }
 

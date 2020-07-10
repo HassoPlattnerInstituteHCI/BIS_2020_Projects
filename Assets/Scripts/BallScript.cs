@@ -12,6 +12,7 @@ namespace PantoGolf
         private GameObject Ball;
         private BallAudio soundEffects;
         private LowerHandle LowerHandle;
+        public bool tempBool = false;
         // Start is called before the first frame update
         void Start()
         {
@@ -25,10 +26,8 @@ namespace PantoGolf
         // Update is called once per frame
         void Update()
         {
-            Vector3 goal_dir = GameObject.Find("Goal").transform.position - transform.position;
-            //LowerHandle.transform.LookAt(goal_dir);
-            GameObject Ball = GameObject.Find("Ball");
-            //StartCoroutine(LowerHandle.SwitchTo(Ball, 0.2f));
+            //Make the ball look at the goal, so the ItHandle faces the direction of the goal as well!
+            Ball.transform.LookAt(GameObject.Find("Goal").transform.position);
         }
 
         private void FixedUpdate()
