@@ -4,17 +4,22 @@ using System.Threading.Tasks;
 
 public class AHoleSoundEffect : MonoBehaviour
 {
-    public AudioClip blaBla;
+    public AudioClip blaBlaClip;
     public AudioSource audioSource;
     GameManager gameManager;
 
     void Start()
     {
         gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
+
     }
 
-
-
+    public void startBlaBla(){
+        audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
+        audioSource.clip = blaBlaClip;
+        audioSource.Play();
+    }
 
     public void StopPlayback()
     {

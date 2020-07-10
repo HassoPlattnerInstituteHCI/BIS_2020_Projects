@@ -6,8 +6,8 @@ using System.Linq;
 
 ////TODO Level 4
 //1. DONE Let Danny Erzählen
-//2. Let Passanten spawnen (Random position)
-//3. Let Passanten quasseln
+//2. DONE Let Passanten spawnen (Random position)
+//3. DONE Let Passanten quasseln
 //4. Wenn Passant hit by bat -> Passant active = false
 //5. Score up
 
@@ -163,7 +163,9 @@ public class GameManager : MonoBehaviour
             System.Random r = new System.Random();
             int rInt = r.Next(0, listOfSpawnPositions.Count-1);
             
-            Instantiate(Resources.Load("AHolePrefab"), listOfSpawnPositions[rInt], Quaternion.identity);
+            GameObject thisAHole = (GameObject) Instantiate(Resources.Load("AHolePrefab"), listOfSpawnPositions[rInt], Quaternion.identity);
+            AHoleSoundEffect aHoleSounds = thisAHole.GetComponent<AHoleSoundEffect>();
+            aHoleSounds.startBlaBla();
             listOfSpawnPositions.RemoveAt(rInt);
         }
 
