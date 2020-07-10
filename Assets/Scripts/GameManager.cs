@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     int gameScore = 0;
     float totalTime = 0;
     float levelStartTime = 0;
+    List<Vector3> listOfSpawnPositions;
+    List<int> spawnUsed = new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     public bool currentObjectiveReached = false;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
@@ -67,6 +69,7 @@ public class GameManager : MonoBehaviour
         lowerHandle = GetComponent<LowerHandle>();
         
         phoneBox = GameObject.Find("TelephoneBox1");
+        listOfSpawnPositions = createAHoleSpawns();
 
         bat = GameObject.Find("Bat");
         bat.SetActive(false);
@@ -141,36 +144,35 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task spawnAHoles(int num){
-
-        List<Vector3> listOfSpawnPositions = new List<Vector3>();        
-        
-        listOfSpawnPositions.Add(new Vector3(7,0,-8));
-        listOfSpawnPositions.Add(new Vector3(5,0,-11));
-        listOfSpawnPositions.Add(new Vector3(3,0,-10));
-        listOfSpawnPositions.Add(new Vector3(-1,0,-11));
-        listOfSpawnPositions.Add(new Vector3(-1,0,-5));
-        listOfSpawnPositions.Add(new Vector3(2,0,-6));
-        listOfSpawnPositions.Add(new Vector3(-4,0,-10));
-        listOfSpawnPositions.Add(new Vector3(-6,0,-9));
-        listOfSpawnPositions.Add(new Vector3(-1,0,-8));
-
         if(num>listOfSpawnPositions.Count){
             Debug.LogError("Tried to spawn more AHoles than spanwpositions available");
             num = listOfSpawnPositions.Count;
         }
 
         for(int i = 0; i<num; i++){
-            System.Random r = new System.Random();
-            int rInt = r.Next(0, listOfSpawnPositions.Count-1);
+            int rInt;
+            do{
+                System.Random r = new System.Random();
+                rInt = r.Next(0, listOfSpawnPositions.Count-1);
+            } while(spawnUsed[rInt]==1);
             
             GameObject thisAHole = (GameObject) Instantiate(Resources.Load("AHolePrefab"), listOfSpawnPositions[rInt], Quaternion.identity);
             AHoleSoundEffect aHoleSounds = thisAHole.GetComponent<AHoleSoundEffect>();
             aHoleSounds.startBlaBla();
-            listOfSpawnPositions.RemoveAt(rInt);
+            spawnUsed[rInt] = 1;
         }
-
-
     }
+
+    public async Task deleteAHole(GameObject victim){
+        int pos = 0;
+        while(victim.transform.position != listOfSpawnPositions[pos]){
+            pos++;
+        }
+        spawnUsed[pos] = 0;
+        Destroy(victim);
+    }
+
+    
 
     
 
@@ -315,5 +317,19 @@ public class GameManager : MonoBehaviour
         }
 
         return levelScore;
+    }
+
+    public List<Vector3> createAHoleSpawns(){
+        List<Vector3> listOfSpawnPositions = new List<Vector3>();        
+        listOfSpawnPositions.Add(new Vector3(7,0,-8));
+        listOfSpawnPositions.Add(new Vector3(5,0,-11));
+        listOfSpawnPositions.Add(new Vector3(3,0,-10));
+        listOfSpawnPositions.Add(new Vector3(-1,0,-11));
+        listOfSpawnPositions.Add(new Vector3(-1,0,-5));
+        listOfSpawnPositions.Add(new Vector3(2,0,-6));
+        listOfSpawnPositions.Add(new Vector3(-4,0,-10));
+        listOfSpawnPositions.Add(new Vector3(-6,0,-9));
+        listOfSpawnPositions.Add(new Vector3(-1,0,-8));
+        return listOfSpawnPositions;
     }
 }

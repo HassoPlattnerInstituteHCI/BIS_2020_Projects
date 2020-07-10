@@ -38,7 +38,7 @@ public class BatLogic : MonoBehaviour
 
     void Update()
     {
-        
+
         //transform.position = player.transform.position;
         // Simply connects the bat to the lower handles position
 
@@ -49,14 +49,14 @@ public class BatLogic : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
 
         Vector3 playerDirection = transform.forward;
-        float spawnDistance = 1.5f; 
-        
-        Vector3 batPos = playerPos + playerDirection*spawnDistance; 
+        float spawnDistance = 1.5f;
+
+        Vector3 batPos = playerPos + playerDirection*spawnDistance;
 
         transform.position = batPos;
 
-        //transform.RotateAround(player.transform.position, Vector3.up, 20 * Time.deltaTime);            
-        
+        //transform.RotateAround(player.transform.position, Vector3.up, 20 * Time.deltaTime);
+
     }
 
 
@@ -65,25 +65,23 @@ public class BatLogic : MonoBehaviour
     //TODO: Level 2 Story
 
     void OnTriggerEnter(Collider collider1)
-    {   
-        if(collider1.CompareTag("dangerous")){  
+    {
+        if(collider1.CompareTag("dangerous")){
             player = GameObject.Find("Player");
-            playerSounds = player.GetComponent<PlayerSoundEffect>();         
-
+            playerSounds = player.GetComponent<PlayerSoundEffect>();
             playerSounds.playObjectHitByBat();
-            
         }
         if(collider1.CompareTag("AHole")){
             Destroy(collider1.gameObject);
             player = GameObject.Find("Player");
-            playerSounds = player.GetComponent<PlayerSoundEffect>();         
+            playerSounds = player.GetComponent<PlayerSoundEffect>();
             playerSounds.playAHoleHitByBat();
-
+            gameManager.spawnAHoles(1);
             if(gameManager.currentLevel == 4){
                 gameManager.currentObjectiveReached = true;
-            }            
-            
+            }
+
         }
-        
+
     }
 }
