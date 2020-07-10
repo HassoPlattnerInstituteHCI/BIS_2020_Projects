@@ -89,6 +89,7 @@ public class BatLogic : MonoBehaviour
 
             }
             
+            Destroy(collider1.gameObject);
         }
         
     }
