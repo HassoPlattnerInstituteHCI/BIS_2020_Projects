@@ -15,10 +15,13 @@ public class PlayerScript : MonoBehaviour
     public float forceMultiplier = 1f;  //Multiplier to increase hitstrength
     public float upForce = 5f;
     private float velocity = 0f;     //Stores the velocity of the moving club
+    public float minHitStrength = 10f;
     private BallAudio soundEffects;
     private int hitCount = 0;
     public SpeechOut speechOut = new SpeechOut();
     private Vector3 previousPosition;   //To calculate velocity of club.
+    private const int pauseAfterHit = 100;
+    private int pauseCounter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +36,16 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         //transform.position = GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position);
-        
+
         //GameObject.Find("Panto").GetComponent<UpperHandle>().
-        ReadyToHit();
+        if (pauseCounter <= 0)
+        {
+            ReadyToHit();
+        }
+        else
+        {
+            pauseCounter--;
+        }
     }
 
     private void FixedUpdate()
@@ -66,15 +76,25 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("Hitting the Ball, Collider disabled.");
             hitCount++;
+            pauseCounter = pauseAfterHit;   //Constant time to wait after a hit to check if ball is moving
             Vector3 shotDir = new Vector3(0, 0, 0);
             float angle = transform.eulerAngles.y * Mathf.Deg2Rad;
             shotDir.x = Mathf.Cos(angle);
             shotDir.z = -Mathf.Sin(angle);
             Vector3 dir = Ball.transform.position - transform.position;
             dir.y = 0;
-            Vector3 up = new Vector3(0, upForce, 0);
+            Debug.Log("Shot direction:");
             Debug.Log(shotDir);
-            Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * velocity);
+            if (velocity < minHitStrength)
+            {
+                Debug.Log("Hitting Ball with minHitStrength of: " + minHitStrength.ToString());
+                Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * minHitStrength);
+            }
+            else 
+            {
+                Debug.Log("Hitting Ball with velocity of: " + velocity.ToString());
+                Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * velocity);
+            }
             //Ball.GetComponent<Rigidbody>().AddForce(up);
             soundEffects.PlayClubHit();
             soundEffects.PlayRolling(1f);
