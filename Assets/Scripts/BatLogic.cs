@@ -79,6 +79,16 @@ public class BatLogic : MonoBehaviour
             playerSounds = player.GetComponent<PlayerSoundEffect>();         
             playerSounds.playAHoleHitByBat();
             Destroy (this.gameObject);
+
+            if(gameManager.currentLevel == 4){
+                gameManager.currentObjectiveReached = true;
+                GameObject phoneBox = GameObject.Find("TelephoneBox2");
+                TelephoneSoundEffect telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
+                telephoneSounds.StopPlayback();
+                telephoneSounds.startPhoneTalks();
+
+            }
+            
         }
         
     }
