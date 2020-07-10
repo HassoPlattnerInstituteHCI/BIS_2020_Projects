@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     public int trophyScore = 10000;
     public UIManager uiManager;
     public int currentLevel;
-
     private TelephoneSoundEffect telephoneSounds;
     private PlayerSoundEffect playerSounds;
 
@@ -104,6 +103,8 @@ public class GameManager : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
        
         telephoneSounds.startPhoneRing();
+        spawnAHoles(5);
+        
     }
 
     public async Task StartLevel2(){
@@ -112,6 +113,8 @@ public class GameManager : MonoBehaviour
         phoneBox = GameObject.Find("TelephoneBox2");
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
         telephoneSounds.startPhoneRing();
+
+        
 
     }
 
@@ -129,6 +132,40 @@ public class GameManager : MonoBehaviour
 
         GameObject safeHouse = GameObject.Find("SafeHouse");
         playerSpawn.position = safeHouse.transform.position;
+
+        
+
+        
+
+
+    }
+
+    public async Task spawnAHoles(int num){
+
+        List<Vector3> listOfSpawnPositions = new List<Vector3>();        
+        
+        listOfSpawnPositions.Add(new Vector3(0,0,-12));
+        listOfSpawnPositions.Add(new Vector3(0,0,-13));
+        listOfSpawnPositions.Add(new Vector3(0,0,-14));
+        listOfSpawnPositions.Add(new Vector3(0,0,-15));
+        listOfSpawnPositions.Add(new Vector3(1,0,-14));
+        listOfSpawnPositions.Add(new Vector3(2,0,-14));
+        listOfSpawnPositions.Add(new Vector3(3,0,-14));
+        listOfSpawnPositions.Add(new Vector3(4,0,-14));
+        listOfSpawnPositions.Add(new Vector3(5,0,-14));
+
+        if(num>listOfSpawnPositions.Count){
+            Debug.LogError("Tried to spawn more AHoles than spanwpositions available");
+            num = listOfSpawnPositions.Count;
+        }
+
+        for(int i = 0; i<num; i++){
+            System.Random r = new System.Random();
+            int rInt = r.Next(0, listOfSpawnPositions.Count-1);
+            
+            Instantiate(Resources.Load("AHolePrefab"), listOfSpawnPositions[rInt], Quaternion.identity);
+            listOfSpawnPositions.RemoveAt(rInt);
+        }
 
 
     }
