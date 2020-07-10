@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6270007740038808549}
   - component: {fileID: 6506558233214441697}
   - component: {fileID: 6121024676692593264}
+  - component: {fileID: -7197879361035833378}
   m_Layer: 0
   m_Name: AHolePrefab
   m_TagString: AHole
@@ -204,3 +205,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onUpper: 0
   onLower: 1
+--- !u!114 &-7197879361035833378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270007740038808548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42420fd50ea48c4ca2e93aca904e47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blaBlaClip: {fileID: 8300000, guid: a0a0c95f8e3a0404daa6207694ae40dd, type: 3}
+  audioSource: {fileID: 6506558233214441697}
