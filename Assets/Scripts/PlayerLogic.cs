@@ -65,8 +65,8 @@ public class PlayerLogic : MonoBehaviour
         Debug.LogError("OnTriggerEnter gets called"); 
         if(gameManager.currentLevel==1){
             if(collider1.CompareTag("TelephoneBox1")){           
-            telephoneSounds.StopPlayback();
-            telephoneSounds.startPhoneTalks();
+                telephoneSounds.StopPlayback();
+                telephoneSounds.startPhoneTalks();
             }
         }
         if(gameManager.currentLevel==2){
@@ -83,9 +83,21 @@ public class PlayerLogic : MonoBehaviour
                 telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
                 telephoneSounds.StopPlayback();
                 telephoneSounds.startPhoneTalks();
-
             }
         }
+        if(gameManager.currentLevel == 4 && gameManager.currentObjectiveReached){
+            Debug.Log("OnTrigger Enter for Level 4 called");
+            if(collider1.CompareTag("safehouse")){      
+                GameObject phoneBox = GameObject.Find("TelephoneBox2");
+                TelephoneSoundEffect telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
+                telephoneSounds.StopPlayback();
+                Debug.Log("Level 4 Intro talk started");
+                telephoneSounds.startPhoneTalks();
+            }           
+
+        }
+            
+        
         if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
             playerSounds.playWasted();
             gameManager.ResetGame();

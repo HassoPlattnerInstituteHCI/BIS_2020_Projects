@@ -97,16 +97,11 @@ public class GameManager : MonoBehaviour
     async Task StartLevel1()
     {
         currentLevel = 1;
-        await speechOut.Speak("Pick up the phone");      
-
+        await speechOut.Speak("Pick up the phone");  
         bat.SetActive(true);
-
         lowerHandle.SwitchTo(bat, 0.1f);
-
-        transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
-       
-        telephoneSounds.startPhoneRing();
-        
+        transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);       
+        telephoneSounds.startPhoneRing();    
         
     }
 
@@ -115,9 +110,7 @@ public class GameManager : MonoBehaviour
         playerSpawn.position = phoneBox.transform.position;
         phoneBox = GameObject.Find("TelephoneBox2");
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
-        telephoneSounds.startPhoneRing();
-
-        
+        telephoneSounds.startPhoneRing();       
 
     }
 
@@ -140,6 +133,10 @@ public class GameManager : MonoBehaviour
 
          
 
+
+    }
+
+    public async Task StartLevel5(){
 
     }
 

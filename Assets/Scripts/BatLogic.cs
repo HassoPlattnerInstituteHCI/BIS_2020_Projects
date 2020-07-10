@@ -74,22 +74,15 @@ public class BatLogic : MonoBehaviour
             
         }
         if(collider1.CompareTag("AHole")){
-            Debug.Log("hit an enemy");
+            Destroy(collider1.gameObject);
             player = GameObject.Find("Player");
             playerSounds = player.GetComponent<PlayerSoundEffect>();         
             playerSounds.playAHoleHitByBat();
-            Destroy (this.gameObject);
 
             if(gameManager.currentLevel == 4){
                 gameManager.currentObjectiveReached = true;
-                GameObject phoneBox = GameObject.Find("TelephoneBox2");
-                TelephoneSoundEffect telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
-                telephoneSounds.StopPlayback();
-                telephoneSounds.startPhoneTalks();
-
-            }
+            }            
             
-            Destroy(collider1.gameObject);
         }
         
     }
