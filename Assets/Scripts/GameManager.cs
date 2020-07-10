@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
        
         telephoneSounds.startPhoneRing();
-        spawnAHoles(5);
+        spawnAHoles(9);
         
     }
 
@@ -144,15 +144,15 @@ public class GameManager : MonoBehaviour
 
         List<Vector3> listOfSpawnPositions = new List<Vector3>();        
         
-        listOfSpawnPositions.Add(new Vector3(0,0,-12));
-        listOfSpawnPositions.Add(new Vector3(0,0,-13));
-        listOfSpawnPositions.Add(new Vector3(0,0,-14));
-        listOfSpawnPositions.Add(new Vector3(0,0,-15));
-        listOfSpawnPositions.Add(new Vector3(1,0,-14));
-        listOfSpawnPositions.Add(new Vector3(2,0,-14));
-        listOfSpawnPositions.Add(new Vector3(3,0,-14));
-        listOfSpawnPositions.Add(new Vector3(4,0,-14));
-        listOfSpawnPositions.Add(new Vector3(5,0,-14));
+        listOfSpawnPositions.Add(new Vector3(7,0,-8));
+        listOfSpawnPositions.Add(new Vector3(5,0,-11));
+        listOfSpawnPositions.Add(new Vector3(3,0,-10));
+        listOfSpawnPositions.Add(new Vector3(-1,0,-11));
+        listOfSpawnPositions.Add(new Vector3(-1,0,-5));
+        listOfSpawnPositions.Add(new Vector3(2,0,-6));
+        listOfSpawnPositions.Add(new Vector3(-4,0,-10));
+        listOfSpawnPositions.Add(new Vector3(-6,0,-9));
+        listOfSpawnPositions.Add(new Vector3(-1,0,-8));
 
         if(num>listOfSpawnPositions.Count){
             Debug.LogError("Tried to spawn more AHoles than spanwpositions available");

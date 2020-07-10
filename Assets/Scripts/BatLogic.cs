@@ -61,20 +61,24 @@ public class BatLogic : MonoBehaviour
 
 
     //TODO: Rotation hinkriegen
-    //TODO: Sounds wenn Bat irgendwas schlägt
-
 
     //TODO: Level 2 Story
 
     void OnTriggerEnter(Collider collider1)
     {   
         if(collider1.CompareTag("dangerous")){  
-            Debug.Log("Dangerous Object hit by bat");
             player = GameObject.Find("Player");
             playerSounds = player.GetComponent<PlayerSoundEffect>();         
 
             playerSounds.playObjectHitByBat();
             
+        }
+        if(collider1.CompareTag("AHole")){
+            Debug.Log("hit an enemy");
+            player = GameObject.Find("Player");
+            playerSounds = player.GetComponent<PlayerSoundEffect>();         
+            playerSounds.playAHoleHitByBat();
+            Destroy (this.gameObject);
         }
         
     }
