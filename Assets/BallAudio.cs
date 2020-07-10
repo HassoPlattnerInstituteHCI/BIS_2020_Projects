@@ -8,6 +8,7 @@ public class BallAudio : MonoBehaviour
 
     public AudioClip[] WaterDrop;
     public AudioClip[] ClubHit;
+    public AudioClip[] ReadyToHit;
     public AudioClip[] Goal;
     public AudioClip[] Rolling;
     public AudioClip[] Obstacle;
@@ -51,10 +52,16 @@ public class BallAudio : MonoBehaviour
         if (vol >= 1)
         {
             Debug.Log("Start Rolling sound");
-            int i = Random.Range(0, Obstacle.Length);
-            rollingSource.pitch = 1f;
+            int i = Random.Range(0, Rolling.Length);
+            //rollingSource.pitch = 1f;
             //rollingSource.PlayOneShot(Rolling[0]);
         }
+    }
+
+    public void PlayReadyToHit()
+    {
+        int i = Random.Range(0, ReadyToHit.Length);
+        PlayClipPitched(ReadyToHit[i]);
     }
 
     public void StopRolling()

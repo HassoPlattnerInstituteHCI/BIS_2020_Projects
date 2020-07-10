@@ -8,6 +8,7 @@ using SpeechIO;
 public class PlayerScript : MonoBehaviour
 {
 
+    public bool allowMovement = true;
     public bool disableHit = false;
     private GameObject Ball;
     private Collider m_Collider;
@@ -40,14 +41,17 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         //Move Club to Handle Position
-        StartCoroutine(MoveOverSpeed(GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 100));
-        //Rotate Club according to Handle Position
-        transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x,
-            GameObject.Find("Panto").GetComponent<UpperHandle>().GetRotation(),
-            transform.eulerAngles.z
-            );
-        velocity = (transform.position - previousPosition).magnitude / Time.deltaTime;
+        if (allowMovement)
+        {
+            StartCoroutine(MoveOverSpeed(GameObject.Find("Panto").GetComponent<UpperHandle>().HandlePosition(transform.position), 100));
+            //Rotate Club according to Handle Position
+            transform.eulerAngles = new Vector3(
+                transform.eulerAngles.x,
+                GameObject.Find("Panto").GetComponent<UpperHandle>().GetRotation(),
+                transform.eulerAngles.z
+                );
+            velocity = (transform.position - previousPosition).magnitude / Time.deltaTime;
+        }
         previousPosition = transform.position;
     }
 
@@ -58,7 +62,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == Ball)
+        if (other.gameObject == Ball && m_Collider.enabled)
         {
             Debug.Log("Hitting the Ball, Collider disabled.");
             hitCount++;
@@ -75,6 +79,7 @@ public class PlayerScript : MonoBehaviour
             soundEffects.PlayClubHit();
             soundEffects.PlayRolling(1f);
             m_Collider.enabled = false;
+            Debug.Log("End of Player Trigger Event");
         }
     }
 
@@ -101,13 +106,15 @@ public class PlayerScript : MonoBehaviour
             {
                 return false;
             }
+            Debug.Log("Ball is not moving:");
             // Ball is not moving anymore:
             rb.velocity = Vector3.zero;     //Balls velocity set to 0.
             soundEffects.StopRolling();
-            Debug.Log("Collider enabled.");
             //int nexthit = hitCount + 1;
             //VoiceOut("Waiting for hit "+ nexthit);
+            soundEffects.PlayReadyToHit();
             m_Collider.enabled = true;      //Enable Club to make next hit.
+            Debug.Log("Collider enabled.");
         }
         return true;
     }

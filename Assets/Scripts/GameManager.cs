@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
         Player = GameObject.Find("Player");
-        Player.SetActive(false);
+        Player.GetComponent<PlayerScript>().allowMovement = false;
+        //Player.SetActive(false);
         Introduction();
     }
 
@@ -52,9 +53,12 @@ public class GameManager : MonoBehaviour
 
         // Set IT Handle to follow the ball
         await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
+        await (upperHandle).SwitchTo(Player, 0.2f);
+        upperHandle.Free();
+        Player.GetComponent<PlayerScript>().allowMovement = true;
+        //Player.SetActive(true);
         Debug.Log("Introduction finished, game starts.");
         //await speechOut.Speak("Introduction finished, game starts.");
-        Player.SetActive(true);
         //await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
         //await ResetGame();
     }
