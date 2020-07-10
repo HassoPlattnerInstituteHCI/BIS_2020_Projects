@@ -78,7 +78,7 @@ public class BatLogic : MonoBehaviour
             player = GameObject.Find("Player");
             playerSounds = player.GetComponent<PlayerSoundEffect>();         
             playerSounds.playAHoleHitByBat();
-            Destroy (this.gameObject);
+            Destroy(collider1.gameObject);
         }
         
     }
