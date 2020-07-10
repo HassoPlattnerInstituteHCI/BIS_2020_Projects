@@ -1220,6 +1220,14 @@ MonoBehaviour:
   wasted: {fileID: 8300000, guid: 8c4139d55384ad04aa26cf2385c7cdf1, type: 3}
   objectHit: {fileID: 8300000, guid: 08b8fad442bd30a43bfb27dc1fb80fa1, type: 3}
   aHoleHit: {fileID: 8300000, guid: 1e8482905960c472a91f102c613f1069, type: 3}
+  aHole1: {fileID: 8300000, guid: 7fadcf127ffc34079974f66a33fe87b0, type: 3}
+  aHole2: {fileID: 8300000, guid: 5d178c950bac649578b4528609586e74, type: 3}
+  aHole3: {fileID: 8300000, guid: 69425946c656044a3b4ebf2eaebd6e6c, type: 3}
+  aHole4: {fileID: 8300000, guid: ea17d9cc2ebc34ed6b47d5729aba0c5d, type: 3}
+  aHole5: {fileID: 8300000, guid: c0c88e2a0fcca4b909e4fbf352edd6c9, type: 3}
+  aHole6: {fileID: 8300000, guid: c500ceba67d5e40819c96e3b09cbbd8b, type: 3}
+  aHole7: {fileID: 8300000, guid: 50eeedf4ba2db4847808282bc0184c99, type: 3}
+  aHole8: {fileID: 8300000, guid: 935e19527b37a448a9a354e278eb6c41, type: 3}
   sirens: {fileID: 8300000, guid: bd413a285ea873a4f9543a04e03662a7, type: 3}
   audioSource: {fileID: 881415698}
   audioSourcePolice: {fileID: 881415702}
@@ -1571,7 +1579,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 20.555555
+  orthographic size: 18.396643
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2146,6 +2154,7 @@ MonoBehaviour:
   trophyScore: 8000
   uiManager: {fileID: 0}
   currentLevel: 0
+  currentObjectiveReached: 0
 --- !u!1 &1374006942
 GameObject:
   m_ObjectHideFlags: 0
