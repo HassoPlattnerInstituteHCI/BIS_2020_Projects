@@ -4,6 +4,7 @@ using System.Collections;
 //using System.Numerics;
 using UnityEngine;
 using SpeechIO;
+using DualPantoFramework;
 
 namespace PantoGolf
 {
