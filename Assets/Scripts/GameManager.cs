@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public bool introduceLevel = true;
     public GameObject Player;
     static public int level = 0;
+    public int levelHitCount = 0;
+    static public int totalHitCount = 0;
 
     UpperHandle upperHandle;
     LowerHandle lowerHandle;

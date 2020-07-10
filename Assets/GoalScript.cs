@@ -27,19 +27,7 @@ public class GoalScript : MonoBehaviour
             if (WinConditions())
             {
                 Debug.Log("Ball im Goal!");
-                StartCoroutine(SoundAndNextLevel(1));
             }
         }
-    }
-
-    IEnumerator SoundAndNextLevel(int delay)
-    {
-        //ölaksjd föoqiwj;
-        yield return new WaitForSeconds(delay);
-        LoadNextLevel();
-    }
-    private void LoadNextLevel()
-    {
-        //SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % (SceneManager.sceneCountInBuildSettings));
     }
 }

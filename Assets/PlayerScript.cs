@@ -17,9 +17,12 @@ public class PlayerScript : MonoBehaviour
     private float velocity = 0f;     //Stores the velocity of the moving club
     public float minHitStrength = 10f;
     private BallAudio soundEffects;
+    
     private int hitCount = 0;
+
     public SpeechOut speechOut = new SpeechOut();
     private Vector3 previousPosition;   //To calculate velocity of club.
+
     private const int pauseAfterHit = 100;
     private int pauseCounter = 0;
 
@@ -76,6 +79,7 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("Hitting the Ball, Collider disabled.");
             hitCount++;
+            GameManager.totalHitCount++;
             pauseCounter = pauseAfterHit;   //Constant time to wait after a hit to check if ball is moving
             //Calculate Angle vertical to the club:
             Vector3 shotDir = new Vector3(0, 0, 0);
@@ -136,8 +140,8 @@ public class PlayerScript : MonoBehaviour
             // Ball is not moving anymore:
             rb.velocity = Vector3.zero;     //Balls velocity set to 0.
             soundEffects.StopRolling();
-            //int nexthit = hitCount + 1;
-            //VoiceOut("Waiting for hit "+ nexthit);
+            int nexthit = hitCount + 1;
+            VoiceOut("Waiting for hit "+ nexthit);
             soundEffects.PlayReadyToHit();
             m_Collider.enabled = true;      //Enable Club to make next hit.
             Debug.Log("Collider enabled.");
