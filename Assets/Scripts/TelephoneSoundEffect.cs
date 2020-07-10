@@ -41,6 +41,11 @@ public class TelephoneSoundEffect : MonoBehaviour
             await speechOut.Speak("Hi Claude. I am Danny." ); //  So you managed to escape from the police - Congrats! I guess you want to earn some money now, right? As Johnny told you, this city is going crazy. It is full of assholes! They are standing all around Downtown talking to their phones all the time. Go and hit one of them with your baseball bat. We pay you for it!
             gameManager.StartLevel4();
         }
+        else if(gameManager.currentLevel == 4 && gameManager.currentObjectiveReached == true){
+            await speechOut.Speak("Welcome Back. You hit an Asshole!" );
+            gameManager.currentObjectiveReached = false;
+
+        }
     }
 
 

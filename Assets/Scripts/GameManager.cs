@@ -8,8 +8,9 @@ using System.Linq;
 //1. DONE Let Danny Erzählen
 //2. DONE Let Passanten spawnen (Random position)
 //3. DONE Let Passanten quasseln
-//4. Wenn Passant hit by bat -> Passant active = false
-//5. Score up
+//4. DONE Wenn Passant hit by bat -> Passant active = false
+//
+
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class GameManager : MonoBehaviour
     float levelStartTime = 0;
     List<Vector3> listOfSpawnPositions;
     List<int> spawnUsed = new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    public bool currentObjectiveReached = false;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
         { "yes", KeyCode.Y },
         { "no", KeyCode.N },
@@ -106,7 +109,7 @@ public class GameManager : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
        
         telephoneSounds.startPhoneRing();
-        spawnAHoles(5);
+        
         
     }
 
@@ -136,9 +139,9 @@ public class GameManager : MonoBehaviour
         GameObject safeHouse = GameObject.Find("SafeHouse");
         playerSpawn.position = safeHouse.transform.position;
 
-        
+        spawnAHoles(5);
 
-        
+         
 
 
     }
