@@ -77,25 +77,31 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Hitting the Ball, Collider disabled.");
             hitCount++;
             pauseCounter = pauseAfterHit;   //Constant time to wait after a hit to check if ball is moving
+            //Calculate Angle vertical to the club:
             Vector3 shotDir = new Vector3(0, 0, 0);
             float angle = transform.eulerAngles.y * Mathf.Deg2Rad;
             shotDir.x = Mathf.Cos(angle);
             shotDir.z = -Mathf.Sin(angle);
-            Vector3 dir = Ball.transform.position - transform.position;
-            dir.y = 0;
-            Debug.Log("Shot direction:");
-            Debug.Log(shotDir);
+            //shotDir is vertical to the club but is always facing to the right -> if the ball is on the left side of the club, it will go through the club (to the right)
+            Vector3 ballDir = Ball.transform.position - transform.position;
+            ballDir.y = 0;
+            //ballDir is the vector from the club to the goal.
+            float ballAngle = Vector3.Angle(ballDir, shotDir);
+            if (ballAngle > 90) //Check if the ball is on the left side of the club.
+            {
+                //Debug.Log("Ball is on the left side of the Club. Inverting shotDir.");
+                shotDir = -shotDir;
+            }
             if (velocity < minHitStrength)
             {
-                Debug.Log("Hitting Ball with minHitStrength of: " + minHitStrength.ToString());
+                Debug.Log("Hitting Ball with minHitStrength of: " + minHitStrength.ToString() + " in direction: " + shotDir);
                 Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * minHitStrength);
             }
             else 
             {
-                Debug.Log("Hitting Ball with velocity of: " + velocity.ToString());
+                Debug.Log("Hitting Ball with velocity of: " + velocity.ToString() + " in direction: " + shotDir);
                 Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * velocity);
             }
-            //Ball.GetComponent<Rigidbody>().AddForce(up);
             soundEffects.PlayClubHit();
             soundEffects.PlayRolling(1f);
             m_Collider.enabled = false;
