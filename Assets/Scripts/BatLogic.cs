@@ -72,7 +72,7 @@ public class BatLogic : MonoBehaviour
             playerSounds.playObjectHitByBat();
         }
         if(collider1.CompareTag("AHole")){
-            Destroy(collider1.gameObject);
+            gameManager.deleteAHole(collider1.gameObject);
             player = GameObject.Find("Player");
             playerSounds = player.GetComponent<PlayerSoundEffect>();
             playerSounds.playAHoleHitByBat();
