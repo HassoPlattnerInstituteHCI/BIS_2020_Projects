@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     SpeechOut speechOut;
     GameManager Manager;
     Playfield Field;
+    
+    
 /*
     public int startBPM = 60;
     public int endBPM = 220;
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
     {
         Manager = GameObject.Find("Panto").GetComponent<GameManager>();
         Field = GameObject.Find("BackgroundWhite").GetComponent<Playfield>();
+        
     }
 
     async void Start()

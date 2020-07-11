@@ -177,8 +177,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -332,8 +332,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tetris PANTO Edition
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 588244006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede8c46b7b2c3e047b344b3a0563b1d1, type: 3}
+  m_Script: {fileID: 11500000, guid: ec3d0e7265844894fbeba4ec17a458c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   QuitButton: {fileID: 433206937}
@@ -758,7 +758,7 @@ MonoBehaviour:
   TutorialButton: {fileID: 673548603}
   EndlessButton: {fileID: 1063665354}
   PuzzlesButton: {fileID: 1476764563}
-  BackButton: {fileID: 414582774}
+  BackButton: {fileID: 0}
 --- !u!1 &673548601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,8 +1074,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Puzzles
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1229,8 +1229,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tutorial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1596,8 +1596,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Endless
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2314,7 +2314,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnSpeed: 1
   welcome: 0
-  introductoryLevel: 0
   mainMenu: 1
   puzzles: 0
   endless: 0
