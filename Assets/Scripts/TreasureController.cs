@@ -47,36 +47,9 @@ namespace Stealth
         {
             successAudioSource.Play();
             await speechOut.Speak("Congratulations. You finished the level.");
-
-            // TODO: Improve using inheritance
-            if (SceneManager.GetActiveScene().name == "Level 1")
-            {
-                LevelManager1 script = GameObject.Find("Panto").GetComponent<LevelManager1>();
-                await script.Success();
-            }
-            else if (SceneManager.GetActiveScene().name == "Level 2")
-            {
-                LevelManager2 script = GameObject.Find("Panto").GetComponent<LevelManager2>();
-                await script.Success();
-            }
-            else if (SceneManager.GetActiveScene().name == "Level 3")
-            {
-                await speechOut.Speak("congratulations. You completed the game.");
-                await speechOut.Speak("Thanks for playing DuelPanto.");
-                Application.Quit();
-            }
-            else if (SceneManager.GetActiveScene().name == "Level 4")
-            {
-                await speechOut.Speak("congratulations. You completed the game.");
-                await speechOut.Speak("Thanks for playing DuelPanto.");
-                Application.Quit();
-            }
-            else if (SceneManager.GetActiveScene().name == "Level 5")
-            {
-                await speechOut.Speak("congratulations. You completed the game.");
-                await speechOut.Speak("Thanks for playing DuelPanto.");
-                Application.Quit();
-            }
+            
+            LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
+            script.Success();
         }
 
         public void OnApplicationQuit()
