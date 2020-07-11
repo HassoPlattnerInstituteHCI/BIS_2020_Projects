@@ -12,15 +12,15 @@ public class GameManager : MonoBehaviour
 {
     public float spawnSpeed = 1f;
     public bool welcome = true;
-    public bool introductoryLevel = true;
+    public static bool introductoryLevel = true;
     public bool mainMenu = false;
     public bool puzzles = false;
     public bool endless = false;
     public GameObject player;
     public bool shouldFreeHandle;
 
-    public bool blockPlaced=false; //Let the Tutorial know when a block was placed
-    public int clearCounter=0; //Counting the amount of rows cleared for Tutorial and Puzzles
+    public static bool blockPlaced=false; //Let the Tutorial know when a block was placed
+    public static int clearCounter=0; //Counting the amount of rows cleared for Tutorial and Puzzles
     bool resetCurrentLevel = false; //If the player cannot finish the level, reset it
 
     UpperHandle upperHandle;
@@ -36,8 +36,6 @@ public class GameManager : MonoBehaviour
 
     GameObject SpawnerPos;
 
-    Playfield Field;
-
     Player PlayerIn;
     static int[] skylineHeights; //Each array space determines the height of the highest block in that column (in steps of 1, not .5)
 
@@ -52,7 +50,6 @@ public class GameManager : MonoBehaviour
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
         speechOut = new SpeechOut();
         PlayerIn = GameObject.Find("Player").GetComponent<Player>();
-        Field = GameObject.Find("BackgroundWhite").GetComponent<Playfield>();
     }
 
     async void Start()
@@ -128,7 +125,7 @@ public class GameManager : MonoBehaviour
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
                 if(resetCurrentLevel) {
-                    Field.cleanUpRows();
+                    Playfield.cleanUpRows();
                     SpawnManager.introCounter--;
                     break;
                 }
@@ -136,7 +133,7 @@ public class GameManager : MonoBehaviour
                 await speechOut.Speak("You have successfully cleared your first rows! Congratulations!");
 
                 //TODO: level cleanup 
-                Field.cleanUpRows();
+                Playfield.cleanUpRows();
                 break;
             case 1:
                 break;
@@ -144,7 +141,7 @@ public class GameManager : MonoBehaviour
                 playingTutorial=false;
                 break;
         }
-        await speechOut.Speak("Starting Tutorial Level Number"+(SpawnManager.introCounter+1));
+        await speechOut.Speak("Starting Tutorial Level Number"+SpawnManager.introCounter+1);
         SpawnManager.introCounter++;
         SpawnManager.spawnIntroPls = true;
     }
