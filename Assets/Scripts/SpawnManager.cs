@@ -62,7 +62,6 @@ public class SpawnManager : MonoBehaviour
                     blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
                     blockLeft.name = ""+leftBlock;
                     Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
-                    introCounter++;
                     spawnIntroPls = false;
                     return; //Level 0 is special, since we only spawn one block
         }
@@ -73,7 +72,6 @@ public class SpawnManager : MonoBehaviour
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
         blockRight.name = ""+rightBlock;
         Player.rightBlockRotaterPos = blockRight.transform.GetChild(0).transform.position;
-        introCounter++;
         spawnIntroPls = false;
     }
 }

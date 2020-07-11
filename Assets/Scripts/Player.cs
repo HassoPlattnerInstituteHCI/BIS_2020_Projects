@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public GameObject SpawnerLeft;
     SpeechIn speechIn;
     SpeechOut speechOut;
+    GameManager Manager;
 /*
     public int startBPM = 60;
     public int endBPM = 220;
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
 
         void Awake()
     {
-        
+        Manager = GameObject.Find("Panto").GetComponent<GameManager>();
         
     }
 
@@ -52,8 +53,6 @@ public class Player : MonoBehaviour
         //await speechOut.Speak("Welcome to Tetris Panto Edition.");
         speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place", "abort" });
         speechIn.StartListening(new string[] {"left", "right", "confirm", "place", "abort" });
-        //Initializes first wave on the left block immediately
-        //onRecognized("left"); DOESNT WORK ANYMORE
     }
 
     // Update is called once per frame
@@ -61,7 +60,7 @@ public class Player : MonoBehaviour
     {
             // Simply connects the player to the upper handles position
 
-            if (!playercontrol) {
+        if (!playercontrol) {
                 if (Input.GetKeyDown(KeyCode.L)) {
                     onRecognized("left");
                 }
@@ -93,18 +92,28 @@ public class Player : MonoBehaviour
 
     }
     
-    async void onRecognized(string message)
+    public async void onRecognized(string message)
     {
         //checking voice input
         Debug.Log("[" + this.GetType() + "]:" + message);
         if (message == "left" && !playercontrol && !placement)      //select left block
         {
             await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
+            transform.position = leftBlockRotaterPos;
+            //SpawnManager.blockLeft.transform.SetParent(transform);
+            //TODO: Sound
+            await speechOut.Speak("Now tracing the left block");
+            await Manager.traceBlock(SpawnManager.leftBlock, true);
             leftBlockActive = true;
         }
         if (message == "right" && !playercontrol && !placement)     //select right block
         {
             await meHandle.MoveToPosition(rightBlockRotaterPos, 0.3f, shouldFreeHandle);
+            transform.position = rightBlockRotaterPos;
+            //SpawnManager.blockRight.transform.SetParent(transform);
+            await speechOut.Speak("Now tracing the right block");
+            //TODO: Sound
+            await Manager.traceBlock(SpawnManager.rightBlock, false);
             leftBlockActive = false;
         }
         if(message == "confirm" && !playercontrol && !placement)    //confirm block selection
@@ -122,6 +131,7 @@ public class Player : MonoBehaviour
             meHandle.Free();
             playercontrol = true;
             chooseMode = false;
+            
             activeBlock.transform.position = transform.position;
         }
         if(message == "place" && playercontrol)     //placing the block on the grid                     
@@ -139,11 +149,14 @@ public class Player : MonoBehaviour
             placement = false;
             Playfield.confirmBlock(activeBlock);
             Playfield.deleteFullRows();
-            SpawnManager.spawnWavePls = true;
-            transform.position = SpawnerLeft.transform.position;
-            await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
-            //Initializes next wave on the Me-Handle immediately
-            onRecognized("left");
+            GameManager.blockPlaced=true;
+            if(!GameManager.introductoryLevel) {
+                SpawnManager.spawnWavePls = true;
+                transform.position = SpawnerLeft.transform.position;
+                await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
+                //Initializes next wave on the Me-Handle immediately
+                onRecognized("left");
+            }
         }
         if(message == "abort" && placement)     //abort block placement
         {

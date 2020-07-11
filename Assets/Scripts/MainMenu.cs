@@ -16,10 +16,15 @@ public class MainMenu : MonoBehaviour
     SpeechIn speechIn;
     SpeechOut speechOut;
 
-    void Start() {
+    async void Start() {
         speechOut = new SpeechOut();
         speechIn = new SpeechIn(onRecognized, new string[] { "modes", "tutorial", "endless", "puzzles", "back", "quit", "commands" });
         speechIn.StartListening(new string[] {"modes", "tutorial", "endless", "puzzles", "back", "quit", "commands"});
+        await speechOut.Speak("Welcome to Tetris Panto Edition. Say modes to hear the list of available modes or start immediately by saying Tutorial.");
+    }
+
+    public static void PlayMainMenu() {
+        SceneManager.LoadScene(0);
     }
 
     public void PlayTutorial() {

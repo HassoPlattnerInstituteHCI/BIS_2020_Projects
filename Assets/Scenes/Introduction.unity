@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skylines:
-  - {fileID: 8098386472531645295, guid: 5e9cbf540ae2aa747af2a19046ee5209, type: 3}
+  - {fileID: 8098386472531645295, guid: 027272edb3f5a7145a38fb65136fd95c, type: 3}
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}
@@ -420,7 +420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422395895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -7}
+  m_LocalPosition: {x: -1.5, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -846,8 +846,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnSpeed: 1
   welcome: 1
-  introductoryLevel: 1
   mainMenu: 0
+  puzzles: 0
+  endless: 0
   player: {fileID: 0}
   shouldFreeHandle: 0
 --- !u!1 &906322409

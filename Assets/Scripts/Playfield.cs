@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using DualPantoFramework;
+using SpeechIO;
 
 namespace Tetris {
 public class Playfield : MonoBehaviour
@@ -14,6 +15,8 @@ public class Playfield : MonoBehaviour
 
     public static int offsetX = 2;
     public static int offsetZ = 14;
+
+    static SpeechOut speechOut;
 
     public static int w = 10;
     public static int h = 18;
@@ -31,6 +34,7 @@ public class Playfield : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speechOut = new SpeechOut();
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
     }
@@ -69,7 +73,7 @@ public class Playfield : MonoBehaviour
     }
 
     //For each row, checks if it is full and proceeds accordingly
-    public static void deleteFullRows() {
+    public async static void deleteFullRows() {
         int maxRow = -1;
         int counter = 0;
         clearedRows = 0;
@@ -85,6 +89,11 @@ public class Playfield : MonoBehaviour
         while(counter>0) { //All rows above the highest fallen row are now decreased as many times as rows have been deleted
             decreaseRowsAbove(maxRow+counter);
             counter--;
+        }
+        GameManager.clearCounter+=clearedRows; //Let the GameManager know of the progress
+        if(clearedRows>0) {
+            await speechOut.Speak("You hav cleared"+clearedRows+"rows.");
+            //TODO Sound
         }
     }
 
@@ -130,6 +139,18 @@ public class Playfield : MonoBehaviour
             child=oldRow.transform.GetChild(0);
             child.parent = null;
             child.parent = allRowsParent.transform.GetChild(newRow);
+        }
+    }
+
+    public static void cleanUpRows() {
+        GameObject parentRow;
+        int children;
+        for(int row=0; row<h; row++) {
+            parentRow = allRowsParent.transform.GetChild(row).gameObject;
+            children = parentRow.transform.childCount;
+            for(int block=0; block<children; block++) {
+                Destroy(parentRow.transform.GetChild(block).gameObject);
+            }
         }
     }
 
