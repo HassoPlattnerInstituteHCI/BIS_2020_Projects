@@ -21,11 +21,11 @@ public class Playfield : MonoBehaviour
     public static int w = 10;
     public static int h = 18;
     private static bool[,] grid = new bool[w,h]; //is currently not used
-    public static GameObject allRowsParent = GameObject.Find("AllRows"); //Parent Object of all the Row-Objects that are used to track blocks positions
+    public static GameObject allRowsParent; //Parent Object of all the Row-Objects that are used to track blocks positions
 
     public static int clearedRows; //To track in endless (for points) and in Tutorial. Don't know how to do it in Puzzles yet.
 
-
+    GameManager Manager;
 
     //Info on blocks in general: Every block is named after its exact position, e.g. "ArrayCR10" would be the block in the bottom row in the first column.
     //Additionally, every block is set as a child of a "RowX" object, each of which (in theory) can only have ten children: One for every column. 
@@ -34,6 +34,8 @@ public class Playfield : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        allRowsParent = GameObject.Find("AllRows");
+        Manager = GameObject.Find("Panto").GetComponent<GameManager>();
         speechOut = new SpeechOut();
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
@@ -46,7 +48,7 @@ public class Playfield : MonoBehaviour
     }
     
     //takes the blocks position and aligns all of its children to the .5 by .5 grid
-    public static void roundAndPlaceBlock(GameObject block) { 
+    public void roundAndPlaceBlock(GameObject block) { 
         //Need to assert that the placement location is valid first!
         foreach(Transform child in block.transform) {
             child.transform.position = new Vector3((Mathf.Round(child.transform.position.x*2f)/2f), 
@@ -59,13 +61,13 @@ public class Playfield : MonoBehaviour
 
 
     //sets a blocks name and tag to the column and row it is in in the grid
-    static void updateTagName(int column, int row, Transform block) {
+    void updateTagName(int column, int row, Transform block) {
         block.tag = ""+column; //need to change tags names to column
         block.name = "ArrayCR"+column+row;
     }
 
     //checks if a position in the grid is already taken by a block (solution without an actual array, but only with blocks in the scene)
-    static bool checkPosition(int column, int row) {
+    bool checkPosition(int column, int row) {
         if(GameObject.Find("ArrayCR"+column+row)) {
             return true;
         }
@@ -73,7 +75,7 @@ public class Playfield : MonoBehaviour
     }
 
     //For each row, checks if it is full and proceeds accordingly
-    public async static void deleteFullRows() {
+    public async void deleteFullRows() {
         int maxRow = -1;
         int counter = 0;
         clearedRows = 0;
@@ -90,7 +92,7 @@ public class Playfield : MonoBehaviour
             decreaseRowsAbove(maxRow+counter);
             counter--;
         }
-        GameManager.clearCounter+=clearedRows; //Let the GameManager know of the progress
+        Manager.clearCounter+=clearedRows; //Let the GameManager know of the progress
         if(clearedRows>0) {
             await speechOut.Speak("You hav cleared"+clearedRows+"rows.");
             //TODO Sound
@@ -98,7 +100,7 @@ public class Playfield : MonoBehaviour
     }
 
     //checks whether or not a row is completely filled with blocks
-    public static bool checkRow(int row) {
+    public bool checkRow(int row) {
         if(allRowsParent.transform.GetChild(row).transform.childCount == w) {
             return true;
         }
@@ -106,7 +108,7 @@ public class Playfield : MonoBehaviour
     }
 
     //deletes one row of blocks
-    public static void deleteThisRow(GameObject currentRow) {
+    public void deleteThisRow(GameObject currentRow) {
         //thisBlock.GetComponent<PantoBoxCollider>().Disable();
         //thisBlock.GetComponent<PantoBoxCollider>().Remove();
         for(int i=9; i>=0; i--) {
@@ -117,7 +119,7 @@ public class Playfield : MonoBehaviour
     }
 
     //for each block in all rows including and above "row", moves the blocks down one row
-    public static void decreaseRowsAbove(int row) {
+    public void decreaseRowsAbove(int row) {
         int column;
         GameObject rowParent;
         for(int currentRow=row; currentRow<h; currentRow++) { //do this for every row above and including the current one
@@ -142,7 +144,7 @@ public class Playfield : MonoBehaviour
         }
     }
 
-    public static void cleanUpRows() {
+    public void cleanUpRows() {
         GameObject parentRow;
         int children;
         for(int row=0; row<h; row++) {
@@ -156,7 +158,7 @@ public class Playfield : MonoBehaviour
 
     //is called when the player wants to place the block in the current position. For each child, except the rotater (which is deleted), the coordinates are confirmed
     //and the block gets the appropiate name and tag
-    public static void confirmBlock(GameObject block) {
+    public void confirmBlock(GameObject block) {
         float xPosRelative;
         float zPosRelative;
         int column;
@@ -181,7 +183,7 @@ public class Playfield : MonoBehaviour
 
     //is called when the player attempts to place a block. Rounds the coordinates of all children (except rotater) and checks whether or not there already is a block in 
     //that position in the grid. Additionally, checks if at least one other block has a neighbour below/is in the bottom row 
-    public static bool isValidPlacement(GameObject block) {
+    public bool isValidPlacement(GameObject block) {
         float xPosRelative;
         float zPosRelative;
         int column;

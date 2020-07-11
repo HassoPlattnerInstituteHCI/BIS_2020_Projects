@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     SpeechIn speechIn;
     SpeechOut speechOut;
     GameManager Manager;
+    Playfield Field;
 /*
     public int startBPM = 60;
     public int endBPM = 220;
@@ -40,7 +41,7 @@ public class Player : MonoBehaviour
         void Awake()
     {
         Manager = GameObject.Find("Panto").GetComponent<GameManager>();
-        
+        Field = GameObject.Find("BackgroundWhite").GetComponent<Playfield>();
     }
 
     async void Start()
@@ -136,10 +137,10 @@ public class Player : MonoBehaviour
         }
         if(message == "place" && playercontrol)     //placing the block on the grid                     
         {
-            if(Playfield.isValidPlacement(activeBlock)) {
+            if(Field.isValidPlacement(activeBlock)) {
                 placement = true;
                 playercontrol = false;
-                Playfield.roundAndPlaceBlock(activeBlock);
+                Field.roundAndPlaceBlock(activeBlock);
                 await meHandle.MoveToPosition(activeBlock.transform.GetChild(0).transform.position, 0.3f, shouldFreeHandle);
             } else {await speechOut.Speak("You cannot place the block here.");}
         }
@@ -147,10 +148,10 @@ public class Player : MonoBehaviour
         {
             activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
-            Playfield.confirmBlock(activeBlock);
-            Playfield.deleteFullRows();
-            GameManager.blockPlaced=true;
-            if(!GameManager.introductoryLevel) {
+            Field.confirmBlock(activeBlock);
+            Field.deleteFullRows();
+            Manager.blockPlaced=true;
+            if(!Manager.introductoryLevel) {
                 SpawnManager.spawnWavePls = true;
                 transform.position = SpawnerLeft.transform.position;
                 await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);

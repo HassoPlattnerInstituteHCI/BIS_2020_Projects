@@ -17,11 +17,12 @@ public class SpawnManager : MonoBehaviour
     public static GameObject blockRight;
     public GameObject[] skylines;
     public GameObject[] groups;
+    Playfield Field;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Field = GameObject.Find("BackgroundWhite").GetComponent<Playfield>();
     }
 
     // Update is called once per frame
@@ -58,14 +59,14 @@ public class SpawnManager : MonoBehaviour
         switch(level) {
             case 0: leftBlock = 3; //Picks the yellow block, which fits in the gap
                     Instantiate(skylines[level], transform.position + new Vector3((float)-0.5, 0, (float)-7), transform.rotation);
-                    Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
+                    Field.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
                     blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
                     blockLeft.name = ""+leftBlock;
                     Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
                     spawnIntroPls = false;
                     return; //Level 0 is special, since we only spawn one block
         }
-        Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
+        Field.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
         blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3((float)1.5,0,0), transform.rotation);
         blockLeft.name = ""+leftBlock;
         Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
