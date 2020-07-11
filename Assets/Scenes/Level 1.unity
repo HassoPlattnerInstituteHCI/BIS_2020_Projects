@@ -326,7 +326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &593793394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e08406b5de1ad014587cfbe2ef4822c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -394,8 +394,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593793393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: -10.78}
-  m_LocalScale: {x: 17.109827, y: 1, z: 11.6375}
+  m_LocalPosition: {x: 0, y: -0.5, z: -9}
+  m_LocalScale: {x: 28.15, y: 1, z: 20.12}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -608,7 +608,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8c93b3d48309a454e894ebd09f03c405, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -782,7 +782,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8c93b3d48309a454e894ebd09f03c405, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -886,7 +886,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 7.5706215
+  orthographic size: 17.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -943,7 +943,7 @@ GameObject:
   - component: {fileID: 967998317}
   - component: {fileID: 967998316}
   - component: {fileID: 967998321}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +994,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8c93b3d48309a454e894ebd09f03c405, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
