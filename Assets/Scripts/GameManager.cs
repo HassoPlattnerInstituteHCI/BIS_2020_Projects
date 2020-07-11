@@ -12,15 +12,15 @@ public class GameManager : MonoBehaviour
 {
     public float spawnSpeed = 1f;
     public bool welcome = true;
-    public static bool introductoryLevel = true;
+    public bool introductoryLevel = false;
     public bool mainMenu = false;
     public bool puzzles = false;
     public bool endless = false;
     public GameObject player;
     public bool shouldFreeHandle;
 
-    public static bool blockPlaced=false; //Let the Tutorial know when a block was placed
-    public static int clearCounter=0; //Counting the amount of rows cleared for Tutorial and Puzzles
+    public bool blockPlaced=false; //Let the Tutorial know when a block was placed
+    public int clearCounter=0; //Counting the amount of rows cleared for Tutorial and Puzzles
     bool resetCurrentLevel = false; //If the player cannot finish the level, reset it
 
     UpperHandle upperHandle;
@@ -69,6 +69,11 @@ public class GameManager : MonoBehaviour
             await IntroductoryLevel();
             await speechOut.Speak("Tutorial finished, you can now choose a new mode in the Main Menu.");
             MainMenu.PlayMainMenu();
+        } else if(puzzles) {
+            //TODO Make PuzzleManager Function
+            SpawnManager.spawnWavePls = true; //Workaround for now
+        } else if (endless) {
+            SpawnManager.spawnWavePls = true;
         }
         /*
         if (welcome)
@@ -118,9 +123,9 @@ public class GameManager : MonoBehaviour
                 await speechOut.Speak("Now the Me-Handle will trace a block at the top of the level. Every block has its own type of sound, remember it!");
                 PlayerIn.onRecognized("left");
 
-                await Task.Delay(2000);
+                await Task.Delay(3000);
 
-                await speechOut.Speak("Now, try to move the block down to clear a row of blocks in the skyline. Say confirm to pick up the selected block.");
+                await speechOut.Speak("Now, try to move the block down to clear a row of blocks in the skyline. Say confirm to pick up the selected block. When you want to place the block, say place.");
                 // TODO: Me-handle wiggle
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
@@ -141,7 +146,7 @@ public class GameManager : MonoBehaviour
                 playingTutorial=false;
                 break;
         }
-        await speechOut.Speak("Starting Tutorial Level Number"+SpawnManager.introCounter+1);
+        await speechOut.Speak("Starting Tutorial Level Number"+(SpawnManager.introCounter+1));
         SpawnManager.introCounter++;
         SpawnManager.spawnIntroPls = true;
     }
@@ -166,7 +171,7 @@ public class GameManager : MonoBehaviour
         
         switch(blockCode) {
             case 0: 
-            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.1f), 0.1f, shouldFreeHandle); //To correct global position
+            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f,0f,-1f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,2f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-2f), 0.1f, shouldFreeHandle);

@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private PantoHandle meHandle;
     GameObject meHandlePrefab;
     GameObject activeBlock;
+    public static int activeBlockID;
     public static Vector3 leftBlockRotaterPos;
     public static Vector3 rightBlockRotaterPos;
     bool playercontrol = false;
@@ -23,17 +24,15 @@ public class Player : MonoBehaviour
     bool leftBlockActive = true;
     bool placement = false;
     public bool shouldFreeHandle;
+    public int rotateAmount; //To track how the block looks in a give moment when trying to rotate
     public float movementspeed = 0.2f;
     public GameObject SpawnerLeft;
     SpeechIn speechIn;
     SpeechOut speechOut;
     GameManager Manager;
-<<<<<<< HEAD
     Playfield Field;
     
     
-=======
->>>>>>> parent of dd5100a... Static fixes
 /*
     public int startBPM = 60;
     public int endBPM = 220;
@@ -46,10 +45,7 @@ public class Player : MonoBehaviour
         void Awake()
     {
         Manager = GameObject.Find("Panto").GetComponent<GameManager>();
-<<<<<<< HEAD
         Field = GameObject.Find("BackgroundWhite").GetComponent<Playfield>();
-=======
->>>>>>> parent of dd5100a... Static fixes
         
     }
 
@@ -61,8 +57,8 @@ public class Player : MonoBehaviour
         await Task.Delay(1000);
         await meHandle.SwitchTo(SpawnerLeft, 0.4f);
         //await speechOut.Speak("Welcome to Tetris Panto Edition.");
-        speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "place", "abort" });
-        speechIn.StartListening(new string[] {"left", "right", "confirm", "place", "abort" });
+        speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm","rotate", "place", "abort" });
+        speechIn.StartListening(new string[] {"left", "right", "confirm","rotate", "place", "abort" });
     }
 
     // Update is called once per frame
@@ -86,10 +82,10 @@ public class Player : MonoBehaviour
             }
         if (playercontrol) {
             transform.position = meHandle.HandlePosition(transform.position);
-            
+            Playfield.alignLive(activeBlockID);
             // Rotate !!Need way of doing this with the Me-Handle rotation!!
             if (Input.GetKeyDown(KeyCode.Space)) {
-                activeBlock.transform.RotateAround(activeBlock.transform.GetChild(0).position, new Vector3(0,1,0), -90);
+                onRecognized("rotate");
             }
 
             else if (Input.GetKeyDown(KeyCode.P)) {
@@ -104,30 +100,32 @@ public class Player : MonoBehaviour
     
     public async void onRecognized(string message)
     {
+        //REENABLE SPEECHOUT BEFORE BUILDING
         //checking voice input
         Debug.Log("[" + this.GetType() + "]:" + message);
         if (message == "left" && !playercontrol && !placement)      //select left block
         {
             await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
             transform.position = leftBlockRotaterPos;
-            //SpawnManager.blockLeft.transform.SetParent(transform);
             //TODO: Sound
-            await speechOut.Speak("Now tracing the left block");
+            //await speechOut.Speak("Now tracing the left block");
             await Manager.traceBlock(SpawnManager.leftBlock, true);
             leftBlockActive = true;
+            activeBlockID = SpawnManager.leftBlock;
         }
         if (message == "right" && !playercontrol && !placement)     //select right block
         {
             await meHandle.MoveToPosition(rightBlockRotaterPos, 0.3f, shouldFreeHandle);
             transform.position = rightBlockRotaterPos;
-            //SpawnManager.blockRight.transform.SetParent(transform);
-            await speechOut.Speak("Now tracing the right block");
+            //await speechOut.Speak("Now tracing the right block");
             //TODO: Sound
             await Manager.traceBlock(SpawnManager.rightBlock, false);
             leftBlockActive = false;
+            activeBlockID = SpawnManager.rightBlock;
         }
         if(message == "confirm" && !playercontrol && !placement)    //confirm block selection
         {
+            //await speechOut.Speak("Block picked up.");
             if(leftBlockActive) {
                 Destroy(SpawnManager.blockRight);
                 SpawnManager.blockLeft.transform.SetParent(transform);
@@ -141,8 +139,12 @@ public class Player : MonoBehaviour
             meHandle.Free();
             playercontrol = true;
             chooseMode = false;
-            
+            rotateAmount=0;
             activeBlock.transform.position = transform.position;
+        }
+        if(message == "rotate" && playercontrol) {
+            //await speechOut.Speak("Rotating");
+            rotateAmount = Field.rotateBlock(activeBlock, activeBlockID, rotateAmount);
         }
         if(message == "place" && playercontrol)     //placing the block on the grid                     
         {
@@ -151,16 +153,18 @@ public class Player : MonoBehaviour
                 playercontrol = false;
                 Playfield.roundAndPlaceBlock(activeBlock);
                 await meHandle.MoveToPosition(activeBlock.transform.GetChild(0).transform.position, 0.3f, shouldFreeHandle);
+                //await speechOut.Speak("Block can be placed here. Say confirm or abort to continue.");
             } else {await speechOut.Speak("You cannot place the block here.");}
         }
         if(message == "confirm" && placement)       //confirming placement location
         {
+            //await speechOut.Speak("Block placed.");
             activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
             Playfield.confirmBlock(activeBlock);
-            Playfield.deleteFullRows();
-            GameManager.blockPlaced=true;
-            if(!GameManager.introductoryLevel) {
+            Field.deleteFullRows();
+            Manager.blockPlaced=true;
+            if(!Manager.introductoryLevel) {
                 SpawnManager.spawnWavePls = true;
                 transform.position = SpawnerLeft.transform.position;
                 await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
@@ -170,6 +174,7 @@ public class Player : MonoBehaviour
         }
         if(message == "abort" && placement)     //abort block placement
         {
+            //await speechOut.Speak("Placement aborted.");
             placement = false;
             playercontrol = true;
             meHandle.Free();

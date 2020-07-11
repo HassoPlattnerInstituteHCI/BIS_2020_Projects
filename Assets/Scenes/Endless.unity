@@ -599,8 +599,12 @@ MonoBehaviour:
   welcome: 1
   introductoryLevel: 0
   mainMenu: 0
+  puzzles: 0
+  endless: 0
   player: {fileID: 0}
   shouldFreeHandle: 0
+  blockPlaced: 0
+  clearCounter: 0
 --- !u!1 &746461401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,6 +1106,7 @@ GameObject:
   - component: {fileID: 1197761971}
   - component: {fileID: 1197761970}
   - component: {fileID: 1197761969}
+  - component: {fileID: 1197761972}
   m_Layer: 0
   m_Name: BackgroundWhite
   m_TagString: Untagged
@@ -1184,6 +1189,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1197761972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197761968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95403a083c2022643ad7f5dc3843995b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shouldFreeHandle: 0
 --- !u!1 &1301077503
 GameObject:
   m_ObjectHideFlags: 0
