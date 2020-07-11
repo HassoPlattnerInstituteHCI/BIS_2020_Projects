@@ -17,23 +17,27 @@ public class Playfield : MonoBehaviour
     public static int offsetZ = 14;
 
     static SpeechOut speechOut;
-
+        GameManager Manager;
     public static int w = 10;
     public static int h = 18;
     private static bool[,] grid = new bool[w,h]; //is currently not used
-    public static GameObject allRowsParent = GameObject.Find("AllRows"); //Parent Object of all the Row-Objects that are used to track blocks positions
-
+    public static GameObject allRowsParent; //Parent Object of all the Row-Objects that are used to track blocks positions
     public static int clearedRows; //To track in endless (for points) and in Tutorial. Don't know how to do it in Puzzles yet.
 
 
 
-    //Info on blocks in general: Every block is named after its exact position, e.g. "ArrayCR10" would be the block in the bottom row in the first column.
-    //Additionally, every block is set as a child of a "RowX" object, each of which (in theory) can only have ten children: One for every column. 
-    //Every block also has a tag that indicates its column, this is used when renaming them after decreasing their height/changing which row they are in.
-
-    // Start is called before the first frame update
-    void Start()
+        //Info on blocks in general: Every block is named after its exact position, e.g. "ArrayCR10" would be the block in the bottom row in the first column.
+        //Additionally, every block is set as a child of a "RowX" object, each of which (in theory) can only have ten children: One for every column. 
+        //Every block also has a tag that indicates its column, this is used when renaming them after decreasing their height/changing which row they are in.
+    void Awake()
     {
+        allRowsParent = GameObject.Find("AllRows");
+        Manager = GameObject.Find("Panto").GetComponent<GameManager>();
+    }
+        // Start is called before the first frame update
+        void Start()
+    {
+        
         speechOut = new SpeechOut();
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
@@ -73,7 +77,7 @@ public class Playfield : MonoBehaviour
     }
 
     //For each row, checks if it is full and proceeds accordingly
-    public async static void deleteFullRows() {
+    public async void deleteFullRows() {
         int maxRow = -1;
         int counter = 0;
         clearedRows = 0;
@@ -90,7 +94,7 @@ public class Playfield : MonoBehaviour
             decreaseRowsAbove(maxRow+counter);
             counter--;
         }
-        GameManager.clearCounter+=clearedRows; //Let the GameManager know of the progress
+        Manager.clearCounter += clearedRows; //Let the GameManager know of the progress
         if(clearedRows>0) {
             await speechOut.Speak("You hav cleared"+clearedRows+"rows.");
             //TODO Sound

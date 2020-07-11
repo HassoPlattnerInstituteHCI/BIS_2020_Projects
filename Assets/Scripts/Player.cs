@@ -28,6 +28,9 @@ public class Player : MonoBehaviour
     SpeechIn speechIn;
     SpeechOut speechOut;
     GameManager Manager;
+    Playfield Field;
+    
+    
 /*
     public int startBPM = 60;
     public int endBPM = 220;
@@ -40,6 +43,7 @@ public class Player : MonoBehaviour
         void Awake()
     {
         Manager = GameObject.Find("Panto").GetComponent<GameManager>();
+        Field = GameObject.Find("BackgroundWhite").GetComponent<Playfield>();
         
     }
 
@@ -148,9 +152,9 @@ public class Player : MonoBehaviour
             activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
             Playfield.confirmBlock(activeBlock);
-            Playfield.deleteFullRows();
-            GameManager.blockPlaced=true;
-            if(!GameManager.introductoryLevel) {
+            Field.deleteFullRows();
+            Manager.blockPlaced = true;
+            if(!Manager.introductoryLevel) {
                 SpawnManager.spawnWavePls = true;
                 transform.position = SpawnerLeft.transform.position;
                 await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);

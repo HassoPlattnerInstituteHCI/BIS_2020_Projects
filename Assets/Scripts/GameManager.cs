@@ -12,15 +12,15 @@ public class GameManager : MonoBehaviour
 {
     public float spawnSpeed = 1f;
     public bool welcome = true;
-    public static bool introductoryLevel = true;
+    public bool introductoryLevel = true;
     public bool mainMenu = false;
     public bool puzzles = false;
     public bool endless = false;
     public GameObject player;
     public bool shouldFreeHandle;
 
-    public static bool blockPlaced=false; //Let the Tutorial know when a block was placed
-    public static int clearCounter=0; //Counting the amount of rows cleared for Tutorial and Puzzles
+    public bool blockPlaced=false; //Let the Tutorial know when a block was placed
+    public int clearCounter=0; //Counting the amount of rows cleared for Tutorial and Puzzles
     bool resetCurrentLevel = false; //If the player cannot finish the level, reset it
 
     UpperHandle upperHandle;

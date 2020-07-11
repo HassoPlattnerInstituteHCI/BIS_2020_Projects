@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skylines:
-  - {fileID: 8098386472531645295, guid: 027272edb3f5a7145a38fb65136fd95c, type: 3}
+  - {fileID: 8098386472531645295, guid: cd9d1b8888f9c5b4aa1582912904830d, type: 3}
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}
@@ -1490,7 +1490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1722251863
 Transform:
   m_ObjectHideFlags: 0
