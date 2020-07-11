@@ -1,8 +1,4 @@
 ﻿using System.Threading.Tasks;
-using SpeechIO;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine.SceneManagement;
 
 namespace Stealth

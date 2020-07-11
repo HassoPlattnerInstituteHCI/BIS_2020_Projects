@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using UnityEngine.SceneManagement;
 
 namespace Stealth
 {
-    public class LevelManager3 : LevelManager
+    public class LevelManager5 : LevelManager
     {
         /// <summary>
         /// Starts a new round.
@@ -14,7 +13,7 @@ namespace Stealth
             DeactivateGameObjects();
             await SpawnPlayer();
             await SpawnEnemies();
-            await speechOut.Speak("Now there are two enemies. Say Switch to switch between enemies.");
+            await speechOut.Speak("You found a sword with which you can fight back enemies. Once enemies have spotted you, you will no longer die, but a battle will start. Rotate the knob on the me handle to swing your sword around you and kill your enemy.");
             upperHandle.Free();
             ActivateGameObjects(); 
             ListenToSwitch();
@@ -22,7 +21,7 @@ namespace Stealth
 
         override async public Task Success()
         {
-            SceneManager.LoadScene(sceneName: "Level 4");
+            await speechOut.Speak("Congratutations. You finished level 5! That's the end of the game for now. Thanks for playing Stealth Panto.");
         }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System.Threading.Tasks;
-using SpeechIO;
-using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine.SceneManagement;
 
 namespace Stealth
@@ -26,7 +22,7 @@ namespace Stealth
 
         override async public Task Success()
         {
-            await speechOut.Speak("Congratutations. You finished level 4! That's the end of the game for now. Thanks for playing Stealth Panto.");
+            SceneManager.LoadScene(sceneName: "Level 5");
         }
     }
 }
