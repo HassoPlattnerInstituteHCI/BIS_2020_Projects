@@ -97,6 +97,7 @@ public class PlayerLogic : MonoBehaviour
 
         if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
             playerSounds.playWasted();
+            gameManager.currentObjectiveReached = false;
             gameManager.ResetGame();
         } 
         if(collider1.CompareTag("safehouse")){
