@@ -4,12 +4,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-////TODO Level 4
-//1. DONE Let Danny Erzählen
-//2. DONE Let Passanten spawnen (Random position)
-//3. DONE Let Passanten quasseln
-//4. DONE Wenn Passant hit by bat -> Passant active = false
-//
+////TODO Level 5
+//// HitCount + reset in safehouse
+//Cashcount
+/// Danny talks, explains level
+// on 4th hit, hearbeat start
+//on 5th hit,sirens start, more cash for hits
 
 
 public class GameManager : MonoBehaviour
