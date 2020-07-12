@@ -109,11 +109,13 @@ public class Levels : MonoBehaviour
 
                 foreach (GameObject obst in obstacles)
                 {
+                    obst.SetActive(true);
                     await IntroduceObject(obst.GetComponent<ObjectOfInterest>());
                 }
 
                 foreach (GameObject powerUp in powerUps)
                 {
+                    powerUp.SetActive(true);
                     await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
                 }
 

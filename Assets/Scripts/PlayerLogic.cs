@@ -58,14 +58,14 @@ public class PlayerLogic : MonoBehaviour
             GetComponent<Shooting>().damage = (int)(GetComponent<Shooting>().damage * 1.2);
             //soundEffects.PlayPowerupCollect();
             _ = speechOut.Speak("Damage powerup found!");
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         if (other.CompareTag("Medipack"))
         {
             health.Heal(25);
             //soundEffects.PlayPowerupCollect();
             _ = speechOut.Speak("Medipack found!");
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
 }
