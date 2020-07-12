@@ -43,7 +43,7 @@ public class TelephoneSoundEffect : MonoBehaviour
         }
         else if(gameManager.currentLevel == 4){
             Debug.Log("Level 5 Intro played");
-            await speechOut.Speak("Welcome Back. You hit an Asshole!" );
+            await speechOut.Speak("I see why you are the right man for the job! You showed it to them assholes. Next time you go out be aware: Police heard that something is goin on here. After you hit a few people you will hear them comin. Thats why we will pay you more money if you go an a streak and hit many assholes before returning" );
             gameManager.currentObjectiveReached = false;
             gameManager.StartLevel5();
 
