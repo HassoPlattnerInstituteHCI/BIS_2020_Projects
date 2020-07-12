@@ -24,6 +24,11 @@ public class Playfield : MonoBehaviour
     static GameObject player; //can it be static?
     static GameObject upperPosition;
 
+    public AudioClip RowClear, LevelClear, LevelFail, BlockPlace, BlockRotate, BlockMove, MovementBlocked;
+    public AudioSource audioSource;
+    public float volume = 0.5f;
+    Vector3[] oldBlockPos = new Vector3[4];
+
         //Info on blocks in general: Every block is named after its exact position, e.g. "ArrayCR10" would be the block in the bottom row in the first column.
         //Additionally, every block is set as a child of a "RowX" object, each of which (in theory) can only have ten children: One for every column. 
         //Every block also has a tag that indicates its column, this is used when renaming them after decreasing their height/changing which row they are in.
@@ -42,38 +47,72 @@ public class Playfield : MonoBehaviour
         upperPosition = GameObject.Find("MeHandlePrefab(Clone)").transform.GetChild(0).gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
-    //takes the blocks position and aligns all of its children to the .5 by .5 grid
-    public static void roundAndPlaceBlock(GameObject block) { 
-        //Need to assert that the placement location is valid first!
-        foreach(Transform child in block.transform) {
-            child.transform.position = new Vector3((Mathf.Round(child.transform.position.x*2f)/2f), 
-                                                                Mathf.Round(child.transform.position.y*2f)/2f, 
-                                                                (Mathf.Round(child.transform.position.z*2f)/2f));
-        }
-
-    }
-
-    public static void alignLive(int blockID) {
+    public void alignLive(GameObject block, int blockID) {
         //More functions: Check if still in bounds. If newPos!=oldPos play sound
-        switch(blockID) {
-            case 0:
-            case 3:
-                player.transform.position = new Vector3(Mathf.Round(upperPosition.transform.position.x*2f)/2f, Mathf.Round(upperPosition.transform.position.y*2f)/2f, Mathf.Round(upperPosition.transform.position.z*2f)/2f);
-                break;
-            case 1:
-            case 2:
-            case 4:
-            case 5:
-            case 6:
-                player.transform.position = new Vector3(Mathf.Round(upperPosition.transform.position.x*2f)/2f, Mathf.Round(upperPosition.transform.position.y*2f)/2f, (Mathf.Round((upperPosition.transform.position.z+0.25f)*2f)/2f));
-                break;
+        Vector3[] newBlockPos = new Vector3[4];
+        newBlockPos[0] = alignBlockPos(block.transform.GetChild(0).gameObject, blockID); 
+        newBlockPos[1] = alignBlockPos(block.transform.GetChild(1).gameObject, blockID); 
+        newBlockPos[2] = alignBlockPos(block.transform.GetChild(2).gameObject, blockID); 
+        newBlockPos[3] = alignBlockPos(block.transform.GetChild(3).gameObject, blockID); 
+        bool notOld = notOldPos(newBlockPos);
+        bool notInter = notIntersecting(newBlockPos);
+        if(notOld && notInter) {
+            oldBlockPos[0] = newBlockPos[0];
+            oldBlockPos[1] = newBlockPos[1];
+            oldBlockPos[2] = newBlockPos[2];
+            oldBlockPos[3] = newBlockPos[3];
+            audioSource.PlayOneShot(BlockMove, volume);
+            switch(blockID) {
+                case 0:
+                case 3:
+                    player.transform.position = new Vector3(Mathf.Round(upperPosition.transform.position.x*2f)/2f, Mathf.Round(upperPosition.transform.position.y*2f)/2f, Mathf.Round(upperPosition.transform.position.z*2f)/2f);
+                    break;
+                case 1:
+                case 2:
+                case 4:
+                case 5:
+                case 6:
+                    player.transform.position = new Vector3(Mathf.Round(upperPosition.transform.position.x*2f)/2f, Mathf.Round(upperPosition.transform.position.y*2f)/2f, (Mathf.Round((upperPosition.transform.position.z+0.25f)*2f)/2f));
+                    break;
         }
+    }
+    else {
+        player.transform.position = oldBlockPos[0];
+        if(!notInter) { 
+            audioSource.PlayOneShot(MovementBlocked, volume);
+        }
+    }
+}
+    //takes the childs position and align it to the grid
+    public Vector3 alignBlockPos(GameObject block, int version) { 
+        if(version==0 || version==3) {
+            return new Vector3(Mathf.Round(upperPosition.transform.position.x*2f)/2f, Mathf.Round(upperPosition.transform.position.y*2f)/2f, Mathf.Round(upperPosition.transform.position.z*2f)/2f);
+        } else {return new Vector3(Mathf.Round(upperPosition.transform.position.x*2f)/2f, Mathf.Round(upperPosition.transform.position.y*2f)/2f, (Mathf.Round((upperPosition.transform.position.z+0.25f)*2f)/2f));}
+    }
+
+    //for every Vector3 in newPosition, check if it is in fact the old Position
+    public bool notOldPos(Vector3[] newPosition) {
+        for(int i=0; i<4; i++) {
+            if(oldBlockPos[i]==newPosition[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //for every Vector3 of the new Position, check if that is already occupied or out of bounds
+    public bool notIntersecting(Vector3[] position) {
+        foreach(Vector3 child in position) {
+            float xPosRelative = (Mathf.Round(child.x*2f)/2f);
+            float zPosRelative = (Mathf.Round(child.z*2f)/2f);
+            int column=(int)(2*(xPosRelative+offsetX));
+            int row=(int)(2*(zPosRelative+offsetZ));
+            if(checkPosition(column, row)) {
+                Debug.Log("Invalid Placement: Position already occupied");
+                return false;
+            }
+        }
+        return true;
     }
 
     public int rotateBlock(GameObject block, int blockID, int rotateAmount) {
@@ -81,16 +120,19 @@ public class Playfield : MonoBehaviour
         GameObject child2 = block.transform.GetChild(1).gameObject;
         GameObject child3 = block.transform.GetChild(2).gameObject;
         GameObject child4 = block.transform.GetChild(3).gameObject;
+        audioSource.PlayOneShot(BlockRotate, volume);
         switch (blockID) {
             case 0:
                 if(rotateAmount==0 || rotateAmount == 2) {
-                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z + 0.5f);
-                    child3.transform.position = new Vector3(child3.transform.position.x + 0.5f, child3.transform.position.y, child3.transform.position.z - 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x + 1f, child4.transform.position.y, child4.transform.position.z - 1f);
+                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z);
+                    child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z - 0.5f);
+                    child3.transform.position = new Vector3(child3.transform.position.x + 0.5f, child3.transform.position.y, child3.transform.position.z - 1f);
+                    child4.transform.position = new Vector3(child4.transform.position.x + 1f, child4.transform.position.y, child4.transform.position.z - 1.5f);
                 } else {
-                    child1.transform.position = new Vector3(child1.transform.position.x + 0.5f, child1.transform.position.y, child1.transform.position.z - 0.5f);
-                    child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child3.transform.position.z + 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x - 1f, child4.transform.position.y, child4.transform.position.z + 1f);
+                    child1.transform.position = new Vector3(child1.transform.position.x + 0.5f, child1.transform.position.y, child1.transform.position.z);
+                    child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z + 0.5f);
+                    child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child3.transform.position.z + 1f);
+                    child4.transform.position = new Vector3(child4.transform.position.x - 1f, child4.transform.position.y, child4.transform.position.z + 1.5f);
                 }
                 break;
             case 1:
@@ -213,6 +255,10 @@ public class Playfield : MonoBehaviour
         if(GameObject.Find("ArrayCR"+column+row)) {
             return true;
         }
+        if(column<0 || column>9 || row<0 || row>17) {
+            Debug.Log("Invalid Placement: Out of bounds");
+            return true;
+        }
         return false;
     }
 
@@ -230,10 +276,12 @@ public class Playfield : MonoBehaviour
         }
         Manager.clearCounter += counter; //Let the GameManager know of the progress
         if(counter>0) {
+            audioSource.PlayOneShot(RowClear, volume);
+            /*
             if(counter==1) {
                 await speechOut.Speak("You have cleared 1 row.");
             } else {await speechOut.Speak("You have cleared "+counter+" rows.");}
-            //TODO Sound
+            */
         }
         while(counter>0) { //All rows above the highest fallen row are now decreased as many times as rows have been deleted
             decreaseRowsAbove(maxRow+1);

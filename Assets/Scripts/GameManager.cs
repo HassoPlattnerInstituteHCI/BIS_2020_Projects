@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour
     int playerScore = 0;
 
     GameObject SpawnerPos;
-
     Player PlayerIn;
+    Playfield Field;
     static int[] skylineHeights; //Each array space determines the height of the highest block in that column (in steps of 1, not .5)
 
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
         speechOut = new SpeechOut();
         PlayerIn = GameObject.Find("Player").GetComponent<Player>();
+        Field = GameObject.Find("BackgroundWhite").GetComponent<Playfield>();
     }
 
     async void Start()
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour
     while(playingTutorial) { //Implement some sort of way for the player to break this loop. Remember to set variable to false at end of last Level
         clearCounter=0;
         blockPlaced=false;
-        await speechOut.Speak("Starting Tutorial Level Number "+(SpawnManager.introCounter+1));
+        await speechOut.Speak("Starting Tutorial Level "+(SpawnManager.introCounter+1));
         switch(SpawnManager.introCounter) {
             case 0 :
                 await speechOut.Speak("Welcome to the Tutorial. We will now show you what you need to know to play the Tetris Panto Edition. Let's Start!");
@@ -97,28 +98,24 @@ public class GameManager : MonoBehaviour
                 await traceSkyline();
 
                 lowerHandle.Free();
-                //await speechOut.Speak("Now, try yourself to feel the blocks.");
-                //Do we need to give the player control here? Remember to return to the block in the end.
 
                 await Task.Delay(1000); //Changed time for debugging
 
-                await speechOut.Speak("Now the Me-Handle will trace a block at the top of the level. Every block has its own type of sound, remember it!");
+                await speechOut.Speak("Now the Me-Handle will trace a block at the top of the level. Every block has its own name, remember it!");
                 PlayerIn.onRecognized("left");
 
-                await Task.Delay(1000);
+                await Task.Delay(2000);
 
                 await speechOut.Speak("Now, try to move the block down to clear a row of blocks in the skyline. Say confirm to pick up the selected block. When you want to place the block, say place.");
                 // TODO: Me-handle wiggle
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
                 if(resetCurrentLevel) {
-                    resetCurrentLevel=false;
                     Playfield.cleanUpRows();
                     SpawnManager.introCounter--;
                     break;
                 }
-
-                await speechOut.Speak("You have successfully cleared your first rows! Congratulations!");
+                //await speechOut.Speak("You have successfully cleared your first rows! Congratulations!");
 
                 Playfield.cleanUpRows();
                 break;
@@ -134,13 +131,12 @@ public class GameManager : MonoBehaviour
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
                 if(resetCurrentLevel) {
-                    resetCurrentLevel=false;
                     Playfield.cleanUpRows();
                     SpawnManager.introCounter--;
                     break;
                 }
 
-                await speechOut.Speak("Congratulations, you chose the right block and cleared the row!");
+                //await speechOut.Speak("Congratulations, you chose the right block and cleared the row!");
                 Playfield.cleanUpRows();
 
                 break;
@@ -156,13 +152,12 @@ public class GameManager : MonoBehaviour
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
                 if(resetCurrentLevel) {
-                    resetCurrentLevel=false;
                     Playfield.cleanUpRows();
                     SpawnManager.introCounter--;
                     break;
                 }
 
-                await speechOut.Speak("Congratulations, you now know how to rotate blocks!");
+                //await speechOut.Speak("Congratulations, you now know how to rotate blocks!");
                 Playfield.cleanUpRows();
                 break;
             case 3:
@@ -177,7 +172,7 @@ public class GameManager : MonoBehaviour
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
 
-                await speechOut.Speak("Great! In the final level you will learn what happens after placing a block.");
+                //await speechOut.Speak("Great! In the final level you will learn what happens after placing a block.");
                 Playfield.cleanUpRows();
                 break;
             case 4:
@@ -192,12 +187,17 @@ public class GameManager : MonoBehaviour
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
                 await Task.Delay(7000);
-                await speechOut.Speak("Congratulations, you have completed the Tutorial!");
+                //await speechOut.Speak("Congratulations, you have completed the Tutorial!");
                 Playfield.cleanUpRows();
                 playingTutorial=false;
                 introductoryLevel=false;
                 break;
         }
+        if(!resetCurrentLevel) {
+            Field.audioSource.PlayOneShot(Field.LevelClear, Field.volume);
+        } else {Field.audioSource.PlayOneShot(Field.LevelFail, Field.volume);}
+        resetCurrentLevel = false;
+        await Task.Delay(2500);
         if(SpawnManager.introCounter!=4) {
             SpawnManager.introCounter++;
             SpawnManager.spawnIntroPls = true;
@@ -236,11 +236,10 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task traceBlock(int blockCode, bool isLeft) {
-        
         switch(blockCode) {
             case 0: 
             await speechOut.Speak("Block Eye");
-            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f,0f,-1f), 0.1f, shouldFreeHandle); //To correct global position
+            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f,0f,-0.25f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,2f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-2f), 0.1f, shouldFreeHandle);
@@ -248,7 +247,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 1:
             await speechOut.Speak("Block L");
-            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.75f), 0.1f, shouldFreeHandle); //To correct global position
+            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-1f), 0.1f, shouldFreeHandle);
@@ -258,17 +257,17 @@ public class GameManager : MonoBehaviour
                 break;
             case 2:
             await speechOut.Speak("Block Reverse L");
-            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.75f), 0.1f, shouldFreeHandle); //To correct global position
+            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
-                await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-1f), 0.1f, shouldFreeHandle);
+                await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-1.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
                 break;
             case 3: 
             await speechOut.Speak("Block O");
-                await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.5f), 0.1f, shouldFreeHandle); //To correct global position
+            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(1f,0f,0f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-1f), 0.1f, shouldFreeHandle);
@@ -276,7 +275,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 4:
             await speechOut.Speak("Block S");
-            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.5f), 0.1f, shouldFreeHandle); //To correct global position
+            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
@@ -288,7 +287,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 5:
             await speechOut.Speak("Block Z");
-            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.5f), 0.1f, shouldFreeHandle); //To correct global position
+            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
@@ -300,7 +299,7 @@ public class GameManager : MonoBehaviour
                 break;
             case 6:
             await speechOut.Speak("Block T");
-            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-1.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
+            await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.75f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);

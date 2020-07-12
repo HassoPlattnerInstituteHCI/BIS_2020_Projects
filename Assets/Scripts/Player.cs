@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         if (playercontrol) {
             transform.position = meHandle.HandlePosition(transform.position);
             activeBlock.transform.position = transform.position;
-            Playfield.alignLive(activeBlockID);
+            Field.alignLive(activeBlock, activeBlockID);
             // Rotate !!Need way of doing this with the Me-Handle rotation!!
             if (Input.GetKeyDown(KeyCode.Space)) {
                 onRecognized("rotate");
@@ -152,9 +152,9 @@ public class Player : MonoBehaviour
         if(message == "place" && playercontrol)     //placing the block on the grid                     
         {
             if(Playfield.isValidPlacement(activeBlock)) {
+                Field.audioSource.PlayOneShot(Field.BlockPlace, Field.volume);
                 placement = true;
                 playercontrol = false;
-                Playfield.roundAndPlaceBlock(activeBlock);
                 await meHandle.MoveToPosition(activeBlock.transform.GetChild(0).transform.position, 0.3f, shouldFreeHandle);
                 //await speechOut.Speak("Block can be placed here. Say confirm or abort to continue.");
             } else {await speechOut.Speak("You cannot place the block here.");}
