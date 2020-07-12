@@ -49,7 +49,7 @@ public class BatLogic : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
 
         Vector3 playerDirection = transform.forward;
-        float spawnDistance = 1.5f;
+        float spawnDistance = 1.0f;
 
         Vector3 batPos = playerPos + playerDirection*spawnDistance;
 
