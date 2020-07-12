@@ -36,10 +36,14 @@ public class PlayerSoundEffect : MonoBehaviour
     //private GameObject TelephoneBox1;
 
     //public SpeechOut speechOut = new SpeechOut();
-    private bool transitionMusicIsPlaying;
+    private bool transitionMusicIsPlaying = false;
+
+    private bool transitionMusicHasBeenPlayed = false;
+    GameManager gameManager;
 
     void Start()
     {
+        gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
         
         speechOut = new SpeechOut();
         //We dont need to get the audiosources here because we assign them directly in unity as its otherwise complicates with multiple sources
@@ -52,10 +56,16 @@ public class PlayerSoundEffect : MonoBehaviour
             //May improve this to make setting by seconds possible
             audioSourcePolice.volume = audioSourcePolice.volume + 0.0002f;
         }
+
+        if(transitionMusicIsPlaying == false && gameManager.hitCount == 4 && transitionMusicHasBeenPlayed == false){
+            startHit4TransitionMusic();
+        }
+
         if(transitionMusicIsPlaying == true && audioSourceMusic.isPlaying == false){
             transitionMusicIsPlaying = false;
             startKillingStreakMusic();
         }
+    
         
     }
 
@@ -109,6 +119,7 @@ public class PlayerSoundEffect : MonoBehaviour
         audioSourceMusic.clip = hit4TransitionMusic;
         audioSourceMusic.Play();
         transitionMusicIsPlaying = true;
+        transitionMusicHasBeenPlayed = true;
 
         
     }
