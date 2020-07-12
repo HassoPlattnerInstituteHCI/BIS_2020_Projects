@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     List<Vector3> listOfSpawnPositions;
     List<int> spawnUsed = new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0};
     public int hitCount = 0;
+    public int cash = 0;
 
     public bool currentObjectiveReached = false;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
@@ -208,6 +209,9 @@ public class GameManager : MonoBehaviour
         await upperHandle.MoveToPosition(player.transform.position, 0.2f, true);
 
         //upperHandle.Free();
+
+        cash = 0;
+        Debug.Log("cash: " + cash);
 
         player.SetActive(true);
         GameObject camera = GameObject.Find("Main Camera");
