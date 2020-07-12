@@ -70,13 +70,8 @@ public class GameManager : MonoBehaviour
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
         
-        phoneBox = GameObject.Find("TelephoneBox1");
+
         listOfSpawnPositions = createAHoleSpawns();
-
-        bat = GameObject.Find("Bat");
-        bat.SetActive(false);
-
-        telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
 
         
 
@@ -87,6 +82,9 @@ public class GameManager : MonoBehaviour
 
     async void Introduction() //Speech: Introduce Me-Handle = Move. - Go to telephone
     {
+
+        bat = GameObject.Find("Bat");
+        bat.SetActive(false);
         
         await speechOut.Speak("Use the upper handle to move your character. Spawning Player");        
         await ResetGame();
@@ -110,10 +108,12 @@ public class GameManager : MonoBehaviour
     {
         currentLevel = 1;
         await speechOut.Speak("Pick up the phone");  
-        bat.SetActive(true);
-        lowerHandle.SwitchTo(bat, 0.1f);
-        transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);       
-        telephoneSounds.startPhoneRing();    
+        
+        transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
+
+        phoneBox = GameObject.Find("TelephoneBox1");   
+        telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();        
+        telephoneSounds.startPhoneRing(phoneBox);    
         
     }
 
@@ -121,8 +121,12 @@ public class GameManager : MonoBehaviour
         currentLevel = 2;
         playerSpawn.position = phoneBox.transform.position;
         phoneBox = GameObject.Find("TelephoneBox2");
+
+        bat.SetActive(true);
+        lowerHandle.SwitchTo(bat, 0.1f);        
+
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
-        telephoneSounds.startPhoneRing();       
+        telephoneSounds.startPhoneRing(phoneBox);       
 
     }
 

@@ -94,7 +94,8 @@ public class PlayerLogic : MonoBehaviour
             }           
         }
 
-        if(gameManager.currentLevel == 5 && gameManager.currentObjectiveReached){
+        
+        if((gameManager.currentLevel == 5 && gameManager.currentObjectiveReached) || gameManager.currentLevel == 6){
             Debug.Log("OnTrigger Enter for Level 5 called");
             if(collider1.CompareTag("safehouse")){      
                 GameObject phoneBox = GameObject.Find("TelephoneBox2");
