@@ -56,7 +56,8 @@ public class Shooting : MonoBehaviour
         if (isUpper)
         {
             handle = panto.GetComponent<UpperHandle>();
-        } else
+        }
+        else
         {
             handle = panto.GetComponent<LowerHandle>();
         }
@@ -140,6 +141,7 @@ public class Shooting : MonoBehaviour
                         spotted = true;
                         GameObject e = hit.transform.gameObject;
                         PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
+                        _ = speechOut.Speak("Enemy found!");
                         await lowerHandle.SwitchTo(e, 0.2f);
                     }
                     if (timestamp <= Time.time)
@@ -164,52 +166,7 @@ public class Shooting : MonoBehaviour
                 lineRenderer.endWidth = endWidth;
                 currentClip = defaultClip;
             }
-            
-        }
-    }
 
-    /// <summary>
-    /// Simple firing in forward direction. Doesn't require a target.
-    /// </summary>
-    async void Fire()
-    {
-        RaycastHit hit;
-
-        if (isUpper)
-            transform.rotation = Quaternion.Euler(0, handle.GetRotation(), 0);
-
-        if (Physics.Raycast(transform.position, transform.forward, out hit, maxRayDistance, hitLayers))
-        {
-            GameObject panto = GameObject.Find("Panto");
-            if (panto.GetComponent<GameManager>().level == 2 && !spotted && CompareTag("Player"))
-            {
-                spotted = true;
-                GameObject e = hit.transform.gameObject;
-                PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
-                await lowerHandle.SwitchTo(e, 0.2f);
-
-            }
-            lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point });
-            lineRenderer.material.color = Color.red;
-            lineRenderer.startWidth = startWidth;
-
-            Health enemy = hit.transform.GetComponent<Health>();
-
-            if (enemy) {
-                enemy.TakeDamage(damage, gameObject);
-
-                currentClip = hitClip;
-            } else
-            {
-                currentClip = wallClip;
-            }
-        } else
-        {
-            lineRenderer.SetPositions(new Vector3[] { transform.position,
-                transform.position + transform.forward * maxRayDistance });
-            lineRenderer.material.color = Color.red;
-            lineRenderer.startWidth = startWidth;
-            currentClip = defaultClip;
         }
     }
 }
