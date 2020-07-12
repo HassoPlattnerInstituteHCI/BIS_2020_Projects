@@ -1,5 +1,6 @@
 using UnityEngine;
 using SpeechIO;
+using System.Threading.Tasks;
 
 public class PlayerSoundEffect : MonoBehaviour
 {
@@ -22,20 +23,32 @@ public class PlayerSoundEffect : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioSource audioSourcePolice;
+
+    public AudioSource audioSourceMusic;
+
+    public AudioClip hitZeroMusic;
+
+    public AudioClip hit4TransitionMusic;
+
+    public AudioClip killingStreakMusic;
     //public AudioSource rollSource;
 
     //private GameObject TelephoneBox1;
 
     //public SpeechOut speechOut = new SpeechOut();
+    private bool transitionMusicIsPlaying = false;
+
+    private bool transitionMusicHasBeenPlayed = false;
+    GameManager gameManager;
 
     void Start()
     {
+        gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
         
         speechOut = new SpeechOut();
+        //We dont need to get the audiosources here because we assign them directly in unity as its otherwise complicates with multiple sources
         //audioSource = GetComponents<AudioSource>();
-        audioSourcePolice = gameObject.AddComponent<AudioSource>();
-        //rollSource.loop = true;
-        //rollSource.clip = rollClip;
+        //audioSourcePolice = gameObject.AddComponent<AudioSource>();
     }
 
     void Update(){
@@ -43,6 +56,16 @@ public class PlayerSoundEffect : MonoBehaviour
             //May improve this to make setting by seconds possible
             audioSourcePolice.volume = audioSourcePolice.volume + 0.0002f;
         }
+
+        if(transitionMusicIsPlaying == false && gameManager.hitCount == 4 && transitionMusicHasBeenPlayed == false){
+            startHit4TransitionMusic();
+        }
+
+        if(transitionMusicIsPlaying == true && audioSourceMusic.isPlaying == false){
+            transitionMusicIsPlaying = false;
+            startKillingStreakMusic();
+        }
+    
         
     }
 
@@ -78,6 +101,37 @@ public class PlayerSoundEffect : MonoBehaviour
         audioSourcePolice.Play();
         
     }
+
+    public void startHitZeroMusic(){
+        //audioSource = GetComponent<AudioSource>();
+        audioSourceMusic.loop = true;
+        audioSourceMusic.volume = 0.03f;
+        audioSourceMusic.clip = hitZeroMusic;
+        audioSourceMusic.Play();
+        
+    }
+
+    public void startHit4TransitionMusic(){
+        //audioSource = GetComponent<AudioSource>();
+        audioSourceMusic.Stop();
+        audioSourceMusic.loop = false;
+        audioSourceMusic.volume = 0.05f;
+        audioSourceMusic.clip = hit4TransitionMusic;
+        audioSourceMusic.Play();
+        transitionMusicIsPlaying = true;
+        transitionMusicHasBeenPlayed = true;
+
+        
+    }
+
+    public void startKillingStreakMusic(){
+        audioSourceMusic.Stop();
+        audioSourceMusic.loop = true;
+        audioSourceMusic.volume = 0.05f;
+        audioSourceMusic.clip = killingStreakMusic;
+        audioSourceMusic.Play();
+    }
+
     public void StopPlayback()
     {
         audioSource.Stop();

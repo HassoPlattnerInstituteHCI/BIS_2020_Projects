@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
 
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
 
+        
+
         //uiManager.UpdateUI(playerScore, enemyScore);
 
         Introduction();
@@ -84,8 +86,13 @@ public class GameManager : MonoBehaviour
 
     async void Introduction() //Speech: Introduce Me-Handle = Move. - Go to telephone
     {
+        
         await speechOut.Speak("Use the upper handle to move your character. Spawning Player");        
         await ResetGame();
+        player = GameObject.Find("Player");
+        playerSounds = player.GetComponent<PlayerSoundEffect>();
+
+        playerSounds.startHitZeroMusic();
 
         //await Task.Delay(1000);
         RegisterColliders();
@@ -121,8 +128,6 @@ public class GameManager : MonoBehaviour
     public async Task StartLevel3(){
         currentLevel = 3;
         playerSpawn.position = phoneBox.transform.position;
-        player = GameObject.Find("Player");
-        playerSounds = player.GetComponent<PlayerSoundEffect>();
         playerSounds.startSirens();
 
     }
