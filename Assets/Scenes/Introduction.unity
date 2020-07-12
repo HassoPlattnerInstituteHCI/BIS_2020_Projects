@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skylines:
   - {fileID: 8098386472531645295, guid: 027272edb3f5a7145a38fb65136fd95c, type: 3}
+  - {fileID: 1949996302861137105, guid: 77e31782ef333fb4aac133e604abc104, type: 3}
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}
@@ -336,7 +337,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: portName
-      value: //.//COM4
+      value: //.//COM3
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -410,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shouldFreeHandle: 0
+  rotateAmount: 0
   movementspeed: 0.2
   SpawnerLeft: {fileID: 136307135}
 --- !u!4 &422395897

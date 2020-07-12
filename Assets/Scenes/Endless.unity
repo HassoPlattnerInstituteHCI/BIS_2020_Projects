@@ -563,7 +563,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: portName
-      value: //.//COM4
+      value: //.//COM3
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -1433,6 +1433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shouldFreeHandle: 0
+  rotateAmount: 0
   movementspeed: 0.2
   SpawnerLeft: {fileID: 1067507100}
 --- !u!4 &1556614292

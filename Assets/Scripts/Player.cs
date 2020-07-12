@@ -17,8 +17,8 @@ public class Player : MonoBehaviour
     GameObject meHandlePrefab;
     GameObject activeBlock;
     public static int activeBlockID;
-    public static Vector3 leftBlockRotaterPos;
-    public static Vector3 rightBlockRotaterPos;
+    public static Vector3 leftBlockRootPos;
+    public static Vector3 rightBlockRootPos;
     bool playercontrol = false;
     bool chooseMode = true;
     bool leftBlockActive = true;
@@ -82,6 +82,7 @@ public class Player : MonoBehaviour
             }
         if (playercontrol) {
             transform.position = meHandle.HandlePosition(transform.position);
+            activeBlock.transform.position = transform.position;
             Playfield.alignLive(activeBlockID);
             // Rotate !!Need way of doing this with the Me-Handle rotation!!
             if (Input.GetKeyDown(KeyCode.Space)) {
@@ -105,23 +106,25 @@ public class Player : MonoBehaviour
         Debug.Log("[" + this.GetType() + "]:" + message);
         if (message == "left" && !playercontrol && !placement)      //select left block
         {
-            await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
-            transform.position = leftBlockRotaterPos;
+            await meHandle.MoveToPosition(leftBlockRootPos, 0.3f, shouldFreeHandle);
+            transform.position = leftBlockRootPos;
             //TODO: Sound
             //await speechOut.Speak("Now tracing the left block");
             await Manager.traceBlock(SpawnManager.leftBlock, true);
             leftBlockActive = true;
             activeBlockID = SpawnManager.leftBlock;
+            Manager.blockPlaced=false;
         }
         if (message == "right" && !playercontrol && !placement)     //select right block
         {
-            await meHandle.MoveToPosition(rightBlockRotaterPos, 0.3f, shouldFreeHandle);
-            transform.position = rightBlockRotaterPos;
+            await meHandle.MoveToPosition(rightBlockRootPos, 0.3f, shouldFreeHandle);
+            transform.position = rightBlockRootPos;
             //await speechOut.Speak("Now tracing the right block");
             //TODO: Sound
             await Manager.traceBlock(SpawnManager.rightBlock, false);
             leftBlockActive = false;
             activeBlockID = SpawnManager.rightBlock;
+            Manager.blockPlaced=false;
         }
         if(message == "confirm" && !playercontrol && !placement)    //confirm block selection
         {
@@ -167,7 +170,7 @@ public class Player : MonoBehaviour
             if(!Manager.introductoryLevel) {
                 SpawnManager.spawnWavePls = true;
                 transform.position = SpawnerLeft.transform.position;
-                await meHandle.MoveToPosition(leftBlockRotaterPos, 0.3f, shouldFreeHandle);
+                await meHandle.MoveToPosition(leftBlockRootPos, 0.3f, shouldFreeHandle);
                 //Initializes next wave on the Me-Handle immediately
                 onRecognized("left");
             }

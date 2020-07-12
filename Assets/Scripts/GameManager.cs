@@ -103,6 +103,8 @@ public class GameManager : MonoBehaviour
     SpawnManager.introCounter=0;
     bool playingTutorial=true;
     while(playingTutorial) { //Implement some sort of way for the player to break this loop. Remember to set variable to false at end of last Level
+        clearCounter=0;
+        await speechOut.Speak("Starting Tutorial Level Number "+(SpawnManager.introCounter+1));
         switch(SpawnManager.introCounter) {
             case 0 :
                 await speechOut.Speak("Welcome to the Tutorial. We will now show you what you need to know to play the Tetris Panto Edition. Let's Start!");
@@ -118,12 +120,12 @@ public class GameManager : MonoBehaviour
                 //await speechOut.Speak("Now, try yourself to feel the blocks.");
                 //Do we need to give the player control here? Remember to return to the block in the end.
 
-                await Task.Delay(2000); //Changed time for debugging
+                await Task.Delay(1000); //Changed time for debugging
 
                 await speechOut.Speak("Now the Me-Handle will trace a block at the top of the level. Every block has its own type of sound, remember it!");
                 PlayerIn.onRecognized("left");
 
-                await Task.Delay(3000);
+                await Task.Delay(2000);
 
                 await speechOut.Speak("Now, try to move the block down to clear a row of blocks in the skyline. Say confirm to pick up the selected block. When you want to place the block, say place.");
                 // TODO: Me-handle wiggle
@@ -141,12 +143,28 @@ public class GameManager : MonoBehaviour
                 Playfield.cleanUpRows();
                 break;
             case 1:
+                await speechOut.Speak("Now you have two blocks to choose from, but only one will fit in the skyline. Pay attention as the IT-Handle traces it.");
+                await traceSkyline();
+
+                lowerHandle.Free();
+
+                await speechOut.Speak("The Me-Handle will now trace the left block. To change the active block, say 'right' or 'left'. Once you pick up a block the other one disappears, so choose wisely.");
+                PlayerIn.onRecognized("left");
+                await Task.Delay(2000);
+
+                await WaitingForLevelFinish(SpawnManager.introCounter);
+                if(resetCurrentLevel) {
+                    Playfield.cleanUpRows();
+                    SpawnManager.introCounter--;
+                    break;
+                }
+
+                await speechOut.Speak("Congratulations, you chose the right block and cleared the row!");
                 break;
             case 2:
                 playingTutorial=false;
                 break;
         }
-        await speechOut.Speak("Starting Tutorial Level Number"+(SpawnManager.introCounter+1));
         SpawnManager.introCounter++;
         SpawnManager.spawnIntroPls = true;
     }
@@ -156,6 +174,16 @@ public class GameManager : MonoBehaviour
         switch(levelNum) {
             case 0:
                 while(clearCounter!=2){
+                    if(blockPlaced) {
+                        await speechOut.Speak("It seems you have misplaced the block and cannot finish the level. Resetting level...");
+                        resetCurrentLevel=true;
+                        return;
+                    }
+                    await Task.Delay(100);
+                }
+                break;
+            case 1:
+                while(clearCounter!=1) { 
                     if(blockPlaced) {
                         await speechOut.Speak("It seems you have misplaced the block and cannot finish the level. Resetting level...");
                         resetCurrentLevel=true;

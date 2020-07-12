@@ -41,14 +41,14 @@ public class SpawnManager : MonoBehaviour
         leftBlock = Random.Range(0, groups.Length);
         blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
         blockLeft.name = ""+leftBlock;
-        Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
+        Player.leftBlockRootPos = blockLeft.transform.GetChild(0).transform.position;
         rightBlock = Random.Range(1, groups.Length);
         if (rightBlock==leftBlock) {
             rightBlock = 0;
         }
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
         blockRight.name = ""+rightBlock;
-        Player.rightBlockRotaterPos = blockRight.transform.GetChild(0).transform.position;
+        Player.rightBlockRootPos = blockRight.transform.GetChild(0).transform.position;
         waveNumber++;
         spawnWavePls = false;
     }
@@ -61,17 +61,22 @@ public class SpawnManager : MonoBehaviour
                     Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
                     blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
                     blockLeft.name = ""+leftBlock;
-                    Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
+                    Player.leftBlockRootPos = blockLeft.transform.GetChild(0).transform.position;
                     spawnIntroPls = false;
                     return; //Level 0 is special, since we only spawn one block
+            case 1: leftBlock = 0;
+                    rightBlock = 6; //forces player to switch blocks
+                    
+                break;
         }
+        Instantiate(skylines[level], transform.position + new Vector3(-0.5f, 0, (float)-7), transform.rotation);
         Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
-        blockLeft = Instantiate(groups[leftBlock], transform.position + new Vector3((float)1.5,0,0), transform.rotation);
+        blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
         blockLeft.name = ""+leftBlock;
-        Player.leftBlockRotaterPos = blockLeft.transform.GetChild(0).transform.position;
+        Player.leftBlockRootPos = blockLeft.transform.GetChild(0).transform.position;
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
         blockRight.name = ""+rightBlock;
-        Player.rightBlockRotaterPos = blockRight.transform.GetChild(0).transform.position;
+        Player.rightBlockRootPos = blockRight.transform.GetChild(0).transform.position;
         spawnIntroPls = false;
     }
 }

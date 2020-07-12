@@ -856,7 +856,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: portName
-      value: //.//COM4
+      value: //.//COM3
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -957,8 +957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755d0893992e16b4f8d8f0fc091668af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skylines:
-  - {fileID: 8098386472531645295, guid: 5e9cbf540ae2aa747af2a19046ee5209, type: 3}
+  skylines: []
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}
@@ -1249,7 +1248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501577216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.25, y: 0, z: -9.6}
+  m_LocalPosition: {x: -2.25, y: 0, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1383708309}
