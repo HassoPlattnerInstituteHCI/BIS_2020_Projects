@@ -77,6 +77,8 @@ public class BatLogic : MonoBehaviour
             playerSounds = player.GetComponent<PlayerSoundEffect>();
             playerSounds.playAHoleHitByBat();
             gameManager.spawnAHoles(1);
+            gameManager.hitCount += 1;
+            Debug.Log("hitcount: " + gameManager.hitCount);
             if(gameManager.currentLevel == 4){
                 gameManager.currentObjectiveReached = true;
             }

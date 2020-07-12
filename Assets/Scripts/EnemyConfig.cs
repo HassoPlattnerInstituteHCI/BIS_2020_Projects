@@ -8,7 +8,6 @@ public class EnemyConfig : ScriptableObject
 {
     public int health = 100;
     public float speed = 3;
-    public bool CSGoPlayer = false;
     public float turnSpeed = 6;
     public float randomStepSpeed = 8;
     public float fieldOfView = 30;

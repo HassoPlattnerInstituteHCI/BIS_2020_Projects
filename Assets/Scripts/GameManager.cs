@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     float levelStartTime = 0;
     List<Vector3> listOfSpawnPositions;
     List<int> spawnUsed = new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public int hitCount = 0;
 
     public bool currentObjectiveReached = false;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
@@ -228,40 +229,6 @@ public class GameManager : MonoBehaviour
     /// game score and eventually ending the game.
     /// </summary>
     /// <param name="defeated"></param>
-    public async void OnDefeat(GameObject defeated)
-    {
-        player.SetActive(false);
-        enemy.SetActive(false);
-
-        bool playerDefeated = defeated.Equals(player);
-
-        if (playerDefeated)
-        {
-            enemyScore++;
-        }
-        else
-        {
-            playerScore++;
-        }
-        uiManager.UpdateUI(playerScore, enemyScore);
-
-        string defeatedPerson = playerDefeated ? "You" : "Enemy";
-        await speechOut.Speak($"{defeatedPerson} got defeated.");
-
-        gameScore += CalculateGameScore(player, enemy); //TODO Level 2
-
-        level++;
-        if (level >= enemyConfigs.Length)
-        {
-            await GameOver();
-        } else
-        {
-            // TODO: Evaluate the players performance with game score
-            await speechOut.Speak($"Current score is {gameScore}");
-            await speechOut.Speak($"Continuing with level {level + 1}");
-            await ResetGame();
-        }
-    }
 
     /// <summary>
     /// Ends the game.
@@ -271,18 +238,7 @@ public class GameManager : MonoBehaviour
     {
         await speechOut.Speak("Congratulations.");
 
-        if (!GetComponent<DualPantoSync>().debug)
-        {
-            await speechOut.Speak($"You achieved a score of {gameScore}.");
-            await speechOut.Speak("Please enter your name to submit your highscore.");
-
-            await uiManager.GameOver(gameScore, (int)totalTime, trophyScore);
-        } else
-        {
-            await speechOut.Speak($"You achieved a score of {gameScore} in debug mode.");
-        }
-
-        await speechOut.Speak("Thanks for playing DuelPanto. Say quit when you're done.");
+        await speechOut.Speak("Thanks for playing GTA2. Say quit when you're done.");
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "quit", KeyCode.Escape } });
 
         Application.Quit();
@@ -295,34 +251,6 @@ public class GameManager : MonoBehaviour
     /// <param name="player"></param>
     /// <param name="enemy"></param>
     /// <returns></returns>
-    int CalculateGameScore(GameObject player, GameObject enemy)
-    {
-        Health playerHealth = player.GetComponent<Health>();
-        Health enemyHealth = enemy.GetComponent<Health>();
-
-        float levelCompleteTime = Time.time - levelStartTime;
-        totalTime += levelCompleteTime;
-        int timeMultiplier = 1;
-        if (levelCompleteTime < 30)
-        {
-            timeMultiplier = 5;
-        } else if (levelCompleteTime < 45)
-        {
-            timeMultiplier = 3;
-        } else if (levelCompleteTime < 60)
-        {
-            timeMultiplier = 2;
-        }
-
-        int levelScore = playerHealth.healthPoints - enemyHealth.healthPoints;
-        if (levelScore > 0)
-        {
-            int levelMultiplier = (int)(Mathf.Pow(2, level) + 1);
-            levelScore *= timeMultiplier * levelMultiplier;
-        }
-
-        return levelScore;
-    }
 
     public List<Vector3> createAHoleSpawns(){
         List<Vector3> listOfSpawnPositions = new List<Vector3>();        

@@ -62,7 +62,6 @@ public class PlayerLogic : MonoBehaviour
 
     void OnTriggerEnter(Collider collider1)
     {   
-        Debug.LogError("OnTriggerEnter gets called"); 
         if(gameManager.currentLevel==1){
             if(collider1.CompareTag("TelephoneBox1")){           
                 telephoneSounds.StopPlayback();
@@ -91,16 +90,19 @@ public class PlayerLogic : MonoBehaviour
                 GameObject phoneBox = GameObject.Find("TelephoneBox2");
                 TelephoneSoundEffect telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
                 telephoneSounds.StopPlayback();
-                Debug.Log("Level 4 Intro talk started");
                 telephoneSounds.startPhoneTalks();
             }           
-
         }
             
-        
+
         if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
             playerSounds.playWasted();
             gameManager.ResetGame();
         } 
+        if(collider1.CompareTag("safehouse")){
+            gameManager.hitCount = 0;
+            Debug.Log("hitcount: " + gameManager.hitCount);
+            //police should disappear
+        }
     }
 }

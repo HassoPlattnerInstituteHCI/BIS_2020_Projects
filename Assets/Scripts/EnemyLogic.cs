@@ -4,10 +4,8 @@ using UnityEngine.AI;
 public class EnemyLogic : MonoBehaviour
 {
     public Transform target;
-    public float aimbotDistance = 10f;
     public float seekingDistance = 1f;
     public EnemyConfig config;
-
     bool foundPlayer = false;
     float timeToFind;
     Vector3 lastSeenPosition;
@@ -18,7 +16,6 @@ public class EnemyLogic : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = config.CSGoPlayer ? aimbotDistance : seekingDistance;
     }
 
     void OnEnable()
