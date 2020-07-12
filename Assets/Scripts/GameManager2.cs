@@ -13,7 +13,7 @@ public class GameManager2 : MonoBehaviour
     public EnemyConfig[] enemyConfigs;
     public Transform playerSpawn;
     public Transform enemySpawn;
-    public int level = 0;
+    public int level = 2;
     public int trophyScore = 10000;
     public UIManager uiManager;
 
@@ -37,11 +37,11 @@ public class GameManager2 : MonoBehaviour
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
         speechOut = new SpeechOut();
 
-        if (level < 0 || level >= enemyConfigs.Length)
+        /* if (level < 0 || level >= enemyConfigs.Length)
         {
             Debug.LogWarning($"Level value {level} < 0 or >= enemyConfigs.Length. Resetting to 0");
             level = 0;
-        }
+        } */
     }
 
     void Start()
@@ -124,9 +124,9 @@ public class GameManager2 : MonoBehaviour
         GameObject heart = GameObject.FindGameObjectWithTag("Liver");
         Debug.Log(heart);
         await lowerHandle.SwitchTo(heart, 0.3f);
-        if (level >= enemyConfigs.Length)
+        /* if (level >= enemyConfigs.Length)
             Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
-        enemy.GetComponent<Enemy>().config = enemyConfigs[level];
+        enemy.GetComponent<Enemy>().config = enemyConfigs[level];*/
 
         upperHandle.Free();
 

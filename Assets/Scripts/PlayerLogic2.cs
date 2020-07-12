@@ -68,13 +68,16 @@ public class PlayerLogic2 : MonoBehaviour
         {
             await speechOut.Speak("Congratulations, you reached the " + targets[currentTarget].name);
             currentTarget++;
+            Debug.Log(collision.gameObject.name);
+            Debug.Log(currentTarget);
         }
         else
         {
             await speechOut.Speak("Sorry, that is not the organ you are looking for");
         }
 
-        Debug.Log(collision.gameObject.name);
+        /* Debug.Log(collision.gameObject.name);
+        Debug.Log(currentTarget); */
 
         if (currentTarget == targets.Length)
         {

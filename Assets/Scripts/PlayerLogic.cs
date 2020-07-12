@@ -60,7 +60,7 @@ public class PlayerLogic : MonoBehaviour
             await speechOut.Speak("Congratulations, you reached the heart.");
             await speechOut.Speak("You completed level 1");
         }
-        else
+        else if (collision.gameObject.name == "Liver" || collision.gameObject.name == "Stomach" || collision.gameObject.name == "Lungs")
         {
             await speechOut.Speak("Sorry, that is not the organ you are looking for");
         }
