@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &219709548
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6911586375303606962}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.6245036, y: 1.2719257, z: 2.3112743}
-  m_Center: {x: 0.019239612, y: 0.13596302, z: -0.43660092}
 --- !u!114 &219709546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,7 +16,33 @@ MonoBehaviour:
   isOnUpper: 0
   description: Liver
   priority: 0
---- !u!114 &219709547
+--- !u!135 &711744008
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911586375303606962}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.9049555
+  m_Center: {x: 0.69363344, y: 1.1200404e-14, z: 0.98360837}
+--- !u!135 &711744009
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911586375303606962}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.3485813
+  m_Center: {x: -1.4723353, y: 1.02996614e-14, z: 0.3907451}
+--- !u!114 &3795328614963410664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -38,11 +51,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6911586375303606962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Script: {fileID: 11500000, guid: ffd175333010a644b8c840e6006e9e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   onUpper: 1
-  onLower: 0
+  onLower: 1
+  numberOfCorners: 8
 --- !u!1001 &3227689114319580091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58,6 +72,16 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}
       propertyPath: m_TagString
+      value: Liver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977819192417808284, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
+        type: 3}
+      propertyPath: m_Name
+      value: Liver
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051746840642452563, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
+        type: 3}
+      propertyPath: m_Name
       value: Liver
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
@@ -129,6 +153,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2773
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922340161142340309, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922340161142340309, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922340161142340309, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922340161142340309, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6734215
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922340161142340309, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5043
+      objectReference: {fileID: 0}
+    - target: {fileID: 6922340161142340309, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5043
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8, type: 3}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
 
-public class PlayerLogic2 : MonoBehaviour
+public class PlayerLogic3 : MonoBehaviour
 {
     private PantoHandle upperHandle;
 
@@ -64,26 +64,23 @@ public class PlayerLogic2 : MonoBehaviour
 
     private async void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == targets[currentTarget].name)
+        if (collision.gameObject.name == "Lungs")
         {
-            await speechOut.Speak("Congratulations, you reached the " + targets[currentTarget].name);
+            await speechOut.Speak("Congratulations, you reached the lungs");
             currentTarget++;
-            Debug.Log(collision.gameObject.name);
-            Debug.Log(currentTarget);
         }
         else if (collision.gameObject.name == "Liver" || collision.gameObject.name == "Stomach" || collision.gameObject.name == "Lungs")
         {
             await speechOut.Speak("Sorry, that is not the organ you are looking for");
+        }
+        else if (collision.gameObject.name == "Ulcer0" || collision.gameObject.name == "Ulcer1" || collision.gameObject.name == "Ulcer2" || collision.gameObject.name == "Ulcer3")
+        {
+            await speechOut.Speak("Ouch, you touched an open wound. That is the end of the game.");
         }
 
         Debug.Log(collision.gameObject.name);
 
         /* Debug.Log(collision.gameObject.name);
         Debug.Log(currentTarget); */
-
-        if (currentTarget == targets.Length)
-        {
-            await speechOut.Speak("You completed level 2");
-        }
     }
 }
