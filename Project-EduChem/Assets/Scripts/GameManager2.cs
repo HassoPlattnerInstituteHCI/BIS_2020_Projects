@@ -3,8 +3,7 @@ using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using DualPantoFramework;
-
+//using DualPantoFramework;
 namespace eduChem
 {
 
@@ -129,16 +128,15 @@ namespace eduChem
 
         async Task Quiz() //TODO new question
         {
-            await speechOut.Speak("Here is a little quiz for you. Is this an actual molecule? Reminder: These are 2 carbon atoms connected with one bond." +
-                "Say yes or no.");
+            await speechOut.Speak("Here is a little quiz for you. Is Ethane liquid?");
             string response = await speechIn.Listen(new Dictionary<string, KeyCode> { { "yes", KeyCode.Y }, { "no", KeyCode.N } });
             if (response == "yes")
             {
-                await speechOut.Speak("You are wrong. That was really hard! C2, the molecule made of two carbon atoms, has a double bond.");
+                await speechOut.Speak("You are wrong. Ethane is gasesous.");
             }
             else if (response == "no")
             {
-                await speechOut.Speak("Yes. thats correct!");
+                await speechOut.Speak("Yes. thats correct! Ethane is gasesous.");
             }
         }
 

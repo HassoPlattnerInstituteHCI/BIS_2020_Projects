@@ -2177,7 +2177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traceShape: 0
   isOnUpper: 0
-  description: Ethan is the main component of natural gas.
+  description: Ethane is the main component of natural gas.
   priority: 2
 --- !u!114 &1080112647
 MonoBehaviour:
