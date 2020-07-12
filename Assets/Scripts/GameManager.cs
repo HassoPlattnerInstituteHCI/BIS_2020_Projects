@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     float levelStartTime = 0;
     List<Vector3> listOfSpawnPositions;
     List<int> spawnUsed = new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public int hitCount = 0;
 
     public bool currentObjectiveReached = false;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
