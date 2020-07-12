@@ -3615,9 +3615,9 @@ MonoBehaviour:
   endWidth: 0.1
   isUpper: 1
   spotted: 0
-  defaultClip: {fileID: 8300000, guid: 83c25aafb0a4d4598bc455810a48cd96, type: 3}
+  defaultClip: {fileID: 8300000, guid: 19b7f2453a83d05478addcceab7827a8, type: 3}
   wallClip: {fileID: 8300000, guid: a492fe44c169248c888b6b7179b84f14, type: 3}
-  hitClip: {fileID: 8300000, guid: 2e99873b97e7a446a9befe2766fb45b4, type: 3}
+  hitClip: {fileID: 8300000, guid: cc9262c396027d64bb94eb5f2cfe89b8, type: 3}
   fireSpreadAngle: 1
   enemyTransform: {fileID: 1819973871}
 --- !u!114 &881415697
@@ -3665,7 +3665,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 83c25aafb0a4d4598bc455810a48cd96, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 19b7f2453a83d05478addcceab7827a8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4911,6 +4911,7 @@ MonoBehaviour:
   powerUps:
   - {fileID: 634546522}
   - {fileID: 311711234}
+  gun: 1
 --- !u!1 &1215762629
 GameObject:
   m_ObjectHideFlags: 0
@@ -6648,9 +6649,9 @@ MonoBehaviour:
   endWidth: 0.1
   isUpper: 0
   spotted: 0
-  defaultClip: {fileID: 8300000, guid: 83c25aafb0a4d4598bc455810a48cd96, type: 3}
+  defaultClip: {fileID: 8300000, guid: 19b7f2453a83d05478addcceab7827a8, type: 3}
   wallClip: {fileID: 8300000, guid: a492fe44c169248c888b6b7179b84f14, type: 3}
-  hitClip: {fileID: 8300000, guid: 2e99873b97e7a446a9befe2766fb45b4, type: 3}
+  hitClip: {fileID: 8300000, guid: 6025f45b44bdde8499b407c523200824, type: 3}
   fireSpreadAngle: 1
   enemyTransform: {fileID: 881415694}
 --- !u!120 &1819973873

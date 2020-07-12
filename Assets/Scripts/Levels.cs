@@ -5,6 +5,7 @@ using DualPantoFramework;
 using System.Threading.Tasks;
 using SpeechIO;
 using System;
+using JetBrains.Annotations;
 
 public class Levels : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Levels : MonoBehaviour
     public GameObject[] obstacles;
     public GameObject[] powerUps;
     Shooting shooting;
+    public int gun = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -222,6 +224,7 @@ public class Levels : MonoBehaviour
                 shooting.cooldown = 0.5f;
                 shooting.startWidth = 0.1f;
                 shooting.endWidth = 0.1f;
+                gun = 1;
                 await speechOut.Speak("weapon one");
                 break;
             case "weapon two": //MG
@@ -231,6 +234,7 @@ public class Levels : MonoBehaviour
                 shooting.cooldown = 0.1f;
                 shooting.startWidth = 0.5f;
                 shooting.endWidth = 0.5f;
+                gun = 2;
                 await speechOut.Speak("weapon two");
                 break;
             case "weapon three": //pump
@@ -240,6 +244,7 @@ public class Levels : MonoBehaviour
                 shooting.cooldown = 1f;
                 shooting.startWidth = 0.1f;
                 shooting.endWidth = 2f;
+                gun = 3;
                 await speechOut.Speak("weapon three");
                 break;
             default: break;
