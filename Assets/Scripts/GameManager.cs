@@ -145,9 +145,9 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task spawnAHoles(int num){
-        if(num>listOfSpawnPositions.Count){
+        if(num>sumOfFreePositions()){
             Debug.LogError("Tried to spawn more AHoles than spanwpositions available");
-            num = listOfSpawnPositions.Count;
+            num = sumOfFreePositions();
         }
 
         for(int i = 0; i<num; i++){
@@ -165,12 +165,14 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task deleteAHole(GameObject victim){
+        //victim.active = false;
+        Destroy(victim);
         int pos = 0;
         while(victim.transform.position != listOfSpawnPositions[pos]){
             pos++;
         }
         spawnUsed[pos] = 0;
-        Destroy(victim);
+        
     }
 
     
@@ -259,5 +261,12 @@ public class GameManager : MonoBehaviour
         listOfSpawnPositions.Add(new Vector3(-6,0,-9));
         listOfSpawnPositions.Add(new Vector3(-1,0,-8));
         return listOfSpawnPositions;
+    }
+    public int sumOfFreePositions(){
+        int free = 0;
+        foreach(int spawn in spawnUsed){
+            if(spawn == 0) free ++;
+        }
+        return free;
     }
 }

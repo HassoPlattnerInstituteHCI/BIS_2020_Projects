@@ -72,7 +72,6 @@ public class BatLogic : MonoBehaviour
             playerSounds.playObjectHitByBat();
         }
         if(collider1.CompareTag("AHole")){
-            gameManager.deleteAHole(collider1.gameObject);
             player = GameObject.Find("Player");
             playerSounds = player.GetComponent<PlayerSoundEffect>();
             playerSounds.playAHoleHitByBat();
@@ -85,5 +84,11 @@ public class BatLogic : MonoBehaviour
 
         }
 
+    }
+
+    void OnTriggerExit(Collider collider1){
+        if(collider1.CompareTag("AHole")){
+            gameManager.deleteAHole(collider1.gameObject);
+        }
     }
 }
