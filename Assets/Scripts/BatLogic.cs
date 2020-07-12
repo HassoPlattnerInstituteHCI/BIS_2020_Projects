@@ -49,7 +49,7 @@ public class BatLogic : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
 
         Vector3 playerDirection = transform.forward;
-        float spawnDistance = 1.5f;
+        float spawnDistance = 1.0f;
 
         Vector3 batPos = playerPos + playerDirection*spawnDistance;
 
@@ -77,8 +77,13 @@ public class BatLogic : MonoBehaviour
             playerSounds = player.GetComponent<PlayerSoundEffect>();
             playerSounds.playAHoleHitByBat();
             gameManager.spawnAHoles(1);
-            gameManager.hitCount += 1;
+            gameManager.hitCount++;
             Debug.Log("hitcount: " + gameManager.hitCount);
+            if(gameManager.hitCount < 5) gameManager.cash++;
+            else if(gameManager.hitCount < 10) gameManager.cash+=2;
+            else if(gameManager.hitCount < 30) gameManager.cash+=5;
+            else gameManager.cash+=10;
+            Debug.Log("Cash: " + gameManager.cash);
             if(gameManager.currentLevel == 4){
                 gameManager.currentObjectiveReached = true;
             }
