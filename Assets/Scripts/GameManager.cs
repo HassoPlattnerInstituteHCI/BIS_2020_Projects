@@ -146,6 +146,18 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task StartLevel5(){
+        currentLevel = 5;
+
+        GameObject safeHouse = GameObject.Find("SafeHouse");
+        playerSpawn.position = safeHouse.transform.position;
+
+    }
+
+     public async Task StartLevel6(){
+        currentLevel = 6;
+
+        GameObject safeHouse = GameObject.Find("SafeHouse");
+        playerSpawn.position = safeHouse.transform.position;
 
     }
 

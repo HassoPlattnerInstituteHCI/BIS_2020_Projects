@@ -93,15 +93,29 @@ public class PlayerLogic : MonoBehaviour
                 telephoneSounds.startPhoneTalks();
             }           
         }
+
+        if(gameManager.currentLevel == 5 && gameManager.currentObjectiveReached){
+            Debug.Log("OnTrigger Enter for Level 5 called");
+            if(collider1.CompareTag("safehouse")){      
+                GameObject phoneBox = GameObject.Find("TelephoneBox2");
+                TelephoneSoundEffect telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
+                telephoneSounds.StopPlayback();
+                telephoneSounds.startPhoneTalks();
+            }           
+        }
             
 
         if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
             playerSounds.playWasted();
             gameManager.currentObjectiveReached = false;
+            playerSounds.StopPolicePlayback();
+            playerSounds.startHitZeroMusic();
             gameManager.ResetGame();
         } 
         if(collider1.CompareTag("safehouse")){
             gameManager.hitCount = 0;
+            playerSounds.StopPolicePlayback();
+            playerSounds.startHitZeroMusic();
             Debug.Log("hitcount: " + gameManager.hitCount);
             //police should disappear
         }

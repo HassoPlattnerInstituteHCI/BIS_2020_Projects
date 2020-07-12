@@ -64,6 +64,10 @@ public class PlayerSoundEffect : MonoBehaviour
         if(transitionMusicIsPlaying == true && audioSourceMusic.isPlaying == false){
             transitionMusicIsPlaying = false;
             startKillingStreakMusic();
+            startSirens();
+            if(gameManager.currentLevel == 5){
+                gameManager.currentObjectiveReached = true;
+            }
         }
     
         
@@ -104,6 +108,8 @@ public class PlayerSoundEffect : MonoBehaviour
 
     public void startHitZeroMusic(){
         //audioSource = GetComponent<AudioSource>();
+        transitionMusicIsPlaying = false;
+        transitionMusicHasBeenPlayed = false;
         audioSourceMusic.loop = true;
         audioSourceMusic.volume = 0.03f;
         audioSourceMusic.clip = hitZeroMusic;
