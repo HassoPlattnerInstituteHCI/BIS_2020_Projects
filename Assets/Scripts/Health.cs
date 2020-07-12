@@ -51,8 +51,15 @@ public class Health : MonoBehaviour
     // Currently not in use but helpful for e.g. medkits.
     public void Heal(int amount)
     {
-        healthPoints = Mathf.Min(healthPoints + amount, maxHealth);
-
+        if(healthPoints == maxHealth)
+        {
+            maxHealth += amount;
+            healthPoints = maxHealth;
+        } 
+        else
+        {
+            healthPoints = Mathf.Min(healthPoints + amount, maxHealth);
+        }
         UpdateUI();
     }
 

@@ -53,12 +53,18 @@ public class PlayerLogic : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Powerup"))
+        if (other.CompareTag("DmgPowerup"))
         {
-            health.Heal(25);
             GetComponent<Shooting>().damage = (int)(GetComponent<Shooting>().damage * 1.2);
             //soundEffects.PlayPowerupCollect();
-            _ = speechOut.Speak("Powerup found!");
+            _ = speechOut.Speak("Damage powerup found!");
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Medipack"))
+        {
+            health.Heal(25);
+            //soundEffects.PlayPowerupCollect();
+            _ = speechOut.Speak("Medipack found!");
             Destroy(other.gameObject);
         }
     }

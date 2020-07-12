@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
             List<dreamloLeaderBoard.Score> highscores = await task;
             foreach (Transform child in contentParent)
             {
-                child.parent = null;
+                child.SetParent(null);
                 Destroy(child.gameObject);
             }
             foreach (dreamloLeaderBoard.Score score in highscores)

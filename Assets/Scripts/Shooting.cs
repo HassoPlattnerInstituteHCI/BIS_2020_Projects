@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DualPantoFramework;
+using SpeechIO;
 
 public class Shooting : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Shooting : MonoBehaviour
     public Transform enemyTransform;
 
     AudioSource audioSource;
+    SpeechOut speechOut;
     AudioClip _currentClip;
     LineRenderer lineRenderer;
     PantoHandle handle;
@@ -44,6 +46,8 @@ public class Shooting : MonoBehaviour
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+
+        speechOut = new SpeechOut();
 
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = defaultClip;
@@ -98,6 +102,7 @@ public class Shooting : MonoBehaviour
                         spotted = true;
                         GameObject e = hit.transform.gameObject;
                         PantoHandle lowerHandle = panto.GetComponent<LowerHandle>();
+                        _ = speechOut.Speak("Enemy found!");
                         await lowerHandle.SwitchTo(e, 0.2f);
                     }
 

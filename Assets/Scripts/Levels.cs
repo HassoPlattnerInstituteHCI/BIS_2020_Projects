@@ -15,7 +15,7 @@ public class Levels : MonoBehaviour
     public GameObject player;
     public GameObject enemy;
     public GameObject[] obstacles;
-    public GameObject powerUp;
+    public GameObject[] powerUps;
     Shooting shooting;
 
     // Start is called before the first frame update
@@ -89,9 +89,11 @@ public class Levels : MonoBehaviour
                     obst.SetActive(true);
                     await IntroduceObject(obst.GetComponent<ObjectOfInterest>());
                 }
-
-                powerUp.SetActive(true);
-                await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
+                foreach (GameObject powerUp in powerUps)
+                {
+                    powerUp.SetActive(true);
+                    await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
+                }
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
                 await speechOut.Speak("The enemy dropped an item behind a wall, move around...");
                 await MoveX(playerHelper);
@@ -105,11 +107,13 @@ public class Levels : MonoBehaviour
 
                 foreach (GameObject obst in obstacles)
                 {
-                    //obst.SetActive(true);
                     await IntroduceObject(obst.GetComponent<ObjectOfInterest>());
                 }
-                //powerUp.SetActive(true);
-                await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
+
+                foreach (GameObject powerUp in powerUps)
+                {
+                    await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
+                }
 
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
                 await speechOut.Speak("This time you can switch your weapon, by saying weapon one (one is your sniper), weapon two (two is your MG) or weapon three (three is your pumpgun)");
@@ -222,7 +226,7 @@ public class Levels : MonoBehaviour
                 break;
             case "weapon two": //MG
                 shooting.fireSpreadAngle = 5f;
-                shooting.damage = 2;
+                shooting.damage = 4;
                 shooting.maxRayDistance = 10f;
                 shooting.cooldown = 0.1f;
                 shooting.startWidth = 0.5f;
@@ -231,7 +235,7 @@ public class Levels : MonoBehaviour
                 break;
             case "weapon three": //pump
                 shooting.fireSpreadAngle = 20f;
-                shooting.damage = 40;
+                shooting.damage = 70;
                 shooting.maxRayDistance = 4f;
                 shooting.cooldown = 1f;
                 shooting.startWidth = 0.1f;
