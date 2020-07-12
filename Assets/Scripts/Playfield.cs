@@ -217,7 +217,7 @@ public class Playfield : MonoBehaviour
     }
 
     //For each row, checks if it is full and proceeds accordingly
-    public async void deleteFullRows() {
+    public async Task deleteFullRows() {
         int maxRow = -1;
         int counter = 0;
         for (int row=0; row<h; row++) { //This first deletes all rows that are full, and counts how many have been deleted
@@ -228,7 +228,6 @@ public class Playfield : MonoBehaviour
             }
             //Debug.Log("Row: "+row+" maxRow: "+maxRow+" counter: "+counter);
         }
-
         Manager.clearCounter += counter; //Let the GameManager know of the progress
         if(counter>0) {
             if(counter==1) {
@@ -236,11 +235,14 @@ public class Playfield : MonoBehaviour
             } else {await speechOut.Speak("You have cleared "+counter+" rows.");}
             //TODO Sound
         }
-
         while(counter>0) { //All rows above the highest fallen row are now decreased as many times as rows have been deleted
             decreaseRowsAbove(maxRow+1);
             counter--;
             maxRow--;
+        }
+        if(!Manager.introductoryLevel || SpawnManager.introCounter>=3) {
+            await Manager.traceSkyline();
+            Manager.lowerHandle.Free();
         }
     }
 

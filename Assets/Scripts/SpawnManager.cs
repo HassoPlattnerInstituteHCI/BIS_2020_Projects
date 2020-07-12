@@ -66,8 +66,18 @@ public class SpawnManager : MonoBehaviour
                     return; //Level 0 is special, since we only spawn one block
             case 1: leftBlock = 0;
                     rightBlock = 6; //forces player to switch blocks
-                    
                 break;
+            case 2: leftBlock = 0;
+                    rightBlock = 5;
+                break;
+            case 3: leftBlock = 2;
+                    rightBlock = 4;
+                break;
+            case 4: Instantiate(skylines[level], transform.position + new Vector3(-0.5f, 0, (float)-7), transform.rotation);
+                    Playfield.confirmBlock(GameObject.Find("IntroSkyline"+(level-1)+"(Clone)"));
+                    spawnIntroPls=false;
+                    spawnWavePls=true;
+                return;
         }
         Instantiate(skylines[level], transform.position + new Vector3(-0.5f, 0, (float)-7), transform.rotation);
         Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));

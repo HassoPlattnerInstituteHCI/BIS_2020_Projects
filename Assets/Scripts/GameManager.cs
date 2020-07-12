@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     bool resetCurrentLevel = false; //If the player cannot finish the level, reset it
 
     UpperHandle upperHandle;
-    LowerHandle lowerHandle;
+    public LowerHandle lowerHandle;
 
     GameObject upperPosition;
     GameObject lowerPosition;
@@ -75,27 +75,6 @@ public class GameManager : MonoBehaviour
         } else if (endless) {
             SpawnManager.spawnWavePls = true;
         }
-        /*
-        if (welcome)
-        {
-            Welcome();
-        } 
-        */
-    }
-
-    async void Welcome()    //welcome the player
-    {
-
-        if (introductoryLevel)
-        {
-            
-            await IntroductoryLevel();
-            await speechOut.Speak("Introduction finished, game starts.");
-
-        } else{SpawnManager.spawnWavePls = true;} //If we are not in the welcome-Level, assume that we are in Endless and spawn a new wave
-        //else-if to determine if in Puzzles mode + Puzzle-Spawn functio in SpawnManager.
-
-        //await ResetGame();
     }
 
     async Task IntroductoryLevel()
@@ -104,6 +83,7 @@ public class GameManager : MonoBehaviour
     bool playingTutorial=true;
     while(playingTutorial) { //Implement some sort of way for the player to break this loop. Remember to set variable to false at end of last Level
         clearCounter=0;
+        blockPlaced=false;
         await speechOut.Speak("Starting Tutorial Level Number "+(SpawnManager.introCounter+1));
         switch(SpawnManager.introCounter) {
             case 0 :
@@ -125,13 +105,14 @@ public class GameManager : MonoBehaviour
                 await speechOut.Speak("Now the Me-Handle will trace a block at the top of the level. Every block has its own type of sound, remember it!");
                 PlayerIn.onRecognized("left");
 
-                await Task.Delay(2000);
+                await Task.Delay(1000);
 
                 await speechOut.Speak("Now, try to move the block down to clear a row of blocks in the skyline. Say confirm to pick up the selected block. When you want to place the block, say place.");
                 // TODO: Me-handle wiggle
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
                 if(resetCurrentLevel) {
+                    resetCurrentLevel=false;
                     Playfield.cleanUpRows();
                     SpawnManager.introCounter--;
                     break;
@@ -139,7 +120,6 @@ public class GameManager : MonoBehaviour
 
                 await speechOut.Speak("You have successfully cleared your first rows! Congratulations!");
 
-                //TODO: level cleanup 
                 Playfield.cleanUpRows();
                 break;
             case 1:
@@ -154,19 +134,74 @@ public class GameManager : MonoBehaviour
 
                 await WaitingForLevelFinish(SpawnManager.introCounter);
                 if(resetCurrentLevel) {
+                    resetCurrentLevel=false;
                     Playfield.cleanUpRows();
                     SpawnManager.introCounter--;
                     break;
                 }
 
                 await speechOut.Speak("Congratulations, you chose the right block and cleared the row!");
+                Playfield.cleanUpRows();
+
                 break;
             case 2:
+                await speechOut.Speak("Welcome to the third level. This time you will learn how to rotate blocks to better fit in the skyline. Let's see how it looks like first.");
+                await traceSkyline();
+
+                lowerHandle.Free();
+
+                await speechOut.Speak("The Me-Handle will always trace the left block first. After picking up a block, you can rotate it by saying 'rotate'. This will rotate the block 90° clockwise. Choose a block and rotate it to clear the skyline.");
+                PlayerIn.onRecognized("left");
+                await Task.Delay(2000);
+
+                await WaitingForLevelFinish(SpawnManager.introCounter);
+                if(resetCurrentLevel) {
+                    resetCurrentLevel=false;
+                    Playfield.cleanUpRows();
+                    SpawnManager.introCounter--;
+                    break;
+                }
+
+                await speechOut.Speak("Congratulations, you now know how to rotate blocks!");
+                Playfield.cleanUpRows();
+                break;
+            case 3:
+                await speechOut.Speak("You will not always be able to clear a row with the first block. Whenever you place a block, the It-Handle will trace the new skyline. Try it out yourself.");
+                await traceSkyline();
+
+                lowerHandle.Free();
+
+                await speechOut.Speak("Choose any block and place it in the skyline. You will not be able to clear it.");
+                PlayerIn.onRecognized("left");
+                await Task.Delay(2000);
+
+                await WaitingForLevelFinish(SpawnManager.introCounter);
+
+                await speechOut.Speak("Great! In the final level you will learn what happens after placing a block.");
+                Playfield.cleanUpRows();
+                break;
+            case 4:
+                await speechOut.Speak("Welcome to the final level. You will now learn the last two mechanics: After placing a block, you always get two new ones. And after clearing a row, the blocks above it fall down to form the new skyline. The skyline in this level is the same as the one before.");
+                await traceSkyline();
+
+                lowerHandle.Free();
+
+                await speechOut.Speak("Take your time and use as many blocks as you need to clear one row. Then you have completed the Tutorial!");
+                PlayerIn.onRecognized("left");
+                await Task.Delay(2000);
+
+                await WaitingForLevelFinish(SpawnManager.introCounter);
+                await Task.Delay(7000);
+                await speechOut.Speak("Congratulations, you have completed the Tutorial!");
+                Playfield.cleanUpRows();
                 playingTutorial=false;
+                introductoryLevel=false;
                 break;
         }
-        SpawnManager.introCounter++;
-        SpawnManager.spawnIntroPls = true;
+        if(SpawnManager.introCounter!=4) {
+            SpawnManager.introCounter++;
+            SpawnManager.spawnIntroPls = true;
+        }
     }
     }
 
@@ -183,6 +218,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case 1:
+            case 2:
                 while(clearCounter!=1) { 
                     if(blockPlaced) {
                         await speechOut.Speak("It seems you have misplaced the block and cannot finish the level. Resetting level...");
@@ -192,6 +228,10 @@ public class GameManager : MonoBehaviour
                     await Task.Delay(100);
                 }
                 break;
+            case 3: while(!blockPlaced) {await Task.Delay(100);}
+                break;
+            case 4: while(clearCounter!=1) {await Task.Delay(100);}
+                break;
         }
     }
 
@@ -199,6 +239,7 @@ public class GameManager : MonoBehaviour
         
         switch(blockCode) {
             case 0: 
+            await speechOut.Speak("Block Eye");
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f,0f,-1f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,2f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
@@ -206,6 +247,7 @@ public class GameManager : MonoBehaviour
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 break;
             case 1:
+            await speechOut.Speak("Block L");
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.75f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
@@ -215,6 +257,7 @@ public class GameManager : MonoBehaviour
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
                 break;
             case 2:
+            await speechOut.Speak("Block Reverse L");
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.75f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
@@ -224,6 +267,7 @@ public class GameManager : MonoBehaviour
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
                 break;
             case 3: 
+            await speechOut.Speak("Block O");
                 await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.5f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(1f,0f,0f), 0.1f, shouldFreeHandle);
@@ -231,6 +275,7 @@ public class GameManager : MonoBehaviour
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
                 break;
             case 4:
+            await speechOut.Speak("Block S");
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.5f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
@@ -242,6 +287,7 @@ public class GameManager : MonoBehaviour
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
                 break;
             case 5:
+            await speechOut.Speak("Block Z");
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.5f, 0f, -0.5f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
@@ -253,6 +299,7 @@ public class GameManager : MonoBehaviour
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 break;
             case 6:
+            await speechOut.Speak("Block T");
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-1.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
@@ -267,7 +314,8 @@ public class GameManager : MonoBehaviour
         await upperHandle.MoveToPosition(playerPosition.transform.position, 0.1f, shouldFreeHandle);
     }
 
-    async Task traceSkyline() {
+    public async Task traceSkyline() {
+        await speechOut.Speak("Tracing the skyline.");
         //In the first part, we get the heights of the highest block in each column. For this, we need to go through every row, starting with the highest one
         //If there is a block in there with a column-tag that is not yet initialized in the array, we take it as our highest block.
         skylineHeights = new int[11]; //By default, max height is 0=ground level

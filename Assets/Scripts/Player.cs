@@ -165,11 +165,12 @@ public class Player : MonoBehaviour
             activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
             Playfield.confirmBlock(activeBlock);
-            Field.deleteFullRows();
+            await Field.deleteFullRows();
             Manager.blockPlaced=true;
-            if(!Manager.introductoryLevel) {
+            if(!Manager.introductoryLevel || (SpawnManager.introCounter==4 && Manager.clearCounter==0) ) {
                 SpawnManager.spawnWavePls = true;
                 transform.position = SpawnerLeft.transform.position;
+                await Task.Delay(500);
                 await meHandle.MoveToPosition(leftBlockRootPos, 0.3f, shouldFreeHandle);
                 //Initializes next wave on the Me-Handle immediately
                 onRecognized("left");

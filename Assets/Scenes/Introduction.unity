@@ -152,6 +152,9 @@ MonoBehaviour:
   skylines:
   - {fileID: 8098386472531645295, guid: 027272edb3f5a7145a38fb65136fd95c, type: 3}
   - {fileID: 1949996302861137105, guid: 77e31782ef333fb4aac133e604abc104, type: 3}
+  - {fileID: 7832582475455690678, guid: 9f38e22eaf413524eae87378ef090b6c, type: 3}
+  - {fileID: 5082102045875885233, guid: 2bc25a251d15015498b0b1935160380a, type: 3}
+  - {fileID: 5082102045875885233, guid: 2bc25a251d15015498b0b1935160380a, type: 3}
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}
@@ -856,6 +859,7 @@ MonoBehaviour:
   shouldFreeHandle: 0
   blockPlaced: 0
   clearCounter: 0
+  lowerHandle: {fileID: 0}
 --- !u!1 &906322409
 GameObject:
   m_ObjectHideFlags: 0
