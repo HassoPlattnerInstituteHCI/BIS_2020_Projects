@@ -1206,9 +1206,11 @@ MonoBehaviour:
   shouldFreeHandle: 0
   RowClear: {fileID: 8300000, guid: e5f1cd52307019b4896823057cc2fcaf, type: 3}
   LevelClear: {fileID: 8300000, guid: 56027a70e8a1a84418b85db863c87a2a, type: 3}
+  LevelFail: {fileID: 0}
   BlockPlace: {fileID: 8300000, guid: 255e3413549495341b30d335aa1ff6f2, type: 3}
   BlockRotate: {fileID: 8300000, guid: b7bbe2ebc5038c14e9e04ea2a35a9b7b, type: 3}
   BlockMove: {fileID: 8300000, guid: cc4f701a13dd00a4fbc74b1832cca980, type: 3}
+  MovementBlocked: {fileID: 0}
   audioSource: {fileID: 1197761973}
   volume: 0.5
 --- !u!82 &1197761973
