@@ -91,7 +91,7 @@ public class GameManager2 : MonoBehaviour
 
     async Task RoomExploration()
     {
-        while (true)
+        /*while (true)
         {
             await speechOut.Speak("Say done when you're ready.");
             string response = await speechIn.Listen(commands);
@@ -99,7 +99,7 @@ public class GameManager2 : MonoBehaviour
             {
                 return;
             }
-        }
+        }*/
     }
 
     void RegisterColliders() {
@@ -121,9 +121,9 @@ public class GameManager2 : MonoBehaviour
         await speechOut.Speak("Find organs liver, heart, stomach and lungs in that order.");
         enemy.transform.position = enemySpawn.position;
         enemy.transform.rotation = enemySpawn.rotation;
-        GameObject heart = GameObject.FindGameObjectWithTag("Liver");
-        Debug.Log(heart);
-        await lowerHandle.SwitchTo(heart, 0.3f);
+        GameObject liver = GameObject.FindGameObjectWithTag("Liver");
+        Debug.Log(liver);
+        await lowerHandle.SwitchTo(liver, 0.3f);
         /* if (level >= enemyConfigs.Length)
             Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
         enemy.GetComponent<Enemy>().config = enemyConfigs[level];*/

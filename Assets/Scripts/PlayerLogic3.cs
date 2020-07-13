@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
+using UnityEngine.SceneManagement;
 
 public class PlayerLogic3 : MonoBehaviour
 {
@@ -17,20 +18,11 @@ public class PlayerLogic3 : MonoBehaviour
     float nextHeartbeat;
     Health health;
 
-    private int currentTarget = 0;
-    private GameObject[] targets;
-
     SpeechOut speechOut;
 
     private void Awake()
     {
         speechOut = new SpeechOut();
-
-        targets = new GameObject[] {
-            GameObject.Find("Liver"),
-            GameObject.Find("Heart"),
-            GameObject.Find("Stomach"),
-            GameObject.Find("Lungs")};
     }
 
     void Start()
@@ -67,9 +59,12 @@ public class PlayerLogic3 : MonoBehaviour
         if (collision.gameObject.name == "Lungs")
         {
             await speechOut.Speak("Congratulations, you reached the lungs");
-            currentTarget++;
+            /*UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();*/
+            AsyncOperation async = SceneManager.LoadSceneAsync(1);
+            async.allowSceneActivation = true;
         }
-        else if (collision.gameObject.name == "Liver" || collision.gameObject.name == "Stomach" || collision.gameObject.name == "Lungs")
+        else if (collision.gameObject.name == "Liver" || collision.gameObject.name == "Stomach" || collision.gameObject.name == "Heart")
         {
             await speechOut.Speak("Sorry, that is not the organ you are looking for");
         }

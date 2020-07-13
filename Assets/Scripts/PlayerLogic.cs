@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
+using UnityEngine.SceneManagement;
 
 public class PlayerLogic : MonoBehaviour
 {
@@ -59,6 +60,10 @@ public class PlayerLogic : MonoBehaviour
         {
             await speechOut.Speak("Congratulations, you reached the heart.");
             await speechOut.Speak("You completed level 1");
+            /*UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();*/
+            AsyncOperation async = SceneManager.LoadSceneAsync(1);
+            async.allowSceneActivation = true;
         }
         else if (collision.gameObject.name == "Liver" || collision.gameObject.name == "Stomach" || collision.gameObject.name == "Lungs")
         {

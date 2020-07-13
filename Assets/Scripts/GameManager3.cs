@@ -91,7 +91,7 @@ public class GameManager3 : MonoBehaviour
 
     async Task RoomExploration()
     {
-        while (true)
+        /*while (true)
         {
             await speechOut.Speak("Say done when you're ready.");
             string response = await speechIn.Listen(commands);
@@ -99,7 +99,7 @@ public class GameManager3 : MonoBehaviour
             {
                 return;
             }
-        }
+        }*/
     }
 
     void RegisterColliders() {
@@ -121,9 +121,9 @@ public class GameManager3 : MonoBehaviour
         await speechOut.Speak("You are holding a scalpel. Reach the left side of the lungs, but beware of the ulcers.");
         enemy.transform.position = enemySpawn.position;
         enemy.transform.rotation = enemySpawn.rotation;
-        GameObject heart = GameObject.FindGameObjectWithTag("Lungs");
-        Debug.Log(heart);
-        await lowerHandle.SwitchTo(heart, 0.3f);
+        GameObject lungs = GameObject.FindGameObjectWithTag("Lungs");
+        Debug.Log(lungs);
+        await lowerHandle.SwitchTo(lungs, 0.3f);
         /* if (level >= enemyConfigs.Length)
             Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
         enemy.GetComponent<Enemy>().config = enemyConfigs[level];*/

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
+using UnityEngine.SceneManagement;
 
 public class PlayerLogic2 : MonoBehaviour
 {
@@ -84,6 +85,10 @@ public class PlayerLogic2 : MonoBehaviour
         if (currentTarget == targets.Length)
         {
             await speechOut.Speak("You completed level 2");
+            /*UnityEditor.EditorApplication.isPlaying = false;
+            Application.Quit();*/
+            AsyncOperation async = SceneManager.LoadSceneAsync(2);
+            async.allowSceneActivation = true;
         }
     }
 }

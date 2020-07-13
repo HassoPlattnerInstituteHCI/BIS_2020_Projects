@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GameManager : MonoBehaviour
+public class GameManager4 : MonoBehaviour
 {
     public float spawnSpeed = 1f;
     public bool introduceLevel = true;
@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public EnemyConfig[] enemyConfigs;
     public Transform playerSpawn;
     public Transform enemySpawn;
-    public int level = 0;
+    public int level = 2;
     public int trophyScore = 10000;
     public UIManager uiManager;
 
@@ -37,11 +37,11 @@ public class GameManager : MonoBehaviour
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
         speechOut = new SpeechOut();
 
-        if (level < 0 || level >= enemyConfigs.Length)
+        /* if (level < 0 || level >= enemyConfigs.Length)
         {
             Debug.LogWarning($"Level value {level} < 0 or >= enemyConfigs.Length. Resetting to 0");
             level = 0;
-        }
+        } */
     }
 
     void Start()
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     async Task IntroduceLevel()
     {
-        await speechOut.Speak("There are four organs.");
+        await speechOut.Speak("There are six organs.");
         Level level = GetComponent<Level>();
         await level.PlayIntroduction();
 
@@ -118,15 +118,15 @@ public class GameManager : MonoBehaviour
         player.transform.position = playerSpawn.position;
         await upperHandle.SwitchTo(player, 0.3f);
 
-        await speechOut.Speak("Finding organ heart");
+        await speechOut.Speak("You are holding a scalpel. Cut one of the kidneys loose and put it to the side. It points to the liver.");
         enemy.transform.position = enemySpawn.position;
         enemy.transform.rotation = enemySpawn.rotation;
-        GameObject heart = GameObject.FindGameObjectWithTag("Heart");
-        Debug.Log(heart);
-        await lowerHandle.SwitchTo(heart, 0.3f);
-        if (level >= enemyConfigs.Length)
+        GameObject liver = GameObject.FindGameObjectWithTag("Liver");
+        Debug.Log(liver);
+        await lowerHandle.SwitchTo(liver, 0.3f);
+        /* if (level >= enemyConfigs.Length)
             Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
-        enemy.GetComponent<Enemy>().config = enemyConfigs[level];
+        enemy.GetComponent<Enemy>().config = enemyConfigs[level];*/
 
         upperHandle.Free();
 
