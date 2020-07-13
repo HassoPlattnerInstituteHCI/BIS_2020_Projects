@@ -120,7 +120,9 @@ MonoBehaviour:
   player: {fileID: 0}
   failureAudioSource: {fileID: 1138222945356138239}
   death: {fileID: 1050093355148965261}
+  dangerAudioSource: {fileID: 137036837414712375}
   canSpot: 0
+  frozen: 1
 --- !u!82 &1050093355148965261
 AudioSource:
   m_ObjectHideFlags: 0

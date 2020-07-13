@@ -12,11 +12,9 @@ namespace Stealth
         override public async Task ResetGame()
         {
             DeactivateGameObjects();
+            await speechOut.Speak("Your are here.");
             await SpawnPlayer();
             await speechOut.Speak("You can move using the me handle. Follow the ticking sound and find treasure. Find a way around the obstacles.");
-            
-            upperHandle.Free();
-            
             ActivateGameObjects();
         }
 

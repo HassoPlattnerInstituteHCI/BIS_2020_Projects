@@ -15,7 +15,6 @@ namespace Stealth
             await SpawnPlayer();
             await SpawnEnemies();
             await speechOut.Speak("Now there are two enemies. Say Switch to switch between enemies.");
-            upperHandle.Free();
             ActivateGameObjects(); 
             ListenToSwitch();
         }

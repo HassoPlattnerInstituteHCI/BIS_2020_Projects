@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using SpeechIO;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,38 +13,44 @@ namespace Stealth
         // Start is called before the first frame update
         public float speed = 1.0f;
         public float health = 100.0f;
+
         public float HitPower = 10.0f;
+
         // The enemy will patrol between these points;
         public Vector3[] path;
         public float SpotRadius = 4.0f;
+
         public GameObject player;
+
         // The part of the path the enemy is currently headed to
         private int currentPathTargetIndex = 0;
         private bool spotted = false;
         SpeechOut speechOut;
         public AudioSource failureAudioSource;
         public AudioSource death;
+        public AudioSource dangerAudioSource;
         public bool canSpot = false;
+        public bool frozen = true;
 
         void Start()
         {
             speechOut = new SpeechOut();
-            
-
-
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (isFrozen())
+            {
+                return;
+            }
+
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= SpotRadius && !spotted)
             {
-                if (canSpot)
-                {
-                  spotted = true;
-                  PlayerSpotted();
-                }
+                spotted = true;
+                PlayerSpotted();
             }
+
             if (gameObject.transform.position == getCurrentTarget())
             {
                 currentPathTargetIndex = (currentPathTargetIndex + 1) % path.Length;
@@ -63,25 +69,31 @@ namespace Stealth
         {
             return path[currentPathTargetIndex];
         }
+
         async Task PlayerSpotted()
         {
             failureAudioSource.Play();
-            if(SceneManager.GetActiveScene().name!="Level 5") await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
-            Debug.Log("Making a call");
-            
             LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
 
-            if (SceneManager.GetActiveScene().name != "Level 5") {
+            script.DeactivateGameObjects();
+            if (SceneManager.GetActiveScene().name != "Level 5")
+            {
+                await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
+            }
+
+
+            if (SceneManager.GetActiveScene().name != "Level 5")
+            {
                 await script.ResetGame();
                 spotted = false;
-
-            } else
+            }
+            else
             {
                 Debug.Log("ACTIVATE SWORD");
                 player.transform.GetChild(0).gameObject.SetActive(true);
             }
-           
         }
+
         public void TakeHit()
         {
             if (health > 0)
@@ -89,12 +101,13 @@ namespace Stealth
                 health = health - HitPower;
                 Debug.Log("helath is " + health);
             }
+
             if (health == 0)
             {
                 EnemyDeath();
             }
-            
         }
+
         async Task EnemyDeath()
         {
             Debug.Log("death");
@@ -102,6 +115,24 @@ namespace Stealth
             death.Play();
             await speechOut.Speak(gameObject.name + " has died");
             gameObject.SetActive(false);
+        }
+
+        public Boolean isFrozen()
+        {
+            return frozen;
+        }
+
+        public void Freeze()
+        {
+            frozen = true;
+            dangerAudioSource.enabled = false;
+        }
+
+        public void Unfreeze()
+        {
+            frozen = false;
+            gameObject.SetActive(true);
+            dangerAudioSource.enabled = true;
         }
     }
 }

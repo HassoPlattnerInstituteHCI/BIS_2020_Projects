@@ -13,13 +13,15 @@ namespace Stealth
         public float speed = 1.0f;
         private PantoHandle upperHandle;
         public GameObject sword;
+        public bool frozen;
+        private AudioListener audioListener;
 
         // Start is called before the first frame update
         void Start()
         {
             playerRb = GetComponent<Rigidbody>();
             upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
-
+            audioListener = GetComponent<AudioListener>();
         }
 
         public void StartFighting()
@@ -29,24 +31,54 @@ namespace Stealth
 
         // Update is called once per frame
         void Update()
-        { 
-            transform.position = upperHandle.HandlePosition(transform.position);
+        {
+            if (isFrozen())
+            {
+                return;
+            }
+
+            transform.position = getUpperHandle().HandlePosition(transform.position);
             transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
         }
 
-        private void FixedUpdate()
+        public Boolean isFrozen()
         {
-            //transform.position = upperHandle.HandlePosition(transform.position);
+            return frozen;
         }
 
-        void PantoMovement()
+        public void Freeze()
         {
-            float rotation = GameObject
-                .Find("Panto")
-                .GetComponent<UpperHandle>()
-                .GetRotation();
-            Vector3 direction = Quaternion.Euler(0, rotation, 0) * Vector3.forward;
-            playerRb.velocity = speed * direction;
+            getUpperHandle().MoveToPosition(transform.position, 0.3f, false); // freeze handle
+            frozen = true;
+            // gameObject.SetActive(false);
+            // getAudioListener().enabled = true;
+        }
+
+        public void Unfreeze()
+        {
+            frozen = false;
+            gameObject.SetActive(true);
+            upperHandle.Free();
+        }
+
+        private PantoHandle getUpperHandle()
+        {
+            if (upperHandle == null)
+            {
+                upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
+            }
+
+            return upperHandle;
+        }
+
+        private AudioListener getAudioListener()
+        {
+            if (audioListener == null)
+            {
+                audioListener = GetComponent<AudioListener>();
+            }
+
+            return audioListener;
         }
     }
 }

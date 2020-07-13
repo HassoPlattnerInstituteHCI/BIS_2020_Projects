@@ -13,10 +13,9 @@ namespace Stealth
         {
             DeactivateGameObjects();
             await SpawnPlayer();
-            await SpawnEnemies();
             await speechOut.Speak(
-                "An enemy protects the treasure. You can feel him using the it handle. Don't get to close to him.");
-            upperHandle.Free();
+                           "An enemy protects the treasure. You can feel him using the it handle. Don't get to close to him."); 
+            await SpawnEnemies();
             ActivateGameObjects();
             ListenToSwitch();
         }

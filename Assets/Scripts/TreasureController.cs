@@ -45,10 +45,13 @@ namespace Stealth
 
         async Task GameOver()
         {
+            tickingAudioSource.Pause();
             successAudioSource.Play();
+            LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
+            script.DeactivateGameObjects();
+            
             await speechOut.Speak("Congratulations. You finished the level.");
             
-            LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
             await script.Success();
         }
 

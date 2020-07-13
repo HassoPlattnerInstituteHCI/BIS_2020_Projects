@@ -20,6 +20,7 @@ namespace Stealth
         public LowerHandle lowerHandle;
         public SpeechIn speechIn;
         public SpeechOut speechOut;
+        public TreasureController treasureController;
 
         public Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>()
         {
@@ -137,35 +138,32 @@ namespace Stealth
 
         public void DeactivateGameObjects()
         {
-            player.SetActive(false);
+            player.GetComponent<PlayerController>().Freeze();
             foreach (GameObject en in enemies)
             {
-                en.SetActive(false);
-                en.GetComponent<EnemyController>().canSpot = false;
+                en.GetComponent<EnemyController>().Freeze();
             }
+            getTreasureController().tickingAudioSource.Pause();
         }
 
         public void ActivateGameObjects()
         {
-            player.SetActive(true);
+            player.GetComponent<PlayerController>().Unfreeze();
             foreach (GameObject en in enemies)
             {
-                en.SetActive(true);
-                en.GetComponent<EnemyController>().canSpot = true;
+                en.GetComponent<EnemyController>().Unfreeze();
             }
+            getTreasureController().tickingAudioSource.Play();
         }
 
         public async Task SpawnPlayer()
         {
-            await speechOut.Speak("Spawning player");
             player.transform.position = playerSpawn.position;
             await upperHandle.SwitchTo(player, 0.3f);
         }
 
         public async Task SpawnEnemies()
         {
-            await speechOut.Speak("Spawning enemies");
-
             for (int i = 0; i < enemies.Length; i++)
             {
                 enemies[i].transform.position = enemySpawns[i].position;
@@ -178,6 +176,16 @@ namespace Stealth
                 currentEnemy = enemies[EnemyIndex];
                 await lowerHandle.SwitchTo(currentEnemy, 0.3f);
             }
+        }
+
+        public TreasureController getTreasureController()
+        {
+            if (treasureController == null)
+            {
+                treasureController = GameObject.FindWithTag("Target").GetComponent<TreasureController>();
+            }
+
+            return treasureController;
         }
     }
 }
