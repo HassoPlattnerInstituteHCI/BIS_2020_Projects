@@ -71,6 +71,10 @@ namespace PantoGolf
 
         async Task IntroduceLevel()
         {
+            if (GameObject.FindGameObjectsWithTag("obstacle").Length > 4)
+            {
+                await speechOut.Speak("There are " + (GameObject.FindGameObjectsWithTag("obstacle").Length - 4) + " obstacles.");
+            }
             //await speechOut.Speak("There are no obstacles.");
             Level level = GetComponent<Level>();
             await level.PlayIntroduction();
