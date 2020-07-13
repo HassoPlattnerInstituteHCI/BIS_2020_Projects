@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
         }
         if(message == "confirm" && !playercontrol && !placement)    //confirm block selection
         {
-            //await speechOut.Speak("Block picked up.");
+            await speechOut.Speak("Block picked up.");
             if(leftBlockActive) {
                 Destroy(SpawnManager.blockRight);
                 SpawnManager.blockLeft.transform.SetParent(transform);
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
                 }
             meHandle.Free();
             playercontrol = true;
-            chooseMode = false;
+            chooseMode = false; //remove this
             rotateAmount=0;
             activeBlock.transform.position = transform.position;
         }
@@ -161,7 +161,7 @@ public class Player : MonoBehaviour
         }
         if(message == "confirm" && placement)       //confirming placement location
         {
-            //await speechOut.Speak("Block placed.");
+            await speechOut.Speak("Block placed."); //TODO Sound
             activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
             Playfield.confirmBlock(activeBlock);
@@ -178,7 +178,7 @@ public class Player : MonoBehaviour
         }
         if(message == "abort" && placement)     //abort block placement
         {
-            //await speechOut.Speak("Placement aborted.");
+            await speechOut.Speak("Placement aborted.");
             placement = false;
             playercontrol = true;
             meHandle.Free();
