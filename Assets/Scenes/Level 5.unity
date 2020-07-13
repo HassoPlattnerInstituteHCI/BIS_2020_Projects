@@ -263,13 +263,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnSpeed: 1
-  introduceLevel: 1
-  player: {fileID: 0}
-  enemies: []
+  introduceLevel: 0
+  player: {fileID: 950786676}
+  enemies:
+  - {fileID: 394298159}
+  - {fileID: 2048514865}
   currentEnemy: {fileID: 0}
   EnemyIndex: 0
-  playerSpawn: {fileID: 0}
-  enemySpawns: []
+  playerSpawn: {fileID: 481616937}
+  enemySpawns:
+  - {fileID: 1616075375}
+  - {fileID: 2026674197}
   upperHandle: {fileID: 0}
   lowerHandle: {fileID: 0}
 --- !u!1 &112374156
@@ -774,6 +778,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52980b55982d9db4a926d3fa16253255, type: 3}
+--- !u!1 &394298159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3921316458802807763, guid: 52980b55982d9db4a926d3fa16253255,
+    type: 3}
+  m_PrefabInstance: {fileID: 394298158}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &481616936
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,7 +996,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 17.5
+  orthographic size: 17.45358
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1947,3 +1957,9 @@ PrefabInstance:
       objectReference: {fileID: 950786676}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52980b55982d9db4a926d3fa16253255, type: 3}
+--- !u!1 &2048514865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3921316458802807763, guid: 52980b55982d9db4a926d3fa16253255,
+    type: 3}
+  m_PrefabInstance: {fileID: 2048514864}
+  m_PrefabAsset: {fileID: 0}

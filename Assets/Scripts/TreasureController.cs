@@ -49,7 +49,7 @@ namespace Stealth
             await speechOut.Speak("Congratulations. You finished the level.");
             
             LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
-            script.Success();
+            await script.Success();
         }
 
         public void OnApplicationQuit()
