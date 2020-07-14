@@ -15,6 +15,11 @@ namespace Stealth
         public GameObject sword;
         public bool frozen;
         private AudioListener audioListener;
+        public AudioSource StepsLeftAudioSource;
+        public AudioSource StepsRightAudioSource;
+
+        private bool leftStep = true;
+        private Vector3 lastStepPosition;
 
         // Start is called before the first frame update
         void Start()
@@ -39,6 +44,7 @@ namespace Stealth
 
             transform.position = getUpperHandle().HandlePosition(transform.position);
             transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
+            StepSound();
         }
 
         public Boolean isFrozen()
@@ -79,6 +85,24 @@ namespace Stealth
             }
 
             return audioListener;
+        }
+
+        private void StepSound()
+        {
+            if (lastStepPosition == null
+                || Vector3.Distance(lastStepPosition, gameObject.transform.position) > 1.0f)
+            {
+                if (leftStep)
+                {
+                    StepsLeftAudioSource.Play();
+                }
+                else
+                {
+                    StepsRightAudioSource.Play();
+                }
+                lastStepPosition = gameObject.transform.position;
+                leftStep = !leftStep;
+            }
         }
     }
 }
