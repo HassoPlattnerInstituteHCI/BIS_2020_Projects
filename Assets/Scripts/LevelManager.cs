@@ -44,8 +44,6 @@ namespace Stealth
 
         async void Introduction()
         {
-            await speechOut.Speak("Welcome to Stealth Panto");
-            // TODO: 1. Introduce obstacles in level 2 (aka 1)
             await Task.Delay(1000);
             RegisterColliders();
 
