@@ -328,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 4298007181664299671, guid: 322f903e715677a4db0c694ace57dc12,
         type: 3}
       propertyPath: orthographic size
-      value: 18.789782
+      value: 9.530255
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 322f903e715677a4db0c694ace57dc12, type: 3}
@@ -562,6 +562,11 @@ PrefabInstance:
     - target: {fileID: 3103208581684867969, guid: ae31b59385cd68345aa5d7a24250d194,
         type: 3}
       propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5987070852016643493, guid: ae31b59385cd68345aa5d7a24250d194,
+        type: 3}
+      propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
