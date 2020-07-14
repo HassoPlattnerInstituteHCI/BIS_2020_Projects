@@ -8,8 +8,6 @@ namespace Stealth
 {
     public abstract class LevelManager : MonoBehaviour
     {
-        public float spawnSpeed = 1f;
-        public bool introduceLevel = true;
         public GameObject player;
         public GameObject[] enemies;
         public GameObject currentEnemy;
@@ -51,31 +49,8 @@ namespace Stealth
             await Task.Delay(1000);
             RegisterColliders();
 
-            if (introduceLevel)
-            {
-                await IntroduceLevel();
-                await speechOut.Speak("Introduction finished, game starts.");
-            }
-
             await ResetGame();
         }
-
-        async Task IntroduceLevel()
-        {
-            await speechOut.Speak("There are two obstacles.");
-            Level level = GetComponent<Level>();
-            await level.PlayIntroduction();
-
-            await speechOut.Speak("Feel for yourself. Say yes or done when you're ready.");
-            //string response = await speechIn.Listen(commands);
-            await speechIn.Listen(new Dictionary<string, KeyCode>() {{"yes", KeyCode.Y}, {"done", KeyCode.D}});
-
-            //if (response == "yes")
-            //{
-            //    await RoomExploration();
-            //}
-        }
-
 
         void RegisterColliders()
         {
