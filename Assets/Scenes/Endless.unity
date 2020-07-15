@@ -568,7 +568,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -600,7 +600,7 @@ MonoBehaviour:
   introductoryLevel: 0
   mainMenu: 0
   puzzles: 0
-  endless: 0
+  endless: 1
   player: {fileID: 0}
   shouldFreeHandle: 0
   blockPlaced: 0
@@ -1206,11 +1206,11 @@ MonoBehaviour:
   shouldFreeHandle: 0
   RowClear: {fileID: 8300000, guid: e5f1cd52307019b4896823057cc2fcaf, type: 3}
   LevelClear: {fileID: 8300000, guid: 56027a70e8a1a84418b85db863c87a2a, type: 3}
-  LevelFail: {fileID: 0}
+  LevelFail: {fileID: 8300000, guid: 6c85136e0042c1346a96947bf432d127, type: 3}
   BlockPlace: {fileID: 8300000, guid: 255e3413549495341b30d335aa1ff6f2, type: 3}
   BlockRotate: {fileID: 8300000, guid: b7bbe2ebc5038c14e9e04ea2a35a9b7b, type: 3}
   BlockMove: {fileID: 8300000, guid: cc4f701a13dd00a4fbc74b1832cca980, type: 3}
-  MovementBlocked: {fileID: 0}
+  MovementBlocked: {fileID: 8300000, guid: 9a99de8a45c073340a0f7c6c6e80099c, type: 3}
   audioSource: {fileID: 1197761973}
   volume: 0.5
 --- !u!82 &1197761973

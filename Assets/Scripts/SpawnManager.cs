@@ -39,6 +39,7 @@ public class SpawnManager : MonoBehaviour
     //Sets their names accordingly, as well as tags for the children (might delete that)
     public void spawnNext() {
         leftBlock = Random.Range(0, groups.Length);
+        leftBlock=0;
         blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
         blockLeft.name = ""+leftBlock;
         Player.leftBlockRootPos = blockLeft.transform.GetChild(0).transform.position;

@@ -238,12 +238,32 @@ public class GameManager : MonoBehaviour
     public async Task traceBlock(int blockCode, bool isLeft) {
         switch(blockCode) {
             case 0: 
-            await speechOut.Speak("Block Eye");
+            await speechOut.Speak("Block I");
+            await Task.Delay(1000);
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f,0f,-0.25f), 0.1f, shouldFreeHandle); //To correct global position
+            await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,2f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-2f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
+                
+                /*
+                await Task.Delay(1000);
+                await upperHandle.MoveToPosition(new Vector3(-2f,0f,-14f), 0.2f, shouldFreeHandle);
+                await Task.Delay(1000);
+                await upperHandle.MoveToPosition(new Vector3(-2f,0f,-10f), 0.2f, shouldFreeHandle);
+                await Task.Delay(1000);
+                await upperHandle.MoveToPosition(new Vector3(0f,0f,-10f), 0.2f, shouldFreeHandle);
+                await Task.Delay(1000);
+                await upperHandle.MoveToPosition(new Vector3(0f,0f,-14f), 0.2f, shouldFreeHandle);
+                await Task.Delay(1000);
+                await upperHandle.MoveToPosition(new Vector3(-2f,0f,-14f), 0.2f, shouldFreeHandle);
+                await Task.Delay(1000);
+                */
                 break;
             case 1:
             await speechOut.Speak("Block L");
