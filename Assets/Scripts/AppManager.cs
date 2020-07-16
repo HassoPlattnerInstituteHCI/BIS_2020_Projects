@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -20,6 +20,7 @@ namespace dualLayouting {
         public GameObject elementPrefab;
 
         private int currLevel;
+        private Action OnSpaceDown;
 
         // Start is called before the first frame update
         async void Start()
@@ -36,6 +37,7 @@ namespace dualLayouting {
             await StartNextLevel();
             UpdateCommandsElements();
         }
+
         private void OnDeleteAll()
         {
             GameObject container = GameObject.Find("Elements");
@@ -64,33 +66,43 @@ namespace dualLayouting {
             });
             await audioManager.Say("Say \"Select Happy Birthday\". Then try to move it to the center of the page.");
             await audioManager.Say("Say \"Done\" when you are ready for the next step.");
-
+            OnSpaceDown = () => { SelectElement(GameObject.Find("Happy Birthday")); };
         }
+
         async public Task StartLevelOne()
         {
             await audioManager.Say("There is a second element on this page.");
             await audioManager.Say("Say \"List Elements\" to get an overview.");
+            OnSpaceDown = () => { OnList(); };
         }
+
         async public Task StartLevelTwo()
         {
             await audioManager.Say("A pizza doesn't seem to be appropriate on a birthday card, right? To delete it, say \"Delete Pizza\".");
+            OnSpaceDown = () => { OnDelete("Pizza"); };
         }
+
         async public Task StartLevelThree()
         {
-            await audioManager.Say("Instead of the pizza, let's insert something fun. How about a clipart of colorful baloons or a bottle of champagne? Say \"Add ballons\" or \"Add champagne\"");
+            await audioManager.Say("Instead of the pizza, let's insert something fun. How about a clipart of colorful baloons or a bottle of champagne? Say \"Add balloons\" or \"Add champagne\"");
+            OnSpaceDown = () => { OnCreate("Balloons"); };
         }
+
         async public Task StartLevelFour()
         {
             await audioManager.Say("Now position the baloons next to the text. If you do not remember it's position just say \"Show Happy Birthday\".");
+            OnSpaceDown = () => { OnShow("Happy Birthday"); };
         }
         async public Task StartLevelFive()
         {
             await audioManager.Say("Great job! Feel free to continue or start over with a new kick-ass design! Say \"Delete all\" to get a clear page.");
+            OnSpaceDown = () => { OnDeleteAll(); };
         }
 
         async private Task StartNextLevel()
         {
             Func<Task>[] startLevels = new Func<Task>[] {StartLevelZero, StartLevelOne, StartLevelTwo, StartLevelThree, StartLevelFour, StartLevelFive};
+            OnSpaceDown = null;
             await startLevels[currLevel]();
             currLevel++;
         }
@@ -169,6 +181,10 @@ namespace dualLayouting {
         // Update is called once per frame
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Space) && OnSpaceDown != null) {
+                OnSpaceDown();
+                OnSpaceDown = () => { OnDone(); };
+            }
             UpdateSelectedElementPosition();
         }
 

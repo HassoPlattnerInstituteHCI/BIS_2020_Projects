@@ -1143,7 +1143,7 @@ PrefabInstance:
     - target: {fileID: 4068519345987674049, guid: 29e46590fe07419498a306494b64e050,
         type: 3}
       propertyPath: description
-      value: A text reading Happy Birthday
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4298555987000511475, guid: 29e46590fe07419498a306494b64e050,
         type: 3}
