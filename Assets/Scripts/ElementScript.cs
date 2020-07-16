@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -76,5 +76,13 @@ namespace dualLayouting
 
         }
 
+        private void OnTriggerEnter(Collider other) {
+            if (other.tag == "Element") {
+                Debug.Log(other);
+                Debug.Log("Elements are colliding");
+                GameObject panto = GameObject.Find("Panto");
+                panto.GetComponent<AppManager>().OnFirstCollision();
+            }  
+        }
     }
 }

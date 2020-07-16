@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -23,6 +23,7 @@ namespace dualLayouting {
         private Action OnSpaceDown;
 
         private GameObject shownElement; 
+        private bool firstCollision;
 
         // Start is called before the first frame update
         async void Start()
@@ -35,7 +36,6 @@ namespace dualLayouting {
             upperHandle = GetComponent<UpperHandle>();
             lowerHandle = GetComponent<LowerHandle>();
             selectedElement = null;
-
             await StartNextLevel();
             UpdateCommandsElements();
         }
@@ -245,6 +245,13 @@ namespace dualLayouting {
 
         public void OnShowCenter(){
             MoveItToElement(shownElement);
+        }
+
+        public async Task OnFirstCollision(){
+            if (!firstCollision){
+            await audioManager.Say("Looks like you created an overlap!");
+            firstCollision = true;
+            }
         }
     }
 }
