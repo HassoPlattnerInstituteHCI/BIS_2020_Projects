@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -34,7 +34,41 @@ namespace dualLayouting
             Destroy(gameObject, deletionSound.length);
         }
 
+        public Vector3 TopPosition() {
+            Vector3 center = transform.position;
+            Vector3 size = transform.localScale * 0.5f;
+            size.x = 0;
+            size.y = 0;
 
+            return center + size;
+        }
+
+        public Vector3 BottomPosition() {
+            Vector3 center = transform.position;
+            Vector3 size = transform.localScale * 0.5f;
+            size.x = 0;
+            size.y = 0;
+
+            return center - size;
+        }
+
+        public Vector3 LeftPosition() {
+            Vector3 center = transform.position;
+            Vector3 size = transform.localScale * 0.5f;
+            size.z = 0;
+            size.y = 0;
+
+            return center - size;
+        }
+
+        public Vector3 RightPosition() {
+            Vector3 center = transform.position;
+            Vector3 size = transform.localScale * 0.5f;
+            size.z = 0;
+            size.y = 0;
+
+            return center + size;
+        }
 
         // Update is called once per frame
         void Update()

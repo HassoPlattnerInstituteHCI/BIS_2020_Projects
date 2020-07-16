@@ -22,12 +22,14 @@ namespace dualLayouting {
         private int currLevel;
         private Action OnSpaceDown;
 
+        private GameObject shownElement; 
+
         // Start is called before the first frame update
         async void Start()
         {
             currLevel = 0;
             audioManager = GetComponent<AudioManager>();
-            audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete, OnList, OnShow, OnDone, OnDeleteAll);
+            audioManager.SetCallbacks(OnSelect, OnCreate, OnDelete, OnList, OnShow, OnDone, OnDeleteAll, OnShowRight, OnShowLeft, OnShowBottom, OnShowTop, OnShowCenter);
 
             isMoving = false;
             upperHandle = GetComponent<UpperHandle>();
@@ -61,7 +63,7 @@ namespace dualLayouting {
             await level.PlayIntroduction();
 
             await Task.WhenAll(new Task[] {
-                MoveItToElement(GameObject.Find("Happy Birthday")),
+                MoveItToElement(GameObject.Find("Happy Birthday"), "center"),
                 audioManager.Say("Here is a text reading \"Happy Birthday\".")
             });
             await audioManager.Say("Say \"Select Happy Birthday\". Then try to move it to the center of the page.");
@@ -133,9 +135,10 @@ namespace dualLayouting {
 
         async public Task ShowElement(GameObject element)
         {
+            shownElement = element;
             Task[] tasks = new Task[] {
                 audioManager.Say(element.name), 
-                MoveItToElement(element)
+                MoveItToElement(element, "center")
             };
 
             await Task.WhenAll(tasks);
@@ -205,10 +208,43 @@ namespace dualLayouting {
             isMoving = false;
         }
 
-        async public Task MoveItToElement(GameObject element)
+        async public Task MoveItToElement(GameObject element, string direction = "center")
         { 
-            await lowerHandle.MoveToPosition(element.transform.position, 0.2f, false);
+            Vector3 position = element.transform.position;
+
+            if (direction == "top") {
+                position = shownElement.GetComponent<ElementScript>().TopPosition();
+            }
+            if (direction == "bottom") {
+                position = shownElement.GetComponent<ElementScript>().BottomPosition();
+            }
+            if (direction == "left") {
+                position = shownElement.GetComponent<ElementScript>().LeftPosition();
+            }
+            if (direction == "right") {
+                position = shownElement.GetComponent<ElementScript>().RightPosition();
+            }
+            await lowerHandle.MoveToPosition(position, 0.2f, false);
         }
 
+        public void OnShowLeft(){
+           MoveItToElement(shownElement, "left");            
+        }
+
+        public void OnShowRight(){
+            MoveItToElement(shownElement, "right");
+        }
+
+        public void OnShowBottom(){
+            MoveItToElement(shownElement, "bottom");
+        }
+
+        public void OnShowTop(){
+            MoveItToElement(shownElement, "top");
+        }
+
+        public void OnShowCenter(){
+            MoveItToElement(shownElement);
+        }
     }
 }

@@ -18,6 +18,11 @@ namespace dualLayouting {
         Action<string> onShow;
         private Action onList;
         private Action onDone;
+        private Action onShowRight;
+        private Action onShowTop;
+        private Action onShowLeft;
+        private Action onShowBottom;
+        private Action onShowCenter;
         private Action onDeleteAll;
         private GameObject[] elements;
         private static List<string> supportedElements = new List<string> {
@@ -49,7 +54,13 @@ namespace dualLayouting {
                                  Action listCallback,
                                  Action<string> showCallback,
                                  Action doneCallback,
-                                 Action deleteAllCallback)
+                                 Action deleteAllCallback,
+                                 Action showRightCallback,
+                                 Action showLeftCallback,
+                                 Action showBottomCallback,
+                                 Action showTopCallback,
+                                 Action showCenterCallback
+                                 )
         {
             onSelect = selectCallback;
             onCreate = createCallback;
@@ -58,6 +69,11 @@ namespace dualLayouting {
             onShow = showCallback;
             onDone = doneCallback;
             onDeleteAll = deleteAllCallback;
+            onShowBottom = showBottomCallback;
+            onShowLeft = showLeftCallback;
+            onShowRight = showRightCallback;
+            onShowTop = showTopCallback;
+            onShowCenter = showCenterCallback;
         }
 
         async public void UpdateCommands(GameObject[] elements)
@@ -77,6 +93,12 @@ namespace dualLayouting {
             newCommands.Add("List Elements");
             newCommands.Add("Done");
             newCommands.Add("Delete all");
+
+            newCommands.Add("Show Right");
+            newCommands.Add("Show Left");
+            newCommands.Add("Show Top");
+            newCommands.Add("Show Bottom");
+            newCommands.Add("Show Center");
 
             foreach (string element in supportedElements)
             {
@@ -104,6 +126,33 @@ namespace dualLayouting {
             if (command == "List Elements")
             {
                 onList();
+                return;
+            }
+
+            if (command == "Show Right")
+            {
+                onShowRight();
+                return;
+            }
+
+            if (command == "Show Left")
+            {
+                onShowLeft();
+                return;
+            }
+            if (command == "Show Top")
+            {
+                onShowTop();
+                return;
+            }
+            if (command == "Show Bottom")
+            {
+                onShowBottom();
+                return;
+            }
+            if (command == "Show Center")
+            {
+                onShowCenter();
                 return;
             }
 
