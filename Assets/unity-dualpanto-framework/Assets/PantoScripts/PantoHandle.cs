@@ -159,9 +159,12 @@ namespace DualPantoFramework
         /// <summary>
         /// Apply a force to the handle.
         /// </summary>
-        public void ApplyForce(Vector3 direction)
+        public void ApplyForce(Vector3 direction, float strength)
         {
-            pantoSync.ApplyForce(isUpper, direction);
+            // TODO: make line correct
+            Debug.Log("Applying Force!");
+            Debug.DrawLine(GameObject.Find("Panto").GetComponent<UpperHandle>().transform.position, direction * strength, Color.red, 3);
+            pantoSync.ApplyForce(isUpper, direction, strength);
         }
 
         /// <summary>
@@ -169,7 +172,7 @@ namespace DualPantoFramework
         /// </summary>
         public void StopApplyingForce()
         {
-            pantoSync.ApplyForce(isUpper, new Vector3(0, 0, 0));
+            pantoSync.ApplyForce(isUpper, new Vector3(0, 0, 0), 0f);
         }
 
         /// <summary>
