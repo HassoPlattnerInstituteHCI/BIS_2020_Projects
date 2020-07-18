@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
         speechOut = new SpeechOut();
         
         speechIn = new SpeechIn(onRecognized, new string[] {"tetris", "modes", "tutorial", "highscore", "back", "quit", "commands" });
-        await speechOut.Speak("Welcome to Tetris Panto Edition. Say Tutorial or Highscore to start playing. If you first want an introduction to what Tetris is, say 'Tetris'.");
+        await speechOut.Speak("Welcome to Tetris Panto Edition. Say Tutorial or Highscore to start playing. Say 'Tetris' to get an explanation of the game.");
         speechIn.StartListening(new string[] {"tetris", "modes", "tutorial", "highscore", "back", "quit", "commands"});
     }
 

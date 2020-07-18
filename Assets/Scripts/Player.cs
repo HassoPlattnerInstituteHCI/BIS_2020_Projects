@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public static int activeBlockID;
     public static Vector3 leftBlockRootPos;
     public static Vector3 rightBlockRootPos;
+    public static Vector3 activeBlockRootOffset;
     bool playercontrol = false;
     bool chooseMode = true;
     bool leftBlockActive = true;
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour
             }
         if (playercontrol) {
             transform.position = meHandle.HandlePosition(transform.position);
-            activeBlock.transform.position = transform.position;
+            activeBlock.transform.position = transform.position - activeBlockRootOffset;
             Field.alignLive(activeBlock, activeBlockID);
             // Rotate !!Need way of doing this with the Me-Handle rotation!!
             if (Input.GetKeyDown(KeyCode.Space)) {
@@ -107,8 +108,8 @@ public class Player : MonoBehaviour
         {
             leftBlockActive = true;
             activeBlockID = SpawnManager.leftBlock;
-            await meHandle.MoveToPosition(leftBlockRootPos, 0.3f, shouldFreeHandle);
             transform.position = leftBlockRootPos;
+            await meHandle.MoveToPosition(transform.position, 0.3f, shouldFreeHandle);
             //TODO: Sound
             await Manager.sayBlockName(SpawnManager.leftBlock);
             Manager.blockPlaced=false;
@@ -117,8 +118,8 @@ public class Player : MonoBehaviour
         {
             leftBlockActive = false;
             activeBlockID = SpawnManager.rightBlock;
-            await meHandle.MoveToPosition(rightBlockRootPos, 0.3f, shouldFreeHandle);
             transform.position = rightBlockRootPos;
+            await meHandle.MoveToPosition(transform.position, 0.3f, shouldFreeHandle);
             //TODO: Sound
             await Manager.sayBlockName(SpawnManager.rightBlock);
             Manager.blockPlaced=false;
@@ -131,11 +132,12 @@ public class Player : MonoBehaviour
                 Destroy(SpawnManager.blockRight);
                 SpawnManager.blockLeft.transform.SetParent(transform);
                 activeBlock = SpawnManager.blockLeft;
-                
+                activeBlockRootOffset = leftBlockRootPos - SpawnerLeft.transform.position;
             } else {
                 Destroy(SpawnManager.blockLeft); 
                 SpawnManager.blockRight.transform.SetParent(transform);
                 activeBlock = SpawnManager.blockRight; 
+                activeBlockRootOffset = rightBlockRootPos - SpawnerLeft.transform.position - new Vector3(2.5f, 0, 0);
                 }
             
             playercontrol = true;
@@ -156,13 +158,12 @@ public class Player : MonoBehaviour
                 Field.audioSource.PlayOneShot(Field.BlockPlace, Field.volume);
                 placement = true;
                 playercontrol = false;
-                await meHandle.MoveToPosition(activeBlock.transform.GetChild(0).transform.position, 0.3f, shouldFreeHandle);
-                //await speechOut.Speak("Block can be placed here. Say confirm or abort to continue.");
+                //await meHandle.MoveToPosition(transform.position, 0.3f, shouldFreeHandle);
             } else {await speechOut.Speak("You cannot place the block here.");}
         }
         if(message == "confirm" && placement)       //confirming placement location
         {
-            await speechOut.Speak("Block placed."); //TODO Sound
+            Field.audioSource.PlayOneShot(Field.ConfirmPlacement, Field.volume);
             activeBlock.transform.parent = null; //detach Block from Player
             placement = false;
             Playfield.confirmBlock(activeBlock);
@@ -180,7 +181,7 @@ public class Player : MonoBehaviour
         }
         if(message == "abort" && placement)     //abort block placement
         {
-            await speechOut.Speak("Placement aborted.");
+            Field.audioSource.PlayOneShot(Field.PlacementAbort, Field.volume);
             placement = false;
             playercontrol = true;
             meHandle.Free();

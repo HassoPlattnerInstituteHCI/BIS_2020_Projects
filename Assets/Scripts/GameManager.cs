@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     async Task HighscoreLevel() {
         SpawnManager.waveNumber=0;
         HighscoreText.text = ""+MainMenu.highscoreOverall;
-        await speechOut.Speak("Welcome to the Highscore mode. We hope you already know how to play Tetris Panto Edition. You will now get 20 waves of blocks, and your goal is to score as high as possible!");
+        await speechOut.Speak("Welcome to the Highscore mode. You will now get 20 waves of blocks, and your goal is to score as high as possible!");
         await speechOut.Speak("The current Highscore is "+MainMenu.highscoreOverall+". Say left or right to start the game.");
         SpawnManager.spawnWavePls = true;
         await WaitingForLevelFinish(5);
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
 
                 await Task.Delay(1000); //Changed time for debugging
 
-                await speechOut.Speak("Now the Me-Handle will trace a block at the top of the level. Every block has its own name, remember it!");
+                await speechOut.Speak("Now the Me-Handle will move to a block at the top of the level. Every block has its own name, remember it! If you want the Me-Handle to show you what shape the block has, say 'trace'.");
                 PlayerIn.onRecognized("left");
 
                 await Task.Delay(2000);
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
 
                 lowerHandle.Free();
 
-                await speechOut.Speak("The Me-Handle will now trace the left block. To change the active block, say 'right' or 'left'. Once you pick up a block the other one disappears, so choose wisely.");
+                await speechOut.Speak("The Me-Handle will now move to the left block. To change the active block, say 'right' or 'left'. Once you pick up a block the other one disappears, so choose wisely.");
                 PlayerIn.onRecognized("left");
                 await Task.Delay(2000);
 
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
 
                 lowerHandle.Free();
 
-                await speechOut.Speak("The Me-Handle will always trace the left block first. After picking up a block, you can rotate it by saying 'rotate'. This will rotate the block 90° clockwise. Choose a block and rotate it to clear the skyline.");
+                await speechOut.Speak("The Me-Handle will always move to the left block first. After picking up a block, you can rotate it by saying 'rotate'. This will rotate the block 90° clockwise. Choose a block and rotate it to clear the skyline.");
                 PlayerIn.onRecognized("left");
                 await Task.Delay(2000);
 
@@ -225,9 +225,11 @@ public class GameManager : MonoBehaviour
                 introductoryLevel=false;
                 break;
         }
+        clearCounter=0;
+        blockPlaced=false;
         if(!resetCurrentLevel) {
-            Field.audioSource.PlayOneShot(Field.LevelClear, Field.volume);
-        } else {Field.audioSource.PlayOneShot(Field.LevelFail, Field.volume);}
+            Field.audioSource.PlayOneShot(Field.LevelClear, (Field.volume/2));
+        } else {Field.audioSource.PlayOneShot(Field.LevelFail, (Field.volume/2));}
         resetCurrentLevel = false;
         await Task.Delay(2500);
         if(SpawnManager.introCounter!=4) {

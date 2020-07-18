@@ -24,7 +24,7 @@ public class Playfield : MonoBehaviour
     static GameObject player; //can it be static?
     static GameObject upperPosition;
 
-    public AudioClip RowClear, LevelClear, LevelFail, BlockPlace, BlockRotate, BlockMove, MovementBlocked;
+    public AudioClip RowClear, LevelClear, LevelFail, BlockPlace, BlockRotate, BlockMove, MovementBlocked, PlacementAbort, ConfirmPlacement;
     public AudioSource audioSource;
     public float volume = 0.5f;
     Vector3[] oldBlockPos = new Vector3[4];
@@ -123,16 +123,16 @@ public class Playfield : MonoBehaviour
         audioSource.PlayOneShot(BlockRotate, volume);
         switch (blockID) {
             case 0:
-                if(rotateAmount==0 || rotateAmount == 2) {
-                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z);
-                    child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z - 0.5f);
-                    child3.transform.position = new Vector3(child3.transform.position.x + 0.5f, child3.transform.position.y, child3.transform.position.z - 1f);
-                    child4.transform.position = new Vector3(child4.transform.position.x + 1f, child4.transform.position.y, child4.transform.position.z - 1.5f);
-                } else {
-                    child1.transform.position = new Vector3(child1.transform.position.x + 0.5f, child1.transform.position.y, child1.transform.position.z);
+                if(rotateAmount==0 || rotateAmount==2) {
+                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z + 1f);
                     child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z + 0.5f);
-                    child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child3.transform.position.z + 1f);
-                    child4.transform.position = new Vector3(child4.transform.position.x - 1f, child4.transform.position.y, child4.transform.position.z + 1.5f);
+                    child3.transform.position = new Vector3(child3.transform.position.x + 0.5f, child3.transform.position.y, child3.transform.position.z);
+                    child4.transform.position = new Vector3(child4.transform.position.x + 1f, child4.transform.position.y, child4.transform.position.z - 0.5f);
+                } else if(rotateAmount == 1 || rotateAmount == 3) {
+                    child1.transform.position = new Vector3(child1.transform.position.x + 0.5f, child1.transform.position.y, child1.transform.position.z - 1f);
+                    child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z - 0.5f);
+                    child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child3.transform.position.z);
+                    child4.transform.position = new Vector3(child4.transform.position.x - 1f, child4.transform.position.y, child4.transform.position.z + 0.5f);
                 }
                 break;
             case 1:
@@ -156,64 +156,49 @@ public class Playfield : MonoBehaviour
                 break;
             case 2:
                 if(rotateAmount==0) {
-                    child1.transform.position = new Vector3(child1.transform.position.x, child1.transform.position.y, child1.transform.position.z + 1f);
-                    child2.transform.position = new Vector3(child2.transform.position.x - 0.5f, child2.transform.position.y, child2.transform.position.z + 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x + 0.5f, child4.transform.position.y, child4.transform.position.z - 0.5f);
+                    child1.transform.position = new Vector3(child1.transform.position.x, child1.transform.position.y, child1.transform.position.z + 0.5f);
+                    child2.transform.position = new Vector3(child2.transform.position.x - 0.5f, child2.transform.position.y, child2.transform.position.z);
+                    child3.transform.position = new Vector3(child3.transform.position.x, child3.transform.position.y, child1.transform.position.z - 0.5f);
+                    child4.transform.position = new Vector3(child4.transform.position.x + 0.5f, child4.transform.position.y, child4.transform.position.z - 1f);
                 } else if (rotateAmount==1) {
-                    child1.transform.position = new Vector3(child1.transform.position.x + 1f, child1.transform.position.y, child1.transform.position.z);
-                    child2.transform.position = new Vector3(child2.transform.position.x + 0.5f, child2.transform.position.y, child2.transform.position.z + 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x - 0.5f, child4.transform.position.y, child4.transform.position.z - 0.5f);
+                    child1.transform.position = new Vector3(child1.transform.position.x + 0.5f, child1.transform.position.y, child1.transform.position.z);
+                    child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z + 0.5f);
+                    child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child1.transform.position.z - 0.5f);
+                    child4.transform.position = new Vector3(child4.transform.position.x - 1f, child4.transform.position.y, child4.transform.position.z - 0.5f);
                 } else if (rotateAmount==2) {
-                    child1.transform.position = new Vector3(child1.transform.position.x, child1.transform.position.y, child1.transform.position.z - 1f);
-                    child2.transform.position = new Vector3(child2.transform.position.x + 0.5f, child2.transform.position.y, child2.transform.position.z - 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x - 0.5f, child4.transform.position.y, child4.transform.position.z + 0.5f);
+                    child1.transform.position = new Vector3(child1.transform.position.x, child1.transform.position.y, child1.transform.position.z - 0.5f);
+                    child2.transform.position = new Vector3(child2.transform.position.x + 0.5f, child2.transform.position.y, child2.transform.position.z);
+                    child3.transform.position = new Vector3(child3.transform.position.x, child3.transform.position.y, child1.transform.position.z + 0.5f);
+                    child4.transform.position = new Vector3(child4.transform.position.x - 0.5f, child4.transform.position.y, child4.transform.position.z + 1f);
                 } else if (rotateAmount==3) {
-                    child1.transform.position = new Vector3(child1.transform.position.x - 1f, child1.transform.position.y, child1.transform.position.z);
-                    child2.transform.position = new Vector3(child2.transform.position.x - 0.5f, child2.transform.position.y, child2.transform.position.z - 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x + 0.5f, child4.transform.position.y, child4.transform.position.z + 0.5f);
+                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z);
+                    child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z - 0.5f);
+                    child3.transform.position = new Vector3(child3.transform.position.x + 0.5f, child3.transform.position.y, child1.transform.position.z + 0.5f);
+                    child4.transform.position = new Vector3(child4.transform.position.x + 1f, child4.transform.position.y, child4.transform.position.z + 0.5f);
                 }
                 break;
             case 3: break;
             case 4:
-                if(rotateAmount==0) {
+                if(rotateAmount==0 || rotateAmount==2) {
                     child1.transform.position = new Vector3(child1.transform.position.x, child1.transform.position.y, child1.transform.position.z + 0.5f);
                     child2.transform.position = new Vector3(child2.transform.position.x - 0.5f, child2.transform.position.y, child2.transform.position.z);
                     child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child3.transform.position.z - 1f);
                     child4.transform.position = new Vector3(child4.transform.position.x, child4.transform.position.y, child4.transform.position.z - 0.5f);
-                } else if (rotateAmount==1) {
+                } else if (rotateAmount==1 || rotateAmount==3) {
                     child1.transform.position = new Vector3(child1.transform.position.x + 1f, child1.transform.position.y, child1.transform.position.z);
                     child2.transform.position = new Vector3(child2.transform.position.x + 0.5f, child2.transform.position.y, child2.transform.position.z + 0.5f);
                     child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child3.transform.position.z + 0.5f);
-                } else if (rotateAmount==2) {
-                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z - 1f);
-                    child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z - 0.5f);
-                    child3.transform.position = new Vector3(child3.transform.position.x, child3.transform.position.y, child3.transform.position.z + 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x - 0.5f, child4.transform.position.y, child4.transform.position.z);
-                } else if (rotateAmount==3) {
-                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z + 0.5f);
-                    child3.transform.position = new Vector3(child3.transform.position.x + 1f, child3.transform.position.y, child3.transform.position.z);
-                    child4.transform.position = new Vector3(child4.transform.position.x + 0.5f, child4.transform.position.y, child4.transform.position.z + 0.5f);
                 }
                 break;
             case 5:
-                if(rotateAmount==0) {
-                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z + 0.5f);
-                    child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child3.transform.position.z - 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x, child4.transform.position.y, child4.transform.position.z - 1f);
-                } else if (rotateAmount==1) {
-                    child1.transform.position = new Vector3(child1.transform.position.x + 1f, child1.transform.position.y, child1.transform.position.z + 0.5f);
-                    child2.transform.position = new Vector3(child2.transform.position.x + 0.5f, child2.transform.position.y, child2.transform.position.z);
-                    child3.transform.position = new Vector3(child3.transform.position.x, child3.transform.position.y, child3.transform.position.z + 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x - 0.5f, child4.transform.position.y, child4.transform.position.z);
-                } else if (rotateAmount==2) {
-                    child1.transform.position = new Vector3(child1.transform.position.x, child1.transform.position.y, child1.transform.position.z - 1f);
-                    child2.transform.position = new Vector3(child2.transform.position.x - 0.5f, child2.transform.position.y, child2.transform.position.z - 0.5f);
-                    child4.transform.position = new Vector3(child4.transform.position.x - 0.5f, child4.transform.position.y, child4.transform.position.z + 0.5f);
-                } else if (rotateAmount==3) {
-                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z);
-                    child2.transform.position = new Vector3(child2.transform.position.x, child2.transform.position.y, child2.transform.position.z + 0.5f);
-                    child3.transform.position = new Vector3(child3.transform.position.x + 0.5f, child3.transform.position.y, child3.transform.position.z);
-                    child4.transform.position = new Vector3(child4.transform.position.x + 1f, child4.transform.position.y, child4.transform.position.z + 0.5f);
+                if(rotateAmount==0 || rotateAmount==2) {
+                    child1.transform.position = new Vector3(child1.transform.position.x + 0.5f, child1.transform.position.y, child1.transform.position.z + 0.5f);
+                    child3.transform.position = new Vector3(child3.transform.position.x - 0.5f, child3.transform.position.y, child3.transform.position.z + 0.5f);
+                    child4.transform.position = new Vector3(child4.transform.position.x - 1f, child4.transform.position.y, child4.transform.position.z);
+                } else if (rotateAmount==1 || rotateAmount==3) {
+                    child1.transform.position = new Vector3(child1.transform.position.x - 0.5f, child1.transform.position.y, child1.transform.position.z - 0.5f);
+                    child3.transform.position = new Vector3(child3.transform.position.x + 0.5f, child3.transform.position.y, child3.transform.position.z - 0.5f);
+                    child4.transform.position = new Vector3(child4.transform.position.x + 1f, child4.transform.position.y, child4.transform.position.z);
                 }
                 break;
             case 6:
@@ -277,22 +262,19 @@ public class Playfield : MonoBehaviour
         Manager.clearCounter += counter; //Let the GameManager know of the progress
         if(counter>0) {
             audioSource.PlayOneShot(RowClear, volume);
-            /*
-            if(counter==1) {
-                await speechOut.Speak("You have cleared 1 row.");
-            } else {await speechOut.Speak("You have cleared "+counter+" rows.");}
-            */
-            switch (counter) {
-                case 1: Manager.playerScore+=40;
-                        break;
-                case 2: Manager.playerScore+=100;
-                        break;
-                case 3: Manager.playerScore+=300;
-                        break;
-                case 4: Manager.playerScore+=1200;
-                        break;
+            if(!Manager.introductoryLevel) {
+                switch (counter) {
+                    case 1: Manager.playerScore+=40;
+                            break;
+                    case 2: Manager.playerScore+=100;
+                            break;
+                    case 3: Manager.playerScore+=300;
+                            break;
+                    case 4: Manager.playerScore+=1200;
+                            break;
+                }
+                await speechOut.Speak("Score is "+Manager.playerScore);
             }
-            await speechOut.Speak("Score is "+Manager.playerScore);
             while(counter>0) { //All rows above the highest fallen row are now decreased as many times as rows have been deleted
                 decreaseRowsAbove(maxRow+1);
                 counter--;

@@ -2007,6 +2007,8 @@ MonoBehaviour:
   BlockRotate: {fileID: 8300000, guid: b7bbe2ebc5038c14e9e04ea2a35a9b7b, type: 3}
   BlockMove: {fileID: 8300000, guid: cc4f701a13dd00a4fbc74b1832cca980, type: 3}
   MovementBlocked: {fileID: 8300000, guid: 9a99de8a45c073340a0f7c6c6e80099c, type: 3}
+  PlacementAbort: {fileID: 8300000, guid: c801867fadccf7f45892a340eae9331d, type: 3}
+  ConfirmPlacement: {fileID: 8300000, guid: b67d7f0aa9a189d409936dbc2e66477c, type: 3}
   audioSource: {fileID: 1197761973}
   volume: 0.5
 --- !u!82 &1197761973
