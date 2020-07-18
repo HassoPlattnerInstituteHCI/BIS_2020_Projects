@@ -57,8 +57,8 @@ public class Player : MonoBehaviour
         await Task.Delay(1000);
         //await meHandle.MoveToPosition(transform.position, 0.2f);
         //await speechOut.Speak("Welcome to Tetris Panto Edition.");
-        speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm","rotate", "place", "abort" });
-        speechIn.StartListening(new string[] {"left", "right", "confirm","rotate", "place", "abort" });
+        speechIn = new SpeechIn(onRecognized, new string[] { "left", "right", "confirm", "rotate", "trace", "place", "abort" });
+        speechIn.StartListening(new string[] {"left", "right", "confirm","rotate", "trace", "place", "abort" });
     }
 
     // Update is called once per frame
@@ -101,29 +101,26 @@ public class Player : MonoBehaviour
     
     public async void onRecognized(string message)
     {
-        //REENABLE SPEECHOUT BEFORE BUILDING
         //checking voice input
         Debug.Log("[" + this.GetType() + "]:" + message);
         if (message == "left" && !playercontrol && !placement)      //select left block
         {
-            //await meHandle.MoveToPosition(leftBlockRootPos, 0.3f, shouldFreeHandle);
-            transform.position = leftBlockRootPos;
-            //TODO: Sound
-            //await speechOut.Speak("Now tracing the left block");
-            await Manager.traceBlock(SpawnManager.leftBlock, true);
             leftBlockActive = true;
             activeBlockID = SpawnManager.leftBlock;
+            await meHandle.MoveToPosition(leftBlockRootPos, 0.3f, shouldFreeHandle);
+            transform.position = leftBlockRootPos;
+            //TODO: Sound
+            await Manager.sayBlockName(SpawnManager.leftBlock);
             Manager.blockPlaced=false;
         }
         if (message == "right" && !playercontrol && !placement)     //select right block
         {
-            //await meHandle.MoveToPosition(rightBlockRootPos, 0.3f, shouldFreeHandle);
-            transform.position = rightBlockRootPos;
-            //await speechOut.Speak("Now tracing the right block");
-            //TODO: Sound
-            await Manager.traceBlock(SpawnManager.rightBlock, false);
             leftBlockActive = false;
             activeBlockID = SpawnManager.rightBlock;
+            await meHandle.MoveToPosition(rightBlockRootPos, 0.3f, shouldFreeHandle);
+            transform.position = rightBlockRootPos;
+            //TODO: Sound
+            await Manager.sayBlockName(SpawnManager.rightBlock);
             Manager.blockPlaced=false;
         }
         if(message == "confirm" && !playercontrol && !placement)    //confirm block selection
@@ -149,6 +146,9 @@ public class Player : MonoBehaviour
         if(message == "rotate" && playercontrol) {
             //await speechOut.Speak("Rotating");
             rotateAmount = Field.rotateBlock(activeBlock, activeBlockID, rotateAmount);
+        }
+        if(message == "trace" && !playercontrol) {
+            await Manager.traceBlock(activeBlockID, leftBlockActive);
         }
         if(message == "place" && playercontrol)     //placing the block on the grid                     
         {

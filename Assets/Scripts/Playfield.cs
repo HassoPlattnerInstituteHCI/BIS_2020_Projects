@@ -236,7 +236,7 @@ public class Playfield : MonoBehaviour
                 }
                 break;
         }
-
+        //Je nach rotationsrichtung hier ++ oder --
         rotateAmount++;
         if(rotateAmount==4) {
             rotateAmount=0;
@@ -282,11 +282,22 @@ public class Playfield : MonoBehaviour
                 await speechOut.Speak("You have cleared 1 row.");
             } else {await speechOut.Speak("You have cleared "+counter+" rows.");}
             */
-        }
-        while(counter>0) { //All rows above the highest fallen row are now decreased as many times as rows have been deleted
-            decreaseRowsAbove(maxRow+1);
-            counter--;
-            maxRow--;
+            switch (counter) {
+                case 1: Manager.playerScore+=40;
+                        break;
+                case 2: Manager.playerScore+=100;
+                        break;
+                case 3: Manager.playerScore+=300;
+                        break;
+                case 4: Manager.playerScore+=1200;
+                        break;
+            }
+            await speechOut.Speak("Score is "+Manager.playerScore);
+            while(counter>0) { //All rows above the highest fallen row are now decreased as many times as rows have been deleted
+                decreaseRowsAbove(maxRow+1);
+                counter--;
+                maxRow--;
+            }
         }
         if(!Manager.introductoryLevel || SpawnManager.introCounter>=3) {
             await Manager.traceSkyline();

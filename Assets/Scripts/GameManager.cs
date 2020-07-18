@@ -6,15 +6,13 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using DualPantoFramework;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace Tetris {
 public class GameManager : MonoBehaviour
 {
-    public float spawnSpeed = 1f;
-    public bool welcome = true;
     public bool introductoryLevel = false;
     public bool mainMenu = false;
-    public bool puzzles = false;
     public bool endless = false;
     public GameObject player;
     public bool shouldFreeHandle;
@@ -32,12 +30,17 @@ public class GameManager : MonoBehaviour
 
     SpeechIn speechIn;
     SpeechOut speechOut;
-    int playerScore = 0;
+    public int playerScore = 0;
+
 
     GameObject SpawnerPos;
     Player PlayerIn;
     Playfield Field;
     static int[] skylineHeights; //Each array space determines the height of the highest block in that column (in steps of 1, not .5)
+
+    public Text HighscoreText;
+    public Text PlayerScoreText;
+    public Text WaveText;
 
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
         { "yes", KeyCode.Y },
@@ -61,7 +64,13 @@ public class GameManager : MonoBehaviour
         upperPosition = GameObject.Find("MeHandlePrefab(Clone)").transform.GetChild(0).gameObject;
         lowerPosition = GameObject.Find("ItHandlePrefab(Clone)").transform.GetChild(1).gameObject;
         playerPosition = GameObject.Find("Player");
-
+        if (MainMenu.playIntro) {
+            introductoryLevel=true;
+            endless=false;
+        } else {
+            introductoryLevel=false;
+            endless=true;
+        }
         await Task.Delay(2000);
         RegisterColliders();
 
@@ -70,12 +79,34 @@ public class GameManager : MonoBehaviour
             await IntroductoryLevel();
             await speechOut.Speak("Tutorial finished, you can now choose a new mode in the Main Menu.");
             MainMenu.PlayMainMenu();
-        } else if(puzzles) {
-            //TODO Make PuzzleManager Function
-            SpawnManager.spawnWavePls = true; //Workaround for now
         } else if (endless) {
-            SpawnManager.spawnWavePls = true;
+            await HighscoreLevel();
+            await speechOut.Speak("Current Session finished, you can now choose a new mode from the Main Menu.");
+            MainMenu.PlayMainMenu();
         }
+    }
+
+    void Update() {
+        PlayerScoreText.text = ""+playerScore;
+        WaveText.text= ""+SpawnManager.waveNumber;
+    }
+
+    async Task HighscoreLevel() {
+        SpawnManager.waveNumber=0;
+        HighscoreText.text = ""+MainMenu.highscoreOverall;
+        await speechOut.Speak("Welcome to the Highscore mode. We hope you already know how to play Tetris Panto Edition. You will now get 20 waves of blocks, and your goal is to score as high as possible!");
+        await speechOut.Speak("The current Highscore is "+MainMenu.highscoreOverall+". Say left or right to start the game.");
+        SpawnManager.spawnWavePls = true;
+        await WaitingForLevelFinish(5);
+        await speechOut.Speak("You have completed the 20th wave. You final score is "+playerScore);
+        if(playerScore>MainMenu.highscoreOverall) {
+            await speechOut.Speak("Congratulation, your score is higher than the current highscore of "+MainMenu.highscoreOverall+". Your score is the new highscore.");
+            MainMenu.highscoreOverall=playerScore;
+            HighscoreText.text = ""+MainMenu.highscoreOverall;
+        } else if(playerScore==MainMenu.highscoreOverall) {
+            await speechOut.Speak("Congratulations, your score of "+playerScore+" is the same as the highscore.");
+        } else {await speechOut.Speak("Unfortunately, your score was lower than the current highscore of "+MainMenu.highscoreOverall+". You would have needed "+(MainMenu.highscoreOverall-playerScore)+" more points to beat the highscore.");}
+
     }
 
     async Task IntroductoryLevel()
@@ -85,11 +116,12 @@ public class GameManager : MonoBehaviour
     while(playingTutorial) { //Implement some sort of way for the player to break this loop. Remember to set variable to false at end of last Level
         clearCounter=0;
         blockPlaced=false;
-        await speechOut.Speak("Starting Tutorial Level "+(SpawnManager.introCounter+1));
+        await speechOut.Speak("Starting Level "+(SpawnManager.introCounter+1));
         switch(SpawnManager.introCounter) {
             case 0 :
                 await speechOut.Speak("Welcome to the Tutorial. We will now show you what you need to know to play the Tetris Panto Edition. Let's Start!");
-
+                //TODO: Trace level outline first.
+                
                 //Spawn first intro level skyline
                 SpawnManager.spawnIntroPls=true;
         
@@ -231,6 +263,34 @@ public class GameManager : MonoBehaviour
             case 3: while(!blockPlaced) {await Task.Delay(100);}
                 break;
             case 4: while(clearCounter!=1) {await Task.Delay(100);}
+                break;
+            case 5: while(SpawnManager.waveNumber!=21) {await Task.Delay(1000);} //This is for highscore mode
+                break;
+        }
+    }
+
+    public async Task sayBlockName(int blockCode) {
+        switch(blockCode) {
+            case 0: 
+            await speechOut.Speak("Block I");
+                break;
+            case 1:
+            await speechOut.Speak("Block L");
+                break;
+            case 2:
+            await speechOut.Speak("Block Reverse L");
+                break;
+            case 3: 
+            await speechOut.Speak("Block O");
+                break;
+            case 4:
+            await speechOut.Speak("Block S");
+                break;
+            case 5:
+            await speechOut.Speak("Block Z");
+                break;
+            case 6:
+            await speechOut.Speak("Block T");
                 break;
         }
     }

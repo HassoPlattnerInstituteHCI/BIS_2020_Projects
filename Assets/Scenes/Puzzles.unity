@@ -994,17 +994,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74f1a29daca7c340b94a6237b35b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnSpeed: 1
-  welcome: 0
   introductoryLevel: 0
   mainMenu: 0
-  puzzles: 1
   endless: 0
   player: {fileID: 0}
   shouldFreeHandle: 0
   blockPlaced: 0
   clearCounter: 0
   lowerHandle: {fileID: 0}
+  playerScore: 0
+  HighscoreText: {fileID: 0}
+  PlayerScoreText: {fileID: 0}
+  WaveText: {fileID: 0}
 --- !u!1 &1263745530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,7 +1065,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755d0893992e16b4f8d8f0fc091668af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skylines: []
+  skylines:
+  - {fileID: 8098386472531645295, guid: 027272edb3f5a7145a38fb65136fd95c, type: 3}
+  - {fileID: 1949996302861137105, guid: 77e31782ef333fb4aac133e604abc104, type: 3}
+  - {fileID: 7832582475455690678, guid: 9f38e22eaf413524eae87378ef090b6c, type: 3}
+  - {fileID: 5082102045875885233, guid: 2bc25a251d15015498b0b1935160380a, type: 3}
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}
