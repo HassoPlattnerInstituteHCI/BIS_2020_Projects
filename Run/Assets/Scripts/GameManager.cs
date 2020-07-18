@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int stageIndex;
     public int health;
     public Player player;
+    public Inspector inspector;
     public GameObject[] Stages;
 
     public Image[] UIhealth;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
             stageIndex++;
             Stages[stageIndex].SetActive(true);
             PlayerReposition();
+            InspectorReposition();
 
             UIStage.text = "Stage " + (stageIndex + 1);
         } else //Game Clear
@@ -95,8 +97,14 @@ public class GameManager : MonoBehaviour
 
     void PlayerReposition()
     {
-        player.transform.position = new Vector3(-80, -28, 0);
+        player.transform.position = new Vector3(-80, -30, 0);
         player.VelocityZero();
+    }
+
+    void InspectorReposition()
+    {
+        inspector.transform.position = new Vector3(-80, -30, 0);
+        inspector.VelocityZero();
     }
 
     public void Restart()

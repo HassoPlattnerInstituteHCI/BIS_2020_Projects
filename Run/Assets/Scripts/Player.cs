@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using ClipperLib;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,8 +17,8 @@ public class Player : MonoBehaviour
     public AudioClip audioLevelCom;
     public AudioClip audioWalk;
 
-    //private PantoHandle upperHandle;
-
+    private PantoHandle upperHandle;
+    private int iteration,lastiteration = 0;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator changeAnimation;
@@ -34,38 +35,53 @@ public class Player : MonoBehaviour
 
     async void Awake()
     {
+        upperHandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         changeAnimation = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
-        ////await upperHandle.MoveToPosition(transform.position, 0.2f);
+        //Debug.Log(HandletoPlayer(upperHandle.GetPosition()));
+        await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.2f);
     }
 
 
-    void Update()
+    async void Update()
     {
+        //Debug.Log(HandletoPlayer(upperHandle.GetPosition()));
 
-        if (transform.position.y < startpos - 8)
+        Vector3 goal = HandletoPlayer(upperHandle.HandlePosition(PlayertoHandle(transform.position)));
+        Vector3 direction = (goal - transform.position);
+        //Debug.Log(direction.y);
+        Vector2 newdir = new Vector2(direction.x * 0.9f, 0);
+
+        if (!(direction.sqrMagnitude > 1))
         {
-            //OnDamaged(transform.position);
-            transform.position = safepos;
+            
+            rigid.AddForce(newdir, ForceMode2D.Impulse);
         }
-        //transform.position = upperHandle.HandlePosition(transform.position);
-        // upperHandle.MoveToPosition(transform.position, 0.2f);
+        else
+        {
+            Debug.Log("AAA");
+        }
+
+
+
+        
 
         // Jumping Movement
-        if (//upperHandle.GetPosition().y > 3 || 
-            Input.GetButtonDown("Jump") && !changeAnimation.GetBool("isJumping"))
+        if (Input.GetButtonDown("Jump") && !changeAnimation.GetBool("isJumping"))
         {
             //Debug.Log(upperHandle.GetPosition().x + " " + upperHandle.GetPosition().y + " " + upperHandle.GetPosition().z);
             //Debug.Log(upperHandle.GetRotation());
-            
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            iteration = 0;
+            rigid.AddForce(Vector2.up * jumpPower + newdir, ForceMode2D.Impulse);
             changeAnimation.SetBool("isJumping", true);
             PlaySound("Jump");
             audioSource.Play();
         }
+        
+
 
         // When the player stops the movement
         if (Input.GetButtonUp("Horizontal"))
@@ -88,6 +104,7 @@ public class Player : MonoBehaviour
         {
             changeAnimation.SetBool("isWalking", true);
         }
+        await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.1f);
     }
 
     // Update is called once per frame
@@ -267,4 +284,15 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+    Vector3 HandletoPlayer(Vector3 handlepos)
+    {
+        return new Vector3(handlepos.x - 70, handlepos.z - 20, 0);
+    }
+
+    Vector3 PlayertoHandle(Vector3 playerpos)
+    {
+        return new Vector3(playerpos.x + 70, 0, playerpos.y + 20);
+    }
+
 }
