@@ -89,7 +89,7 @@ public class SpawnManager : MonoBehaviour
                     Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
                     blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
                     blockLeft.name = ""+leftBlock;
-                    Player.leftBlockRootPos = blockLeft.transform.GetChild(0).transform.position;
+                    Player.leftBlockRootPos = blockLeft.transform.position;
                     spawnIntroPls = false;
                     return; //Level 0 is special, since we only spawn one block
             case 1: leftBlock = 0;
@@ -111,10 +111,38 @@ public class SpawnManager : MonoBehaviour
         Playfield.confirmBlock(GameObject.Find("IntroSkyline"+level+"(Clone)"));
         blockLeft = Instantiate(groups[leftBlock], transform.position, transform.rotation);
         blockLeft.name = ""+leftBlock;
-        Player.leftBlockRootPos = blockLeft.transform.GetChild(0).transform.position;
+        switch(leftBlock) {
+            case 0: Player.leftBlockRootPos = blockLeft.transform.position + new Vector3(0, 0, 1f);
+                    break;
+            case 1: Player.leftBlockRootPos = blockLeft.transform.position + new Vector3(0, 0, 0.5f);
+                    break;
+            case 2: Player.leftBlockRootPos = blockLeft.transform.position + new Vector3(0.5f, 0, 0.5f);
+                    break;
+            case 3: Player.leftBlockRootPos = blockLeft.transform.position;
+                    break;
+            case 4:
+            case 6: Player.leftBlockRootPos = blockLeft.transform.position + new Vector3(0.5f, 0, 0);
+                    break;
+            case 5: Player.leftBlockRootPos = blockLeft.transform.position + new Vector3(0, 0, 0.5f);
+                    break;
+        }
         blockRight = Instantiate(groups[rightBlock], transform.position + new Vector3 ((float)2.5, 0, 0), transform.rotation);
         blockRight.name = ""+rightBlock;
-        Player.rightBlockRootPos = blockRight.transform.GetChild(0).transform.position;
+        switch(rightBlock) {
+            case 0: Player.rightBlockRootPos = blockRight.transform.position + new Vector3(0, 0, 1f);
+                    break;
+            case 1: Player.rightBlockRootPos = blockRight.transform.position + new Vector3(0, 0, 0.5f);
+                    break;
+            case 2: Player.rightBlockRootPos = blockRight.transform.position + new Vector3(0.5f, 0, 0.5f);
+                    break;
+            case 3: Player.rightBlockRootPos = blockRight.transform.position;
+                    break;
+            case 4:
+            case 6: Player.rightBlockRootPos = blockRight.transform.position + new Vector3(0.5f, 0, 0);
+                    break;
+            case 5: Player.rightBlockRootPos = blockRight.transform.position + new Vector3(0, 0, 0.5f);
+                    break;
+        }
         spawnIntroPls = false;
     }
 }
