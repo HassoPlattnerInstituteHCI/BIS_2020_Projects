@@ -1,27 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DualPantoFramework;
 
 namespace MarioKart
 {
-    public class Checkpoint : MonoBehaviour
+    public class SnapToMe : MonoBehaviour
     {
-        public int number;
         // Start is called before the first frame update
+        private PantoHandle handle;
         void Start()
         {
-
+            handle = GameObject.Find("Panto").GetComponent<UpperHandle>();
         }
 
         // Update is called once per frame
         void Update()
         {
-
-        }
-
-        public int GetNumber()
-        {
-            return number;
+            transform.position = handle.GetPosition();
         }
     }
 }

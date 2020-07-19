@@ -113,7 +113,7 @@ namespace MarioKart
                     break;
 
                 case Powerup.PowerupType.Laser:
-                    Say("You have a laser. You can use it to stun next opponent in front of you");
+                    Say("You have a laser. You can use it to slow your opponent");
                     break;
             }
             SayFinished += OnDescriptionSayFinished;
@@ -134,25 +134,22 @@ namespace MarioKart
                     player.speed = player.defaultSpeed;
                     break;
 
-                    //Shockwave
-                    /* braucht noch Enemy
-                    case 2:
-                        if (Vector3.Distance(GameObject.FindObjectOfType<Player>().transform.position, GameObject.FindObjectOfType<Enemy>().transform.position) < 2)
-                        {
-                            GameObject.FindObjectOfType<Enemy>().SetSpeed(0.0f);
-                            yield return new WaitForSeconds(5);
-                            GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
-                        }
-
-                        break;
-
-                    //Laser
-                    case 3: 
+                //Shockwave
+                case Powerup.PowerupType.Shockwave:
+                    if (Vector3.Distance(GameObject.FindObjectOfType<Player>().transform.position, GameObject.FindObjectOfType<Enemy>().transform.position) < 2)
+                    {
                         GameObject.FindObjectOfType<Enemy>().SetSpeed(0.0f);
-                        yield return new WaitForSeconds(3);
+                        yield return new WaitForSeconds(5);
                         GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
-                        break;
-                    */
+                    }
+                    break;
+
+                //Laser
+                case Powerup.PowerupType.Laser: 
+                    GameObject.FindObjectOfType<Enemy>().SetSpeed(2.0f);
+                    yield return new WaitForSeconds(3);
+                    GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
+                    break;
             }
             UsedPowerup?.Invoke(this, activePowerup);
             activePowerup = Powerup.PowerupType.None;

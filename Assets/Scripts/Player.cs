@@ -45,7 +45,6 @@ namespace MarioKart
                 return;
             }
 
-            itHandle.SwitchTo(tracker, handleSpeed);
             rigidBody.WakeUp();
 
             MoveTracker();
@@ -74,7 +73,7 @@ namespace MarioKart
             Vector3 normal = transform.rotation * Vector3.forward * maxMeDistance;
             Vector3 desired = meHandle.GetPosition() - transform.position;
             float factor = Vector3.Dot(normal, desired);
-            MoveMeTo(transform.position + Vector3.ClampMagnitude(desired, maxMeDistance));
+            // MoveMeTo(transform.position + Vector3.ClampMagnitude(desired, maxMeDistance));
             return factor;
         }
 
@@ -91,6 +90,20 @@ namespace MarioKart
             speedFactor = Mathf.Clamp(speedFactor, -speed, speed);
             Vector3 velocity = transform.rotation * Vector3.forward * speedFactor * speed;
             rigidBody.velocity = velocity;
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Checkpoint"))
+            {
+                GameObject.FindObjectOfType<Goal>().NextCheckpoint();
+                Destroy(other.gameObject);
+            }
+
+            else if (other.gameObject.CompareTag("Goal"))
+            {
+                GameObject.FindObjectOfType<Goal>().NextLap();
+            }
         }
     }
 

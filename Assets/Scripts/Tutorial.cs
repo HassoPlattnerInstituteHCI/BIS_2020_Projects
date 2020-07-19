@@ -22,7 +22,6 @@ namespace MarioKart
         async void Start()
         {
             speech = new SpeechOut();
-            // GenerateNextCheckpoint();
             if (autoStart)
             {
                 await PlayNext();
@@ -66,27 +65,6 @@ namespace MarioKart
         void OnApplicationQuit()
         {
             speech.Stop();
-        }
-
-        async public void GenerateNextCheckpoint()
-        {
-            switch (checkpointnumber)
-            {
-                case 0:
-                    Instantiate(checkpoint, pathCreator.path.GetPointAtDistance(50), pathCreator.path.GetRotationAtDistance(50));
-                    checkpointnumber++;
-                    break;
-
-                case 1:
-                    Instantiate(checkpoint, pathCreator.path.GetPointAtDistance(62), pathCreator.path.GetRotationAtDistance(62));
-                    // GameObject.FindObjectOfType<PowerUpManager>().GenerateZone(60);
-                    await speech.Speak("There is a powerup on the road, just continue driving to get it");
-                    checkpointnumber++;
-                    break;
-                case 2:
-                    await speech.Speak("Now that you got your powerup, say Description to find out what it does");
-                    break;
-            }
         }
 
         public bool GetTutorial()
