@@ -25,14 +25,14 @@ public class Inspector : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
         //Debug.Log(HandletoPlayer(upperHandle.GetPosition()));
-        await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.2f);
+        //await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.2f);
     }
 
     // Update is called once per frame
     async void Update()
     {
         transform.position = HandletoPlayer(upperHandle.HandlePosition(PlayertoHandle(transform.position)));
-        await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.1f);
+        //await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.1f);
     }
 
     public void VelocityZero()

@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
         //Debug.Log(HandletoPlayer(upperHandle.GetPosition()));
-        await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.2f);
+        await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.02f);
     }
 
 
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         //Debug.Log(direction.y);
         Vector2 newdir = new Vector2(direction.x * 0.9f, 0);
 
-        if (!(direction.sqrMagnitude > 1))
+        if (direction.sqrMagnitude < 5)
         {
             
             rigid.AddForce(newdir, ForceMode2D.Impulse);
@@ -72,10 +72,8 @@ public class Player : MonoBehaviour
         // Jumping Movement
         if (Input.GetButtonDown("Jump") && !changeAnimation.GetBool("isJumping"))
         {
-            //Debug.Log(upperHandle.GetPosition().x + " " + upperHandle.GetPosition().y + " " + upperHandle.GetPosition().z);
-            //Debug.Log(upperHandle.GetRotation());
             iteration = 0;
-            rigid.AddForce(Vector2.up * jumpPower + newdir, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             changeAnimation.SetBool("isJumping", true);
             PlaySound("Jump");
             audioSource.Play();
@@ -104,7 +102,14 @@ public class Player : MonoBehaviour
         {
             changeAnimation.SetBool("isWalking", true);
         }
-        await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.1f);
+
+        //Repositioning the Handle
+        if (direction.sqrMagnitude > 0.5)
+        {
+            Debug.Log("reposition");
+            await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.1f);
+        }
+        
     }
 
     // Update is called once per frame
@@ -293,6 +298,11 @@ public class Player : MonoBehaviour
     Vector3 PlayertoHandle(Vector3 playerpos)
     {
         return new Vector3(playerpos.x + 70, 0, playerpos.y + 20);
+    }
+
+    async public void Reposition()
+    {
+        await upperHandle.MoveToPosition(PlayertoHandle(transform.position), 0.001f);
     }
 
 }

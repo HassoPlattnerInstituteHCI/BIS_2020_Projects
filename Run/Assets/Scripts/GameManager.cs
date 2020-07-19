@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
     void PlayerReposition()
     {
         player.transform.position = new Vector3(-80, -30, 0);
+        player.Reposition();
         player.VelocityZero();
     }
 
