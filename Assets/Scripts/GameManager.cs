@@ -396,6 +396,7 @@ public class GameManager : MonoBehaviour
     }
 
     public async Task traceSkyline() {
+        DisableColliders();
         await speechOut.Speak("Tracing the skyline.");
         //In the first part, we get the heights of the highest block in each column. For this, we need to go through every row, starting with the highest one
         //If there is a block in there with a column-tag that is not yet initialized in the array, we take it as our highest block.
@@ -417,10 +418,19 @@ public class GameManager : MonoBehaviour
         await lowerHandle.MoveToPosition(new Vector3(-2.25f,0f,-14.25f), 0.1f, shouldFreeHandle); //Moves handle to lower left corner of the level
         for(int col=1; col<11; col++) { //Starting at 1 since skylineHeights[0] is our default value for the first subtraction below
         Debug.Log(lowerHandle.transform.position);
-            await lowerHandle.MoveToPosition(lowerPosition.transform.position + new Vector3(0f,0f,0.5f*(skylineHeights[col]-skylineHeights[col-1])), 0.1f, shouldFreeHandle);
+        await Task.Delay(500);
+        int sign;
+        float moves=Mathf.Abs((float)(skylineHeights[col]-skylineHeights[col-1]));
+        if(moves>=0) {sign=1;} else {sign=-1;}
+        for(float i=0; i<moves; i++) {
+            await lowerHandle.MoveToPosition(lowerPosition.transform.position + new Vector3(0f,0f,0.5f*sign), 0.1f, shouldFreeHandle);
+            await Task.Delay(500);
+        }
             await lowerHandle.MoveToPosition(lowerPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
         }
+        await Task.Delay(500);
         await lowerHandle.MoveToPosition(new Vector3(2.75f,0f,-14.25f), 0.1f, shouldFreeHandle);
+        EnableColliders();
     }
 
     void RegisterColliders()
@@ -434,6 +444,22 @@ public class GameManager : MonoBehaviour
                 collider.CreateObstacle();
                 collider.Enable();
             }
+        }
+    }
+    void DisableColliders() {
+        PantoCollider[] colliders = FindObjectsOfType<PantoCollider>();
+
+        foreach (PantoCollider collider in colliders)
+        {
+                collider.Disable();
+        }
+    }
+    void EnableColliders() {
+        PantoCollider[] colliders = FindObjectsOfType<PantoCollider>();
+
+        foreach (PantoCollider collider in colliders)
+        {
+                collider.Enable();
         }
     }
 

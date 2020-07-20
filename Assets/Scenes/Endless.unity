@@ -177,8 +177,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Highscore
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -193,8 +193,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 60627d38187b452498f5e315c4d6003e,
-    type: 2}
+  m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0
@@ -411,8 +410,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Your score
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -427,8 +426,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 60627d38187b452498f5e315c4d6003e,
-    type: 2}
+  m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0
@@ -639,6 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   onUpper: 1
   onLower: 1
 --- !u!65 &362013966
@@ -880,7 +879,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -1102,6 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   onUpper: 1
   onLower: 1
 --- !u!65 &766424123
@@ -1387,8 +1387,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wave
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1403,8 +1403,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 60627d38187b452498f5e315c4d6003e,
-    type: 2}
+  m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0
@@ -1776,10 +1775,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skylines:
-  - {fileID: 8098386472531645295, guid: 027272edb3f5a7145a38fb65136fd95c, type: 3}
-  - {fileID: 1949996302861137105, guid: 77e31782ef333fb4aac133e604abc104, type: 3}
-  - {fileID: 7832582475455690678, guid: 9f38e22eaf413524eae87378ef090b6c, type: 3}
-  - {fileID: 5082102045875885233, guid: 2bc25a251d15015498b0b1935160380a, type: 3}
+  - {fileID: 8098386472531645295, guid: 5e9cbf540ae2aa747af2a19046ee5209, type: 3}
+  - {fileID: 1949996302861137105, guid: e37450e0352bf35429388c491438ac91, type: 3}
+  - {fileID: 7832582475455690678, guid: 0893bd7fc374bd14b904e282fbd9f41b, type: 3}
+  - {fileID: 5082102045875885233, guid: 3dfec65766ffc5941810dd115ca92742, type: 3}
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}
@@ -1996,19 +1995,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1197761968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95403a083c2022643ad7f5dc3843995b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2618b99992850a3438744ef0f571121d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shouldFreeHandle: 0
-  RowClear: {fileID: 8300000, guid: e5f1cd52307019b4896823057cc2fcaf, type: 3}
-  LevelClear: {fileID: 8300000, guid: 56027a70e8a1a84418b85db863c87a2a, type: 3}
-  LevelFail: {fileID: 8300000, guid: 6c85136e0042c1346a96947bf432d127, type: 3}
-  BlockPlace: {fileID: 8300000, guid: 255e3413549495341b30d335aa1ff6f2, type: 3}
-  BlockRotate: {fileID: 8300000, guid: b7bbe2ebc5038c14e9e04ea2a35a9b7b, type: 3}
-  BlockMove: {fileID: 8300000, guid: cc4f701a13dd00a4fbc74b1832cca980, type: 3}
-  MovementBlocked: {fileID: 8300000, guid: 9a99de8a45c073340a0f7c6c6e80099c, type: 3}
-  PlacementAbort: {fileID: 8300000, guid: c801867fadccf7f45892a340eae9331d, type: 3}
-  ConfirmPlacement: {fileID: 8300000, guid: b67d7f0aa9a189d409936dbc2e66477c, type: 3}
+  RowClear: {fileID: 0}
+  LevelClear: {fileID: 0}
+  LevelFail: {fileID: 0}
+  BlockPlace: {fileID: 0}
+  BlockRotate: {fileID: 0}
+  BlockMove: {fileID: 0}
+  MovementBlocked: {fileID: 0}
+  PlacementAbort: {fileID: 0}
+  ConfirmPlacement: {fileID: 0}
   audioSource: {fileID: 1197761973}
   volume: 0.5
 --- !u!82 &1197761973
@@ -2183,6 +2182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   onUpper: 1
   onLower: 1
 --- !u!65 &1379671797
@@ -2431,6 +2431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   onUpper: 1
   onLower: 1
 --- !u!65 &1578525591

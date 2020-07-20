@@ -297,11 +297,13 @@ public class Playfield : MonoBehaviour
 
     //deletes one row of blocks
     public static void deleteThisRow(GameObject currentRow) {
-        //thisBlock.GetComponent<PantoBoxCollider>().Disable();
-        //thisBlock.GetComponent<PantoBoxCollider>().Remove();
+        
         for(int i=9; i>=0; i--) {
-            Transform child = currentRow.transform.GetChild(i);
-            child.parent = null;
+            GameObject child = currentRow.transform.GetChild(i).gameObject;
+            child.transform.parent = null;
+            
+            child.GetComponent<PantoBoxCollider>().Disable();
+            child.GetComponent<PantoBoxCollider>().Remove();
             Destroy(child.gameObject);
         }
     }

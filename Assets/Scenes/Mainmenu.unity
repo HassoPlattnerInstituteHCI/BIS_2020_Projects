@@ -177,8 +177,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -193,8 +193,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 60627d38187b452498f5e315c4d6003e,
-    type: 2}
+  m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0
@@ -333,8 +332,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tetris PANTO Edition
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -349,8 +348,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 60627d38187b452498f5e315c4d6003e,
-    type: 2}
+  m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0
@@ -604,7 +602,7 @@ RectTransform:
   m_Children:
   - {fileID: 78671061}
   m_Father: {fileID: 588244007}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -732,9 +730,9 @@ RectTransform:
   - {fileID: 192712112}
   - {fileID: 673548602}
   - {fileID: 1476764562}
-  - {fileID: 1063665353}
   - {fileID: 2055965212}
   - {fileID: 433206936}
+  - {fileID: 1063665353}
   m_Father: {fileID: 1963662257}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -752,15 +750,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 588244006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede8c46b7b2c3e047b344b3a0563b1d1, type: 3}
+  m_Script: {fileID: 11500000, guid: e4d53f50cbb007646ba3a320d8b5c1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuitButton: {fileID: 433206937}
-  OptionsButton: {fileID: 2055965213}
+  QuitButton: {fileID: 0}
+  OptionsButton: {fileID: 0}
   TutorialButton: {fileID: 673548603}
   EndlessButton: {fileID: 1063665354}
-  PuzzlesButton: {fileID: 1476764563}
-  BackButton: {fileID: 414582774}
+  PuzzlesButton: {fileID: 0}
+  BackButton: {fileID: 0}
 --- !u!1 &673548601
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,7 +920,7 @@ RectTransform:
   m_Children:
   - {fileID: 1490490697}
   m_Father: {fileID: 588244007}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1076,7 +1074,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Puzzles
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1231,8 +1229,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tutorial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1247,7 +1245,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 60627d38187b452498f5e315c4d6003e,
+  m_fontColorGradientPreset: {fileID: 11400000, guid: ea60332ac8e20734f82b9b20dfcdbbd1,
     type: 2}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -1599,8 +1597,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Highscore
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: f86a064d3bb9cf44595850b408d0ea15, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1615,8 +1613,7 @@ MonoBehaviour:
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 11400000, guid: 60627d38187b452498f5e315c4d6003e,
-    type: 2}
+  m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0
@@ -2316,8 +2313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74f1a29daca7c340b94a6237b35b1fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnSpeed: 1
-  welcome: 0
   introductoryLevel: 0
   mainMenu: 1
   endless: 0
@@ -2326,6 +2321,10 @@ MonoBehaviour:
   blockPlaced: 0
   clearCounter: 0
   lowerHandle: {fileID: 0}
+  playerScore: 0
+  HighscoreText: {fileID: 0}
+  PlayerScoreText: {fileID: 0}
+  WaveText: {fileID: 0}
 --- !u!1 &2055965211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,7 +2357,7 @@ RectTransform:
   m_Children:
   - {fileID: 2071397748}
   m_Father: {fileID: 588244007}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
