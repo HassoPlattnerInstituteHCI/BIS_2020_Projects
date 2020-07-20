@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &219709546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6911586375303606962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7948ea43f9f03c647aa1ec214c4fbde9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  traceShape: 0
-  isOnUpper: 0
-  description: Liver
-  priority: 0
 --- !u!135 &711744008
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -42,6 +26,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.3485813
   m_Center: {x: -1.4723353, y: 1.02996614e-14, z: 0.3907451}
+--- !u!114 &219709546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911586375303606962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7948ea43f9f03c647aa1ec214c4fbde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traceShape: 0
+  isOnUpper: 0
+  description: Liver
+  priority: 0
 --- !u!114 &3795328614963410664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onUpper: 1
-  onLower: 1
+  onLower: 0
   numberOfCorners: 8
 --- !u!1001 &3227689114319580091
 PrefabInstance:
@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.27
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}
@@ -97,7 +97,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.35
+      value: -10.59
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}
@@ -142,17 +142,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2773
+      value: 0.69189775
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2773
+      value: 0.69189775
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2773
+      value: 0.6832629
       objectReference: {fileID: 0}
     - target: {fileID: 6922340161142340309, guid: d0bdfcfc2561e6f46b1c67c2dae97fc8,
         type: 3}

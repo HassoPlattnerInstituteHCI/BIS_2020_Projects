@@ -2403,7 +2403,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 16.327944
+  orthographic size: 32.170902
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3619,7 +3619,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1769380718}
   m_HandleRect: {fileID: 1769380717}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 4
   m_OnValueChanged:
@@ -3866,26 +3866,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.3848
       objectReference: {fileID: 0}
-    - target: {fileID: 205523369, guid: 24392ef61aab7c845bf661941ade5911, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8835671834308649825, guid: 24392ef61aab7c845bf661941ade5911,
-        type: 3}
-      propertyPath: m_Name
-      value: Heart
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923108780136902830, guid: 24392ef61aab7c845bf661941ade5911,
+    - target: {fileID: 5135350511086662734, guid: 24392ef61aab7c845bf661941ade5911,
         type: 3}
       propertyPath: m_Name
       value: Heart
       objectReference: {fileID: 0}
     - target: {fileID: 5253347376078960282, guid: 24392ef61aab7c845bf661941ade5911,
-        type: 3}
-      propertyPath: m_Name
-      value: Heart
-      objectReference: {fileID: 0}
-    - target: {fileID: 5135350511086662734, guid: 24392ef61aab7c845bf661941ade5911,
         type: 3}
       propertyPath: m_Name
       value: Heart
@@ -3900,10 +3886,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heart
       objectReference: {fileID: 0}
+    - target: {fileID: 5923108780136902830, guid: 24392ef61aab7c845bf661941ade5911,
+        type: 3}
+      propertyPath: m_Name
+      value: Heart
+      objectReference: {fileID: 0}
     - target: {fileID: 7326606199568869262, guid: 24392ef61aab7c845bf661941ade5911,
         type: 3}
       propertyPath: m_Name
       value: Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 8835671834308649825, guid: 24392ef61aab7c845bf661941ade5911,
+        type: 3}
+      propertyPath: m_Name
+      value: Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 205523369, guid: 24392ef61aab7c845bf661941ade5911, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24392ef61aab7c845bf661941ade5911, type: 3}
@@ -3932,7 +3932,7 @@ PrefabInstance:
     - target: {fileID: 7616073952635404449, guid: 98c83ff64c73a2a41871100e91c9e7de,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.35
+      value: -11.54
       objectReference: {fileID: 0}
     - target: {fileID: 7616073952635404449, guid: 98c83ff64c73a2a41871100e91c9e7de,
         type: 3}
@@ -3974,20 +3974,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 219709548, guid: 98c83ff64c73a2a41871100e91c9e7de, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4791238945259291687, guid: 98c83ff64c73a2a41871100e91c9e7de,
-        type: 3}
-      propertyPath: m_Name
-      value: Liver
-      objectReference: {fileID: 0}
-    - target: {fileID: 7696764851742840808, guid: 98c83ff64c73a2a41871100e91c9e7de,
-        type: 3}
-      propertyPath: m_Name
-      value: Liver
-      objectReference: {fileID: 0}
     - target: {fileID: 5537766820874211694, guid: 98c83ff64c73a2a41871100e91c9e7de,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -4018,6 +4004,20 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.68
       objectReference: {fileID: 0}
+    - target: {fileID: 4791238945259291687, guid: 98c83ff64c73a2a41871100e91c9e7de,
+        type: 3}
+      propertyPath: m_Name
+      value: Liver
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696764851742840808, guid: 98c83ff64c73a2a41871100e91c9e7de,
+        type: 3}
+      propertyPath: m_Name
+      value: Liver
+      objectReference: {fileID: 0}
+    - target: {fileID: 219709548, guid: 98c83ff64c73a2a41871100e91c9e7de, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98c83ff64c73a2a41871100e91c9e7de, type: 3}
 --- !u!1001 &6214046652391590834
@@ -4045,7 +4045,7 @@ PrefabInstance:
     - target: {fileID: 1388813269594380657, guid: ba07dff24b1039a4eb0c082093e44657,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.32
+      value: -14.509999
       objectReference: {fileID: 0}
     - target: {fileID: 1388813269594380657, guid: ba07dff24b1039a4eb0c082093e44657,
         type: 3}
@@ -4190,6 +4190,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.7824253
       objectReference: {fileID: 0}
+    - target: {fileID: 2156700159493766150, guid: 8cd2b9660eb86664d8dc8c0db934001f,
+        type: 3}
+      propertyPath: m_Name
+      value: Lungs
+      objectReference: {fileID: 0}
+    - target: {fileID: 3838091540120334281, guid: 8cd2b9660eb86664d8dc8c0db934001f,
+        type: 3}
+      propertyPath: m_Name
+      value: Lungs
+      objectReference: {fileID: 0}
+    - target: {fileID: 3429240964171557373, guid: 8cd2b9660eb86664d8dc8c0db934001f,
+        type: 3}
+      propertyPath: m_Name
+      value: Lungs
+      objectReference: {fileID: 0}
     - target: {fileID: 592286143, guid: 8cd2b9660eb86664d8dc8c0db934001f, type: 3}
       propertyPath: m_Radius
       value: 2.020978
@@ -4209,21 +4224,6 @@ PrefabInstance:
     - target: {fileID: 592286143, guid: 8cd2b9660eb86664d8dc8c0db934001f, type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2156700159493766150, guid: 8cd2b9660eb86664d8dc8c0db934001f,
-        type: 3}
-      propertyPath: m_Name
-      value: Lungs
-      objectReference: {fileID: 0}
-    - target: {fileID: 3838091540120334281, guid: 8cd2b9660eb86664d8dc8c0db934001f,
-        type: 3}
-      propertyPath: m_Name
-      value: Lungs
-      objectReference: {fileID: 0}
-    - target: {fileID: 3429240964171557373, guid: 8cd2b9660eb86664d8dc8c0db934001f,
-        type: 3}
-      propertyPath: m_Name
-      value: Lungs
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cd2b9660eb86664d8dc8c0db934001f, type: 3}

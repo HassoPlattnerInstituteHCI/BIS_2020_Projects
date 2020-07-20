@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/SurgeonSim.unity
     guid: 5d287fb1364d3da4e9f7a554e65eb589
   - enabled: 1
-    path: Assets/Scenes/SurgeonSim2.unity
-    guid: 3d9024191d097744f89bd109e82d1b8d
+    path: Assets/Scenes/SurgeonSim12.unity
+    guid: 6c12cda2474aa154cbef23b8f262fce1
   - enabled: 1
-    path: Assets/Scenes/SurgeonSim3.unity
-    guid: 5689e1fcc8f8a544da4526f9619c8254
+    path: Assets/Scenes/SurgeonSim13.unity
+    guid: ae88ae092d6841544a7cdb0dd705d8f9
   - enabled: 1
-    path: Assets/Scenes/SurgeonSim4.unity
-    guid: f545934de8d249445b7ce761b384c888
+    path: Assets/Scenes/SurgeonSim14.unity
+    guid: 190a198f510ff794391ec09fff7ebf29
+  - enabled: 1
+    path: Assets/Scenes/SurgeonSim15.unity
+    guid: 6ae7c1b0f05ec814cacfe54fd48fd1e7
   m_configObjects: {}

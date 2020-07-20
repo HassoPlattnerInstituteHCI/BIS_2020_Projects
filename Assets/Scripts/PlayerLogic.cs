@@ -56,20 +56,24 @@ public class PlayerLogic : MonoBehaviour
 
     private async void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Heart")
+        string name = collision.gameObject.name;
+        
+        if (name.Contains("Fill") || name.Contains("group"))
         {
-            await speechOut.Speak("Congratulations, you reached the heart.");
-            await speechOut.Speak("You completed level 1");
+
+        }
+        else
+        {
+            await speechOut.Speak(collision.gameObject.name);
+        }
+
+        if (name == "KidneyLeft")
+        {
+            await speechOut.Speak("Yes, first challenge completed");
             /*UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();*/
             AsyncOperation async = SceneManager.LoadSceneAsync(1);
             async.allowSceneActivation = true;
         }
-        else if (collision.gameObject.name == "Liver" || collision.gameObject.name == "Stomach" || collision.gameObject.name == "Lungs")
-        {
-            await speechOut.Speak("Sorry, that is not the organ you are looking for");
-        }
-
-        Debug.Log(collision.gameObject.name);
     }
 }

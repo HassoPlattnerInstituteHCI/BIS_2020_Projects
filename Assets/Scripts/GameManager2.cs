@@ -56,17 +56,17 @@ public class GameManager2 : MonoBehaviour
 
     async void Introduction()
     {
-        await speechOut.Speak("Welcome to the Surgeon Simulator Panto Edition");
+        // await speechOut.Speak("Welcome to the Surgeon Simulator Panto Edition");
         // TODO: 1. Introduce obstacles in level 2 (aka 1)
         await Task.Delay(1000);
         RegisterColliders();
 
-        if (introduceLevel)
+        /* if (introduceLevel)
         {
             await IntroduceLevel();
-        }
+        } */
 
-        await speechOut.Speak("Introduction finished, game starts.");
+        // await speechOut.Speak("Introduction finished, game starts.");
 
         await ResetGame();
     }
@@ -75,7 +75,7 @@ public class GameManager2 : MonoBehaviour
     {
         await speechOut.Speak("There are four organs.");
         Level level = GetComponent<Level>();
-        await level.PlayIntroduction();
+        // await level.PlayIntroduction();
 
         // TODO: 2. Explain enemy and player with weapons by wiggling and playing shooting sound
 
@@ -114,25 +114,23 @@ public class GameManager2 : MonoBehaviour
 
     async Task ResetGame()
     {
-        await speechOut.Speak("Spawning player");
+        await speechOut.Speak("spawning");
         player.transform.position = playerSpawn.position;
         await upperHandle.SwitchTo(player, 0.3f);
+        // await upperHandle.SwitchTo(player, 0.3f);
 
-        await speechOut.Speak("Find organs liver, heart, stomach and lungs in that order.");
-        enemy.transform.position = enemySpawn.position;
-        enemy.transform.rotation = enemySpawn.rotation;
-        GameObject liver = GameObject.FindGameObjectWithTag("Liver");
-        Debug.Log(liver);
-        await lowerHandle.SwitchTo(liver, 0.3f);
-        /* if (level >= enemyConfigs.Length)
-            Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
-        enemy.GetComponent<Enemy>().config = enemyConfigs[level];*/
+        // StartCoroutine(MyPause());
+
+        await speechOut.Speak("Let's explore the other organs.");
+        await speechOut.Speak("Move to the lungs.");
+        GameObject lungs = GameObject.Find("Lungs");
+        await lowerHandle.SwitchTo(lungs, 0.3f);
 
         upperHandle.Free();
 
         player.SetActive(true);
-        enemy.SetActive(true);
-        levelStartTime = Time.time;
+        // enemy.SetActive(true);
+        // levelStartTime = Time.time;
     }
 
     async void onRecognized(string message)

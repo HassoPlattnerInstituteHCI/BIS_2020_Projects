@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 using SpeechIO;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GameManager : MonoBehaviour
+public class GameManager5 : MonoBehaviour
 {
     public float spawnSpeed = 1f;
     public bool introduceLevel = true;
@@ -14,7 +13,7 @@ public class GameManager : MonoBehaviour
     public EnemyConfig[] enemyConfigs;
     public Transform playerSpawn;
     public Transform enemySpawn;
-    public int level = 0;
+    public int level = 2;
     public int trophyScore = 10000;
     public UIManager uiManager;
 
@@ -33,16 +32,20 @@ public class GameManager : MonoBehaviour
         { "done", KeyCode.D }
     };
 
+    private GameObject scalpel;
+
     void Awake()
     {
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
         speechOut = new SpeechOut();
 
-        if (level < 0 || level >= enemyConfigs.Length)
+        scalpel = GameObject.Find("Scalpel");
+
+        /* if (level < 0 || level >= enemyConfigs.Length)
         {
             Debug.LogWarning($"Level value {level} < 0 or >= enemyConfigs.Length. Resetting to 0");
             level = 0;
-        }
+        } */
     }
 
     void Start()
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     async void Introduction()
     {
-        await speechOut.Speak("Welcome to your surgeon trainer.");
+        // await speechOut.Speak("Welcome to the Surgeon Simulator Panto Edition");
         // TODO: 1. Introduce obstacles in level 2 (aka 1)
         await Task.Delay(1000);
         RegisterColliders();
@@ -74,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     async Task IntroduceLevel()
     {
-        await speechOut.Speak("There are four organs.");
+        await speechOut.Speak("There are six organs.");
         Level level = GetComponent<Level>();
         await level.PlayIntroduction();
 
@@ -118,19 +121,18 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("spawning");
         player.transform.position = playerSpawn.position;
         await upperHandle.SwitchTo(player, 0.3f);
-        // await upperHandle.SwitchTo(player, 0.3f);
 
-        // StartCoroutine(MyPause());
+        await speechOut.Speak("First, say scalpel.");
+        await speechIn.Listen(new Dictionary<string, KeyCode>() { { "scalpel", KeyCode.S } });
+        scalpel.SetActive(true);
 
-        await speechOut.Speak("Move to the left kidney.");
-        GameObject kidneyLeft = GameObject.Find("KidneyLeft");
-        await lowerHandle.SwitchTo(kidneyLeft, 0.3f);
+        await speechOut.Speak("Reach the right kidney. Remember: Don't cut in an organ.");
+        GameObject kidney = GameObject.Find("KidneyRight");
+        await lowerHandle.SwitchTo(kidney, 0.3f);
 
         upperHandle.Free();
 
         player.SetActive(true);
-        // enemy.SetActive(true);
-        // levelStartTime = Time.time;
     }
 
     async void onRecognized(string message)

@@ -28,10 +28,10 @@ public class PlayerLogic2 : MonoBehaviour
         speechOut = new SpeechOut();
 
         targets = new GameObject[] {
-            GameObject.Find("Liver"),
+            GameObject.Find("Lungs"),
             GameObject.Find("Heart"),
-            GameObject.Find("Stomach"),
-            GameObject.Find("Lungs")};
+            // GameObject.Find("Stomach"),
+            GameObject.Find("Liver")};
     }
 
     void Start()
@@ -65,30 +65,32 @@ public class PlayerLogic2 : MonoBehaviour
 
     private async void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == targets[currentTarget].name)
+        string name = collision.gameObject.name;
+
+        if (name.Contains("Fill") || name.Contains("group"))
         {
-            await speechOut.Speak("Congratulations, you reached the " + targets[currentTarget].name);
+
+        }
+        else
+        {
+            await speechOut.Speak(collision.gameObject.name);
+        }
+
+        if (name == targets[currentTarget].name)
+        {
             currentTarget++;
-            Debug.Log(collision.gameObject.name);
-            Debug.Log(currentTarget);
-        }
-        else if (collision.gameObject.name == "Liver" || collision.gameObject.name == "Stomach" || collision.gameObject.name == "Lungs")
-        {
-            await speechOut.Speak("Sorry, that is not the organ you are looking for");
-        }
-
-        Debug.Log(collision.gameObject.name);
-
-        /* Debug.Log(collision.gameObject.name);
-        Debug.Log(currentTarget); */
-
-        if (currentTarget == targets.Length)
-        {
-            await speechOut.Speak("You completed level 2");
-            /*UnityEditor.EditorApplication.isPlaying = false;
-            Application.Quit();*/
-            AsyncOperation async = SceneManager.LoadSceneAsync(2);
-            async.allowSceneActivation = true;
+            if (currentTarget < targets.Length)
+            {
+                await speechOut.Speak("Feel the " + targets[currentTarget].name + "next.");
+            }
+            else
+            {
+                await speechOut.Speak("Alright, let's make it harder.");
+                /*UnityEditor.EditorApplication.isPlaying = false;
+                Application.Quit();*/
+                AsyncOperation async = SceneManager.LoadSceneAsync(1);
+                async.allowSceneActivation = true;
+            }
         }
     }
 }

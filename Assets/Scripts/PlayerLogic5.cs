@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SpeechIO;
-using System.Linq;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
-public class PlayerLogic4 : MonoBehaviour
+public class PlayerLogic5 : MonoBehaviour
 {
     private PantoHandle upperHandle;
     private PantoHandle lowerHandle;
@@ -22,10 +22,12 @@ public class PlayerLogic4 : MonoBehaviour
 
     SpeechOut speechOut;
     SpeechIn speechIn;
-    private int lives = 2;
+
     private GameObject scalpel;
-    private GameObject heart;
+    private GameObject kidney;
     private GameObject player;
+    private int lives = 2;
+    bool strike = false;
     private bool attached = false;
 
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
@@ -40,6 +42,11 @@ public class PlayerLogic4 : MonoBehaviour
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
     }
 
+    async void onRecognized(string message)
+    {
+        Debug.Log("SpeechIn recognized: " + message);
+    }
+
     void Start()
     {
         upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
@@ -48,7 +55,8 @@ public class PlayerLogic4 : MonoBehaviour
         scalpel = GameObject.Find("Scalpel");
         scalpel.SetActive(false);
         Debug.Log(scalpel);
-        heart = GameObject.Find("Heart");
+        kidney = GameObject.Find("KidneyRight");
+        Debug.Log(kidney);
         player = GameObject.Find("Player");
         /* health = GetComponent<Health>();
         audioSource = GetComponent<AudioSource>();
@@ -62,16 +70,15 @@ public class PlayerLogic4 : MonoBehaviour
 
         if (attached)
         {
-            heart.transform.position = upperHandle.HandlePosition(heart.transform.position);
-            Debug.Log(heart.transform.position);
+            kidney.transform.position = upperHandle.HandlePosition(kidney.transform.position);
+            Debug.Log(kidney.transform.position);
             Debug.Log(player.transform.position);
         }
 
-        if (heart.transform.position.x > 4.2f && heart.transform.position.z < -13f)
+        if (kidney.transform.position.x < -3.5f && kidney.transform.position.z > -6.4f)
         {
-            speechOut.Speak("Great!");
-            AsyncOperation async = SceneManager.LoadSceneAsync(1);
-            async.allowSceneActivation = true;
+            speechOut.Speak("That's it for today. See you again, soon.");
+            UnityEditor.EditorApplication.isPlaying = false;
         }
 
         /* if (health.healthPoints > 0 && health.healthPoints <= 2 * health.maxHealth / 3)
@@ -88,11 +95,16 @@ public class PlayerLogic4 : MonoBehaviour
                 nextHeartbeat += Time.deltaTime;
             }
         } */
-    }
-
-    async void onRecognized(string message)
-    {
-        Debug.Log("SpeechIn recognized: " + message);
+        /*if (rightKidneySeparated)
+        {
+            GameObject kidney = GameObject.Find("KidneyRight");
+            kidney.transform.position = GameObject.Find("MeHandlePrefab(Clone)").transform.position;
+        }
+        if (leftKidneySeparated)
+        {
+            GameObject kidney = GameObject.Find("KidneyLeft");
+            kidney.transform.position = GameObject.Find("MeHandlePrefab(Clone)").transform.position;
+        }*/
     }
 
     private async void OnCollisionEnter(Collision collision)
@@ -105,9 +117,9 @@ public class PlayerLogic4 : MonoBehaviour
         }
         else
         {
-            if (attached && name == "Heart")
+            if (attached && name == "KidneyRight")
             {
-                
+
             }
             else
             {
@@ -115,7 +127,7 @@ public class PlayerLogic4 : MonoBehaviour
             }
         }
 
-        if ("Heart" == collision.gameObject.name && ! attached)
+        if ("KidneyRight" == collision.gameObject.name && !attached)
         {
             if (scalpel.activeSelf)
             {
@@ -123,17 +135,34 @@ public class PlayerLogic4 : MonoBehaviour
                 // await speechOut.Speak("Say hand.");
                 // await speechIn.Listen(new Dictionary<string, KeyCode>() { { "hand", KeyCode.H } });
                 scalpel.SetActive(false);
-                await speechOut.Speak("Move to the bin in the bottom right corner.");
-                await lowerHandle.MoveToPosition(new Vector3(4.2f, 0f, -13f), 0.3f, false);
+                await speechOut.Speak("This time, move the kidney to the top left corner.");
+                await lowerHandle.MoveToPosition(new Vector3(-3.5f, 0f, -6.4f), 0.3f, false);
             }
             else
             {
                 await speechOut.Speak("Now say scalpel.");
                 await speechIn.Listen(new Dictionary<string, KeyCode>() { { "scalpel", KeyCode.S } });
                 scalpel.SetActive(true);
-                await speechOut.Speak("Make a cut to the heart.");
+                await speechOut.Speak("Make a cut to the kidney.");
                 /*UnityEditor.EditorApplication.isPlaying = false;
                 Application.Quit();*/
+            }
+        }
+
+
+
+        if (!collision.gameObject.name.Contains("group") && scalpel.activeSelf)
+        {
+            Debug.Log(name);
+            if (strike)
+            {
+                await speechOut.Speak("Oh no, you messed up! Game over!");
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
+            else
+            {
+                await speechOut.Speak("Be careful! You got one more chance.");
+                strike = true;
             }
         }
     }

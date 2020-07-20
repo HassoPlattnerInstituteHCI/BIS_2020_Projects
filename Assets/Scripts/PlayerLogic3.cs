@@ -19,6 +19,7 @@ public class PlayerLogic3 : MonoBehaviour
     Health health;
 
     SpeechOut speechOut;
+    bool strike = false;
 
     private void Awake()
     {
@@ -56,26 +57,30 @@ public class PlayerLogic3 : MonoBehaviour
 
     private async void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Lungs")
+        string name = collision.gameObject.name;
+
+        if ("Stomach" == collision.gameObject.name)
         {
-            await speechOut.Speak("Congratulations, you reached the lungs");
+            await speechOut.Speak("Well done! Now, we'll try to remove an organ.");
             /*UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();*/
             AsyncOperation async = SceneManager.LoadSceneAsync(1);
             async.allowSceneActivation = true;
         }
-        else if (collision.gameObject.name == "Liver" || collision.gameObject.name == "Stomach" || collision.gameObject.name == "Heart")
+        else if (!collision.gameObject.name.Contains("group"))
         {
-            await speechOut.Speak("Sorry, that is not the organ you are looking for");
+            Debug.Log(name);
+            if (strike)
+            {
+                await speechOut.Speak("Oh no, you messed up! Game over!");
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
+            else
+            {
+                await speechOut.Speak("Be careful! You got one more chance.");
+                strike = true;
+            }
         }
-        else if (collision.gameObject.name == "Ulcer0" || collision.gameObject.name == "Ulcer1" || collision.gameObject.name == "Ulcer2" || collision.gameObject.name == "Ulcer3")
-        {
-            await speechOut.Speak("Ouch, you touched an open wound. That is the end of the game.");
-        }
-
-        Debug.Log(collision.gameObject.name);
-
-        /* Debug.Log(collision.gameObject.name);
-        Debug.Log(currentTarget); */
+        
     }
 }

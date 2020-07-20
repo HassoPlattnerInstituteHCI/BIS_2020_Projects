@@ -56,17 +56,17 @@ public class GameManager4 : MonoBehaviour
 
     async void Introduction()
     {
-        await speechOut.Speak("Welcome to the Surgeon Simulator Panto Edition");
+        // await speechOut.Speak("Welcome to the Surgeon Simulator Panto Edition");
         // TODO: 1. Introduce obstacles in level 2 (aka 1)
         await Task.Delay(1000);
         RegisterColliders();
 
-        if (introduceLevel)
+        /* if (introduceLevel)
         {
             await IntroduceLevel();
-        }
+        } */
 
-        await speechOut.Speak("Introduction finished, game starts.");
+        // await speechOut.Speak("Introduction finished, game starts.");
 
         await ResetGame();
     }
@@ -114,25 +114,17 @@ public class GameManager4 : MonoBehaviour
 
     async Task ResetGame()
     {
-        await speechOut.Speak("Spawning player");
+        await speechOut.Speak("spawning");
         player.transform.position = playerSpawn.position;
         await upperHandle.SwitchTo(player, 0.3f);
 
-        await speechOut.Speak("You are holding a scalpel. Cut one of the kidneys loose and put it to the side. It points to the liver.");
-        enemy.transform.position = enemySpawn.position;
-        enemy.transform.rotation = enemySpawn.rotation;
-        GameObject liver = GameObject.FindGameObjectWithTag("Liver");
-        Debug.Log(liver);
-        await lowerHandle.SwitchTo(liver, 0.3f);
-        /* if (level >= enemyConfigs.Length)
-            Debug.LogError($"Level {level} is over number of enemies {enemyConfigs.Length}");
-        enemy.GetComponent<Enemy>().config = enemyConfigs[level];*/
+        await speechOut.Speak("Let's get to the heart.");
+        GameObject heart = GameObject.Find("Heart");
+        await lowerHandle.SwitchTo(heart, 0.3f);
 
         upperHandle.Free();
 
         player.SetActive(true);
-        enemy.SetActive(true);
-        levelStartTime = Time.time;
     }
 
     async void onRecognized(string message)
