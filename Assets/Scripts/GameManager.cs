@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public Transform enemySpawn;
     public int level = 0;
     public int trophyScore = 10000;
-    public UIManager uiManager;
 
     UpperHandle upperHandle;
     LowerHandle lowerHandle;
@@ -52,8 +51,6 @@ public class GameManager : MonoBehaviour
     {
         upperHandle = GetComponent<UpperHandle>();
         lowerHandle = GetComponent<LowerHandle>();
-
-        uiManager.UpdateUI(playerScore, enemyScore);
         Introduction();
     }
 
@@ -178,16 +175,6 @@ public class GameManager : MonoBehaviour
 
         bool playerDefeated = defeated.Equals(player);
 
-        if (playerDefeated)
-        {
-            enemyScore++;
-        }
-        else
-        {
-            playerScore++;
-        }
-        uiManager.UpdateUI(playerScore, enemyScore);
-
         string defeatedPerson = playerDefeated ? "You" : "Enemy";
         await speechOut.Speak($"{defeatedPerson} got defeated.");
 
@@ -200,8 +187,6 @@ public class GameManager : MonoBehaviour
         } else
         {
             // TODO: Evaluate the players performance with game score
-            await speechOut.Speak($"Current score is {gameScore}");
-            await speechOut.Speak($"Continuing with level {level + 1}");
             await IntroduceLevel();
             await ResetGame();
         }
@@ -215,18 +200,7 @@ public class GameManager : MonoBehaviour
     {
         await speechOut.Speak("Congratulations.");
 
-        if (!GetComponent<DualPantoSync>().debug)
-        {
-            await speechOut.Speak($"You achieved a score of {gameScore}.");
-            await speechOut.Speak("Please enter your name to submit your highscore.");
-
-            await uiManager.GameOver(gameScore, (int)totalTime, trophyScore);
-        } else
-        {
-            await speechOut.Speak($"You achieved a score of {gameScore} in debug mode.");
-        }
-
-        await speechOut.Speak("Thanks for playing DuelPanto. Say quit when you're done.");
+        await speechOut.Speak("Thanks for playing C o D Blackout. Say quit when you're done.");
         await speechIn.Listen(new Dictionary<string, KeyCode>() { { "quit", KeyCode.Escape } });
 
         Application.Quit();
