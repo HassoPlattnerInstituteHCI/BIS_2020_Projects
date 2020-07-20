@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using DualPantoFramework;
 
 [System.Serializable]
 public class DefeatEvent : UnityEvent<GameObject> { }

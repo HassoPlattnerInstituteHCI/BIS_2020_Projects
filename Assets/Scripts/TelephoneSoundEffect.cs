@@ -1,6 +1,7 @@
 using UnityEngine;
 using SpeechIO;
 using System.Threading.Tasks;
+using DualPantoFramework;
 
 public class TelephoneSoundEffect : MonoBehaviour
 {

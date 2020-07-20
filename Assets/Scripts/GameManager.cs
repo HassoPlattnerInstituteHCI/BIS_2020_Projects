@@ -3,6 +3,7 @@ using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using DualPantoFramework;
 
 ////TODO Level 5
 //// HitCount + reset in safehouse
@@ -224,7 +225,7 @@ public class GameManager : MonoBehaviour
         player.transform.position = playerSpawn.position;
         await upperHandle.MoveToPosition(player.transform.position, 0.2f, true);
 
-        //upperHandle.Free();
+        upperHandle.Free();
 
         cash = 0;
         Debug.Log("cash: " + cash);

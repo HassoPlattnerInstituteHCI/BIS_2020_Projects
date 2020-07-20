@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DualPantoFramework;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
