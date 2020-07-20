@@ -156,6 +156,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8489706618734150506
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049876103772104635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 8376437588128204712, guid: 091b433f32276064bb6541ab2ff067d6, type: 3}
 --- !u!1 &3103208581684867973
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,10 +246,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd4eca3f8183754eacbbf2241e9482c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: /dev/cu.SLAB_USBtoUART
+  portName: //.//COM3
   debug: 0
   debugRotationSpeed: 10
   toggleVisionKey: 98
+  showRawValues: 0
 --- !u!114 &3103208581684867968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,33 +275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8684daf065224d688575e0262e620d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnSpeed: 1
   introduceLevel: 1
-  player: {fileID: 0}
-  enemy: {fileID: 0}
-  enemyConfigs:
-  - {fileID: 11400000, guid: 250866c4286eb423a8b4403c91105727, type: 2}
-  - {fileID: 11400000, guid: 208eff900b552412aa87ec05faeab19d, type: 2}
-  - {fileID: 11400000, guid: cc985994c53e84f6fae197a5aed96f0e, type: 2}
-  playerSpawn: {fileID: 0}
-  enemySpawn: {fileID: 0}
-  level: 0
-  trophyScore: 8000
-  uiManager: {fileID: 0}
---- !u!64 &8489706618734150506
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3049876103772104635}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 8376437588128204712, guid: 091b433f32276064bb6541ab2ff067d6, type: 3}
+  Player: {fileID: 0}
+  levelHitCount: 0
 --- !u!1001 &5644297822113890281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298,11 +289,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ember Bounds
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 091b433f32276064bb6541ab2ff067d6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 091b433f32276064bb6541ab2ff067d6,
         type: 3}
