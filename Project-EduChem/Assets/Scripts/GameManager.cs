@@ -108,7 +108,8 @@ namespace eduChem
                 await speechOut.Speak("You are wrong. That was really hard! C2, the molecule made of two carbon atoms, has a double bond. We will learn more about this in a moment.");
             } else if (response == "no")
             {
-                await speechOut.Speak("Yes. thats correct!");
+                audioSource.PlayOneShot(success);
+                await speechOut.Speak("Yes. thats correct! C2, the molecule made of two carbon atoms, has a double bond. We will learn more about this in a moment.");
             }
         }
 

@@ -714,6 +714,7 @@ GameObject:
   - component: {fileID: 881415690}
   - component: {fileID: 881415697}
   - component: {fileID: 881415696}
+  - component: {fileID: 881415699}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -1060,6 +1061,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &881415699
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881415689}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 3
 --- !u!1 &903076698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,7 +1197,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 16.532257
+  orthographic size: 16.03765
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1281,12 +1298,12 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 138
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1372,6 +1389,7 @@ GameObject:
   - component: {fileID: 1888021897}
   - component: {fileID: 1888021896}
   - component: {fileID: 1888021895}
+  - component: {fileID: 1888021900}
   m_Layer: 0
   m_Name: MeHandle
   m_TagString: Player
@@ -1464,6 +1482,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1888021900
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888021894}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &2099524815
 GameObject:
   m_ObjectHideFlags: 0

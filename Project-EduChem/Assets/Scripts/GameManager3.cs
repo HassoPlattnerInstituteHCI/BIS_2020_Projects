@@ -97,6 +97,8 @@ namespace eduChem {
         async Task IntroduceLevel()
         {
             await speechOut.Speak("Now we want to take that a step further. There are both the carbon atoms. But there are just 4 of the 6 hydrogen atoms from the ethane molecule.");
+            Level level = GetComponent<Level>();
+            await level.PlayIntroduction();
         }
 
         async Task ThirdLevel()

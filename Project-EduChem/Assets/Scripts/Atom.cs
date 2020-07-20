@@ -29,7 +29,7 @@ public class Atom : MonoBehaviour
         GameObject other = collision.gameObject;
         Debug.Log("on collision");
 
-        if (other.tag == "Player")
+        //if (other.tag == "Player")
         {
             audioSource.Play();
             Debug.Log("play");
