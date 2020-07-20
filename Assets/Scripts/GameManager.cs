@@ -218,13 +218,15 @@ public class GameManager : MonoBehaviour
     /// Starts a new round.
     /// </summary>
     /// <returns></returns>
+
+
     public async Task ResetGame()
     {
         
         player.transform.position = playerSpawn.position;
         await upperHandle.MoveToPosition(player.transform.position, 0.2f, true);
 
-        //upperHandle.Free();
+        upperHandle.Free();
 
         cash = 0;
         Debug.Log("cash: " + cash);
