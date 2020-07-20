@@ -119,7 +119,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 5d6ae59e519024cb581ddbab27049d5a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6c753afa948670445af6a123479c52c5, type: 2}
 --- !u!1001 &17882218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -694,7 +694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &311711235
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2384,7 +2384,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 16.987226
+  orthographic size: 9.84006
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2408,7 +2408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.6, y: 14.5, z: -7.8}
+  m_LocalPosition: {x: 0.71, y: 14.5, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2426,7 +2426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce38cac05dd94f75bd7e1824c5a9008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneWidth: 70
+  sceneWidth: 40
 --- !u!1 &1012411827
 GameObject:
   m_ObjectHideFlags: 0
@@ -2564,7 +2564,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 208eff900b552412aa87ec05faeab19d, type: 2}
   playerSpawn: {fileID: 743777051}
   enemySpawn: {fileID: 1012411828}
-  level: 0
+  level: 2
   trophyScore: 8000
 --- !u!114 &1189803894
 MonoBehaviour:

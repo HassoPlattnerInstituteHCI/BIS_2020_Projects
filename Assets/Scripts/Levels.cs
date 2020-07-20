@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SpeechIO;
 using System;
 using JetBrains.Annotations;
+using UnityEngine.SceneManagement;
 
 public class Levels : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Levels : MonoBehaviour
     public GameObject[] powerUps;
     Shooting shooting;
     public int gun = 1;
+    Scene currentScene;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,7 @@ public class Levels : MonoBehaviour
         lowerHandle = GetComponent<LowerHandle>();
         gm = GetComponent<GameManager>();
         shooting = gm.player.GetComponent<Shooting>();
+        currentScene = SceneManager.GetActiveScene();
     }
 
     // Update is called once per frame
@@ -84,6 +87,10 @@ public class Levels : MonoBehaviour
                 break;
             //Level 4
             case 3:
+
+                if (!(currentScene.name == "Lvl4-5"))
+                    SceneManager.LoadScene("Lvl4-5");
+
                 shooting.spotted = false;
 
                 foreach (GameObject obst in obstacles)
@@ -105,6 +112,10 @@ public class Levels : MonoBehaviour
                 break;
             //level 5
             case 4:
+
+                if (!(currentScene.name == "Lvl4-5"))
+                    SceneManager.LoadScene("Lvl4-5");
+
                 shooting.spotted = false;
 
                 foreach (GameObject obst in obstacles)
