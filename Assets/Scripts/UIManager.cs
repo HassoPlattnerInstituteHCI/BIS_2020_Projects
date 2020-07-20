@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using DualPantoFramework;
 
 public class UIManager : MonoBehaviour
 {

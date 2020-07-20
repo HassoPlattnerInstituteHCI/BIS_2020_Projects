@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DualPantoFramework;
 
 /// <summary>
 /// Enemy configuration for different difficulities.

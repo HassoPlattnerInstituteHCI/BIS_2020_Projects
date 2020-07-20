@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using DualPantoFramework;
 
 public class EnemyLogic : MonoBehaviour
 {
