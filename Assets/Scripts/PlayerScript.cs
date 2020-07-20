@@ -19,6 +19,7 @@ namespace PantoGolf
         public float upForce = 5f;
         private float velocity = 0f;     //Stores the velocity of the moving club
         public float minHitStrength = 10f;
+        public float maxHitStrength = 50f;
         private BallAudio soundEffects;
 
         private int hitCount = 0;
@@ -101,8 +102,13 @@ namespace PantoGolf
                 }
                 if (velocity < minHitStrength)
                 {
-                    Debug.Log("Hitting Ball with minHitStrength of: " + minHitStrength.ToString() + " in direction: " + shotDir);
+                    Debug.Log("Hitting Ball with minHitStrength of: " + minHitStrength.ToString() + "(minHitStrength) in direction: " + shotDir);
                     Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * minHitStrength);
+                }
+                else if (velocity > maxHitStrength)
+                {
+                    Debug.Log("Hitting Ball with velocity of: " + maxHitStrength.ToString() + "(maxHitStrength) in direction: " + shotDir);
+                    Ball.GetComponent<Rigidbody>().AddForce(shotDir.normalized * forceMultiplier * maxHitStrength);
                 }
                 else
                 {
