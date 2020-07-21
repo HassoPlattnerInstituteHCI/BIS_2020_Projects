@@ -10,11 +10,11 @@ namespace Stealth
         /// <returns></returns>
         override public async Task ResetGame()
         {
-            DeactivateGameObjects();
+            FreezeGameObjects();
             await SpawnPlayer();
             await SpawnEnemies();
             await speechOut.Speak("You found a sword with which you can fight back enemies. Once enemies have spotted you, you will no longer die, but a battle will start. Rotate the knob on the me handle to swing your sword around you and kill your enemy.");
-            ActivateGameObjects(); 
+            UnfreezeGameObjects(); 
             ListenToSwitch();
         }
 

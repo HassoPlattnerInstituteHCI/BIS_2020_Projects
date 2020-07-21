@@ -11,11 +11,11 @@ namespace Stealth
         /// <returns></returns>
         override public async Task ResetGame()
         {
-            DeactivateGameObjects();
+            FreezeGameObjects();
             await SpawnPlayer();
             await SpawnEnemies();
             await speechOut.Speak("Now there are two enemies. Say Switch to switch between enemies.");
-            ActivateGameObjects(); 
+            UnfreezeGameObjects(); 
             ListenToSwitch();
         }
 

@@ -18,7 +18,9 @@ namespace Stealth
         public LowerHandle lowerHandle;
         public SpeechIn speechIn;
         public SpeechOut speechOut;
-        public TreasureController treasureController;
+        private GameObject _treasure;
+        private TreasureController _treasureController;
+        private bool _hasHitObstacle;
 
         public Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>()
         {
@@ -30,7 +32,7 @@ namespace Stealth
 
         void Awake()
         {
-            speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
+            speechIn = new SpeechIn(OnRecognized, commands.Keys.ToArray());
             speechOut = new SpeechOut();
         }
 
@@ -46,7 +48,8 @@ namespace Stealth
         {
             await Task.Delay(1000);
             RegisterColliders();
-
+            
+            ActivateGameObjects();
             await ResetGame();
         }
 
@@ -75,7 +78,7 @@ namespace Stealth
         abstract public Task Success();
 
 
-        async void onRecognized(string message)
+        async void OnRecognized(string message)
         {
             Debug.Log("SpeechIn recognized: " + message);
         }
@@ -91,14 +94,13 @@ namespace Stealth
             string response = await speechIn.Listen(commands);
             if (response == "switch")
             {
-                ToggleEnemies();
-                await lowerHandle.SwitchTo(currentEnemy, 0.3f);
+                await ToggleEnemies();
             }
 
             ListenToSwitch();
         }
 
-        private void ToggleEnemies()
+        async Task ToggleEnemies()
         {
             if (EnemyIndex < enemies.Length - 1)
             {
@@ -107,26 +109,39 @@ namespace Stealth
             else EnemyIndex = 0;
 
             currentEnemy = enemies[EnemyIndex];
+                await lowerHandle.SwitchTo(currentEnemy, 0.3f);
         }
 
-        public void DeactivateGameObjects()
+        public void FreezeGameObjects()
         {
             player.GetComponent<PlayerController>().Freeze();
             foreach (GameObject en in enemies)
             {
                 en.GetComponent<EnemyController>().Freeze();
             }
-            getTreasureController().tickingAudioSource.Pause();
+
+            GetTreasureController().tickingAudioSource.Pause();
         }
 
         public void ActivateGameObjects()
         {
+            player.SetActive(true);
+            foreach (GameObject en in enemies)
+            {
+                en.SetActive(true);
+            }
+        }
+
+        public void UnfreezeGameObjects()
+        {
+            player.SetActive(true);
             player.GetComponent<PlayerController>().Unfreeze();
             foreach (GameObject en in enemies)
             {
                 en.GetComponent<EnemyController>().Unfreeze();
             }
-            getTreasureController().tickingAudioSource.Play();
+
+            GetTreasureController().tickingAudioSource.Play();
         }
 
         public async Task SpawnPlayer()
@@ -151,14 +166,43 @@ namespace Stealth
             }
         }
 
-        public TreasureController getTreasureController()
+        public GameObject GetTreasure()
         {
-            if (treasureController == null)
+            if (_treasure == null)
             {
-                treasureController = GameObject.FindWithTag("Target").GetComponent<TreasureController>();
+                _treasure = GameObject.FindWithTag("Target");
             }
 
-            return treasureController;
+            return _treasure;
+        }
+
+        public TreasureController GetTreasureController()
+        {
+            if (_treasureController == null)
+            {
+                _treasureController = GetTreasure().GetComponent<TreasureController>();
+            }
+
+            return _treasureController;
+        }
+
+        public async Task OnObstacleHit()
+        {
+            if (!_hasHitObstacle)
+            {
+                _hasHitObstacle = true;
+                await OnFirstObstacleHit();
+            }
+        }
+
+        virtual public async Task OnFirstObstacleHit()
+        {
+            return;
+        }
+
+        public async Task MoveItHandleToTreasure()
+        {
+            await lowerHandle.SwitchTo(GetTreasure(), 0.3f);
         }
     }
 }

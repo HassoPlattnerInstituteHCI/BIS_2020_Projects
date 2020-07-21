@@ -75,7 +75,7 @@ namespace Stealth
             failureAudioSource.Play();
             LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
 
-            script.DeactivateGameObjects();
+            script.FreezeGameObjects();
             if (SceneManager.GetActiveScene().name != "Level 5")
             {
                 await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
