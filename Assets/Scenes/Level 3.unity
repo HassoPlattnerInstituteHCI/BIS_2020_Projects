@@ -808,6 +808,11 @@ PrefabInstance:
       propertyPath: SpotRadius
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6260530555286758967, guid: 52980b55982d9db4a926d3fa16253255,
+        type: 3}
+      propertyPath: dangerAudioSource
+      value: 
+      objectReference: {fileID: 1145393524}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52980b55982d9db4a926d3fa16253255, type: 3}
 --- !u!1 &963194225
@@ -855,7 +860,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 13.014608
+  orthographic size: 6.581921
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1013,6 +1018,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 939985277}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1145393524 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 137036837414712375, guid: 52980b55982d9db4a926d3fa16253255,
+    type: 3}
+  m_PrefabInstance: {fileID: 939985277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1189803887 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 826605487606422809, guid: f08d327e9fb42f94d97ba9d1d226d418,
@@ -1043,7 +1054,6 @@ MonoBehaviour:
   - {fileID: 920517842}
   upperHandle: {fileID: 0}
   lowerHandle: {fileID: 0}
-  treasureController: {fileID: 0}
 --- !u!1001 &1237496909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1231,11 +1241,22 @@ PrefabInstance:
       propertyPath: SpotRadius
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6260530555286758967, guid: 52980b55982d9db4a926d3fa16253255,
+        type: 3}
+      propertyPath: dangerAudioSource
+      value: 
+      objectReference: {fileID: 1272860247}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52980b55982d9db4a926d3fa16253255, type: 3}
 --- !u!1 &1272860244 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3921316458802807763, guid: 52980b55982d9db4a926d3fa16253255,
+    type: 3}
+  m_PrefabInstance: {fileID: 1272860243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1272860247 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 137036837414712375, guid: 52980b55982d9db4a926d3fa16253255,
     type: 3}
   m_PrefabInstance: {fileID: 1272860243}
   m_PrefabAsset: {fileID: 0}

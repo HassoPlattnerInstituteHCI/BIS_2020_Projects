@@ -75,9 +75,10 @@ namespace Stealth
             failureAudioSource.Play();
             LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
 
-            script.FreezeGameObjects();
+            
             if (SceneManager.GetActiveScene().name != "Level 5")
             {
+                script.FreezeGameObjects();
                 await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
             }
 
@@ -89,6 +90,7 @@ namespace Stealth
             }
             else
             {
+                
                 Debug.Log("ACTIVATE SWORD");
                 player.transform.GetChild(0).gameObject.SetActive(true);
             }
