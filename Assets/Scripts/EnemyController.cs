@@ -16,7 +16,8 @@ namespace Stealth
 
         public float HitPower = 10.0f;
 
-        // The enemy will patrol between these points;
+        // The enemy will patrol between these points
+        // NB: They are relative to the starting position.;
         public Vector3[] path;
         public float SpotRadius = 4.0f;
 
@@ -24,23 +25,24 @@ namespace Stealth
 
         // The part of the path the enemy is currently headed to
         private int currentPathTargetIndex = 0;
+        private Vector3 startingPosition;
         private bool spotted = false;
         SpeechOut speechOut;
         public AudioSource failureAudioSource;
         public AudioSource death;
         public AudioSource dangerAudioSource;
-        public bool canSpot = false;
         public bool frozen = true;
 
         void Start()
         {
             speechOut = new SpeechOut();
+            startingPosition = gameObject.transform.position;
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (isFrozen())
+            if (IsFrozen())
             {
                 return;
             }
@@ -51,23 +53,23 @@ namespace Stealth
                 PlayerSpotted();
             }
 
-            if (gameObject.transform.position == getCurrentTarget())
+            if (gameObject.transform.position == GetCurrentTarget())
             {
                 currentPathTargetIndex = (currentPathTargetIndex + 1) % path.Length;
             }
 
-            moveTowardsTarget();
+            MoveTowardsTarget();
         }
 
-        void moveTowardsTarget()
+        void MoveTowardsTarget()
         {
             gameObject.transform.position =
-                Vector3.MoveTowards(gameObject.transform.position, getCurrentTarget(), Time.deltaTime * speed);
+                Vector3.MoveTowards(gameObject.transform.position, GetCurrentTarget(), Time.deltaTime * speed);
         }
 
-        Vector3 getCurrentTarget()
+        Vector3 GetCurrentTarget()
         {
-            return path[currentPathTargetIndex];
+            return path[currentPathTargetIndex] + startingPosition;
         }
 
         async Task PlayerSpotted()
@@ -119,7 +121,7 @@ namespace Stealth
             gameObject.SetActive(false);
         }
 
-        public Boolean isFrozen()
+        public Boolean IsFrozen()
         {
             return frozen;
         }

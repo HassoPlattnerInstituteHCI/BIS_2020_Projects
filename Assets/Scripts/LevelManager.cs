@@ -13,7 +13,6 @@ namespace Stealth
         public GameObject currentEnemy;
         public int EnemyIndex = 0;
         public Transform playerSpawn;
-        public Transform[] enemySpawns;
         public UpperHandle upperHandle;
         public LowerHandle lowerHandle;
         public SpeechIn speechIn;
@@ -161,11 +160,6 @@ namespace Stealth
 
         public async Task SpawnEnemies()
         {
-            for (int i = 0; i < enemies.Length; i++)
-            {
-                enemies[i].transform.position = enemySpawns[i].position;
-                enemies[i].transform.rotation = enemySpawns[i].rotation;
-            }
 
             EnemyIndex = 0;
             if (enemies.Length > 0)
