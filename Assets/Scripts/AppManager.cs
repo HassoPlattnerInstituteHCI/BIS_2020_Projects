@@ -59,7 +59,7 @@ namespace dualLayouting {
         async public Task StartLevelZero()
         {
             Level level = GetComponent<Level>();
-            await audioManager.Say("Welcome to Dual Layouting. Let's design a birthday card.");
+            await audioManager.Say("Let's layout a birthday card.");
             await level.PlayIntroduction();
 
             await Task.WhenAll(new Task[] {
@@ -200,12 +200,18 @@ namespace dualLayouting {
             selectedElement.transform.position = upperHandle.GetPosition();
         }
 
+        public GameObject GetSelectedElement(){
+            return selectedElement;
+        }
+
         async public Task SelectElement(GameObject element)
         {
             isMoving = true;
             selectedElement = element; 
             await upperHandle.MoveToPosition(selectedElement.transform.position, 0.2f);
             isMoving = false;
+            
+            //selectedElement.GetComponent<LinearForceField>().onUpper = false;
         }
 
         async public Task MoveItToElement(GameObject element, string direction = "center")
@@ -249,8 +255,10 @@ namespace dualLayouting {
 
         public async Task OnFirstCollision(){
             if (!firstCollision){
-            await audioManager.Say("Looks like you created an overlap!");
-            firstCollision = true;
+                firstCollision = true;
+                await audioManager.Say("Looks like you created an overlap!");
+                await audioManager.Say("Try to feel it!");
+                await audioManager.Say("For finer layouts try \"Show Top\" for the upper edge of the shown Element");
             }
         }
     }

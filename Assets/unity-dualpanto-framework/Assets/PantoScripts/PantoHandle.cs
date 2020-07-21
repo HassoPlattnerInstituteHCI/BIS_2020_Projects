@@ -161,9 +161,7 @@ namespace DualPantoFramework
         /// </summary>
         public void ApplyForce(Vector3 direction, float strength)
         {
-            // TODO: make line correct
             Debug.Log("Applying Force!");
-            Debug.DrawLine(GameObject.Find("Panto").GetComponent<UpperHandle>().transform.position, direction * strength, Color.red, 3);
             pantoSync.ApplyForce(isUpper, direction, strength);
         }
 
