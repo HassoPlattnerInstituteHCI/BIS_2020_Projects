@@ -85,7 +85,7 @@ namespace Stealth
 
             if (SceneManager.GetActiveScene().name != "Level 5")
             {
-                await script.ResetGame();
+                await script.ResetLevel();
                 spotted = false;
             }
             else

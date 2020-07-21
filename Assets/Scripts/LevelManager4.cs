@@ -5,11 +5,7 @@ namespace Stealth
 {
     public class LevelManager4 : LevelManager
     {
-        /// <summary>
-        /// Starts a new round.
-        /// </summary>
-        /// <returns></returns>
-        override public async Task ResetGame()
+        override public async Task StartLevel()
         {
             FreezeGameObjects();
             await SpawnPlayer();

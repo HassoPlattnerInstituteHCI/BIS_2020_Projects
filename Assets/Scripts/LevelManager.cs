@@ -48,9 +48,9 @@ namespace Stealth
         {
             await Task.Delay(1000);
             RegisterColliders();
-            
+
             ActivateGameObjects();
-            await ResetGame();
+            await StartLevel();
         }
 
         void RegisterColliders()
@@ -64,11 +64,20 @@ namespace Stealth
             }
         }
 
+        abstract public Task StartLevel();
+
         /// <summary>
         /// Starts a new round.
         /// </summary>
         /// <returns></returns>
-        abstract public Task ResetGame();
+        virtual public async Task ResetLevel()
+        {
+            FreezeGameObjects();
+            await SpawnPlayer();
+            await SpawnEnemies();
+            UnfreezeGameObjects();
+            ListenToSwitch();
+        }
 
         /// <summary>
         /// Complete the level.
@@ -109,7 +118,7 @@ namespace Stealth
             else EnemyIndex = 0;
 
             currentEnemy = enemies[EnemyIndex];
-                await lowerHandle.SwitchTo(currentEnemy, 0.3f);
+            await lowerHandle.SwitchTo(currentEnemy, 0.3f);
         }
 
         public void FreezeGameObjects()
