@@ -188,6 +188,10 @@ namespace dualLayouting {
                 OnSpaceDown();
                 OnSpaceDown = () => { OnDone(); };
             }
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                Debug.Log("Pressed Enter");
+                audioManager.speechOut.Stop();
+            }
             UpdateSelectedElementPosition();
         }
 
@@ -258,7 +262,7 @@ namespace dualLayouting {
                 firstCollision = true;
                 await audioManager.Say("Looks like you created an overlap!");
                 await audioManager.Say("Try to feel it!");
-                await audioManager.Say("For finer layouts try \"Show Top\" for the upper edge of the shown Element");
+                await audioManager.Say("For more granular controls try \"Show Top\" for the upper edge of the shown Element");
             }
         }
     }

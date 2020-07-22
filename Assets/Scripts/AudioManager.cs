@@ -11,7 +11,7 @@ namespace dualLayouting {
     {
 
         private SpeechIn speechIn;
-        private SpeechOut speechOut; 
+        public SpeechOut speechOut; 
         private Action<string> onSelect;
         private Action<string> onCreate;
         Action<string> onDelete;
