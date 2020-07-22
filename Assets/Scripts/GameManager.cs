@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public bool introduceLevel = true;
     public GameObject player;
     public GameObject enemy;
-    public EnemyConfig[] enemyConfigs;
+    public CopConfig[] copConfigs;
     public Transform playerSpawn;
     public Transform enemySpawn;
     public int level = 0;
@@ -59,9 +59,9 @@ public class GameManager : MonoBehaviour
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
         speechOut = new SpeechOut();
 
-        if (level < 0 || level >= enemyConfigs.Length)
+        if (level < 0 || level >= copConfigs.Length)
         {
-            Debug.LogWarning($"Level value {level} < 0 or >= enemyConfigs.Length. Resetting to 0");
+            Debug.LogWarning($"Level value {level} < 0 or >= copConfigs.Length. Resetting to 0");
             level = 0;
         }
     }
@@ -114,7 +114,9 @@ public class GameManager : MonoBehaviour
 
         phoneBox = GameObject.Find("TelephoneBox1");   
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();        
-        telephoneSounds.startPhoneRing(phoneBox);    
+        telephoneSounds.startPhoneRing(phoneBox);  
+
+        spawnCops(1);  
         
     }
 
@@ -190,8 +192,16 @@ public class GameManager : MonoBehaviour
     public IEnumerator makeFirstWaveOfCopsArriveAfterTime(float time){
         yield return new WaitForSeconds(time);
 
+        spawnCops(1);
+    }
+
+    public void spawnCops(int num){
         GameObject copSpawn = GameObject.Find("Cop Spawn");
+
         GameObject aCop = (GameObject) Instantiate(Resources.Load("CopPrefab"), copSpawn.transform.position, Quaternion.identity);
+        aCop.GetComponent<CopLogic>().config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
+        aCop.GetComponent<CopLogic>().target = player.transform;
+
     }
 
     public async Task deleteAHole(GameObject victim){

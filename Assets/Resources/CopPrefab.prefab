@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6270007740038808549}
   - component: {fileID: 6506558233214441697}
   - component: {fileID: 6121024676692593264}
+  - component: {fileID: 929507897893318885}
+  - component: {fileID: -6333546205837571662}
   m_Layer: 0
   m_Name: CopPrefab
   m_TagString: Cop
@@ -213,3 +215,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onUpper: 0
   onLower: 1
+--- !u!114 &929507897893318885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270007740038808548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588ce500f5d812f4ab47db08800c0dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  aimbotDistance: 10
+  seekingDistance: 1
+  config: {fileID: 0}
+--- !u!195 &-6333546205837571662
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270007740038808548}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
