@@ -420,9 +420,9 @@ public class GameManager : MonoBehaviour
         Debug.Log(lowerHandle.transform.position);
         await Task.Delay(500);
         int sign;
-        float moves=Mathf.Abs((float)(skylineHeights[col]-skylineHeights[col-1]));
+        float moves=(float)(skylineHeights[col]-skylineHeights[col-1]);
         if(moves>=0) {sign=1;} else {sign=-1;}
-        for(float i=0; i<moves; i++) {
+        for(float i=0; i<Mathf.Abs(moves); i++) {
             await lowerHandle.MoveToPosition(lowerPosition.transform.position + new Vector3(0f,0f,0.5f*sign), 0.1f, shouldFreeHandle);
             await Task.Delay(500);
         }

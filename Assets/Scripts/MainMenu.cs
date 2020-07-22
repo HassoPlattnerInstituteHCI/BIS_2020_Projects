@@ -11,7 +11,7 @@ namespace Tetris {
 public class MainMenu : MonoBehaviour
 {
 
-    public Button QuitButton, OptionsButton, TutorialButton, EndlessButton, PuzzlesButton, BackButton;
+    public Button QuitButton, TutorialButton, EndlessButton;
 
     public static int highscoreOverall = 0;
     public static bool playIntro = false;
@@ -79,11 +79,13 @@ async void onRecognized(string message)
             await speechOut.Speak("Starting Highscore mode.");
             ExecuteEvents.Execute(EndlessButton.gameObject, pointer, ExecuteEvents.submitHandler);
         }
+        /*
         else if (message == "back")
         {
             await speechOut.Speak("Going back to Main Menu.");
             ExecuteEvents.Execute(BackButton.gameObject, pointer, ExecuteEvents.submitHandler);
         }
+        */
         else if (message == "quit")
         {
             await speechOut.Speak("Quitting the game. Thanks for playing.");

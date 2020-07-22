@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     public static Vector3 rightBlockRootPos;
     public static Vector3 activeBlockRootOffset;
     bool playercontrol = false;
-    bool chooseMode = true;
     bool leftBlockActive = true;
     bool placement = false;
     public bool shouldFreeHandle;
@@ -65,8 +64,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            // Simply connects the player to the upper handles position
-
         if (!playercontrol) {
                 if (Input.GetKeyDown(KeyCode.L)) {
                     onRecognized("left");
@@ -126,7 +123,7 @@ public class Player : MonoBehaviour
         }
         if(message == "confirm" && !playercontrol && !placement)    //confirm block selection
         {
-            meHandle.Free();
+            //meHandle.Free();
             await speechOut.Speak("Block picked up.");
             if(leftBlockActive) {
                 Destroy(SpawnManager.blockRight);
@@ -139,14 +136,12 @@ public class Player : MonoBehaviour
                 activeBlock = SpawnManager.blockRight; 
                 activeBlockRootOffset = rightBlockRootPos - SpawnerLeft.transform.position - new Vector3(2.5f, 0, 0);
                 }
-            
             playercontrol = true;
-            chooseMode = false; //remove this
             rotateAmount=0;
-            activeBlock.transform.position = transform.position;
+            //activeBlock.transform.position = transform.position;
+            meHandle.Free();
         }
         if(message == "rotate" && playercontrol) {
-            //await speechOut.Speak("Rotating");
             rotateAmount = Field.rotateBlock(activeBlock, activeBlockID, rotateAmount);
         }
         if(message == "trace" && !playercontrol) {
@@ -158,7 +153,6 @@ public class Player : MonoBehaviour
                 Field.audioSource.PlayOneShot(Field.BlockPlace, Field.volume);
                 placement = true;
                 playercontrol = false;
-                //await meHandle.MoveToPosition(transform.position, 0.3f, shouldFreeHandle);
             } else {await speechOut.Speak("You cannot place the block here.");}
         }
         if(message == "confirm" && placement)       //confirming placement location
