@@ -80,11 +80,15 @@ public class BatLogic : MonoBehaviour
             gameManager.spawnAHoles(1);
             gameManager.hitCount++;
             Debug.Log("hitcount: " + gameManager.hitCount);
+
+            //Calculate Cash/Game Score
             if(gameManager.hitCount < 5) gameManager.cash++;
             else if(gameManager.hitCount < 10) gameManager.cash+=2;
             else if(gameManager.hitCount < 30) gameManager.cash+=5;
             else gameManager.cash+=10;
             Debug.Log("Cash: " + gameManager.cash);
+
+            
             if(gameManager.currentLevel == 4){
                 gameManager.currentObjectiveReached = true;
             }
