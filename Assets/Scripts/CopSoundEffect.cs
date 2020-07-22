@@ -13,13 +13,11 @@ public class CopSoundEffect : MonoBehaviour
 
     public AudioClip carDoorOpenCloses;
 
+    public AudioClip[] radioList;
+
     void Start()
     {
         gameManager = (GameManager) FindObjectOfType(typeof(GameManager));        
-        //We dont need to get the audiosources here because we assign them directly in unity as its otherwise complicates with multiple sources
-        //audioSource = GetComponents<AudioSource>();
-        //audioSourcePolice = gameObject.AddComponent<AudioSource>();
-
 
     }
 
@@ -37,6 +35,16 @@ public class CopSoundEffect : MonoBehaviour
         audioSource.loop = false;
         audioSource = GetComponent<AudioSource>();
         audioSource.PlayOneShot(carDoorOpenCloses);
+    }
+
+    public void startCopsRadioTalk(){
+        audioSource.maxDistance = 5;
+        audioSource.loop = true;
+
+        //Make This nonloop random
+        audioSource.clip = radioList[0];
+        audioSource.Play();
+
     }
 
 

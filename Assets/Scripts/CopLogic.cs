@@ -26,33 +26,36 @@ public class CopLogic : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = stopDistance;
-        player = GameObject.Find("Player");
 
         copSounds = GetComponent<CopSoundEffect>();
         copSounds.playCopCarArrived();
 
     }
 
-    void OnEnable()
+    void OnEnable()  
     {   
+
+        player = GameObject.Find("Player");
+        config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
         copSounds = GetComponent<CopSoundEffect>();
         copSounds.playCopCarArrived();
 
         //Makes Cop Start going for Player only after he left his car
-        StartCoroutine(waiter());
+        StartCoroutine(waiter(2));
         
+        
+    }
+
+    IEnumerator waiter(int time){
+        yield return new WaitForSeconds(time);
+        target = player.transform;
+        copSounds.startCopsRadioTalk();
+
         if (config.attackPlayerAtStart)
         {
             lastSeenPosition = target.position;
             foundPlayer = true;
         }
-    }
-
-    IEnumerator waiter(){
-        yield return new WaitForSeconds(2);
-        player = GameObject.Find("Player");
-        config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
-        target = player.transform;
     }
 
     void Update()
