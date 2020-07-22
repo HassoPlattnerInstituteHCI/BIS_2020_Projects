@@ -9,6 +9,7 @@ TagManager:
   - TelephoneBox2
   - safehouse
   - AHole
+  - Cop
   layers:
   - Default
   - TransparentFX
