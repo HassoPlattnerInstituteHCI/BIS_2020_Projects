@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6121024676692593264}
   - component: {fileID: 929507897893318885}
   - component: {fileID: -6333546205837571662}
+  - component: {fileID: -987506451073331679}
   m_Layer: 0
   m_Name: CopPrefab
   m_TagString: Cop
@@ -107,7 +108,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -117,7 +118,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0.16
   MinDistance: 1
-  MaxDistance: 2.5
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -255,3 +256,17 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-987506451073331679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270007740038808548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa09ff297721edd41984d6937e6203c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 6506558233214441697}
+  carDoorOpenCloses: {fileID: 8300000, guid: 881e44d0119e7f448a635b33cce34346, type: 3}

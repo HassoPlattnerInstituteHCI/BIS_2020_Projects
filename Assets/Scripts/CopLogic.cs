@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using DualPantoFramework;
+using System.Collections;
 
 public class CopLogic : MonoBehaviour
 {
@@ -17,27 +18,41 @@ public class CopLogic : MonoBehaviour
 
     GameObject player;
 
+    CopSoundEffect copSounds;
+
+    
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = stopDistance;
         player = GameObject.Find("Player");
 
-        config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
-        target = player.transform;
+        copSounds = GetComponent<CopSoundEffect>();
+        copSounds.playCopCarArrived();
+
     }
 
     void OnEnable()
     {   
-        config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
-        target = player.transform;
+        copSounds = GetComponent<CopSoundEffect>();
+        copSounds.playCopCarArrived();
+
+        //Makes Cop Start going for Player only after he left his car
+        StartCoroutine(waiter());
         
         if (config.attackPlayerAtStart)
         {
             lastSeenPosition = target.position;
             foundPlayer = true;
         }
-        GetComponent<Health>().maxHealth = config.health;
+    }
+
+    IEnumerator waiter(){
+        yield return new WaitForSeconds(2);
+        player = GameObject.Find("Player");
+        config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
+        target = player.transform;
     }
 
     void Update()

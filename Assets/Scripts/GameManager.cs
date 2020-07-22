@@ -192,6 +192,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator makeFirstWaveOfCopsArriveAfterTime(float time){
         yield return new WaitForSeconds(time);
 
+        playerSounds.StopPolicePlayback();
         spawnCops(1);
     }
 
