@@ -4,13 +4,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using DualPantoFramework;
+using System.Collections;
 
-////TODO Level 5
-//// HitCount + reset in safehouse
-//Cashcount
-/// Danny talks, explains level
-// on 4th hit, hearbeat start
-//on 5th hit,sirens start, more cash for hits
+////TODO Level 6
+//// DONE Make 1 Cop Spawn after certain time
+// Make Cops go in direction of player
+/// Make Cop sounds including arrival sound (Door closing, Stops sirens), Funkgeräte talk in 3D, Festnahmetalk in 3D
+
 
 
 public class GameManager : MonoBehaviour
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public bool introduceLevel = true;
     public GameObject player;
     public GameObject enemy;
-    public EnemyConfig[] enemyConfigs;
+    public CopConfig[] copConfigs;
     public Transform playerSpawn;
     public Transform enemySpawn;
     public int level = 0;
@@ -59,9 +59,9 @@ public class GameManager : MonoBehaviour
         speechIn = new SpeechIn(onRecognized, commands.Keys.ToArray());
         speechOut = new SpeechOut();
 
-        if (level < 0 || level >= enemyConfigs.Length)
+        if (level < 0 || level >= copConfigs.Length)
         {
-            Debug.LogWarning($"Level value {level} < 0 or >= enemyConfigs.Length. Resetting to 0");
+            Debug.LogWarning($"Level value {level} < 0 or >= copConfigs.Length. Resetting to 0");
             level = 0;
         }
     }
@@ -116,7 +116,9 @@ public class GameManager : MonoBehaviour
         //playerSpawn.position = safeHouse.transform.position;
         phoneBox = GameObject.Find("TelephoneBox1");   
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();        
-        telephoneSounds.startPhoneRing(phoneBox);    
+        telephoneSounds.startPhoneRing(phoneBox);  
+
+        spawnCops(1);  
         
     }
 
@@ -184,6 +186,22 @@ public class GameManager : MonoBehaviour
             aHoleSounds.startBlaBla();
             spawnUsed[rInt] = 1;
         }
+    }
+
+    public IEnumerator makeFirstWaveOfCopsArriveAfterTime(float time){
+        yield return new WaitForSeconds(time);
+
+        playerSounds.StopPolicePlayback();
+        spawnCops(1);
+    }
+
+    public void spawnCops(int num){
+        GameObject copSpawn = GameObject.Find("Cop Spawn");
+
+        GameObject aCop = (GameObject) Instantiate(Resources.Load("CopPrefab"), copSpawn.transform.position, Quaternion.identity);
+        
+        
+
     }
 
     public async Task deleteAHole(GameObject victim){

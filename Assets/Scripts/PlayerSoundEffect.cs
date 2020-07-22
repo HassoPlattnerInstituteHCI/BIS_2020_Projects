@@ -2,6 +2,7 @@ using UnityEngine;
 using SpeechIO;
 using System.Threading.Tasks;
 using DualPantoFramework;
+using System.Collections;
 
 public class PlayerSoundEffect : MonoBehaviour
 {
@@ -66,6 +67,7 @@ public class PlayerSoundEffect : MonoBehaviour
             transitionMusicIsPlaying = false;
             startKillingStreakMusic();
             startSirens();
+            StartCoroutine(gameManager.makeFirstWaveOfCopsArriveAfterTime(5));
             if(gameManager.currentLevel == 5){
                 gameManager.currentObjectiveReached = true;
             }
@@ -73,6 +75,7 @@ public class PlayerSoundEffect : MonoBehaviour
     
         
     }
+
 
     public void playWasted(){
 
@@ -143,6 +146,8 @@ public class PlayerSoundEffect : MonoBehaviour
     {
         audioSource.Stop();
     }
+
+    
     public void StopPolicePlayback()
     {
         audioSourcePolice.Stop();
