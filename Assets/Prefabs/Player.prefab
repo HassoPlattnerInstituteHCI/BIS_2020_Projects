@@ -19,9 +19,10 @@ GameObject:
   - component: {fileID: 8486844978483602216}
   - component: {fileID: 6418556380710416389}
   - component: {fileID: 6893120513946921676}
+  - component: {fileID: 2396865051044367334}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,10 +293,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  sword: {fileID: 0}
+  sword: {fileID: 1548720563579268840}
   frozen: 0
   StepsLeftAudioSource: {fileID: 6418556380710416389}
   StepsRightAudioSource: {fileID: 8486844978483602216}
+  health: 100
+  HitPower: 10
 --- !u!81 &1401097167766281587
 AudioListener:
   m_ObjectHideFlags: 0
@@ -525,6 +528,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2396865051044367334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401097167766281578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 1
+  onLower: 0
 --- !u!1 &1548720563579268840
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,11 +558,11 @@ GameObject:
   - component: {fileID: 3937587992640151324}
   m_Layer: 8
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Sword
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1619261879542914266
 Transform:
   m_ObjectHideFlags: 0
@@ -554,8 +571,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1548720563579268840}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0.5}
-  m_LocalScale: {x: 0.1, y: 0.01, z: 2}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.956}
+  m_LocalScale: {x: 0.1, y: 0.01, z: 1}
   m_Children: []
   m_Father: {fileID: 1401097167766281581}
   m_RootOrder: 0
@@ -632,6 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit: {fileID: 3937587992640151324}
+  targetType: 1
 --- !u!82 &3937587992640151324
 AudioSource:
   m_ObjectHideFlags: 0

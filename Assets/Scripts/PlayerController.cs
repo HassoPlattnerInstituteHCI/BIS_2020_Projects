@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Packages.Rider.Editor;
+using SpeechIO;
 using UnityEngine;
 
 namespace Stealth
@@ -16,10 +17,14 @@ namespace Stealth
         public bool frozen;
         private AudioListener audioListener;
         public AudioSource StepsLeftAudioSource;
+        SpeechOut speechOut;
         public AudioSource StepsRightAudioSource;
 
         private bool leftStep = true;
         private Vector3 lastStepPosition;
+        public float health = 100.0f;
+
+        public float HitPower = 10.0f;
 
         // Start is called before the first frame update
         void Start()
@@ -27,6 +32,7 @@ namespace Stealth
             playerRb = GetComponent<Rigidbody>();
             upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
             audioListener = GetComponent<AudioListener>();
+            speechOut = new SpeechOut();
         }
 
         public void StartFighting()
@@ -103,6 +109,30 @@ namespace Stealth
                 lastStepPosition = gameObject.transform.position;
                 leftStep = !leftStep;
             }
+        }
+        public void TakeHit()
+        {
+            if (health > 0)
+            {
+                health = health - HitPower;
+                Debug.Log("Player health is " + health);
+            }
+
+            if (health == 0)
+            {
+                PlayerDeath();
+            }
+        }
+        async void PlayerDeath()
+        {
+            LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
+            script.FreezeGameObjects();
+            await speechOut.Speak("You are dead. Try again.");
+            //sword.SetActive(false);
+            health = 100;
+            await script.ResetLevel();
+            
+            
         }
     }
 }

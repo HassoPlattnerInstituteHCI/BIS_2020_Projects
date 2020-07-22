@@ -164,6 +164,11 @@ namespace Stealth
             EnemyIndex = 0;
             if (enemies.Length > 0)
             {
+                foreach(GameObject en in enemies)
+                {
+                    en.GetComponent<EnemyController>().ResetPosition();
+                 
+                }
                 currentEnemy = enemies[EnemyIndex];
                 await lowerHandle.SwitchTo(currentEnemy, 0.3f);
             }

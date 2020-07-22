@@ -15,6 +15,7 @@ namespace Stealth
         public float health = 100.0f;
 
         public float HitPower = 10.0f;
+        public int rotateSpeed = 60;
 
         // The enemy will patrol between these points
         // NB: They are relative to the starting position.;
@@ -32,6 +33,8 @@ namespace Stealth
         public AudioSource death;
         public AudioSource dangerAudioSource;
         public bool frozen = true;
+        public GameObject sword;
+        private bool fight = false;
 
         void Start()
         {
@@ -47,18 +50,22 @@ namespace Stealth
                 return;
             }
 
-            if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= SpotRadius && !spotted)
+            if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= SpotRadius && !spotted && !fight)
             {
                 spotted = true;
                 PlayerSpotted();
             }
 
-            if (gameObject.transform.position == GetCurrentTarget())
+            if (gameObject.transform.position == GetCurrentTarget() && !fight)
             {
                 currentPathTargetIndex = (currentPathTargetIndex + 1) % path.Length;
             }
 
             MoveTowardsTarget();
+            if (fight)
+            {
+                RotateWithSword();
+            }
         }
 
         void MoveTowardsTarget()
@@ -66,10 +73,25 @@ namespace Stealth
             gameObject.transform.position =
                 Vector3.MoveTowards(gameObject.transform.position, GetCurrentTarget(), Time.deltaTime * speed);
         }
+        void RotateWithSword()
+        {
+            Vector3 rot = new Vector3(0, rotateSpeed * Time.deltaTime, 0);
+            gameObject.transform.Rotate(rot);
+        }
 
         Vector3 GetCurrentTarget()
         {
-            return path[currentPathTargetIndex] + startingPosition;
+            if (fight)
+            {
+                if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= 1.0f)
+                {
+                    return transform.position;
+                }
+                return player.transform.position;
+            }
+
+            else
+                return path[currentPathTargetIndex] + startingPosition;
         }
 
         async Task PlayerSpotted()
@@ -92,8 +114,10 @@ namespace Stealth
             }
             else
             {
-                
+                spotted = false;
                 Debug.Log("ACTIVATE SWORD");
+                sword.SetActive(true);
+                fight = true;
                 player.transform.GetChild(0).gameObject.SetActive(true);
             }
         }
@@ -114,8 +138,11 @@ namespace Stealth
 
         async Task EnemyDeath()
         {
+            
+            fight = false;
+            sword.SetActive(false);
             Debug.Log("death");
-            GameObject.Find("Sword").SetActive(false);
+            //player.transform.GetChild(0).gameObject.SetActive(false);
             death.Play();
             await speechOut.Speak(gameObject.name + " has died");
             gameObject.SetActive(false);
@@ -137,6 +164,14 @@ namespace Stealth
             frozen = false;
             gameObject.SetActive(true);
             dangerAudioSource.enabled = true;
+        }
+        public void ResetPosition()
+        {
+            sword.SetActive(false);
+            fight = false;
+            health = 100;
+            if(startingPosition!=null)
+            gameObject.transform.position = startingPosition;
         }
     }
 }
