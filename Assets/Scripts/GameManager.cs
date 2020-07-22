@@ -87,7 +87,8 @@ public class GameManager : MonoBehaviour
         bat = GameObject.Find("Bat");
         bat.SetActive(false);
         
-        await speechOut.Speak("Use the upper handle to move your character. Spawning Player");        
+        await speechOut.Speak("Use the upper handle to move your character. Spawning Player");
+        //playerSpawn.position = safeHouse.transform.position;       
         await ResetGame();
         player = GameObject.Find("Player");
         playerSounds = player.GetComponent<PlayerSoundEffect>();
@@ -112,6 +113,7 @@ public class GameManager : MonoBehaviour
         
         transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
 
+        //playerSpawn.position = safeHouse.transform.position;
         phoneBox = GameObject.Find("TelephoneBox1");   
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();        
         telephoneSounds.startPhoneRing(phoneBox);    
@@ -145,9 +147,6 @@ public class GameManager : MonoBehaviour
         playerSpawn.position = safeHouse.transform.position;
 
         spawnAHoles(5);
-
-         
-
 
     }
 
