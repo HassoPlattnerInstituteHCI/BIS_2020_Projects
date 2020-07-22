@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
             leftBlockActive = true;
             activeBlockID = SpawnManager.leftBlock;
             transform.position = leftBlockRootPos;
-            await meHandle.MoveToPosition(transform.position, 0.3f, shouldFreeHandle);
+            //await meHandle.MoveToPosition(transform.position, 0.3f, shouldFreeHandle);
             //TODO: Sound
             await Manager.sayBlockName(SpawnManager.leftBlock);
             Manager.blockPlaced=false;
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
             leftBlockActive = false;
             activeBlockID = SpawnManager.rightBlock;
             transform.position = rightBlockRootPos;
-            await meHandle.MoveToPosition(transform.position, 0.3f, shouldFreeHandle);
+            //await meHandle.MoveToPosition(transform.position, 0.3f, shouldFreeHandle);
             //TODO: Sound
             await Manager.sayBlockName(SpawnManager.rightBlock);
             Manager.blockPlaced=false;
@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
         if(message == "confirm" && !playercontrol && !placement)    //confirm block selection
         {
             //meHandle.Free();
+            await meHandle.MoveToPosition(transform.position, 0.1f, shouldFreeHandle);
             await speechOut.Speak("Block picked up.");
             if(leftBlockActive) {
                 Destroy(SpawnManager.blockRight);
@@ -167,7 +168,7 @@ public class Player : MonoBehaviour
                 SpawnManager.spawnWavePls = true;
                 transform.position = SpawnerLeft.transform.position;
                 await Task.Delay(500);
-                await meHandle.MoveToPosition(leftBlockRootPos, 0.3f, shouldFreeHandle);
+                //await meHandle.MoveToPosition(leftBlockRootPos, 0.3f, shouldFreeHandle);
                 //Initializes next wave on the Me-Handle immediately
                 onRecognized("left");
                 await Task.Delay(1000);

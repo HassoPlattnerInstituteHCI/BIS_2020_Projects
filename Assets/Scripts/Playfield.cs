@@ -14,7 +14,7 @@ public class Playfield : MonoBehaviour
     public bool shouldFreeHandle;
 
     public static int offsetX = 2;
-    public static int offsetZ = 14;
+    public static int offsetZ = 13;
 
     static SpeechOut speechOut;
     public static int w = 10;
@@ -102,9 +102,9 @@ public class Playfield : MonoBehaviour
 
     //for every Vector3 of the new Position, check if that is already occupied or out of bounds
     public bool notIntersecting(Vector3[] position) {
-        foreach(Vector3 child in position) {
-            float xPosRelative = (Mathf.Round(child.x*2f)/2f);
-            float zPosRelative = (Mathf.Round(child.z*2f)/2f);
+        for(int i=0; i<4; i++) {
+            float xPosRelative = (Mathf.Round(position[i].x*2f)/2f);
+            float zPosRelative = (Mathf.Round(position[i].z*2f)/2f);
             int column=(int)(2*(xPosRelative+offsetX));
             int row=(int)(2*(zPosRelative+offsetZ));
             if(checkPosition(column, row)) {

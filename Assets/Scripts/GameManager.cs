@@ -312,84 +312,122 @@ public class GameManager : MonoBehaviour
                 await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-0.5f,0f,0f), 0.1f, shouldFreeHandle);
                 await Task.Delay(1000);
-                
-                /*
-                await Task.Delay(1000);
-                await upperHandle.MoveToPosition(new Vector3(-2f,0f,-14f), 0.2f, shouldFreeHandle);
-                await Task.Delay(1000);
-                await upperHandle.MoveToPosition(new Vector3(-2f,0f,-10f), 0.2f, shouldFreeHandle);
-                await Task.Delay(1000);
-                await upperHandle.MoveToPosition(new Vector3(0f,0f,-10f), 0.2f, shouldFreeHandle);
-                await Task.Delay(1000);
-                await upperHandle.MoveToPosition(new Vector3(0f,0f,-14f), 0.2f, shouldFreeHandle);
-                await Task.Delay(1000);
-                await upperHandle.MoveToPosition(new Vector3(-2f,0f,-14f), 0.2f, shouldFreeHandle);
-                await Task.Delay(1000);
-                */
                 break;
             case 1:
             await speechOut.Speak("Block L");
+            await Task.Delay(1000);
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
+            await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-1f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 break;
             case 2:
             await speechOut.Speak("Block Reverse L");
+            await Task.Delay(1000);
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-1.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 break;
             case 3: 
             await speechOut.Speak("Block O");
+            await Task.Delay(1000);
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(1f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-1f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 break;
             case 4:
             await speechOut.Speak("Block S");
+            await Task.Delay(1000);
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(1f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 break;
             case 5:
             await speechOut.Speak("Block Z");
+            await Task.Delay(1000);
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.25f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,1f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-1f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 break;
             case 6:
             await speechOut.Speak("Block T");
+            await Task.Delay(1000);
             await upperHandle.MoveToPosition(playerPosition.transform.position + new Vector3(-0.75f, 0f, -0.25f), 0.1f, shouldFreeHandle); //To correct global position
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(0f,0f,-0.5f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 await upperHandle.MoveToPosition(upperPosition.transform.position + new Vector3(-1.5f,0f,0f), 0.1f, shouldFreeHandle);
+                await Task.Delay(1000);
                 break;
         }
         await upperHandle.MoveToPosition(playerPosition.transform.position, 0.1f, shouldFreeHandle);
@@ -415,7 +453,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //We have now filled the Array with the heights in each column. Time to make the Panto move
-        await lowerHandle.MoveToPosition(new Vector3(-2.25f,0f,-14.25f), 0.1f, shouldFreeHandle); //Moves handle to lower left corner of the level
+        await lowerHandle.MoveToPosition(new Vector3(-2.25f,0f,-13.25f), 0.1f, shouldFreeHandle); //Moves handle to lower left corner of the level
         for(int col=1; col<11; col++) { //Starting at 1 since skylineHeights[0] is our default value for the first subtraction below
         Debug.Log(lowerHandle.transform.position);
         await Task.Delay(500);
@@ -428,8 +466,10 @@ public class GameManager : MonoBehaviour
         }
             await lowerHandle.MoveToPosition(lowerPosition.transform.position + new Vector3(0.5f,0f,0f), 0.1f, shouldFreeHandle);
         }
-        await Task.Delay(500);
-        await lowerHandle.MoveToPosition(new Vector3(2.75f,0f,-14.25f), 0.1f, shouldFreeHandle);
+        for(float i=0; i<(float)(skylineHeights[10]); i++) {
+            await Task.Delay(500);
+            await lowerHandle.MoveToPosition(lowerPosition.transform.position + new Vector3(0f,0f,-0.5f), 0.1f, shouldFreeHandle);
+        }
         EnableColliders();
     }
 
