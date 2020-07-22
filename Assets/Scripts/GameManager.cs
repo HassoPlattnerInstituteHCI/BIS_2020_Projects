@@ -199,8 +199,8 @@ public class GameManager : MonoBehaviour
         GameObject copSpawn = GameObject.Find("Cop Spawn");
 
         GameObject aCop = (GameObject) Instantiate(Resources.Load("CopPrefab"), copSpawn.transform.position, Quaternion.identity);
-        aCop.GetComponent<CopLogic>().config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
-        aCop.GetComponent<CopLogic>().target = player.transform;
+        
+        
 
     }
 

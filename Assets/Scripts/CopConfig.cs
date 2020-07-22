@@ -9,10 +9,10 @@ using DualPantoFramework;
 public class CopConfig : ScriptableObject
 {
     public int health = 100;
-    public float speed = 0.1f;
+    public float speed = 0.001f;
     public bool CSGoPlayer = true;
-    public float turnSpeed = 1;
-    public float randomStepSpeed = 1;
+    public float turnSpeed = 0.1f;
+    public float randomStepSpeed = 0.01f;
     public float fieldOfView = 30;
     public float timeTillSeek = 2f;
     public float inaccuracy = 0.2f;

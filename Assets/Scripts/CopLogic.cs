@@ -7,8 +7,7 @@ public class CopLogic : MonoBehaviour
 {
     public Transform target;
     public LayerMask layerMask;
-    public float aimbotDistance = 10f;
-    public float seekingDistance = 1f;
+    public float stopDistance = 10;
     public CopConfig config;
 
     bool foundPlayer = false;
@@ -16,14 +15,23 @@ public class CopLogic : MonoBehaviour
     Vector3 lastSeenPosition;
     NavMeshAgent agent;
 
+    GameObject player;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = config.CSGoPlayer ? aimbotDistance : seekingDistance;
+        agent.stoppingDistance = stopDistance;
+        player = GameObject.Find("Player");
+
+        config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
+        target = player.transform;
     }
 
     void OnEnable()
-    {
+    {   
+        config = (CopConfig) ScriptableObject.CreateInstance("CopConfig");
+        target = player.transform;
+        
         if (config.attackPlayerAtStart)
         {
             lastSeenPosition = target.position;
