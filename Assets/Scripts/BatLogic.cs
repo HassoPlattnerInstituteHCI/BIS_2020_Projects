@@ -103,7 +103,7 @@ public class BatLogic : MonoBehaviour
 
         }
 
-        if(collider1.CompareTag("Cop")){
+        if(collider1.CompareTag("Cop") && collider1.GetType() == typeof(BoxCollider)){
             cop = collider1.gameObject;
             copSounds = cop.GetComponent<CopSoundEffect>();
             copSounds.playCopHit();
@@ -116,7 +116,7 @@ public class BatLogic : MonoBehaviour
         if(collider1.CompareTag("AHole")){
             gameManager.deleteAHole(collider1.gameObject);
         }
-        if(collider1.CompareTag("Cop")){
+        if(collider1.CompareTag("Cop") && collider1.GetType() == typeof(BoxCollider)){
             collider1.GetComponent<CopLogic>().healthLeft -= 1;
         }
     }
