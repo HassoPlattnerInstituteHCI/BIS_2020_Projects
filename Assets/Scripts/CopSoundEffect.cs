@@ -15,6 +15,8 @@ public class CopSoundEffect : MonoBehaviour
 
     public AudioClip[] radioList;
 
+    public bool shouldPlayRadio;
+
     void Start()
     {
         gameManager = (GameManager) FindObjectOfType(typeof(GameManager));        
@@ -39,12 +41,26 @@ public class CopSoundEffect : MonoBehaviour
 
     public void startCopsRadioTalk(){
         audioSource.maxDistance = 5;
-        audioSource.loop = true;
+        shouldPlayRadio = true;
+        StartCoroutine("PlayRandom");
+        
 
-        //Make This nonloop random
-        audioSource.clip = radioList[0];
-        audioSource.Play();
+    }
 
+    IEnumerator PlayRandom(){
+
+        while(shouldPlayRadio){
+            int radioToPlay = Random.Range(0, radioList.Length);
+            AudioClip clip = radioList[radioToPlay];
+            audioSource.PlayOneShot(clip);
+            yield return new WaitForSeconds(clip.length);
+        }        
+
+    }
+
+    public void stopRadio(){
+        shouldPlayRadio = false;
+        audioSource.Stop();        
     }
 
 
