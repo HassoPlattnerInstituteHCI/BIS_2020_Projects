@@ -199,8 +199,7 @@ public class GameManager : MonoBehaviour
         GameObject copSpawn = GameObject.Find("Cop Spawn");
 
         GameObject aCop = (GameObject) Instantiate(Resources.Load("CopPrefab"), copSpawn.transform.position, Quaternion.identity);
-        
-        
+               
 
     }
 
@@ -213,9 +212,7 @@ public class GameManager : MonoBehaviour
         }
         spawnUsed[pos] = 0;
         
-    }
-
-    
+    }  
 
     
 
