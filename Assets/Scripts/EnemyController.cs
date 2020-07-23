@@ -132,6 +132,7 @@ namespace Stealth
 
             if (health == 0)
             {
+                health -= HitPower;
                 EnemyDeath();
             }
         }
