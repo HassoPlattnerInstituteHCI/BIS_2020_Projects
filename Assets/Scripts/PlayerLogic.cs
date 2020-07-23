@@ -9,7 +9,8 @@ public class PlayerLogic : MonoBehaviour
 
     AudioSource audioSource;
     public AudioClip heartbeatClip;
-
+    public float timeLeft = 4;
+    public bool countdown = false;
     public int startBPM = 60;
     public int endBPM = 220;
     float bpmCoefficient;
@@ -44,6 +45,9 @@ public class PlayerLogic : MonoBehaviour
     {
         // Simply connects the player to the upper handles position
         transform.position = upperHandle.HandlePosition(transform.position);
+
+        if(countdown) timeLeft -= Time.deltaTime;
+        if(timeLeft <= 0) playerDies();
 
         if (health.healthPoints > 0 && health.healthPoints <= 2 * health.maxHealth / 3)
         {
@@ -108,11 +112,7 @@ public class PlayerLogic : MonoBehaviour
             
 
         if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
-            playerSounds.playWasted();
-            gameManager.currentObjectiveReached = false;
-            playerSounds.StopPolicePlayback();
-            playerSounds.startHitZeroMusic();
-            gameManager.ResetGame();
+            playerDies();
         } 
         if(collider1.CompareTag("safehouse")){
             gameManager.hitCount = 0;
@@ -121,5 +121,23 @@ public class PlayerLogic : MonoBehaviour
             Debug.Log("hitcount: " + gameManager.hitCount);
             //police should disappear
         }
+        if(collider1.CompareTag("Cop")){   //player should die when staying in the radius of the cop
+            countdown = true;
+        } 
+    }
+
+    void OnTriggerLeave(Collider collider1){
+        if(collider1.CompareTag("Cop")){   
+            countdown = false;
+            timeLeft = 4;
+        } 
+    }
+
+    public void playerDies(){
+        playerSounds.playWasted();
+        gameManager.currentObjectiveReached = false;
+        playerSounds.StopPolicePlayback();
+        playerSounds.startHitZeroMusic();
+        gameManager.ResetGame();
     }
 }
