@@ -75,8 +75,9 @@ public class CopLogic : MonoBehaviour
             playersounds.playCopTurnsCash();
             player.GetComponent<PlayerLogic>().resetTimer();
             gameManager.copsKilled += 1;
-            gameManager.cash += 20*(int)(1 + gameManager.copsKilled*0.5 + gameManager.hitCount*0.1);
+            gameManager.cash += (int)(20*(1 + gameManager.copsKilled*0.5 + gameManager.hitCount*0.1));
             Debug.Log("Cash: " + gameManager.cash);
+            gameManager.makeWaveOfCopsArriveAfterTime(5.0f, 2);
         }
         if (healthLeft < 3) Debug.Log(healthLeft + " cop health left");
     }
