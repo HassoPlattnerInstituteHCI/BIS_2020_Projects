@@ -302,9 +302,16 @@ public class Playfield : MonoBehaviour
             GameObject child = currentRow.transform.GetChild(i).gameObject;
             child.transform.parent = null;
             
-            child.GetComponent<PantoBoxCollider>().Disable();
-            child.GetComponent<PantoBoxCollider>().Remove();
+            //child.GetComponent<PantoBoxCollider>().Disable();
+            //child.GetComponent<PantoBoxCollider>().Remove();
             Destroy(child.gameObject);
+            
+        }
+        allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().Remove();
+        if (allRowsParent.transform.GetChild(0).transform.childCount > 0)
+        {
+            allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().CreateObstacle();
+            allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().Enable();
         }
     }
 
@@ -360,12 +367,18 @@ public class Playfield : MonoBehaviour
             column = (int)(2 * (xPosRelative+offsetX));
             row = (int)(2 * (zPosRelative+offsetZ));
             updateTagName(column, row, block.transform.GetChild(i));
-            block.transform.GetChild(i).gameObject.GetComponent<PantoBoxCollider>().CreateObstacle();
-            block.transform.GetChild(i).gameObject.GetComponent<PantoBoxCollider>().Enable();
+            //block.transform.GetChild(i).gameObject.GetComponent<PantoBoxCollider>().CreateObstacle();
+            //block.transform.GetChild(i).gameObject.GetComponent<PantoBoxCollider>().Enable();
             parentRow = GameObject.Find("Row"+row);
             block.transform.GetChild(i).transform.SetParent(parentRow.transform);            
         }
         Destroy(block);
+        allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().Remove();
+        if (allRowsParent.transform.GetChild(0).transform.childCount >0)
+        { 
+            allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().CreateObstacle();
+            allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().Enable();
+        }
     }
 
     //is called when the player attempts to place a block. Rounds the coordinates of all children (except rotater) and checks whether or not there already is a block in 

@@ -17,11 +17,12 @@ public class SpawnManager : MonoBehaviour
     public static GameObject blockRight;
     public GameObject[] skylines;
     public GameObject[] groups;
+    public static GameObject allRowsParent;
 
-    // Start is called before the first frame update
-    void Start()
+        // Start is called before the first frame update
+        void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -143,6 +144,7 @@ public class SpawnManager : MonoBehaviour
             case 5: Player.rightBlockRootPos = blockRight.transform.position + new Vector3(0, 0, 0.5f);
                     break;
         }
+        
         spawnIntroPls = false;
     }
 }

@@ -177,8 +177,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Highscore
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -284,6 +284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 156252655}
+  - component: {fileID: 156252656}
   m_Layer: 0
   m_Name: AllRows
   m_TagString: Untagged
@@ -323,6 +324,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &156252656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156252654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c40145e82032241a8ca3f585dd118f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 1
+  onLower: 1
 --- !u!1 &170067878
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,8 +425,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Your score
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -637,7 +652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   onUpper: 1
   onLower: 1
 --- !u!65 &362013966
@@ -879,7 +893,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: debug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
@@ -1101,7 +1115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   onUpper: 1
   onLower: 1
 --- !u!65 &766424123
@@ -1387,8 +1400,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wave
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1775,10 +1788,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skylines:
-  - {fileID: 8098386472531645295, guid: 5e9cbf540ae2aa747af2a19046ee5209, type: 3}
-  - {fileID: 1949996302861137105, guid: e37450e0352bf35429388c491438ac91, type: 3}
-  - {fileID: 7832582475455690678, guid: 0893bd7fc374bd14b904e282fbd9f41b, type: 3}
-  - {fileID: 5082102045875885233, guid: 3dfec65766ffc5941810dd115ca92742, type: 3}
+  - {fileID: 8098386472531645295, guid: cd9d1b8888f9c5b4aa1582912904830d, type: 3}
+  - {fileID: 1949996302861137105, guid: 21651b3c5d4ec8848977cbe43574a47c, type: 3}
+  - {fileID: 7832582475455690678, guid: 15a7656aa58bae54d8f7916da534aea6, type: 3}
+  - {fileID: 5082102045875885233, guid: 36e3f65ef038e6249b4f667a9f9ddb21, type: 3}
   groups:
   - {fileID: 1776210040655155148, guid: ff997ce41a1338a44bc4788ec2f4f611, type: 3}
   - {fileID: 521779287909189652, guid: ec9d258ea3d0a8b49acf56181d5ad27f, type: 3}
@@ -1995,19 +2008,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1197761968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2618b99992850a3438744ef0f571121d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d2760af43167834fbcc8aed305e49b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shouldFreeHandle: 0
-  RowClear: {fileID: 8300000, guid: a20a8323f313f9349b168d09abd6bcb6, type: 3}
-  LevelClear: {fileID: 8300000, guid: 26ffb135e4e811644b2cd7ef82662c8e, type: 3}
-  LevelFail: {fileID: 8300000, guid: 02bf692c6695f4f4381024c8a66a8847, type: 3}
-  BlockPlace: {fileID: 8300000, guid: c0d2b6eb09a0d274d9ed895405ff8990, type: 3}
-  BlockRotate: {fileID: 8300000, guid: 68c6c76d86d176242b9e7dca3b747014, type: 3}
-  BlockMove: {fileID: 8300000, guid: 64d334d0cb20b8642bc3e9f2cc934588, type: 3}
-  MovementBlocked: {fileID: 8300000, guid: 2330e43e826badb468db788cef38a969, type: 3}
-  PlacementAbort: {fileID: 8300000, guid: e28d1acf53a87f342a73f78a65910859, type: 3}
-  ConfirmPlacement: {fileID: 8300000, guid: ff803d576f3f2e54891fc1f8141f6e8c, type: 3}
+  RowClear: {fileID: 0}
+  LevelClear: {fileID: 0}
+  LevelFail: {fileID: 0}
+  BlockPlace: {fileID: 0}
+  BlockRotate: {fileID: 0}
+  BlockMove: {fileID: 0}
+  MovementBlocked: {fileID: 0}
+  PlacementAbort: {fileID: 0}
+  ConfirmPlacement: {fileID: 0}
   audioSource: {fileID: 1197761973}
   volume: 0.5
 --- !u!82 &1197761973
@@ -2182,7 +2195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   onUpper: 1
   onLower: 1
 --- !u!65 &1379671797
@@ -2431,7 +2443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   onUpper: 1
   onLower: 1
 --- !u!65 &1578525591

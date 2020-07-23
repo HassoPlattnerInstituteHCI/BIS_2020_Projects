@@ -499,8 +499,11 @@ public class GameManager : MonoBehaviour
 
         foreach (PantoCollider collider in colliders)
         {
-                collider.Enable();
-        }
+                if (collider.name.Contains("Border") || collider.name.Contains("AllRows"))
+                {
+                    collider.Enable();
+                }
+            }
     }
 
     /// <summary>
