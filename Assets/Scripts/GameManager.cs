@@ -118,8 +118,6 @@ public class GameManager : MonoBehaviour
         phoneBox = GameObject.Find("TelephoneBox1");   
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();        
         telephoneSounds.startPhoneRing(phoneBox);  
-
-        spawnCops(1);  
         
     }
 
