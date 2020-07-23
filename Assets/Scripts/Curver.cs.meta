@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: eeca1aa3c35391e4bb66fafbcbd45f99
+guid: a6752851a57fb564b829e567c8f4bceb
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - Brush: {fileID: 8544009303710247261, guid: ac9064152d09ca04c96242885114affb, type: 3}
-  - RTexture: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
