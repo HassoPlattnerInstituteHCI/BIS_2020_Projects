@@ -73,7 +73,7 @@ public class CopLogic : MonoBehaviour
             Destroy(this.gameObject);
             player.GetComponent<PlayerLogic>().resetTimer();
             gameManager.copsKilled += 1;
-            gameManager.cash += 20*(int)(1 + gameManager.copsKilled*0.5 + gameManager.hitCount*0.1);
+            gameManager.cash += (int)(20*(1 + gameManager.copsKilled*0.5 + gameManager.hitCount*0.1));
             Debug.Log("Cash: " + gameManager.cash);
             //playerSoundeffects.somethingWithCash();
         }
