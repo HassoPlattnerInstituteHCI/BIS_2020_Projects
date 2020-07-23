@@ -8,24 +8,23 @@ namespace Stealth
         override public async Task ResetLevel()
         {
             FreezeGameObjects();
-            await speechOut.Speak("You are here.");
+            await PlayTextAudio("LM1-1");
             await SpawnPlayer();
-            await speechOut.Speak("The treasure is here.");
+            await PlayTextAudio("LM1-2");
             await MoveItHandleToTreasure();
-            await speechOut.Speak("You can move using the me handle. Follow the ticking sound and find treasure.");
+            await PlayTextAudio("LM1-3");
             UnfreezeGameObjects();
         }
 
         override public async Task StartLevel()
         {
             FreezeGameObjects();
-            await speechOut.Speak(
-                "Welcome to Stealth Panto. You are a ninja searching for treasure in a dangerous medieval city.");
-            await speechOut.Speak("Your are here.");
+            await PlayTextAudio("LM1-4");
+            await PlayTextAudio("LM1-1");
             await SpawnPlayer();
-            await speechOut.Speak("The treasure is here.");
+            await PlayTextAudio("LM1-2");
             await MoveItHandleToTreasure();
-            await speechOut.Speak("You can move using the me handle. Follow the ticking sound and find treasure.");
+            await PlayTextAudio("LM1-3");
             UnfreezeGameObjects();
         }
 
@@ -36,7 +35,7 @@ namespace Stealth
 
         override public async Task OnFirstObstacleHit()
         {
-            await speechOut.Speak("This is an obstacle. Find a way around it.");
+            await PlayTextAudio("LM1-5");
         }
     }
 }

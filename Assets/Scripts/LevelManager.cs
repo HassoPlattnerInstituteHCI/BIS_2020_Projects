@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections;
+using System.Threading.Tasks;
 using SpeechIO;
 using UnityEngine;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace Stealth
         public LowerHandle lowerHandle;
         public SpeechIn speechIn;
         public SpeechOut speechOut;
+        private AudioSource _speechOutAudioSource;
         private GameObject _treasure;
         private TreasureController _treasureController;
         private bool _hasHitObstacle;
@@ -33,6 +36,7 @@ namespace Stealth
         {
             speechIn = new SpeechIn(OnRecognized, commands.Keys.ToArray());
             speechOut = new SpeechOut();
+            InitializeSpeechOutAudioSource();
         }
 
         void Start()
@@ -160,15 +164,14 @@ namespace Stealth
 
         public async Task SpawnEnemies()
         {
-
             EnemyIndex = 0;
             if (enemies.Length > 0)
             {
-                foreach(GameObject en in enemies)
+                foreach (GameObject en in enemies)
                 {
                     en.GetComponent<EnemyController>().ResetPosition();
-                 
                 }
+
                 currentEnemy = enemies[EnemyIndex];
                 await lowerHandle.SwitchTo(currentEnemy, 0.3f);
             }
@@ -211,6 +214,25 @@ namespace Stealth
         public async Task MoveItHandleToTreasure()
         {
             await lowerHandle.SwitchTo(GetTreasure(), 0.3f);
+        }
+
+        public async Task PlayTextAudio(string name)
+        {
+            AudioClip clip = Resources.Load("Texts/" + name) as AudioClip;
+            if (clip == null)
+            {
+                Debug.LogErrorFormat("Cannot find text clip {0}", name);
+                return;
+            }
+
+            _speechOutAudioSource.PlayOneShot(clip);
+            await Task.Delay(TimeSpan.FromSeconds(clip.length));
+        }
+
+
+        private void InitializeSpeechOutAudioSource()
+        {
+            _speechOutAudioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 }

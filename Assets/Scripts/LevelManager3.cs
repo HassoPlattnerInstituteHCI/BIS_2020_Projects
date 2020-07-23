@@ -7,12 +7,12 @@ namespace Stealth
     {
         override public async Task StartLevel()
         {
-            await NewRoundWithDialoge("Now there are two enemies. Say Switch to switch between enemies.");
+            await NewRoundWithDialoge("LM3-1");
         }
 
         override public async Task ResetLevel()
         {
-            await NewRoundWithDialoge("Remember: Say Switch to switch between enemies.");
+            await NewRoundWithDialoge("LM3-2");
         }
 
         private async Task NewRoundWithDialoge(string s)
@@ -20,7 +20,7 @@ namespace Stealth
             FreezeGameObjects();
             await SpawnPlayer();
             await SpawnEnemies();
-            await speechOut.Speak(s);
+            await PlayTextAudio(s);
             UnfreezeGameObjects();
             ListenToSwitch();
         }

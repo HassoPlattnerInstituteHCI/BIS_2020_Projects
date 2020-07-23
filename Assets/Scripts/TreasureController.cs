@@ -49,8 +49,8 @@ namespace Stealth
             successAudioSource.Play();
             LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
             script.FreezeGameObjects();
-            
-            await speechOut.Speak("Congratulations. You finished the level.");
+
+            await script.PlayTextAudio("LM-1");
             
             await script.Success();
         }

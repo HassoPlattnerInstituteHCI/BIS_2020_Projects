@@ -42,6 +42,11 @@ namespace Stealth
             startingPosition = gameObject.transform.position;
         }
 
+        LevelManager GetLevelManager()
+        {
+            return GameObject.Find("Panto").GetComponent<LevelManager>();
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -97,13 +102,13 @@ namespace Stealth
         async Task PlayerSpotted()
         {
             failureAudioSource.Play();
-            LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
+            LevelManager script = GetLevelManager();
 
             
             if (SceneManager.GetActiveScene().name != "Level 5")
             {
                 script.FreezeGameObjects();
-                await speechOut.Speak(gameObject.name + " has spotted you. Try again.");
+                await GetLevelManager().PlayTextAudio("EC-1");
             }
 
 
@@ -139,13 +144,12 @@ namespace Stealth
 
         async Task EnemyDeath()
         {
-            
             fight = false;
             sword.SetActive(false);
             Debug.Log("death");
             //player.transform.GetChild(0).gameObject.SetActive(false);
             death.Play();
-            await speechOut.Speak(gameObject.name + " has died");
+            await GetLevelManager().PlayTextAudio("EC-2");
             gameObject.SetActive(false);
         }
 

@@ -127,12 +127,10 @@ namespace Stealth
         {
             LevelManager script = GameObject.Find("Panto").GetComponent<LevelManager>();
             script.FreezeGameObjects();
-            await speechOut.Speak("You are dead. Try again.");
+            await script.PlayTextAudio("PC-1");
             //sword.SetActive(false);
             health = 100;
             await script.ResetLevel();
-            
-            
         }
     }
 }
