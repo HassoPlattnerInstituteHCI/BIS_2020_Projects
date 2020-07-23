@@ -11,6 +11,7 @@ namespace MarioKart
     public class Player : MonoBehaviour
     {
         public PathCreator pathCreator;
+        public EndOfPathInstruction end;
         public GameObject tracker;
         public GameObject trackerPos;
         private GameObject panto;
@@ -34,6 +35,12 @@ namespace MarioKart
             itHandle = panto.GetComponent<LowerHandle>();
             rigidBody = GetComponent<Rigidbody>();
             pauseManager = GetComponent<PauseManager>();
+        }
+
+        public void Spawn()
+        {
+            transform.position = pathCreator.path.GetPointAtDistance(0, end);
+            transform.rotation = pathCreator.path.GetRotationAtDistance(0, end);
         }
 
         // Update is called once per frame
@@ -73,7 +80,7 @@ namespace MarioKart
             Vector3 normal = transform.rotation * Vector3.forward * maxMeDistance;
             Vector3 desired = meHandle.GetPosition() - transform.position;
             float factor = Vector3.Dot(normal, desired);
-            // MoveMeTo(transform.position + Vector3.ClampMagnitude(desired, maxMeDistance));
+            MoveMeTo(transform.position + Vector3.ClampMagnitude(desired, maxMeDistance));
             return factor;
         }
 

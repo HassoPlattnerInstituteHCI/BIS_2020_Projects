@@ -23,6 +23,11 @@ namespace MarioKart
             speechIn.StartListening(new string[] { "description", "use" });
         }
 
+        public void Reset()
+        {
+            activePowerup = Powerup.PowerupType.None;
+        }
+
         void OnApplicationQuit()
         {
             speechOut.Stop();
@@ -136,19 +141,21 @@ namespace MarioKart
 
                 //Shockwave
                 case Powerup.PowerupType.Shockwave:
+                    Say("You used a shockwave!");
                     if (Vector3.Distance(GameObject.FindObjectOfType<Player>().transform.position, GameObject.FindObjectOfType<Enemy>().transform.position) < 2)
                     {
-                        GameObject.FindObjectOfType<Enemy>().SetSpeed(0.0f);
+                        GameObject.FindObjectOfType<Enemy>().ModifySpeed(0.01f);
                         yield return new WaitForSeconds(5);
-                        GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
+                        GameObject.FindObjectOfType<Enemy>().ModifySpeed(100.0f);
                     }
                     break;
 
                 //Laser
-                case Powerup.PowerupType.Laser: 
-                    GameObject.FindObjectOfType<Enemy>().SetSpeed(2.0f);
+                case Powerup.PowerupType.Laser:
+                    Say("You used a laser!");
+                    GameObject.FindObjectOfType<Enemy>().ModifySpeed(0.2f);
                     yield return new WaitForSeconds(3);
-                    GameObject.FindObjectOfType<Enemy>().SetSpeed(10.0f);
+                    GameObject.FindObjectOfType<Enemy>().ModifySpeed(5.0f);
                     break;
             }
             UsedPowerup?.Invoke(this, activePowerup);

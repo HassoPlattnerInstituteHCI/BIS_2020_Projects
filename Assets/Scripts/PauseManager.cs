@@ -12,6 +12,7 @@ namespace MarioKart
         void Start()
         {
             wasPaused = !isPaused;
+            OnPauseChanged.Invoke(isPaused);
         }
 
         void Update()
@@ -21,6 +22,10 @@ namespace MarioKart
 
         public void Pause()
         {
+            if (!isPaused)
+            {
+                OnPauseChanged.Invoke(true);
+            }
             isPaused = true;
         }
 
@@ -29,8 +34,12 @@ namespace MarioKart
             if (isPaused)
             {
                 wasPaused = true;
+                OnPauseChanged.Invoke(false);
             }
             isPaused = false;
         }
+
+        public delegate void PauseChangedHandler(bool isPaused);
+        public event PauseChangedHandler OnPauseChanged;
     }
 }

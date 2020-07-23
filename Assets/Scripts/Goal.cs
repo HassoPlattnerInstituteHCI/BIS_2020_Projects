@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using SpeechIO;
+using UnityEditor.PackageManager.Requests;
 
 namespace MarioKart
 {
@@ -13,7 +15,21 @@ namespace MarioKart
         public PathCreator pathCreator;
         public int MaxLaps;
         public GameObject checkpoint;
-          
+        public int place = 1;
+        private float time = 0;
+        private SpeechOut speechOut;
+        private SpeechIn speechIn;
+        public GameObject player;
+        public GameObject enemy;
+
+        private void Start()
+        {
+            speechOut = new SpeechOut();
+        }
+        void Update()
+        {
+            time += Time.deltaTime;
+        }
         public void NextCheckpoint()
         {
             if (pathCreator.path.length-2 <= distance)
@@ -45,11 +61,56 @@ namespace MarioKart
             }
         }
 
-        void Victory()
+        public int getMaxLaps()
         {
-            //nächstes level laden/ siegerehrung?
-            Debug.Log("Victory");
+            return MaxLaps;
+        }
+
+        public void increasePlace()
+        {
+            place++;
+        }
+        async void Victory()
+        {
             Destroy(gameObject);
+            //nächstes level laden/ siegerehrung?
+            if (place == 1)
+            {
+                await speechOut.Speak("Congratulations you won. This is the end of the Demo, but you can redo the track by saying 'YES'.");
+            }
+            else
+            {
+                await speechOut.Speak("The Enemy was faster this time. If you want to retry this track say 'YES'");
+            }
+
+            speechIn = new SpeechIn(OnSpeechRecognized);
+            speechIn.StartListening(new string[] { "YES" });
+        }
+
+        void OnSpeechRecognized(string command)
+        {
+            print("Recoglized command " + command);
+            if (command == "YES")
+            {
+                Reset();
+            }
+        }
+
+        void Reset()
+        {
+            lapcount = 0;
+            time = 0;
+            place = 1;
+            //StartSound
+            player.GetComponent<Player>().Spawn();
+            enemy.GetComponent<Enemy>().Spawn();
+            player.GetComponent<PowerUpManager>().Reset();
+        }
+
+        void OnApplicationQuit()
+        {
+            speechOut.Stop();
+            speechIn.StopListening();
         }
     }
 }
