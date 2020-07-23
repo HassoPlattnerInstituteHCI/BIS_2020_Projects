@@ -187,9 +187,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator makeWaveOfCopsArriveAfterTime(float time, int num){
+    public void newCopsWave(int time, int num){
+        StartCoroutine(makeWaveOfCopsArriveAfterTime(time, num));
+    }
+
+    public IEnumerator makeWaveOfCopsArriveAfterTime(int time, int num){
         playerSounds.startSirens();
+        Debug.Log("StartSirenscalled");
         yield return new WaitForSeconds(time);
+        Debug.Log("StartWaitesuccesfully");
         playerSounds.StopPolicePlayback();
         spawnCops(num);
     }
@@ -197,9 +203,12 @@ public class GameManager : MonoBehaviour
     public void spawnCops(int num){
         GameObject copSpawn = GameObject.Find("Cop Spawn");
 
+        StopCoroutine("makeWaveOfCopsArriveAfterTime");
+
         for( int i = 0; i<num; i++){
             GameObject aCop = (GameObject) Instantiate(Resources.Load("CopPrefab"), copSpawn.transform.position, Quaternion.identity);
         }
+
 
         
                
