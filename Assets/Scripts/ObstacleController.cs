@@ -4,35 +4,38 @@ using System.Collections.Generic;
 using Stealth;
 using UnityEngine;
 
-public class ObstacleController : MonoBehaviour
+namespace Stealth
 {
-    public AudioSource hitAudioSource;
-    private LevelManager _script;
-    // Start is called before the first frame update
-    void Start()
+    public class ObstacleController : MonoBehaviour
     {
-    }
-
-    private LevelManager GetScript()
-    {
-        if (_script == null)
+        public AudioSource hitAudioSource;
+        private LevelManager _script;
+        // Start is called before the first frame update
+        void Start()
         {
-            _script = GameObject.Find("Panto").GetComponent<LevelManager>();
         }
 
-        return _script;
-    }
+        private LevelManager GetScript()
+        {
+            if (_script == null)
+            {
+                _script = GameObject.Find("Panto").GetComponent<LevelManager>();
+            }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+            return _script;
+        }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Collision with obstacle");
-        hitAudioSource.Play();
-        GetScript().OnObstacleHit();
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("Collision with obstacle");
+            hitAudioSource.Play();
+            GetScript().OnObstacleHit();
+        }
     }
 }

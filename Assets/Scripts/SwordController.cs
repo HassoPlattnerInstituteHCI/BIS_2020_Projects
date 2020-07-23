@@ -4,45 +4,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordController : MonoBehaviour
+namespace Stealth
 {
-    public AudioSource hit;
-    [System.Serializable] 
-    public enum Targets{ Player,Enemy};
-    public Targets targetType;
-    string target;
-    // Start is called before the first frame update
-    void Start()
+    public class SwordController : MonoBehaviour
     {
-        target = Enum.GetName(typeof(Targets), targetType);
+        public AudioSource hit;
+        [System.Serializable]
+        public enum Targets { Player, Enemy };
+        public Targets targetType;
+        string target;
+        // Start is called before the first frame update
+        void Start()
+        {
+            target = Enum.GetName(typeof(Targets), targetType);
 
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("This collision is " + other.gameObject.tag);
-
-        if (other.gameObject.tag == target)
+        // Update is called once per frame
+        void Update()
         {
 
-            hit.Play();
-            if (target == "Enemy")
-            {
-                other.gameObject.GetComponent<EnemyController>().TakeHit();
-            }
-            else if (target == "Player")
-            {
-                Debug.Log("Col with player");
-                other.gameObject.GetComponent<PlayerController>().TakeHit();
-            }
+        }
 
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("This collision is " + other.gameObject.tag);
+
+            if (other.gameObject.tag == target)
+            {
+
+                hit.Play();
+                if (target == "Enemy")
+                {
+                    other.gameObject.GetComponent<EnemyController>().TakeHit();
+                }
+                else if (target == "Player")
+                {
+                    Debug.Log("Col with player");
+                    other.gameObject.GetComponent<PlayerController>().TakeHit();
+                }
+
+            }
         }
     }
 }
