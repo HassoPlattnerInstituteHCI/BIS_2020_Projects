@@ -146,6 +146,7 @@ namespace eduChem
                 cylinder.transform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
                 cylinder.transform.position = pos1;
                 cylinder.transform.rotation = Quaternion.Euler(0, 0, 90);
+                await speechOut.Speak("started");
 
                 await speechIn.Listen(new Dictionary<string, KeyCode> { { "end bond", KeyCode.E } });
 
