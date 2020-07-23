@@ -62,11 +62,13 @@ public class PlayerSoundEffect : MonoBehaviour
         }
 
         if(transitionMusicIsPlaying == false && gameManager.hitCount == 4 && transitionMusicHasBeenPlayed == false){
+            Debug.Log("StartHit4Music gets calöled gets called");
             startHit4TransitionMusic();
         }
 
         if(transitionMusicIsPlaying == true && audioSourceMusic.isPlaying == false){
             transitionMusicIsPlaying = false;
+            Debug.Log("StartKillingStreakMusic gets called");
             startKillingStreakMusic();
             startSirens();
             StartCoroutine(gameManager.makeFirstWaveOfCopsArriveAfterTime(5));

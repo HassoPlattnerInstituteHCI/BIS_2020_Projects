@@ -24,6 +24,10 @@ public class BatLogic : MonoBehaviour
 
     GameManager gameManager;
 
+    GameObject cop;
+
+    CopSoundEffect copSounds;
+
 
 
     void Start()
@@ -37,6 +41,8 @@ public class BatLogic : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
+
+        
     }
 
     void Update()
@@ -98,8 +104,8 @@ public class BatLogic : MonoBehaviour
         }
 
         if(collider1.CompareTag("Cop")){
-            GameObject cop = collider1.gameObject;
-            CopSoundEffect copSounds = cop.GetComponent<CopSoundEffect>();
+            cop = collider1.gameObject;
+            copSounds = cop.GetComponent<CopSoundEffect>();
             copSounds.playCopHit();
 
         }

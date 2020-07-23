@@ -279,8 +279,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0dff798a3114bcc48a42d85934604b86, type: 3}
   freeze: {fileID: 8300000, guid: 10312ab8ffa298f42baf2c1dc65972a4, type: 3}
   copHit: {fileID: 8300000, guid: 08b8fad442bd30a43bfb27dc1fb80fa1, type: 3}
-  copGrunt: {fileID: 8300000, guid: 8b8a60bd6d9183e45bd67e4ae15acf1d, type: 3}
-  copTurnsCash: {fileID: 8300000, guid: b7af3c9145a66a7459d4da9a5d4cdb18, type: 3}
+  copGrunt: {fileID: 8300000, guid: 32e1712dfa7a7ca4c9eaaef40dc3eb72, type: 3}
 --- !u!82 &3786554307833844747
 AudioSource:
   m_ObjectHideFlags: 0
@@ -292,7 +291,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
