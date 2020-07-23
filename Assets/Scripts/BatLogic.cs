@@ -101,5 +101,12 @@ public class BatLogic : MonoBehaviour
         if(collider1.CompareTag("AHole")){
             gameManager.deleteAHole(collider1.gameObject);
         }
+        if(collider1.CompareTag("Cop")){
+            //reduce his health
+            //collider1.gameObject.healthLeft -= 1;
+            collider1.GetComponent<CopLogic>().healthLeft -= 1;
+            Debug.Log("should reduce cop health");
+            //CopLogic cop = collider1.GetComponent<Mover>();
+        }
     }
 }
