@@ -54,8 +54,10 @@ public class CopSoundEffect : MonoBehaviour
     }
 
     public void playCopHit(){
-        audioSource2.PlayOneShot(copHit);
+        audioSource2.volume = 0.5f;
         audioSource2.PlayOneShot(copGrunt);
+        audioSource2.PlayOneShot(copHit);
+        
     }
 
 
