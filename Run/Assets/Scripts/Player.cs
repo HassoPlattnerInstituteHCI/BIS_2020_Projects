@@ -262,7 +262,7 @@ public class Player : MonoBehaviour
     }
 
 
-    void PlaySound(string action)
+    public void PlaySound(string action)
     {
         switch (action)
         {
