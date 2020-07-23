@@ -126,6 +126,12 @@ public class PlayerLogic : MonoBehaviour
             gameManager.hitCount = 0;
             gameManager.copsKilled = 0;
             //police should disappear
+            GameObject[] cops = GameObject.FindGameObjectsWithTag("Cop");
+            foreach(GameObject cop in cops){
+                GameObject.Destroy(cop);
+            }
+                
+
         }
         if(collider1.CompareTag("Cop")){   //player should die when staying in the radius of the cop
             countdown = true;

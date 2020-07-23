@@ -187,17 +187,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator makeFirstWaveOfCopsArriveAfterTime(float time){
+    public IEnumerator makeWaveOfCopsArriveAfterTime(float time, int num){
+        playerSounds.startSirens();
         yield return new WaitForSeconds(time);
-
         playerSounds.StopPolicePlayback();
-        spawnCops(1);
+        spawnCops(num);
     }
 
     public void spawnCops(int num){
         GameObject copSpawn = GameObject.Find("Cop Spawn");
 
-        GameObject aCop = (GameObject) Instantiate(Resources.Load("CopPrefab"), copSpawn.transform.position, Quaternion.identity);
+        for( int i = 0; i<num; i++){
+            GameObject aCop = (GameObject) Instantiate(Resources.Load("CopPrefab"), copSpawn.transform.position, Quaternion.identity);
+        }
+
+        
                
 
     }

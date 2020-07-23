@@ -58,7 +58,7 @@ public class PlayerSoundEffect : MonoBehaviour
     void Update(){
         if(audioSourcePolice.isPlaying){
             //May improve this to make setting by seconds possible
-            audioSourcePolice.volume = audioSourcePolice.volume + 0.0002f;
+            audioSourcePolice.volume = audioSourcePolice.volume + 0.002f;
         }
 
         if(transitionMusicIsPlaying == false && gameManager.hitCount == 4 && transitionMusicHasBeenPlayed == false){
@@ -70,8 +70,7 @@ public class PlayerSoundEffect : MonoBehaviour
             transitionMusicIsPlaying = false;
             Debug.Log("StartKillingStreakMusic gets called");
             startKillingStreakMusic();
-            startSirens();
-            StartCoroutine(gameManager.makeFirstWaveOfCopsArriveAfterTime(5));
+            StartCoroutine(gameManager.makeWaveOfCopsArriveAfterTime(10, 1));
             if(gameManager.currentLevel == 5){
                 gameManager.currentObjectiveReached = true;
             }
@@ -108,7 +107,7 @@ public class PlayerSoundEffect : MonoBehaviour
     public void startSirens(){
         //audioSource = GetComponent<AudioSource>();
         audioSourcePolice.loop = true;
-        audioSourcePolice.volume = 0.1f;
+        audioSourcePolice.volume = 0.05f;
         audioSourcePolice.clip = sirens;
         audioSourcePolice.Play();
         
