@@ -272,7 +272,7 @@ MonoBehaviour:
   carDoorOpenCloses: {fileID: 8300000, guid: 881e44d0119e7f448a635b33cce34346, type: 3}
   radioList:
   - {fileID: 8300000, guid: 64669a7aa14f17046b165e6265bddd77, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 54d53768a6a229d44819d1c11a873f77, type: 3}
+  - {fileID: 8300000, guid: 0dff798a3114bcc48a42d85934604b86, type: 3}
   - {fileID: 0}
   - {fileID: 0}
