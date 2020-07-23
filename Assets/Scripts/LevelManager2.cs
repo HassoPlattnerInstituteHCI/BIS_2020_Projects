@@ -19,7 +19,6 @@ namespace Stealth
         {
             FreezeGameObjects();
             await SpawnPlayer();
-            await speechOut.Speak(s);
             await PlayTextAudio(s);
             await SpawnEnemies();
             UnfreezeGameObjects();
