@@ -10,83 +10,96 @@ namespace MarioKart
     {
         private Rigidbody enemyRb;
         public PathCreator pathCreator;
-        public EndOfPathInstruction end;
-        float distance;
-        public float speed;
-        Vector3 wantedPoint;
+
         private int laps = 0;
         Boolean crash = false;
-        int crashFrames = 20;
-        int frameCounter = 0;
+        public float crashTime = 2.0f;
+
+        public MovementGoal movementTarget;
+        public float maxMovementSpeed = 1.0f;
+        PauseManager pauseManager;
+        public float bounceStength = 0.1f;
+        private AudioSource audioSource;
+        public AudioClip hitClip;
+
         // Start is called before the first frame update
         private void Start()
         {
             enemyRb = GetComponent<Rigidbody>();
-            distance = -5;
+            pauseManager = GetComponent<PauseManager>();
+            audioSource = GetComponent<AudioSource>();
+            Reset();
         }
 
-        public void Spawn()
+        public void Reset()
         {
-            laps = 0;
-            //frameCounter = 0;
-            //crash = false;
-            //speed = 2;
-            distance = -5;
-            transform.position = pathCreator.path.GetPointAtDistance(pathCreator.path.length + distance, end);
-            transform.rotation = pathCreator.path.GetRotationAtDistance(pathCreator.path.length + distance, end);
-
+            movementTarget.Reset();
+            transform.position = movementTarget.transform.position;
         }
 
-        void Update()
-        {
-            distance += speed * Time.deltaTime;
-            transform.position = pathCreator.path.GetPointAtDistance(distance, end);
-            transform.rotation = pathCreator.path.GetRotationAtDistance(distance, end);
+        // void Update()
+        // {
+        //     distance += speed * Time.deltaTime;
+        //     transform.position = pathCreator.path.GetPointAtDistance(distance, end);
+        //     transform.rotation = pathCreator.path.GetRotationAtDistance(distance, end);
 
-            /*distance += speed * Time.deltaTime;
-            wantedPoint = pathCreator.path.GetPointAtDistance(distance, end);
-            Vector3 direction = wantedPoint - transform.position;
-            direction.y = 0;
-            enemyRb.AddForce((1/(Mathf.Sqrt(direction.x*direction.x + direction.z*direction.z))*speed)*direction);
-            */
-        }
+        //     /*distance += speed * Time.deltaTime;
+        //     wantedPoint = pathCreator.path.GetPointAtDistance(distance, end);
+        //     Vector3 direction = wantedPoint - transform.position;
+        //     direction.y = 0;
+        //     enemyRb.AddForce((1/(Mathf.Sqrt(direction.x*direction.x + direction.z*direction.z))*speed)*direction);
+        //     */
+        // }
 
         void FixedUpdate()
         {
-            if (crash)
-                if (frameCounter++ == crashFrames)
-                {
-                    ModifySpeed(2);
-                    crash = false;
-                    frameCounter = 0;
-                }
+            if (pauseManager.isPaused)
+            {
+                enemyRb.Sleep();
+                return;
+            }
+            MoveToTarget();
         }
 
         public void ModifySpeed(float modifier)
         {
-            speed = modifier * speed;
+            maxMovementSpeed *= modifier;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            print("Collision");
-            if (other.gameObject.CompareTag("Goal"))
-            {
-                laps++;
-                if (laps == other.gameObject.GetComponent<Goal>().getMaxLaps())
-                {
-                    other.gameObject.GetComponent<Goal>().increasePlace();
-                    Destroy(gameObject);
-                }
-            }
-
             if (other.gameObject.CompareTag("Player"))
             {
                 //sound
-                ModifySpeed(0.5f);
-                crash = true;
+                if (!crash)
+                {
+
+                    StartCoroutine(SlowDown(crashTime));
+                }
                 print("Hit player!");
+                // Push back player and enemy
+                audioSource.PlayOneShot(hitClip);
+                Vector3 toPlayer = (other.transform.position - transform.position).normalized;
+                enemyRb.AddForce(-toPlayer * bounceStength, ForceMode.VelocityChange);
+                other.GetComponent<Rigidbody>().AddForce(toPlayer * bounceStength, ForceMode.VelocityChange);
+
             }
+        }
+
+        IEnumerator SlowDown(float timeout)
+        {
+            crash = true;
+            ModifySpeed(0.5f);
+            yield return new WaitForSeconds(timeout);
+            ModifySpeed(2.0f);
+            crash = false;
+        }
+
+        void MoveToTarget()
+        {
+            Vector3 direction = (movementTarget.transform.position - transform.position).normalized;
+            enemyRb.velocity = direction * maxMovementSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
         }
     }
 }

@@ -9,15 +9,17 @@ namespace MarioKart
     // Accepts a powerup and allows using it
     public class PowerUpManager : MonoBehaviour
     {
-        private Player player;
+        private DraggedPlayer player;
         private SpeechOut speechOut;
         private SpeechIn speechIn;
         private Powerup.PowerupType activePowerup = Powerup.PowerupType.None;
+        public AudioClip shockWaveClip;
+        public AudioSource audioSource;
 
         // Start is called before the first frame update
         void Start()
         {
-            player = GetComponent<Player>();
+            player = GetComponent<DraggedPlayer>();
             speechOut = new SpeechOut();
             speechIn = new SpeechIn(OnSpeechRecognized);
             speechIn.StartListening(new string[] { "description", "use" });
@@ -62,7 +64,7 @@ namespace MarioKart
                     break;
 
                 case Powerup.PowerupType.Shockwave:
-                    Say("You got a shockwave!");
+                    Say("You got a shockwave! Say use to use it");
                     break;
 
                 case Powerup.PowerupType.Laser:
@@ -133,19 +135,20 @@ namespace MarioKart
                     break;
                 //Booster
                 case Powerup.PowerupType.Booster:
-                    Say("You used a booster!");
-                    player.speed = 20.0f;
-                    yield return new WaitForSeconds(2);
-                    player.speed = player.defaultSpeed;
+                    // Say("You used a booster!");
+                    // player.speed = 20.0f;
+                    // yield return new WaitForSeconds(2);
+                    // player.speed = player.defaultSpeed;
                     break;
 
                 //Shockwave
                 case Powerup.PowerupType.Shockwave:
                     Say("You used a shockwave!");
-                    if (Vector3.Distance(GameObject.FindObjectOfType<Player>().transform.position, GameObject.FindObjectOfType<Enemy>().transform.position) < 2)
+                    audioSource.PlayOneShot(shockWaveClip);
+                    if (Vector3.Distance(GameObject.FindObjectOfType<DraggedPlayer>().transform.position, GameObject.FindObjectOfType<Enemy>().transform.position) < 2)
                     {
                         GameObject.FindObjectOfType<Enemy>().ModifySpeed(0.01f);
-                        yield return new WaitForSeconds(5);
+                        yield return new WaitForSeconds(2.0f);
                         GameObject.FindObjectOfType<Enemy>().ModifySpeed(100.0f);
                     }
                     break;

@@ -30,81 +30,74 @@ namespace MarioKart
         {
             time += Time.deltaTime;
         }
-        public void NextCheckpoint()
+
+        void OnTriggerEnter(Collider other)
         {
-            if (pathCreator.path.length-2 <= distance)
+            SetPauseAll(true);
+            if (other.CompareTag("Player"))
             {
-                lap = true;
+                place = 1;
+                Victory();
             }
-            else
+            else if (other.CompareTag("Enemy"))
             {
-                distance += 1;
-                Instantiate(checkpoint, pathCreator.path.GetPointAtDistance(distance), pathCreator.path.GetRotationAtDistance(distance));
+                place = 2;
+                Victory();
             }
+
         }
 
-        public void NextLap()
-        {
-            if (lap)
-            {
-                lapcount++;
-                if (lapcount == MaxLaps + 1)
-                {
-                    Victory();
-                }
-                else
-                {
-                    distance = 2;
-                    lap = false;
-                    NextCheckpoint();
-                }             
-            }
-        }
-
-        public int getMaxLaps()
-        {
-            return MaxLaps;
-        }
-
-        public void increasePlace()
-        {
-            place++;
-        }
         async void Victory()
         {
-            Destroy(gameObject);
             //nächstes level laden/ siegerehrung?
             if (place == 1)
             {
-                await speechOut.Speak("Congratulations you won. This is the end of the Demo, but you can redo the track by saying 'YES'.");
+                await speechOut.Speak("Congratulations you won. This is the end of the Demo.");
             }
             else
             {
-                await speechOut.Speak("The Enemy was faster this time. If you want to retry this track say 'YES'");
+                await speechOut.Speak("The Enemy was faster this time");
             }
 
             speechIn = new SpeechIn(OnSpeechRecognized);
-            speechIn.StartListening(new string[] { "YES" });
+            speechIn.StartListening(new string[] { "stop" });
         }
 
         void OnSpeechRecognized(string command)
         {
             print("Recoglized command " + command);
-            if (command == "YES")
+            if (command == "stop")
             {
-                Reset();
+                print("Quitting application...");
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+UnityEngine.Application.Quit();
+#endif
             }
         }
 
         void Reset()
         {
-            lapcount = 0;
-            time = 0;
-            place = 1;
-            //StartSound
-            player.GetComponent<Player>().Spawn();
-            enemy.GetComponent<Enemy>().Spawn();
+            player.GetComponent<DraggedPlayer>().Reset();
+            enemy.GetComponent<Enemy>().Reset();
             player.GetComponent<PowerUpManager>().Reset();
+        }
+
+        void SetPauseAll(bool isPaused)
+        {
+            PauseManager[] pauseManagers = GameObject.FindObjectsOfType<PauseManager>();
+            foreach (PauseManager p in pauseManagers)
+            {
+                if (isPaused)
+                {
+                    p.Pause();
+                }
+                else
+                {
+                    p.Unpause();
+                }
+            }
         }
 
         void OnApplicationQuit()

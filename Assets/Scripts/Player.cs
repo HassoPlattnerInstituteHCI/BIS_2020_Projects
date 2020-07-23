@@ -103,13 +103,13 @@ namespace MarioKart
         {
             if (other.gameObject.CompareTag("Checkpoint"))
             {
-                GameObject.FindObjectOfType<Goal>().NextCheckpoint();
+                // GameObject.FindObjectOfType<Goal>().NextCheckpoint();
                 Destroy(other.gameObject);
             }
 
             else if (other.gameObject.CompareTag("Goal"))
             {
-                GameObject.FindObjectOfType<Goal>().NextLap();
+                // GameObject.FindObjectOfType<Goal>().NextLap();
             }
         }
     }

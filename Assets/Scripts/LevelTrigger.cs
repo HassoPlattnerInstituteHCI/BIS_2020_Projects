@@ -14,10 +14,15 @@ namespace MarioKart
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                print("Player has reached checkpoint " + name);
-                tutorial.PlayLevel(levelIndex);
-                GameObject.Destroy(gameObject);
+                Activate();
             }
+        }
+
+        protected void Activate()
+        {
+            print("Player has reached checkpoint " + name);
+            tutorial.PlayLevel(levelIndex);
+            GameObject.Destroy(gameObject);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace MarioKart
         private PauseManager pauseManager;
         private PantoHandle handle;
         [Header("Movement")]
+        public GameObject startPos;
         public float deadZone = 0.1f;
         public float maxSpeed = 5.0f;
         public float maxHandleDistance = 5.0f;
@@ -31,8 +32,8 @@ namespace MarioKart
 
         [Header("Debug")]
         public GameObject marker;
-
         private float speedNorm = 0.0f;
+
 
         async void Start()
         {
@@ -50,6 +51,11 @@ namespace MarioKart
                     CaptureHandle();
                 }
             }
+        }
+
+        public async void Reset()
+        {
+            transform.position = startPos.transform.position;
         }
 
         async void CaptureHandle()
@@ -97,7 +103,7 @@ namespace MarioKart
                 return;
             }
             speedNorm = Mathf.Clamp(movement.magnitude / maxHandleDistance, 0.0f, 1.0f);
-            float actualSpeed = speedNorm * maxSpeed;
+            float actualSpeed = speedNorm * (IsOnGrass() ? maxSpeed / 2 : maxSpeed);
             rigidbody.velocity = movement.normalized * actualSpeed * Time.fixedDeltaTime;
             LeadCurve();
         }
@@ -155,6 +161,13 @@ namespace MarioKart
             Vector3 leadPos = roadMeshCreator.pathCreator.path.GetPointAtDistance(pointOnCurve);
             marker.transform.position = leadPos;
             return leadPos;
+        }
+
+        bool IsOnGrass()
+        {
+            Vector3 closestPointOnPath = roadMeshCreator.pathCreator.path.GetClosestPointOnPath(transform.position);
+            float distance = (transform.position - closestPointOnPath).magnitude;
+            return distance >= roadMeshCreator.roadWidth;
         }
     }
 }

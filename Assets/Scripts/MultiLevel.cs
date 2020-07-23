@@ -5,12 +5,12 @@ using UnityEngine;
 using SpeechIO;
 using System.Threading.Tasks;
 using DualPantoFramework;
+using UnityEngine.Audio;
 
 namespace MarioKart
 {
     public class MultiLevel : PantoBehaviour
     {
-        AudioSource audioSource;
         SpeechOut speechOut = new SpeechOut();
         public ObjectOfInterest[] objectsOfInterest;
 
@@ -27,6 +27,7 @@ namespace MarioKart
         /// </summary>
         async public Task PlayIntroduction()
         {
+
             Array.Sort(objectsOfInterest, ((go1, go2) => go2.priority.CompareTo(go1.priority)));
 
             for (int index = 0; index < objectsOfInterest.Length; index++)

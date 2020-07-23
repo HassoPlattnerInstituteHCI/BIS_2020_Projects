@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Threading.Tasks;
 using SpeechIO;
 using PathCreation;
+using UnityEngine.Audio;
 
 namespace MarioKart
 {
@@ -17,6 +18,7 @@ namespace MarioKart
         public GameObject checkpoint;
         private int checkpointnumber = 0;
         private bool tutorial = true;
+        public AudioMixer masterMixer;
 
         // Start is called before the first frame update
         async void Start()
@@ -48,11 +50,13 @@ namespace MarioKart
         {
             if (levelIndex < levels.Length)
             {
+                masterMixer.SetFloat("master", -80.0f);
                 MultiLevel level = levels[levelIndex++];
                 SetPause(true);
                 await speech.Speak(level.description);
                 await level.PlayIntroduction();
                 SetPause(false);
+                masterMixer.SetFloat("master", 0.0f);
             }
         }
 

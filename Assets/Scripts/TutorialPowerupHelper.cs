@@ -14,15 +14,7 @@ namespace MarioKart
         void Start()
         {
             powerUpManager = GetComponent<PowerUpManager>();
-            powerUpManager.SaidDescription += OnSaidDescription;
             powerUpManager.UsedPowerup += OnUsedPowerup;
-        }
-
-        // Play level about using powerups
-        async void OnSaidDescription(object sender, Powerup.PowerupType powerup)
-        {
-            await tutorial.PlayNext();
-            GetComponent<PowerUpManager>().SaidDescription -= OnSaidDescription;
         }
 
         // Play final level (Level 4 end) and destroy this component
