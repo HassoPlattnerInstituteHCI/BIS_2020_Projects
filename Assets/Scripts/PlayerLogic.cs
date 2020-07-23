@@ -126,7 +126,7 @@ public class PlayerLogic : MonoBehaviour
         } 
     }
 
-    void OnTriggerLeave(Collider collider1){
+    void OnTriggerExit(Collider collider1){
         if(collider1.CompareTag("Cop")){   
             countdown = false;
             timeLeft = 4;
