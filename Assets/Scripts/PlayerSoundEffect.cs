@@ -33,6 +33,8 @@ public class PlayerSoundEffect : MonoBehaviour
     public AudioClip hit4TransitionMusic;
 
     public AudioClip killingStreakMusic;
+
+    public AudioClip copTurnsCash;
     //public AudioSource rollSource;
 
     //private GameObject TelephoneBox1;
@@ -140,6 +142,11 @@ public class PlayerSoundEffect : MonoBehaviour
         audioSourceMusic.volume = 0.05f;
         audioSourceMusic.clip = killingStreakMusic;
         audioSourceMusic.Play();
+    }
+
+    
+    public void playCopTurnsCash(){
+        audioSource.PlayOneShot(copTurnsCash);
     }
 
     public void StopPlayback()

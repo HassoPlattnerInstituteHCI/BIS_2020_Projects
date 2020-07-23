@@ -20,6 +20,8 @@ public class BatLogic : MonoBehaviour
 
     AudioSource audioSource;
 
+
+
     GameManager gameManager;
 
 
@@ -92,6 +94,13 @@ public class BatLogic : MonoBehaviour
             if(gameManager.currentLevel == 4){
                 gameManager.currentObjectiveReached = true;
             }
+
+        }
+
+        if(collider1.CompareTag("Cop")){
+            GameObject cop = collider1.gameObject;
+            CopSoundEffect copSounds = cop.GetComponent<CopSoundEffect>();
+            copSounds.playCopHit();
 
         }
 

@@ -9,6 +9,8 @@ public class CopSoundEffect : MonoBehaviour
     SpeechOut speechOut;
 
     public AudioSource audioSource;
+
+    public AudioSource audioSource2;
     GameManager gameManager;
 
     public AudioClip carDoorOpenCloses;
@@ -18,6 +20,9 @@ public class CopSoundEffect : MonoBehaviour
     private bool shouldPlayRadio;
 
     public AudioClip freeze;
+
+    public AudioClip copHit;
+    public AudioClip copGrunt;
 
     void Start()
     {
@@ -44,10 +49,15 @@ public class CopSoundEffect : MonoBehaviour
     public void startCopsRadioTalk(){
         audioSource.maxDistance = 5;
         shouldPlayRadio = true;
-        StartCoroutine("PlayRandom");
-        
+        StartCoroutine("PlayRandom");       
 
     }
+
+    public void playCopHit(){
+        audioSource2.PlayOneShot(copHit);
+        audioSource2.PlayOneShot(copGrunt);
+    }
+
 
     IEnumerator PlayRandom(){
 
