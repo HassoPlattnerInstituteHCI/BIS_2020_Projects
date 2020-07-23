@@ -24,6 +24,8 @@ public class PlayerLogic : MonoBehaviour
     private PlayerSoundEffect playerSounds;
     GameObject phoneBox;
 
+    private CopSoundEffect copSounds;
+
     void Start()
     {
         upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
@@ -35,6 +37,7 @@ public class PlayerLogic : MonoBehaviour
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
 
         playerSounds = GetComponent<PlayerSoundEffect>();
+
 
         bpmCoefficient = (endBPM - startBPM) / Mathf.Pow(health.maxHealth, 2);
 
@@ -123,6 +126,12 @@ public class PlayerLogic : MonoBehaviour
         }
         if(collider1.CompareTag("Cop")){   //player should die when staying in the radius of the cop
             countdown = true;
+
+            GameObject cop = collider1.gameObject;
+            copSounds = cop.GetComponent<CopSoundEffect>();
+            copSounds.stopRadio();
+            copSounds.playShout();
+
         } 
     }
 
@@ -130,10 +139,19 @@ public class PlayerLogic : MonoBehaviour
         if(collider1.CompareTag("Cop")){   
             countdown = false;
             timeLeft = 4;
+
+            Debug.Log("OnTriggerLeaveWasCalled");
+
+            GameObject cop = collider1.gameObject;
+            copSounds = cop.GetComponent<CopSoundEffect>();
+            copSounds.StopPlayback();
+            copSounds.startCopsRadioTalk();
         } 
     }
 
     public void playerDies(){
+        countdown = false;
+        timeLeft = 4;
         playerSounds.playWasted();
         gameManager.currentObjectiveReached = false;
         playerSounds.StopPolicePlayback();

@@ -15,7 +15,9 @@ public class CopSoundEffect : MonoBehaviour
 
     public AudioClip[] radioList;
 
-    public bool shouldPlayRadio;
+    private bool shouldPlayRadio;
+
+    public AudioClip freeze;
 
     void Start()
     {
@@ -60,7 +62,17 @@ public class CopSoundEffect : MonoBehaviour
 
     public void stopRadio(){
         shouldPlayRadio = false;
-        audioSource.Stop();        
+        StopPlayback();        
+    }
+
+
+    public void playShout(){
+        StopPlayback();
+        audioSource.maxDistance = 5;
+        audioSource.loop = true;
+        audioSource.clip = freeze;
+        audioSource.Play();
+
     }
 
 
