@@ -8,7 +8,7 @@ namespace Stealth
         override public async Task ResetLevel()
         {
             FreezeGameObjects();
-            await speechOut.Speak("Your are here.");
+            await speechOut.Speak("You are here.");
             await SpawnPlayer();
             await speechOut.Speak("The treasure is here.");
             await MoveItHandleToTreasure();
