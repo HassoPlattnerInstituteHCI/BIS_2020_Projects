@@ -14,7 +14,7 @@ public class Playfield : MonoBehaviour
     public bool shouldFreeHandle;
 
     public static int offsetX = 2;
-    public static int offsetZ = 13;
+    public static int offsetZ = 14;
 
     static SpeechOut speechOut;
     public static int w = 10;
@@ -297,7 +297,6 @@ public class Playfield : MonoBehaviour
 
     //deletes one row of blocks
     public static void deleteThisRow(GameObject currentRow) {
-        
         for(int i=9; i>=0; i--) {
             GameObject child = currentRow.transform.GetChild(i).gameObject;
             child.transform.parent = null;
@@ -308,11 +307,11 @@ public class Playfield : MonoBehaviour
             
         }
         allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().Remove();
-        if (allRowsParent.transform.GetChild(0).transform.childCount > 0)
-        {
+        //if (allRowsParent.transform.GetChild(0).transform.childCount > 0)
+        //{
             allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().CreateObstacle();
             allRowsParent.transform.gameObject.GetComponent<PantoCompoundCollider>().Enable();
-        }
+        //}
     }
 
     //for each block in all rows including and above "row", moves the blocks down one row

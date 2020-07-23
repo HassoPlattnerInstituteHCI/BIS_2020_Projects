@@ -431,6 +431,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         await upperHandle.MoveToPosition(playerPosition.transform.position, 0.1f, shouldFreeHandle);
+        upperHandle.Free();
     }
 
     public async Task traceSkyline() {
@@ -453,7 +454,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //We have now filled the Array with the heights in each column. Time to make the Panto move
-        await lowerHandle.MoveToPosition(new Vector3(-2.25f,0f,-13.25f), 0.1f, shouldFreeHandle); //Moves handle to lower left corner of the level
+        await lowerHandle.MoveToPosition(new Vector3(-2.25f,0f,-14.25f), 0.1f, shouldFreeHandle); //Moves handle to lower left corner of the level
         for(int col=1; col<11; col++) { //Starting at 1 since skylineHeights[0] is our default value for the first subtraction below
         Debug.Log(lowerHandle.transform.position);
         await Task.Delay(500);
@@ -470,6 +471,8 @@ public class GameManager : MonoBehaviour
             await Task.Delay(500);
             await lowerHandle.MoveToPosition(lowerPosition.transform.position + new Vector3(0f,0f,-0.5f), 0.1f, shouldFreeHandle);
         }
+        await Task.Delay(500);
+        await lowerHandle.MoveToPosition(lowerPosition.transform.position + new Vector3(-1f, 0f, 5f), 0.1f, shouldFreeHandle);
         EnableColliders();
     }
 
@@ -499,7 +502,7 @@ public class GameManager : MonoBehaviour
 
         foreach (PantoCollider collider in colliders)
         {
-                if (collider.name.Contains("Border") || collider.name.Contains("AllRows"))
+                if (!collider.name.Contains("Block"))
                 {
                     collider.Enable();
                 }

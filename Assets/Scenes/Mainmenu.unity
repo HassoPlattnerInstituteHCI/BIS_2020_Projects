@@ -177,8 +177,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -332,8 +332,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tetris PANTO Edition
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 588244006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec3d0e7265844894fbeba4ec17a458c1, type: 3}
+  m_Script: {fileID: 11500000, guid: e4d53f50cbb007646ba3a320d8b5c1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   QuitButton: {fileID: 433206937}
@@ -1226,8 +1226,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Tutorial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1593,8 +1593,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Highscore
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: bf097b2df1e3a6a46a2492719304ebca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
