@@ -67,8 +67,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator tutorialLevel3()
     {
-        speechOut.Speak("“Somewhere in this level is a item-box. Collect the item by jumping against it! You will hear a sound when you do.");
+        speechOut.Speak("Somewhere in this level is a item-box. Collect the item by jumping against it! You will hear a sound when you do.");
         speechOut.Speak("Now complete the level by reaching the flag on the right!.");
+        yield return new WaitForSeconds(0);
     }
 
     void update()
