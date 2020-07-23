@@ -137,8 +137,7 @@ public class PlayerLogic : MonoBehaviour
 
     void OnTriggerExit(Collider collider1){
         if(collider1.CompareTag("Cop")){   
-            countdown = false;
-            timeLeft = 4;
+            resetTimer();
 
             Debug.Log("OnTriggerLeaveWasCalled");
 
@@ -150,12 +149,16 @@ public class PlayerLogic : MonoBehaviour
     }
 
     public void playerDies(){
-        countdown = false;
-        timeLeft = 4;
+        resetTimer();
         playerSounds.playWasted();
         gameManager.currentObjectiveReached = false;
         playerSounds.StopPolicePlayback();
         playerSounds.startHitZeroMusic();
         gameManager.ResetGame();
+    }
+
+    public void resetTimer(){
+        countdown = false;
+        timeLeft = 4;
     }
 }

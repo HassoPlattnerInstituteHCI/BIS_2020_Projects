@@ -63,16 +63,15 @@ public class CopLogic : MonoBehaviour
         {
             AimbotMode();
         }
-        else
-        {
-            //SeekMode();
-        }
 
         agent.SetDestination(lastSeenPosition);
         Quaternion lookRotation = Quaternion.LookRotation(lastSeenPosition - transform.position, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, config.turnSpeed);
 
-        if (healthLeft <= 0) Destroy(this.gameObject);
+        if (healthLeft <= 0) {
+            Destroy(this.gameObject);
+            player.GetComponent<PlayerLogic>().resetTimer();
+        }
         if (healthLeft < 3) Debug.Log(healthLeft + " cop health left");
     }
 
