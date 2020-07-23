@@ -118,10 +118,13 @@ public class PlayerLogic : MonoBehaviour
             playerDies();
         } 
         if(collider1.CompareTag("safehouse")){
-            gameManager.hitCount = 0;
             playerSounds.StopPolicePlayback();
             playerSounds.startHitZeroMusic();
             Debug.Log("hitcount: " + gameManager.hitCount);
+            Debug.Log("cops killed: " + gameManager.copsKilled);
+            Debug.Log("cash: " + gameManager.cash);
+            gameManager.hitCount = 0;
+            gameManager.copsKilled = 0;
             //police should disappear
         }
         if(collider1.CompareTag("Cop")){   //player should die when staying in the radius of the cop

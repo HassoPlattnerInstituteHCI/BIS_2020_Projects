@@ -17,7 +17,7 @@ public class CopLogic : MonoBehaviour
     NavMeshAgent agent;
 
     GameObject player;
-
+    GameManager gameManager;
     CopSoundEffect copSounds;
     public int healthLeft = 3;
     
@@ -29,6 +29,7 @@ public class CopLogic : MonoBehaviour
         copSounds = GetComponent<CopSoundEffect>();
         copSounds.playCopCarArrived();
 
+        gameManager = (GameManager) FindObjectOfType(typeof(GameManager));
     }
 
     void OnEnable()  
@@ -71,6 +72,10 @@ public class CopLogic : MonoBehaviour
         if (healthLeft <= 0) {
             Destroy(this.gameObject);
             player.GetComponent<PlayerLogic>().resetTimer();
+            gameManager.copsKilled += 1;
+            gameManager.cash += 20*(int)(1 + gameManager.copsKilled*0.5 + gameManager.hitCount*0.1);
+            Debug.Log("Cash: " + gameManager.cash);
+            //playerSoundeffects.somethingWithCash();
         }
         if (healthLeft < 3) Debug.Log(healthLeft + " cop health left");
     }

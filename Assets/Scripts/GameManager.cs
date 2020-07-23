@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     List<int> spawnUsed = new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0};
     public int hitCount = 0;
     public int cash = 0;
+    public int copsKilled = 0;
 
     public bool currentObjectiveReached = false;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
