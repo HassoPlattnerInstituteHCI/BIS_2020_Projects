@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using DualPantoFramework;
 using SpeechIO;
+using System.Collections;
 
 public class Shooting : MonoBehaviour
 {
@@ -15,8 +16,11 @@ public class Shooting : MonoBehaviour
     public bool spotted = false;
     public AudioClip defaultClip;
     public AudioClip wallClip;
-    public AudioClip hitClip;
+    public AudioClip hitClipMG;
+    public AudioClip hitClipSniper;
+    public AudioClip hitClipPump;
     private float timestamp = 0;
+    private int gunnr;
 
     public float fireSpreadAngle = 1f;
     public Transform enemyTransform;
@@ -110,8 +114,21 @@ public class Shooting : MonoBehaviour
                     if (timestamp <= Time.time)
                     {
                         enemy.TakeDamage(damage, gameObject);
-
-                        currentClip = hitClip;
+                        if (CompareTag("Player"))
+                        {
+                            gunnr = GameObject.Find("Panto").GetComponent<Levels>().gun;
+                        }
+                        else
+                        {
+                            gunnr = 1;
+                        }
+                        switch (gunnr)
+                        {
+                            case 1: currentClip = hitClipSniper; break;
+                            case 2: currentClip = hitClipMG; break;
+                            case 3: currentClip = hitClipPump; break;
+                            default: break;
+                        }
                         timestamp = Time.time + cooldown;
                     }
                 }
@@ -147,8 +164,21 @@ public class Shooting : MonoBehaviour
                     if (timestamp <= Time.time)
                     {
                         enemy.TakeDamage(damage, gameObject);
-
-                        currentClip = hitClip;
+                        if (CompareTag("Player"))
+                        {
+                            gunnr = GameObject.Find("Panto").GetComponent<Levels>().gun;
+                        }
+                        else
+                        {
+                            gunnr = 1;
+                        }
+                        switch(gunnr)
+                        {
+                            case 1: currentClip = hitClipSniper; break;
+                            case 2: currentClip = hitClipMG; break;
+                            case 3: currentClip = hitClipPump; break;
+                            default: break;
+                        }
                         timestamp = Time.time + cooldown;
                     }
                 }
