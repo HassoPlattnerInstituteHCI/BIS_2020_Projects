@@ -90,17 +90,19 @@ public class PlayerLogic : MonoBehaviour
                 telephoneSounds.startPhoneTalks();
             }
         }
-        if(gameManager.currentLevel==3){
+        if(gameManager.currentLevel==3 && cooldown <= 0){
             if(collider1.CompareTag("safehouse")){
+                cooldown =2;
                 playerSounds.StopPolicePlayback();
                 telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
                 telephoneSounds.StopPlayback();
                 telephoneSounds.startPhoneTalks();
             }
         }
-        if(gameManager.currentLevel == 4 && gameManager.currentObjectiveReached){
+        if(gameManager.currentLevel == 4 && gameManager.currentObjectiveReached && cooldown <= 0){
             Debug.Log("OnTrigger Enter for Level 4 called");
-            if(collider1.CompareTag("safehouse")){      
+            if(collider1.CompareTag("safehouse")){  
+                cooldown =2;    
                 GameObject phoneBox = GameObject.Find("TelephoneBox2");
                 TelephoneSoundEffect telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
                 telephoneSounds.StopPlayback();
@@ -109,9 +111,10 @@ public class PlayerLogic : MonoBehaviour
         }
 
         
-        if((gameManager.currentLevel == 5 && gameManager.currentObjectiveReached) || gameManager.currentLevel == 6){
+        if((cooldown <= 0 && gameManager.currentLevel == 5 && gameManager.currentObjectiveReached) || gameManager.currentLevel == 6){
             Debug.Log("OnTrigger Enter for Level 5 called");
             if(collider1.CompareTag("safehouse")){      
+                cooldown =2;
                 GameObject phoneBox = GameObject.Find("TelephoneBox2");
                 TelephoneSoundEffect telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();  
                 telephoneSounds.StopPlayback();
@@ -155,7 +158,7 @@ public class PlayerLogic : MonoBehaviour
         if(collider1.CompareTag("Cop")){   
             resetTimer();
 
-            Debug.Log("OnTriggerLeaveWasCalled");
+            Debug.Log("OnTriggerExitOfCopWasCalled");
 
             GameObject cop = collider1.gameObject;
             copSounds = cop.GetComponent<CopSoundEffect>();
