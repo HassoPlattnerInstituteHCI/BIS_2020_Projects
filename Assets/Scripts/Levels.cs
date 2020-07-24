@@ -123,7 +123,7 @@ public class Levels : MonoBehaviour
                 }
 
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
-                await speechOut.Speak("This time you can switch your weapon, by saying weapon one (one is your sniper), weapon two (two is your MG) or weapon three (three is your pumpgun)");
+                await speechOut.Speak("This time you can switch your weapon, by saying weapon one (one is your MG), weapon two (two is your Sniper) or weapon three (three is your pumpgun)");
                 break;
 
             default: break;
