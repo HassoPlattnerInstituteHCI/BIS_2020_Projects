@@ -206,13 +206,22 @@ namespace PantoDrawing
             { "circle", () => {
                     lineDraw.CreateCircle();
                 }},
+            { "rectangle", () => {
+                    lineDraw.CreateRectangle();
+                }},
+            { "triangle", () => {
+                    lineDraw.CreateTriangle();
+                }},
             { "yes", () => {
                     levelMaster.ready = true;
+                }},
+            { "show all", () => {
+                    lineDraw.ShowLines();
                 }},
             { "repeat" , () => {}},
             { "options" , () => {}},
             { "quit" , () => {}}
-            };
+        };
             speechIn = new SpeechIn(onRecognized, keywords.Keys.ToArray());
         }
 

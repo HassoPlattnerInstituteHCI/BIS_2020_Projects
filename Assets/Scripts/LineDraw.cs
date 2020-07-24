@@ -102,125 +102,23 @@ namespace PantoDrawing
             return lineRenderer;
         }
 
-        public void CreateCircle()
-        {
-            LineRenderer line = lines["line"+(lineCount-1)];
-            Vector3 center = GetCircleCenter(line);
-            Vector3 radius = GetCircleRadius(line, center);
-            CreateCirclePoints(line, center, (radius.x + radius.z) / 2);
-        }
+        
 
         public void CreateRectangle()
         {
             LineRenderer line = lines["line"+(lineCount-1)];
-            CreateRectanglePoints(line);
-        }
-
-        void CreateRectanglePoints(LineRenderer lineRenderer)
-        {
-            Vector3[] line = new Vector3[lineRenderer.positionCount];
-            lineRenderer.GetPositions(line);
-            float x_max = -10000, x_min = 10000, z_max = -10000, z_min = 10000;
-            for (int i = 0; i < lineRenderer.positionCount; i++)
-            {
-                if(line[i].x < x_min) x_min = line[i].x;
-                if(line[i].x > x_max) x_max = line[i].x;
-                if(line[i].z < z_min) z_min = line[i].z;
-                if(line[i].z > z_max) z_max = line[i].z;
-            }
-            Debug.Log(x_min+ " "+ x_max+ " "+ z_min+ " "+ z_max);
-            int count = lineRenderer.positionCount/4;
-            float x_step = (x_max-x_min)/(count);
-            float z_step = (z_max-z_min)/(count);
-            Vector3[] newPositions = new Vector3[count*4];
-            for (int i = 0; i < count; i++)
-            {
-                newPositions[i] = new Vector3(x_min+x_step*i,.1f,z_min);
-                newPositions[i + count] = new Vector3(x_max,.1f,z_min+z_step*i);
-                newPositions[i + 2 * count] = new Vector3(x_max-x_step*i,.1f,z_max);
-                newPositions[i + 3 * count] = new Vector3(x_min,.1f,z_max-z_step*i);
-            }
-            lineRenderer.positionCount = count*4;
-            lineRenderer.SetPositions(newPositions);   
+            RectangleDraw.CreateRectanglePoints(line);
         }
 
         public void CreateTriangle()
         {
             LineRenderer line = lines["line"+(lineCount-1)];
-            CreateTrianglePoints(line);
+            TriangleDraw.CreateTrianglePoints(line);
         }
 
-        void CreateTrianglePoints(LineRenderer lineRenderer)
-        {
-            Vector3[] line = new Vector3[lineRenderer.positionCount];
-            lineRenderer.GetPositions(line);
-            float x_max = -10000, x_min = 10000, z_max = -10000, z_min = 10000;
-            for (int i = 0; i < lineRenderer.positionCount; i++)
-            {
-                if(line[i].x < x_min) x_min = line[i].x;
-                if(line[i].x > x_max) x_max = line[i].x;
-                if(line[i].z < z_min) z_min = line[i].z;
-                if(line[i].z > z_max) z_max = line[i].z;
-            }
-            Debug.Log(x_min+" "+ x_max+" "+ z_min+" "+ z_max);
-            int count = lineRenderer.positionCount/3;
-            float x_step = (x_max-x_min)/(count);
-            float x_mid = (x_max+x_min)/2;
-            float x_mid_step = (x_max-x_mid)/(count);
-            float z_step = (z_max-z_min)/(count);
-            float z_mid = (z_max+z_min)/2;
-            Vector3[] newPositions = new Vector3[count*3];
-            for (int i = 0; i < count; i++)
-            {
-                newPositions[i] = new Vector3(x_min+x_step*i,.1f,z_min);
-                newPositions[i + count] = new Vector3(x_max-x_mid_step*i,.1f,z_min+z_step*i);
-                newPositions[i + 2 * count] = new Vector3(x_mid-x_mid_step*i,.1f,z_max-z_step*i);
-            }
-            lineRenderer.positionCount = count*3;
-            lineRenderer.SetPositions(newPositions);   
-        }
-
-        void CreateCirclePoints (LineRenderer line, Vector3 center, float radius)
-        {
-            float x;
-            float y = .1f;
-            float z;
-        
-            float angle = 20f;
-        
-            for (int i = 0; i < line.positionCount; i++)
-            {
-                x = Mathf.Sin (Mathf.Deg2Rad * angle) * radius;
-                z = Mathf.Cos (Mathf.Deg2Rad * angle) * radius;
-
-                line.SetPosition (i,new Vector3(x+center.x,y,z+center.z));
-                    
-                angle += (360f / line.positionCount);
-            }
-        }
-
-        Vector3 GetCircleCenter(LineRenderer line)
-        {
-            float sumX = 0, sumZ = 0;
-            Vector3[] linePos = new Vector3[line.positionCount];
-            line.GetPositions(linePos);
-            for (int i = 0; i < line.positionCount; i++){
-                sumX += linePos[i].x;
-                sumZ += linePos[i].z;
-            }
-            return new Vector3(sumX/line.positionCount, .1f, sumZ/line.positionCount);
-        }
-
-        Vector3 GetCircleRadius(LineRenderer line, Vector3 center)
-        {
-            float sumX = 0, sumZ = 0;
-            Vector3[] linePos = new Vector3[line.positionCount];
-            line.GetPositions(linePos);
-            for (int i = 0; i < line.positionCount; i++){
-                sumX += Mathf.Abs(linePos[i].x-center.x);
-                sumZ += Mathf.Abs(linePos[i].z-center.z);
-            }
-            return new Vector3(sumX/line.positionCount*1.56f, .1f, sumZ/line.positionCount*1.56f);
+        public void CreateCircle(){
+            LineRenderer line = lines["line"+(lineCount-1)];
+            CircleDraw.CreateCircle(line);
         }
 
         void UpdateLine(LineRenderer line, Vector3 newFingerPos)
