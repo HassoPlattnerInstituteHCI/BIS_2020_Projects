@@ -12,16 +12,21 @@ using System.Collections;
 /// Make Cop sounds including arrival sound (Door closing, Stops sirens), Funkgeräte talk in 3D, Festnahmetalk in 3D
 
 
+//TODO Rethink stroy to introduce cop killing
+//TODO Alle Storytext einfügen
+
+//Drohne und Baseballschlänger in unterschiedlichen Leveln
+
+
 
 public class GameManager : MonoBehaviour
 {
-    public float spawnSpeed = 1f;
+
     public bool introduceLevel = true;
     public GameObject player;
-    public GameObject enemy;
     public CopConfig[] copConfigs;
     public Transform playerSpawn;
-    public Transform enemySpawn;
+
     public int level = 0;
     public int trophyScore = 10000;
     public UIManager uiManager;
@@ -36,10 +41,6 @@ public class GameManager : MonoBehaviour
     LowerHandle lowerHandle;
     SpeechIn speechIn;
     SpeechOut speechOut;
-    int playerScore = 0;
-    int enemyScore = 0;
-    int gameScore = 0;
-    float totalTime = 0;
     float levelStartTime = 0;
     List<Vector3> listOfSpawnPositions;
     List<int> spawnUsed = new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -48,6 +49,10 @@ public class GameManager : MonoBehaviour
     public int copsKilled = 0;
 
     public bool currentObjectiveReached = false;
+
+    GameObject drone;
+
+    GameObject safeHouse;
     Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
         { "yes", KeyCode.Y },
         { "no", KeyCode.N },
@@ -82,11 +87,20 @@ public class GameManager : MonoBehaviour
         Introduction();
     }
 
+    void Update(){
+        if(drone.activeSelf){
+            drone.transform.position = lowerHandle.HandlePosition(drone.transform.position);
+        }
+    }
+
     async void Introduction() //Speech: Introduce Me-Handle = Move. - Go to telephone
     {
 
         bat = GameObject.Find("Bat");
         bat.SetActive(false);
+
+        drone=GameObject.Find("Drone");
+        drone.SetActive(false);
         
         await speechOut.Speak("Use the upper handle to move your character. Spawning Player");
         //playerSpawn.position = safeHouse.transform.position;       
@@ -96,7 +110,7 @@ public class GameManager : MonoBehaviour
 
         playerSounds.startHitZeroMusic();
 
-        //await Task.Delay(1000);
+        await Task.Delay(1000);
         RegisterColliders();
 
         if (introduceLevel)
@@ -112,7 +126,7 @@ public class GameManager : MonoBehaviour
         currentLevel = 1;
         await speechOut.Speak("Pick up the phone");  
         
-        transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
+        //player.transform.rotation = Quaternion.Euler(0, upperHandle.GetRotation(), 0);
 
         //playerSpawn.position = safeHouse.transform.position;
         phoneBox = GameObject.Find("TelephoneBox1");   
@@ -126,8 +140,10 @@ public class GameManager : MonoBehaviour
         playerSpawn.position = phoneBox.transform.position;
         phoneBox = GameObject.Find("TelephoneBox2");
 
-        bat.SetActive(true);
-        lowerHandle.SwitchTo(bat, 0.1f);        
+        //bat.SetActive(true);
+        //lowerHandle.SwitchTo(bat, 0.1f);  
+        await lowerHandle.MoveToPosition(player.transform.position, 0.2f);
+        drone.SetActive(true);
 
         telephoneSounds = phoneBox.GetComponent<TelephoneSoundEffect>();
         telephoneSounds.startPhoneRing(phoneBox);       
@@ -139,13 +155,17 @@ public class GameManager : MonoBehaviour
         playerSpawn.position = phoneBox.transform.position;
         playerSounds.startSirens();
 
+        safeHouse = GameObject.Find("SafeHouse");
+        lowerHandle.MoveToPosition(safeHouse.transform.position, 0.2f);
+
     }
 
     public async Task StartLevel4(){
         currentLevel = 4;
 
-        GameObject safeHouse = GameObject.Find("SafeHouse");
         playerSpawn.position = safeHouse.transform.position;
+
+        bat.SetActive(true);
 
         spawnAHoles(5);
 
@@ -167,7 +187,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public async Task spawnAHoles(int num){
+    public void spawnAHoles(int num){
         if(num>sumOfFreePositions()){
             Debug.LogError("Tried to spawn more AHoles than spanwpositions available");
             num = sumOfFreePositions();
@@ -207,10 +227,7 @@ public class GameManager : MonoBehaviour
 
         for( int i = 0; i<num; i++){
             GameObject aCop = (GameObject) Instantiate(Resources.Load("CopPrefab"), copSpawn.transform.position, Quaternion.identity);
-        }
-
-
-        
+        }     
                
 
     }
