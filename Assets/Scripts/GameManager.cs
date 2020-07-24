@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         drone=GameObject.Find("Drone");
         drone.SetActive(false);
         
-        await speechOut.Speak("Use the upper handle to move your character. Spawning Player");
+        await speechOut.Speak("Use the upper handle to move your character.");
         //playerSpawn.position = safeHouse.transform.position;       
         await ResetGame();
         player = GameObject.Find("Player");

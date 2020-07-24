@@ -135,6 +135,8 @@ public class PlayerLogic : MonoBehaviour
             Debug.Log("cash: " + gameManager.cash);
             gameManager.hitCount = 0;
             gameManager.copsKilled = 0;
+
+            StopCoroutine("makeWaveOfCopsArriveAfterTime");
             //police should disappear
             GameObject[] cops = GameObject.FindGameObjectsWithTag("Cop");
             foreach(GameObject cop in cops){
