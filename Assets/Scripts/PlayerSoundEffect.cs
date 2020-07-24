@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using DualPantoFramework;
 using System.Collections;
 
+namespace gta{
+
 public class PlayerSoundEffect : MonoBehaviour
 {
     public AudioClip wasted;
@@ -160,4 +162,5 @@ public class PlayerSoundEffect : MonoBehaviour
     {
         audioSourcePolice.Stop();
     }
+}
 }

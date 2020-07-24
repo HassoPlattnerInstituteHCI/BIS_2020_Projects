@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DualPantoFramework;
 using System.Collections;
 
+namespace gta{
 public class CopSoundEffect : MonoBehaviour
 {
     SpeechOut speechOut;
@@ -97,4 +98,5 @@ public class CopSoundEffect : MonoBehaviour
     }
 
     
+}
 }

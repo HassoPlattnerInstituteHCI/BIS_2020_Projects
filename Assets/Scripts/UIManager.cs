@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using DualPantoFramework;
 
+namespace gta{
+
 public class UIManager : MonoBehaviour
 {
     public GameObject uiGameObject;
@@ -143,4 +145,5 @@ public class UIManager : MonoBehaviour
             nameEntered = true;
         }
     }
+}
 }

@@ -3,6 +3,8 @@ using SpeechIO;
 using System.Threading.Tasks;
 using DualPantoFramework;
 
+namespace gta{
+
 public class TelephoneSoundEffect : MonoBehaviour
 {
     public AudioClip ringClip;
@@ -77,4 +79,4 @@ public class TelephoneSoundEffect : MonoBehaviour
         audioSource.Stop();
     }
 
-}
+}}

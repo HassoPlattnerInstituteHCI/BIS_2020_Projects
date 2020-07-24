@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using DualPantoFramework;
 
-
+namespace gta{
 public class BatLogic : MonoBehaviour
 {
     private PantoHandle lowerHandle;
@@ -120,4 +120,5 @@ public class BatLogic : MonoBehaviour
             collider1.GetComponent<CopLogic>().healthLeft -= 1;
         }
     }
+}
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DualPantoFramework;
 
+namespace gta{
+
 public class PlayerLogic : MonoBehaviour
 {
     private PantoHandle upperHandle;
@@ -183,4 +185,5 @@ public class PlayerLogic : MonoBehaviour
         countdown = false;
         timeLeft = 4;
     }
+}
 }

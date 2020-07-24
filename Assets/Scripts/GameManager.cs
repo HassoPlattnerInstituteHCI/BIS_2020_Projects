@@ -17,7 +17,7 @@ using System.Collections;
 
 //Drohne und Baseballschlänger in unterschiedlichen Leveln
 
-
+namespace gta{
 
 public class GameManager : MonoBehaviour
 {
@@ -342,4 +342,4 @@ public class GameManager : MonoBehaviour
         }
         return free;
     }
-}
+}}

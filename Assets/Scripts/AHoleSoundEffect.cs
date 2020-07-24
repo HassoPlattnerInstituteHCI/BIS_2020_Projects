@@ -3,6 +3,8 @@ using SpeechIO;
 using System.Threading.Tasks;
 using DualPantoFramework;
 
+namespace gta{
+
 public class AHoleSoundEffect : MonoBehaviour
 {
     public AudioClip blaBlaClip;
@@ -27,4 +29,4 @@ public class AHoleSoundEffect : MonoBehaviour
         audioSource.Stop();
     }
 
-}
+}}

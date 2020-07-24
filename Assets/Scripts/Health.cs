@@ -3,6 +3,8 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using DualPantoFramework;
 
+namespace gta{
+
 [System.Serializable]
 public class DefeatEvent : UnityEvent<GameObject> { }
 
@@ -61,4 +63,5 @@ public class Health : MonoBehaviour
         sliderImage.color = Color.Lerp(zeroHealthColor,
             fullHealthColor, healthPoints / (float)maxHealth);
     }
+}
 }

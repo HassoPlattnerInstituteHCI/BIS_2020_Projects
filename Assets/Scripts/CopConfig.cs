@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using DualPantoFramework;
 
-
+namespace gta{
 /// <summary>
 /// Enemy configuration for different difficulities.
 /// </summary>
@@ -18,4 +18,5 @@ public class CopConfig : ScriptableObject
     public float inaccuracy = 0.2f;
     public bool returnsFireOnAttack = true;
     public bool attackPlayerAtStart = true;
+}
 }

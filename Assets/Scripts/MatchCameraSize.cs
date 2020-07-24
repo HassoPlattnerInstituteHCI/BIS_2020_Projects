@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using DualPantoFramework;
 
+namespace gta{
+
 [ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
 public class MatchCameraSize : MonoBehaviour
@@ -25,4 +27,5 @@ public class MatchCameraSize : MonoBehaviour
 
         _camera.orthographicSize = desiredHalfHeight;
     }
+}
 }

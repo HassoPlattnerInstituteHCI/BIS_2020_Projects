@@ -4,6 +4,8 @@ using UnityEngine.AI;
 using DualPantoFramework;
 using System.Collections;
 
+namespace gta{
+
 public class CopLogic : MonoBehaviour
 {
     public Transform target;
@@ -90,4 +92,5 @@ public class CopLogic : MonoBehaviour
         lastSeenPosition = target.position;
     }
 
+}
 }
