@@ -45,7 +45,6 @@ namespace MarioKart
             pauseManager.OnPauseChanged += OnPauseChangedHandler;
             if (!pantoSync.debug)
             {
-                await Task.Delay(2000);
                 if (!pauseManager.isPaused)
                 {
                     CaptureHandle();
@@ -64,6 +63,7 @@ namespace MarioKart
             {
                 return;
             }
+            await Task.Delay(1000);
             await handle.SwitchTo(meHandleTarget, 0.2f);
         }
 

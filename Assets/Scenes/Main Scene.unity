@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 97714381}
   m_Layer: 10
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -774,7 +774,7 @@ PrefabInstance:
     - target: {fileID: 826605487606422808, guid: f08d327e9fb42f94d97ba9d1d226d418,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f08d327e9fb42f94d97ba9d1d226d418, type: 3}
@@ -2425,7 +2425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traceShape: 0
   isOnUpper: 0
-  description: This is a shockwave
+  description: This is a shockwave. Collect it and say use.
   priority: 0
 --- !u!114 &1810688882
 MonoBehaviour:
@@ -2521,7 +2521,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   traceShape: 0
   isOnUpper: 1
-  description: This is you. Move to drive and follow the road.
+  description: This is you. Move to drive and follow the road. It will point to the
+    center of the road.
   priority: 0
 --- !u!1001 &2015167940
 PrefabInstance:

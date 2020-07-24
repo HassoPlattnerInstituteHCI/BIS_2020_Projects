@@ -59,23 +59,23 @@ namespace MarioKart
                 await speechOut.Speak("The Enemy was faster this time");
             }
 
-            speechIn = new SpeechIn(OnSpeechRecognized);
-            speechIn.StartListening(new string[] { "stop" });
+            // speechIn = new SpeechIn(OnSpeechRecognized);
+            // speechIn.StartListening(new string[] { "stop" });
         }
 
-        void OnSpeechRecognized(string command)
-        {
-            print("Recoglized command " + command);
-            if (command == "stop")
-            {
-                print("Quitting application...");
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
-UnityEngine.Application.Quit();
-#endif
-            }
-        }
+        //         void OnSpeechRecognized(string command)
+        //         {
+        //             print("Recoglized command " + command);
+        //             if (command == "stop")
+        //             {
+        //                 print("Quitting application...");
+        // #if UNITY_EDITOR
+        //                 UnityEditor.EditorApplication.isPlaying = false;
+        // #else
+        // UnityEngine.Application.Quit();
+        // #endif
+        //             }
+        //         }
 
         void Reset()
         {
@@ -103,7 +103,7 @@ UnityEngine.Application.Quit();
         void OnApplicationQuit()
         {
             speechOut.Stop();
-            speechIn.StopListening();
+            // speechIn.StopListening();
         }
     }
 }

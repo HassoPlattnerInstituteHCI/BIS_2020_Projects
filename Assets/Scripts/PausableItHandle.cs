@@ -11,13 +11,13 @@ namespace MarioKart
         private PauseManager pauseManager;
         private PantoHandle handle;
         // Start is called before the first frame update
-        async void Start()
+        void Start()
         {
             handle = GameObject.Find("Panto").GetComponent<LowerHandle>();
             pauseManager = GetComponent<PauseManager>();
             pauseManager.OnPauseChanged += OnPauseChangedHandler;
 
-            await Task.Delay(2000);
+
             if (!pauseManager.isPaused)
             {
                 CaptureHandle();
@@ -35,6 +35,7 @@ namespace MarioKart
 
         async void CaptureHandle()
         {
+            await Task.Delay(1000);
             await handle.SwitchTo(gameObject, 0.2f);
         }
     }
