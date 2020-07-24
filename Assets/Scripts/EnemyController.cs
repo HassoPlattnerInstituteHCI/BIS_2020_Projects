@@ -109,16 +109,12 @@ namespace Stealth
             {
                 script.FreezeGameObjects();
                 await GetLevelManager().PlayTextAudio("EC-1");
-            }
-
-
-            if (SceneManager.GetActiveScene().name != "Level 5")
-            {
                 await script.ResetLevel();
                 spotted = false;
             }
             else
             {
+                await script.OnBattleStarted();
                 spotted = false;
                 Debug.Log("ACTIVATE SWORD");
                 sword.SetActive(true);
@@ -145,6 +141,7 @@ namespace Stealth
         async Task EnemyDeath()
         {
             fight = false;
+            Freeze();
             sword.SetActive(false);
             Debug.Log("death");
             //player.transform.GetChild(0).gameObject.SetActive(false);

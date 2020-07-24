@@ -28,7 +28,7 @@ namespace Stealth
             UnfreezeGameObjects();
         }
 
-        override async public Task Success()
+        override public async Task Success()
         {
             SceneManager.LoadScene(sceneName: "Level 2");
         }

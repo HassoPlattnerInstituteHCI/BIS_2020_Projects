@@ -211,6 +211,11 @@ namespace Stealth
             return;
         }
 
+        virtual public async Task OnBattleStarted()
+        {
+            return;
+        }
+
         public async Task MoveItHandleToTreasure()
         {
             await lowerHandle.SwitchTo(GetTreasure(), 0.3f);

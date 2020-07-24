@@ -24,9 +24,14 @@ namespace Stealth
             ListenToSwitch();
         }
 
-        override async public Task Success()
+        override public async Task Success()
         {
             await PlayTextAudio("LM5-3");
+        }
+
+        override public async Task OnBattleStarted()
+        {
+            await PlayTextAudio("LM5-4");
         }
     }
 }
