@@ -27,6 +27,11 @@ namespace PantoGolf
         {
             //Make the ball look at the goal, so the ItHandle faces the direction of the goal as well!
             Ball.transform.LookAt(GameObject.Find("Goal").transform.position);
+            if (transform.position.y < -1)  //Somehow the ball might shoot through the wall.
+            //if this happens, we want to restart the level.
+            {
+                RestartLevel();
+            }
         }
 
         private void FixedUpdate()

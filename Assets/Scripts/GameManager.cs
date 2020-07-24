@@ -22,10 +22,9 @@ namespace PantoGolf
         SpeechIn speechIn;
         SpeechOut speechOut;
         Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
-        { "yes", KeyCode.Y },
-        { "no", KeyCode.N },
-        { "done", KeyCode.D }
-    };
+        { "reset", KeyCode.R },
+        { "gamereset", KeyCode.G }
+        };
 
         void Awake()
         {
@@ -41,6 +40,7 @@ namespace PantoGolf
             Player.GetComponent<PlayerScript>().allowMovement = false;
             //Player.SetActive(false);
             Introduction();
+            speechIn.StartListening();
         }
 
         async void Introduction()
@@ -58,8 +58,8 @@ namespace PantoGolf
             }
 
             // Set IT Handle to follow the ball
-            await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
-            await (upperHandle).SwitchTo(Player, 0.2f);
+            await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.1f);
+            await (upperHandle).SwitchTo(Player, 0.1f);
             upperHandle.Free();
             Player.GetComponent<PlayerScript>().allowMovement = true;
             //Player.SetActive(true);
@@ -112,6 +112,8 @@ namespace PantoGolf
 
         async Task ResetGame()
         {
+            Debug.Log("Restarting the game");
+            await speechOut.Speak("Restarting the game.");
             level = 0;
             LoadScene(level);
         }
@@ -132,12 +134,25 @@ namespace PantoGolf
 
         public void RestartLevel()
         {
+            Debug.Log("Restarting the level.");
             LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         async void onRecognized(string message)
         {
             Debug.Log("SpeechIn recognized: " + message);
+            switch (message)
+            {
+                case "reset":
+                    RestartLevel();
+                    break;
+                case "gamereset":
+                    await ResetGame();
+                    break;
+                default:
+                    Debug.Log("No procedure for command " + message);
+                    break;
+            }
         }
 
         public void OnApplicationQuit()
