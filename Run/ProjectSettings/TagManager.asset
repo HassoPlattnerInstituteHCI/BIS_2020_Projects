@@ -9,6 +9,8 @@ TagManager:
   - Coin
   - Itembox
   - Mushroom
+  - Inspector
+  - Ground
   layers:
   - Default
   - TransparentFX

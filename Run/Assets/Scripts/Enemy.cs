@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,14 +11,15 @@ public class Enemy : MonoBehaviour
     CapsuleCollider2D capsuleCollider;
 
     //private PantoHandle lowerHandle;
-
+    public float waittime;
     public int direction = -1;
     float xpos;
-    float time;
+    float time, starttime;
 
     // Start is called before the first frame update
     async void Awake()
     {
+        starttime = Time.time;
         time = Time.time;
         xpos = transform.position.x;
         rigid = GetComponent<Rigidbody2D>();
@@ -33,6 +35,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Time.time - starttime < waittime)
+            return;
         // Moving 
         rigid.velocity = new Vector2(direction, rigid.velocity.y);
         if((Time.time - time) > .1f)
@@ -58,7 +62,7 @@ public class Enemy : MonoBehaviour
         //transform.position = lowerHandle.HandlePosition(transform.position);
 
         //Platform checking
-        Vector2 frontVec = new Vector2(rigid.position.x + direction * 0.5f, rigid.position.y);
+        Vector2 frontVec = new Vector2(rigid.position.x + direction * 0.25f, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
 
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
@@ -72,20 +76,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Think()
-    {
-        //nextMove = Random.Range(-1, 2);
-
-        // Changing the direction of the animation
-        //changeAnimation.SetInteger("MovingSpeed", nextMove);
-        //if (nextMove != 0)
-        //{
-        //    spriteRenderer.flipX = nextMove == 1;
-        //}
-
-        //float selfMoveTime = Random.Range(2f, 5f);
-        //Invoke("Think", selfMoveTime);
-    }
 
     void Turning()
     {

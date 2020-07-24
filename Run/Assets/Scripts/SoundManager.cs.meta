@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 07be0b06f3364584abb0085ba03e8f78
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - audioJump: {fileID: 8300000, guid: 402968dabfdcec14585db6efb7fa532d, type: 3}
+  - audioAttack: {fileID: 8300000, guid: 862ccab5630d11f44bd76c043876f12d, type: 3}
+  - audioCollision: {fileID: 8300000, guid: 845b6ea155fdff94a90674724ad29eb3, type: 3}
+  - audioDie: {fileID: 8300000, guid: 52bf32d8b378ea941ad26b3665bbf4be, type: 3}
+  - audioCoin: {fileID: 8300000, guid: dc1bb9f3e3c395143bb100b40e0cffc2, type: 3}
+  - audioLevelCom: {fileID: 8300000, guid: 90b2dc0fa8cbc954d963d84c32bb5d80, type: 3}
+  - audioWalk: {fileID: 8300000, guid: 07deb61f5e975d840827b4b1e03d5936, type: 3}
+  - audioItembox: {fileID: 8300000, guid: 0463d6afadddcfa4f841ac8eded448a0, type: 3}
+  - audioMushroom: {fileID: 8300000, guid: d2856ed058a7af44c9bff9521da1ab7c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
