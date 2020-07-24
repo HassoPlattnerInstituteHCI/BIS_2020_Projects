@@ -23,7 +23,8 @@ namespace PantoGolf
         SpeechOut speechOut;
         Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
         { "reset", KeyCode.R },
-        { "gamereset", KeyCode.G }
+        { "gamereset", KeyCode.G },
+        { "quit", KeyCode.Q }
         };
 
         void Awake()
@@ -149,6 +150,9 @@ namespace PantoGolf
                 case "gamereset":
                     await ResetGame();
                     break;
+                case "quit":
+                    QuitGame();
+                    break;
                 default:
                     Debug.Log("No procedure for command " + message);
                     break;
@@ -161,7 +165,7 @@ namespace PantoGolf
             speechIn.StopListening(); // [macOS] do not delete this line!
         }
 
-        async Task GameOver()
+        async Task QuitGame()
         {
             await speechOut.Speak("Thanks for playing PantoGolf.");
             Application.Quit();

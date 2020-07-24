@@ -232,4 +232,4 @@ MonoBehaviour:
   traceShape: 1
   isOnUpper: 0
   description: Here is an obstacle.
-  priority: 0
+  priority: 5

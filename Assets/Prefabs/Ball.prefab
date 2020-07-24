@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba696c4c3b44a14a917cb8b69ecfaee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 1
 --- !u!82 &3979329026019844503
 AudioSource:
   m_ObjectHideFlags: 0
@@ -268,4 +269,4 @@ MonoBehaviour:
   traceShape: 0
   isOnUpper: 0
   description: This is the ball. Try to shoot the ball into the goal.
-  priority: 5
+  priority: 0
