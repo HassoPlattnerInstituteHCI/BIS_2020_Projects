@@ -100,6 +100,7 @@ namespace PantoGolf
                     //Debug.Log("Ball is on the left side of the Club. Inverting shotDir.");
                     shotDir = -shotDir;
                 }
+                //shotDir = ballDir; //Rotation of me handle doesnt matter (for DEMO Session)
                 if (velocity < minHitStrength)
                 {
                     Debug.Log("Hitting Ball with minHitStrength of: " + minHitStrength.ToString() + "(minHitStrength) in direction: " + shotDir);
