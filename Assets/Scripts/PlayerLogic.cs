@@ -24,6 +24,8 @@ public class PlayerLogic : MonoBehaviour
     private PlayerSoundEffect playerSounds;
     GameObject phoneBox;
 
+    float cooldown;
+
     private CopSoundEffect copSounds;
 
     void Start()
@@ -65,6 +67,10 @@ public class PlayerLogic : MonoBehaviour
             {
                 nextHeartbeat += Time.deltaTime;
             }
+        }
+
+        if(cooldown > 0){
+            cooldown -= Time.deltaTime;
         }
     }
 
@@ -114,7 +120,8 @@ public class PlayerLogic : MonoBehaviour
         }
             
 
-        if(collider1.CompareTag("dangerous")){   //player should die when running into an obstacle
+        if(collider1.CompareTag("dangerous") && cooldown <= 0){   //player should die when running into an obstacle
+            cooldown = 1;
             playerDies();
         } 
         if(collider1.CompareTag("safehouse")){
@@ -158,6 +165,7 @@ public class PlayerLogic : MonoBehaviour
     }
 
     public void playerDies(){
+        //this.gameObject.SetActive(false);
         resetTimer();
         playerSounds.playWasted();
         gameManager.currentObjectiveReached = false;

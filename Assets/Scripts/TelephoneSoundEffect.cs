@@ -32,7 +32,7 @@ public class TelephoneSoundEffect : MonoBehaviour
         Debug.Log(gameManager.currentLevel);
         if(gameManager.currentLevel == 1){
             gameManager.currentLevel = 2;
-            //await speechOut.Speak("Yo Claude, it's Johnny Zoo. Use the drone that if hidden here for you. You can use it to spot things around you. Do not run into obstacles yourself! I will call you on the other telephone booth to see if that works for you." ); 
+            await speechOut.Speak("Yo Claude, it's Johnny Zoo. Use the drone that i have hidden here for you. You can use it to spot things around you. Do not run into obstacles yourself! I will call you on the other telephone booth to see if that works for you." ); 
             gameManager.StartLevel2();
         }
         else if(gameManager.currentLevel == 2){
@@ -45,14 +45,27 @@ public class TelephoneSoundEffect : MonoBehaviour
         }
         else if(gameManager.currentLevel == 4){
             Debug.Log("Level 5 Intro played");
-            //await speechOut.Speak(" Good Job, you hit an asshole. You own 1 Dollar. I see why you are the right man for the job! You showed it to them assholes. Next time you go out be aware: Police heard that something is goin on here. After you hit a few people you will hear them comin. Thats why we will pay you more money if you go an a streak and hit many assholes before returning. Go out, hit some assholes and return back to the safe house as soon as you here the sirens"); //
+            await speechOut.Speak(" Good Job, you hit an asshole. You own 1 Dollar. I see why you are the right man for the job! Next time you go out be aware: Police heard that something is goin on here. After you hit a few people you will hear them comin. Thats why we will pay you more money if you go an a streak and hit many assholes before returning. Go out, hit some assholes and return back to the safe house as soon as you here the sirens"); //
             gameManager.currentObjectiveReached = false;
             gameManager.StartLevel5();
-        }else if(gameManager.currentLevel == 5 || gameManager.currentLevel == 6){
+        }else if(gameManager.currentLevel == 5){
             Debug.Log("Level 6 Intro played");
-            await speechOut.Speak("Good Job, you hit " +gameManager.hitCount + " assholes. You own " + gameManager.cash + " Dollars" );
+            if(gameManager.hitCount == 0){
+                await speechOut.Speak("Ouch, try again");
+            }else{
+                await speechOut.Speak("Good Job, you hit " +gameManager.hitCount + " assholes. You own " + gameManager.cash + " Dollars. When the sirens stop and you hear some car doors closing the policemen arrived. You will hear them speak to their radio. If you get to close to them they will shout at you. If you dont run away fast enough or knock them out they will arrest you. Hit them 3 times to knock them out. This will give you extra money but more cops will come! Go and earn as much money as possible without getting arrested or dying!");
+            }
             gameManager.currentObjectiveReached = false;
             gameManager.StartLevel6();
+        }else if(gameManager.currentLevel == 6){
+            Debug.Log("Free game Intro played");
+            if(gameManager.hitCount == 0){
+                await speechOut.Speak("Ouch, try again");
+            }else{
+                await speechOut.Speak("Good Job, you hit " +gameManager.hitCount + " assholes. You own " + gameManager.cash + " Dollars.");
+            }
+            
+
         }
     }
 

@@ -91,6 +91,10 @@ public class GameManager : MonoBehaviour
         if(drone.activeSelf){
             drone.transform.position = lowerHandle.HandlePosition(drone.transform.position);
         }
+
+        if(player.activeSelf){
+            player.transform.position = upperHandle.HandlePosition(player.transform.position);
+        }
     }
 
     async void Introduction() //Speech: Introduce Me-Handle = Move. - Go to telephone
@@ -267,10 +271,8 @@ public class GameManager : MonoBehaviour
     public async Task ResetGame()
     {
         
-        player.transform.position = playerSpawn.position;
-        await upperHandle.MoveToPosition(player.transform.position, 0.2f, true);
+        await upperHandle.MoveToPosition(playerSpawn.position, 0.2f, true);
 
-        upperHandle.Free();
 
         cash = 0;
         Debug.Log("cash: " + cash);

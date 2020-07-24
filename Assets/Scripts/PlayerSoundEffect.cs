@@ -70,7 +70,7 @@ public class PlayerSoundEffect : MonoBehaviour
             transitionMusicIsPlaying = false;
             Debug.Log("StartKillingStreakMusic gets called");
             startKillingStreakMusic();
-            StartCoroutine(gameManager.makeWaveOfCopsArriveAfterTime(1, 1));
+            StartCoroutine(gameManager.makeWaveOfCopsArriveAfterTime(15, 1));
             if(gameManager.currentLevel == 5){
                 gameManager.currentObjectiveReached = true;
             }
