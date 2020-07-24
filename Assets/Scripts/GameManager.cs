@@ -60,7 +60,8 @@ namespace PantoGolf
 
             // Set IT Handle to follow the ball
             await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.1f);
-            await (upperHandle).SwitchTo(Player, 0.1f);
+            await speechOut.Speak("Use the ME Handle to shoot the ball");
+            //await (upperHandle).SwitchTo(Player, 0.1f);
             upperHandle.Free();
             Player.GetComponent<PlayerScript>().allowMovement = true;
             //Player.SetActive(true);
