@@ -135,7 +135,15 @@ public class GameManager : MonoBehaviour
 
         if(level == 0)
         {
-            upperHandle.FreeRotation();
+            if(GetComponent<DualPantoSync>().debug)
+            {
+                upperHandle.FreeRotation();
+            }
+            else
+            {
+                upperHandle.Free();
+            }
+
         }
         else
         {

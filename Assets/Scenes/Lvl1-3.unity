@@ -2564,7 +2564,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 208eff900b552412aa87ec05faeab19d, type: 2}
   playerSpawn: {fileID: 743777051}
   enemySpawn: {fileID: 1012411828}
-  level: 0
+  level: 3
   trophyScore: 8000
 --- !u!114 &1189803894
 MonoBehaviour:
