@@ -141,7 +141,7 @@ namespace SurgeonSim
             await speechIn.Listen(new Dictionary<string, KeyCode>() { { "scalpel", KeyCode.S } });
             scalpel.SetActive(true);
 
-            await speechOut.Speak("Reach the right kidney.");
+            await speechOut.Speak("Reach the right kidney. You got twenty seconds.");
             GameObject kidney = GameObject.Find("KidneyRight");
             await lowerHandle.SwitchTo(kidney, 0.3f);
 
