@@ -222,23 +222,23 @@ public class Levels : MonoBehaviour
         string input = await speechIn.Listen(command);
         switch (input)
         {
-            case "weapon one": //sniper/normal
-                shooting.fireSpreadAngle = 1f;
-                shooting.damage = 10;
-                shooting.maxRayDistance = 20f;
-                shooting.cooldown = 0.5f;
-                shooting.startWidth = 0.1f;
-                shooting.endWidth = 0.1f;
-                gun = 1;
-                await speechOut.Speak("weapon one");
-                break;
-            case "weapon two": //MG
+            case "weapon one": //MG/normal
                 shooting.fireSpreadAngle = 5f;
                 shooting.damage = 4;
                 shooting.maxRayDistance = 10f;
                 shooting.cooldown = 0.1f;
                 shooting.startWidth = 0.5f;
                 shooting.endWidth = 0.5f;
+                gun = 1;
+                await speechOut.Speak("weapon one");
+                break;
+            case "weapon two": //Sniper
+                shooting.fireSpreadAngle = 1f;
+                shooting.damage = 40;
+                shooting.maxRayDistance = 20f;
+                shooting.cooldown = 1f;
+                shooting.startWidth = 0.1f;
+                shooting.endWidth = 0.1f;
                 gun = 2;
                 await speechOut.Speak("weapon two");
                 break;

@@ -124,8 +124,8 @@ public class Shooting : MonoBehaviour
                         }
                         switch (gunnr)
                         {
-                            case 1: currentClip = hitClipSniper; break;
-                            case 2: currentClip = hitClipMG; break;
+                            case 1: currentClip = hitClipMG; break;
+                            case 2: currentClip = hitClipSniper; break;
                             case 3: currentClip = hitClipPump; break;
                             default: break;
                         }
@@ -174,8 +174,8 @@ public class Shooting : MonoBehaviour
                         }
                         switch(gunnr)
                         {
-                            case 1: currentClip = hitClipSniper; break;
-                            case 2: currentClip = hitClipMG; break;
+                            case 1: currentClip = hitClipMG; break;
+                            case 2: currentClip = hitClipSniper; break;
                             case 3: currentClip = hitClipPump; break;
                             default: break;
                         }

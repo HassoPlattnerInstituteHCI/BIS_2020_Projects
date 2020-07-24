@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2057,7 +2057,9 @@ MonoBehaviour:
   spotted: 0
   defaultClip: {fileID: 8300000, guid: 19b7f2453a83d05478addcceab7827a8, type: 3}
   wallClip: {fileID: 8300000, guid: a492fe44c169248c888b6b7179b84f14, type: 3}
-  hitClip: {fileID: 8300000, guid: cc9262c396027d64bb94eb5f2cfe89b8, type: 3}
+  hitClipMG: {fileID: 8300000, guid: cc9262c396027d64bb94eb5f2cfe89b8, type: 3}
+  hitClipSniper: {fileID: 8300000, guid: 0be340bb95ce3064497c9ec005a32eb6, type: 3}
+  hitClipPump: {fileID: 8300000, guid: 30fef36672ce87644a1589a685689c2a, type: 3}
   fireSpreadAngle: 1
   enemyTransform: {fileID: 1819973871}
 --- !u!114 &881415697
@@ -2384,7 +2386,7 @@ Camera:
   far clip plane: 1000
   field of view: 20
   orthographic: 1
-  orthographic size: 9.84006
+  orthographic size: 9.361233
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2564,7 +2566,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 208eff900b552412aa87ec05faeab19d, type: 2}
   playerSpawn: {fileID: 743777051}
   enemySpawn: {fileID: 1012411828}
-  level: 3
+  level: 0
   trophyScore: 8000
 --- !u!114 &1189803894
 MonoBehaviour:
@@ -3296,7 +3298,9 @@ MonoBehaviour:
   spotted: 0
   defaultClip: {fileID: 8300000, guid: 19b7f2453a83d05478addcceab7827a8, type: 3}
   wallClip: {fileID: 8300000, guid: a492fe44c169248c888b6b7179b84f14, type: 3}
-  hitClip: {fileID: 8300000, guid: 6025f45b44bdde8499b407c523200824, type: 3}
+  hitClipMG: {fileID: 8300000, guid: 6025f45b44bdde8499b407c523200824, type: 3}
+  hitClipSniper: {fileID: 0}
+  hitClipPump: {fileID: 0}
   fireSpreadAngle: 1
   enemyTransform: {fileID: 881415694}
 --- !u!120 &1819973873
