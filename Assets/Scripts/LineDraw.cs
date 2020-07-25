@@ -4,6 +4,7 @@ using UnityEngine;
 using DualPantoFramework;
 using System.Threading.Tasks;
 using SpeechIO;
+using System.Linq;
 
 namespace PantoDrawing
 {
@@ -33,6 +34,7 @@ namespace PantoDrawing
         public Dictionary<string, LineRenderer> lines = new Dictionary<string, LineRenderer>();
 
         public Audio audio;
+        private GameManager gameManager;
 
         // Start is called before the first frame update
         void Start()
@@ -40,6 +42,7 @@ namespace PantoDrawing
             upperHandle = GameObject.Find("Panto").GetComponent<UpperHandle>();
             lowerHandle = GameObject.Find("Panto").GetComponent<LowerHandle>();
             upperRotation = upperHandle.GetRotation();
+            gameManager = GameObject.Find("Panto").GetComponent<GameManager>();
             audio = GameObject.Find("Panto").GetComponent<Audio>();
         }
 
@@ -87,6 +90,16 @@ namespace PantoDrawing
                 }
             }
         }
+
+        public void UndoLine()
+        {
+        	lineCount--;
+        	Destroy(lines["line"+lineCount]);
+        	lines.Remove("line"+lineCount);
+            gameManager.keywords.Remove((lineCount+1)+"");
+            gameManager.speechIn = new SpeechIn(gameManager.onRecognized, gameManager.keywords.Keys.ToArray());
+        }
+
 
         LineRenderer CreateLine()
         {   
