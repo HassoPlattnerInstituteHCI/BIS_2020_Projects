@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 2009324628961502323}
   - component: {fileID: 2009324628961502320}
   - component: {fileID: 2009324628961502321}
+  - component: {fileID: 3154916650702912011}
   m_Layer: 0
   m_Name: Wall3
   m_TagString: obstacle
@@ -184,6 +185,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3154916650702912011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009324628961502223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
 --- !u!1 &2009324629436021578
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +211,7 @@ GameObject:
   - component: {fileID: 2009324629436021582}
   - component: {fileID: 2009324629436021583}
   - component: {fileID: 2009324629436021580}
+  - component: {fileID: 2877734219160874676}
   m_Layer: 0
   m_Name: Wall1
   m_TagString: obstacle
@@ -276,6 +292,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2877734219160874676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009324629436021578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
 --- !u!1 &2009324629593007296
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +410,7 @@ GameObject:
   - component: {fileID: 2009324629703594459}
   - component: {fileID: 2009324629703594456}
   - component: {fileID: 2009324629703594457}
+  - component: {fileID: 7192457014481648261}
   m_Layer: 0
   m_Name: Wall2
   m_TagString: obstacle
@@ -460,6 +491,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7192457014481648261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009324629703594455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
 --- !u!1 &2009324630110699802
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +517,7 @@ GameObject:
   - component: {fileID: 2009324630110699806}
   - component: {fileID: 2009324630110699807}
   - component: {fileID: 2009324630110699804}
+  - component: {fileID: 6725830803075383091}
   m_Layer: 0
   m_Name: Wall4
   m_TagString: obstacle
@@ -552,6 +598,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6725830803075383091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009324630110699802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 0
+  onLower: 1
 --- !u!1 &2009324630236760345
 GameObject:
   m_ObjectHideFlags: 0

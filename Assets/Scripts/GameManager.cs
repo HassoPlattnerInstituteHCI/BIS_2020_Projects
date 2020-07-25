@@ -47,7 +47,6 @@ namespace PantoGolf
         async void Introduction()
         {
             //await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
-            RegisterColliders();
             if (SceneManager.GetActiveScene().name == "Level 1")
             {
                 await speechOut.Speak("Welcome to PantoGolf.");
@@ -62,11 +61,12 @@ namespace PantoGolf
             // Set IT Handle to follow the ball
             await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.1f);
             await speechOut.Speak("Use the ME Handle like a club to shoot the ball");
-            //await (upperHandle).SwitchTo(Player, 0.1f);
+            await (upperHandle).SwitchTo(Player, 0.1f);     //Make sure that the Me Handle is inside the play area
             upperHandle.Free();
             Player.GetComponent<PlayerScript>().allowMovement = true;
             Player.GetComponent<PlayerScript>().soundEffects.PlayReadyToHit();  //Signalize that the player can now hit the ball
             //Player.SetActive(true);
+            RegisterColliders();       //Activate the colliders
             Debug.Log("Introduction finished, game starts.");
             //await speechOut.Speak("Introduction finished, game starts.");
             //await lowerHandle.SwitchTo(GameObject.Find("Ball"), 0.2f);
