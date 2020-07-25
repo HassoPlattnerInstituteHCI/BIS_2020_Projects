@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 2736119963243901715}
   - component: {fileID: 2736119963243901712}
   - component: {fileID: 1652362007}
+  - component: {fileID: 8919499792545039533}
   m_Layer: 0
   m_Name: Obstacle
   m_TagString: obstacle
@@ -233,3 +234,17 @@ MonoBehaviour:
   isOnUpper: 0
   description: Here is an obstacle.
   priority: 5
+--- !u!114 &8919499792545039533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2736119963243901713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cec89c855408d47937c25a1befeede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUpper: 1
+  onLower: 1
