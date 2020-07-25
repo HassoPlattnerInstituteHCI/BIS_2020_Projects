@@ -65,6 +65,7 @@ namespace PantoGolf
             //await (upperHandle).SwitchTo(Player, 0.1f);
             upperHandle.Free();
             Player.GetComponent<PlayerScript>().allowMovement = true;
+            Player.GetComponent<PlayerScript>().soundEffects.PlayReadyToHit();  //Signalize that the player can now hit the ball
             //Player.SetActive(true);
             Debug.Log("Introduction finished, game starts.");
             //await speechOut.Speak("Introduction finished, game starts.");

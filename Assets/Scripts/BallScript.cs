@@ -27,10 +27,13 @@ namespace PantoGolf
         {
             //Make the ball look at the goal, so the ItHandle faces the direction of the goal as well!
             Ball.transform.LookAt(GameObject.Find("Goal").transform.position);
-            if (transform.position.y < -1)  //Somehow the ball might shoot through the wall.
+            if (transform.position.y < -1 && active)  //Somehow the ball might shoot through the wall.
             //if this happens, we want to restart the level.
             {
-                RestartLevel();
+                active = false;
+                Debug.LogError("Ball is outside the play area!");
+                soundEffects.voiceOutput("An error occured.");
+                StartCoroutine(RestartLevel());
             }
         }
 
@@ -55,6 +58,7 @@ namespace PantoGolf
             {
                 Debug.Log("The ball hit the goal!");
                 active = false;
+                GameObject.Find("Player").GetComponent<PlayerScript>().disableHit = true;
                 soundEffects.PlayGoal();
                 rb.velocity = Vector3.zero;
                 // Start next level

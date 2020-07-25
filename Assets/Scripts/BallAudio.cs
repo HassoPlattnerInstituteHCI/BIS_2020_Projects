@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using SpeechIO;
 
 
 namespace PantoGolf
@@ -17,6 +18,7 @@ namespace PantoGolf
         public AudioClip[] Obstacle;
         public float maxPitch = 1.2f;
         public float minPitch = 0.8f;
+        private SpeechOut speechOut = new SpeechOut();
 
         public AudioSource audioSource;
         private AudioSource rollingSource;
@@ -71,6 +73,12 @@ namespace PantoGolf
         {
             Debug.Log("End Rolling sound");
             //rollingSource.Stop();
+        }
+
+        public async void voiceOutput(string message)
+        {
+            speechOut.Stop();
+            await speechOut.Speak(message);
         }
 
         public void PlayClipPitched(AudioClip clip)

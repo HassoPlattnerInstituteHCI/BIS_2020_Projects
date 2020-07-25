@@ -20,7 +20,7 @@ namespace PantoGolf
         private float velocity = 0f;     //Stores the velocity of the moving club
         public float minHitStrength = 10f;
         public float maxHitStrength = 50f;
-        private BallAudio soundEffects;
+        public BallAudio soundEffects;
 
         private int hitCount = 0;
 
@@ -121,6 +121,15 @@ namespace PantoGolf
                 m_Collider.enabled = false;
                 Debug.Log("End of Player Trigger Event");
             }
+            else if (other.gameObject == GameObject.Find("Goal"))
+            {
+                Debug.Log("Club in Goal");
+            }
+            else
+            {
+                Debug.Log("Club collided.");
+                Debug.Log(other.gameObject.name);
+            }
         }
 
         public IEnumerator MoveOverSpeed(Vector3 end, float speed)
@@ -142,7 +151,7 @@ namespace PantoGolf
                     return false;
                 }
                 Rigidbody rb = Ball.GetComponent<Rigidbody>();
-                if (rb.velocity.magnitude > 0.02)   //Check if ball is moving
+                if (rb.velocity.magnitude > 0.2)   //Check if ball is moving
                 {
                     return false;
                 }
