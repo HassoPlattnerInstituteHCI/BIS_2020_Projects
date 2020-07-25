@@ -58,7 +58,7 @@ namespace PantoGolf
             {
                 Debug.Log("The ball hit the goal!");
                 active = false;
-                GameObject.Find("Player").GetComponent<PlayerScript>().disableHit = true;
+                GameObject.Find("Player").GetComponent<PlayerScript>().disableHit = true; //This disables the "readyToHit sound for the player
                 soundEffects.PlayGoal();
                 rb.velocity = Vector3.zero;
                 // Start next level
@@ -69,6 +69,7 @@ namespace PantoGolf
             {
                 Debug.Log("Ball fell in water!");
                 active = false;
+                GameObject.Find("Player").GetComponent<PlayerScript>().disableHit = true;  //This disables the "readyToHit sound for the player
                 rb.velocity = Vector3.zero;
                 soundEffects.PlayWaterDrop();
                 StartCoroutine(RestartLevel());
