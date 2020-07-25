@@ -155,6 +155,7 @@ namespace PantoGolf
                     break;
                 case "quit":
                     QuitGame();
+                    UnityEditor.EditorApplication.isPlaying = false;
                     break;
                 default:
                     Debug.Log("No procedure for command " + message);
@@ -172,12 +173,14 @@ namespace PantoGolf
         {
             await speechOut.Speak("Thanks for playing PantoGolf.");
             Application.Quit();
+            UnityEditor.EditorApplication.isPlaying = false;
         }
 
         async Task LastLevelComplete()
         {
             await speechOut.Speak("You completed all levels of PantoGolf! Congratulations");
             Application.Quit();
+            UnityEditor.EditorApplication.isPlaying = false;
         }
 
         private void LoadScene(int index)
