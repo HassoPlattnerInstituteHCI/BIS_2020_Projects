@@ -21,9 +21,6 @@ public class GameManager : MonoBehaviour
     LowerHandle lowerHandle;
     SpeechIn speechIn;
     SpeechOut speechOut;
-    int playerScore = 0;
-    int enemyScore = 0;
-    int gameScore = 0;
     float totalTime = 0;
     float levelStartTime = 0;
     public Dictionary<string, KeyCode> commands = new Dictionary<string, KeyCode>() {
@@ -59,7 +56,6 @@ public class GameManager : MonoBehaviour
         await speechOut.Speak("Welcome to C o D Blackout Panto Edition");
         // TODO: 1. Introduce obstacles in level 2 (aka 1)
         await Task.Delay(1000);
-        RegisterColliders();
 
         if (introduceLevel)
         {
@@ -76,12 +72,9 @@ public class GameManager : MonoBehaviour
         upperHandle.Free();
         lowerHandle.Free();
         await GetComponent<Levels>().PlayIntroduction(level,speechIn);
+        RegisterColliders();
         upperHandle.Free();
         lowerHandle.Free();
-        //if (response == "yes")
-        //{
-        //    await RoomExploration();
-        //}
     }
 
     [System.Obsolete]
@@ -185,8 +178,6 @@ public class GameManager : MonoBehaviour
 
         string defeatedPerson = playerDefeated ? "You" : "Enemy";
         await speechOut.Speak($"{defeatedPerson} got defeated.");
-
-        gameScore += CalculateGameScore(player, enemy);
 
         level++;
         if (level >= enemyConfigs.Length)
