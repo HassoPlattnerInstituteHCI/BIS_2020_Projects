@@ -59,6 +59,8 @@ public class Levels : MonoBehaviour
 
                 await speechOut.Speak("he is trying to kill you");
 
+                upperHandle = GetComponent<UpperHandle>();
+                lowerHandle = GetComponent<LowerHandle>();
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
 
                 await speechOut.Speak("so aim at him");
@@ -68,6 +70,8 @@ public class Levels : MonoBehaviour
                 break;
             //Level 2                                                                                                                                      OLIVER SCHULZ
             case 1:
+                upperHandle = GetComponent<UpperHandle>();
+                lowerHandle = GetComponent<LowerHandle>();
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
                 await speechOut.Speak("Oh no the enemy spotted you, move to another position...");
                 await MoveX(playerHelper);
@@ -78,6 +82,8 @@ public class Levels : MonoBehaviour
                 break;
             //Level 3                                                                                                                                      OLIVER SCHULZ
             case 2:
+                upperHandle = GetComponent<UpperHandle>();
+                lowerHandle = GetComponent<LowerHandle>();
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
                 await speechOut.Speak("Oh no the enemy escaped, move around...");
                 await MoveX(playerHelper);
@@ -99,6 +105,8 @@ public class Levels : MonoBehaviour
                     powerUp.SetActive(true);
                     await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
                 }
+                upperHandle = GetComponent<UpperHandle>();
+                lowerHandle = GetComponent<LowerHandle>();
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
                 await speechOut.Speak("The enemy dropped an item behind a wall, move around...");
                 await MoveX(playerHelper);
@@ -121,7 +129,8 @@ public class Levels : MonoBehaviour
                     powerUp.SetActive(true);
                     await IntroduceObject(powerUp.GetComponent<ObjectOfInterest>());
                 }
-
+                upperHandle = GetComponent<UpperHandle>();
+                lowerHandle = GetComponent<LowerHandle>();
                 await upperHandle.SwitchTo(playerHelper, 0.2f);
                 await speechOut.Speak("This time you can switch your weapon, by saying weapon one (one is your MG), weapon two (two is your Sniper) or weapon three (three is your pumpgun)");
                 break;
@@ -188,31 +197,41 @@ public class Levels : MonoBehaviour
     async Task MoveX(GameObject obj)
     {
         await Move(obj, 0, 0, 1, 10);
+        await Task.Delay(100);
         await Move(obj, 0, 0, -1, 10);
+        await Task.Delay(100);
         await Move(obj, 1, 0, 0, 10);
+        await Task.Delay(100);
         await Move(obj, -1, 0, 0, 10);
+        await Task.Delay(100);
         await Move(obj, 0, 0, -1, 10);
+        await Task.Delay(100);
         await Move(obj, 0, 0, 1, 10);
+        await Task.Delay(100);
         await Move(obj, -1, 0, -0, 10);
+        await Task.Delay(100);
         await Move(obj, 1, 0, -0, 10);
     }
 
     async Task RotateX(GameObject obj)
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 50; i++)
         {
-            obj.transform.Rotate(0, -1f, 0);
-            await Task.Delay(10);
+            //obj.transform.Rotate(0, -3f, 0);
+            obj.transform.RotateAround(obj.transform.position, Vector3.up, 1f);
+            await Task.Delay(20);
         }
-        for (int i = 0; i < 60; i++)
+        for (int i = 0; i < 100; i++)
         {
-            obj.transform.Rotate(0, 1f, 0);
-            await Task.Delay(10);
+            //obj.transform.Rotate(0, 3f, 0);
+            obj.transform.RotateAround(obj.transform.position, Vector3.up, -1f);
+            await Task.Delay(20);
         }
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 50; i++)
         {
-            obj.transform.Rotate(0, -1f, 0);
-            await Task.Delay(10);
+            //obj.transform.Rotate(0, -3f, 0);
+            obj.transform.RotateAround(obj.transform.position, Vector3.up, 1f);
+            await Task.Delay(20);
         }
     }
 
